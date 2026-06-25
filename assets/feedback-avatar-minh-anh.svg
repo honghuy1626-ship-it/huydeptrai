@@ -1,0 +1,25 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 120 120" role="img" aria-label="Minh Anh 28 tuổi">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+      <stop stop-color="#ffe9b8"/>
+      <stop offset="1" stop-color="#b97845"/>
+    </linearGradient>
+    <linearGradient id="hair" x1="0" y1="0" x2="1" y2="1">
+      <stop stop-color="#3b2018"/>
+      <stop offset="1" stop-color="#6f3f2b"/>
+    </linearGradient>
+  </defs>
+  <rect width="120" height="120" rx="60" fill="url(#bg)"/>
+  <circle cx="60" cy="58" r="43" fill="#fff6df" opacity=".35"/>
+  <path d="M30 61c0-29 15-44 32-44 18 0 31 16 31 43 0 18-7 34-18 41H48C37 94 30 79 30 61Z" fill="url(#hair)"/>
+  <path d="M39 60c0-18 9-31 23-31 15 0 24 13 24 31 0 19-10 34-24 34S39 79 39 60Z" fill="#f5c7a7"/>
+  <path d="M38 55c8-2 16-8 20-18 8 12 18 16 29 17-3-16-13-27-27-27-13 0-22 10-22 28Z" fill="url(#hair)"/>
+  <circle cx="51" cy="61" r="2.8" fill="#2f1b14"/>
+  <circle cx="72" cy="61" r="2.8" fill="#2f1b14"/>
+  <path d="M54 77c5 4 11 4 16 0" fill="none" stroke="#9d4d47" stroke-width="3" stroke-linecap="round"/>
+  <path d="M40 104c6-14 16-22 22-22s17 8 22 22" fill="#fff0cf"/>
+  <circle cx="37" cy="65" r="4" fill="#f5c7a7"/>
+  <circle cx="87" cy="65" r="4" fill="#f5c7a7"/>
+  <rect x="43" y="88" width="39" height="20" rx="10" fill="#7d4b32"/>
+  <text x="60" y="105" text-anchor="middle" font-family="Arial, sans-serif" font-size="13" font-weight="800" fill="#ffe9b8">MA</text>
+</svg>
