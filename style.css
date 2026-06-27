@@ -4273,6 +4273,10 @@ body.booking-popover-open {
 }
 
 @media (max-width: 760px) {
+  .header-inner {
+    gap: 10px;
+  }
+
   .site-header .brand {
     gap: 7px;
     min-width: 190px;
@@ -4286,13 +4290,49 @@ body.booking-popover-open {
 }
 
 @media (max-width: 480px) {
+  .header-inner {
+    min-height: 72px;
+    gap: 6px;
+  }
+
   .site-header .brand {
-    min-width: 178px;
+    flex: 1 1 0;
+    gap: 5px;
+    min-width: 0;
+    max-width: 158px;
+  }
+
+  .site-header .brand .brand-logo-img {
+    height: 42px;
+    max-width: 92px;
   }
 
   .site-header .brand::after {
-    max-width: 86px;
-    font-size: 0.52rem;
+    max-width: 58px;
+    font-size: 0.43rem;
+    line-height: 1.04;
+  }
+
+  .header-actions {
+    flex: 0 0 auto;
+    gap: 5px;
+  }
+
+  .header-actions .btn {
+    width: 106px;
+    min-height: 42px;
+    justify-content: center;
+    padding: 7px 8px;
+    font-size: 0.66rem;
+    line-height: 1.08;
+    text-align: center;
+    white-space: normal;
+  }
+
+  .menu-toggle {
+    flex: 0 0 40px;
+    width: 40px;
+    height: 40px;
   }
 }
 
@@ -4304,6 +4344,11 @@ body.booking-popover-open {
   .brand-logo-img {
     height: 38px;
     max-width: 108px;
+  }
+
+  .site-header .brand .brand-logo-img {
+    height: 36px;
+    max-width: 82px;
   }
 
   .brand-logo-inline {
@@ -4318,13 +4363,14 @@ body.booking-popover-open {
 
   .site-header .brand {
     gap: 5px;
-    min-width: 162px;
+    max-width: 142px;
+    min-width: 0;
   }
 
   .site-header .brand::after {
     display: inline-block;
-    max-width: 74px;
-    font-size: 0.46rem;
+    max-width: 54px;
+    font-size: 0.4rem;
     line-height: 1.04;
   }
 
@@ -4337,13 +4383,15 @@ body.booking-popover-open {
   }
 
   .header-actions {
-    gap: 6px;
+    gap: 4px;
   }
 
   .header-actions .btn {
+    width: 92px;
     min-height: 38px;
-    padding: 8px 9px;
-    font-size: 0.7rem;
+    padding: 6px 6px;
+    font-size: 0.6rem;
+    line-height: 1.08;
   }
 
   .day-input-wrap {
@@ -4365,6 +4413,7 @@ body.booking-popover-open {
   }
 
   .menu-toggle {
+    flex-basis: 40px;
     width: 40px;
     height: 40px;
   }
