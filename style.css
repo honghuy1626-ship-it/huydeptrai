@@ -4620,7 +4620,7 @@ body.booking-popover-open {
 .home-service-note {
   position: absolute;
   top: 18px;
-  right: 18px;
+  left: 18px;
   z-index: 5;
   width: min(54%, 310px);
   padding: 13px 15px 14px;
@@ -4693,7 +4693,7 @@ body.booking-popover-open {
 
   .home-service-note {
     top: 14px;
-    right: 14px;
+    left: 14px;
     width: min(62%, 248px);
     padding: 10px 12px 11px;
     border-radius: 15px;
