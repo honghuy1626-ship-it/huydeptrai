@@ -1,13 +1,13 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="vi">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta
       name="description"
-      content="Dịch vụ phun xăm thẩm mỹ tại nhà ELLY SPA: phun môi collagen, phun mày tán bột, điêu khắc chân mày và phun mí."
+      content="Dịch vụ phun xăm thẩm mỹ tại nhà ELLY: phun môi collagen, phun mày tán bột, điêu khắc chân mày và phun mí."
     />
-    <title>Dịch vụ phun xăm tại nhà | ELLY SPA</title>
+    <title>Dịch vụ phun xăm tại nhà | ELLY</title>
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
@@ -19,12 +19,8 @@
   <body>
     <header class="site-header">
       <div class="container header-inner">
-        <a class="brand" href="index.html#home" aria-label="ELLY SPA trang chủ">
-          <span class="brand-text">
-            <span class="brand-name">ELLY</span>
-            <span class="brand-sub">SPA</span>
-          </span>
-        </a>
+        <a class="brand" href="index.html#home" aria-label="ELLY trang chủ">
+          <img class="brand-logo-img" src="assets/elly-logo.png" alt="ELLY" /></a>
         <nav class="main-nav" id="mainNav" aria-label="Điều hướng chính">
           <a href="index.html#home">Trang chủ</a>
           <a href="dich-vu.html">Phun xăm tại nhà</a>
@@ -48,9 +44,9 @@
         <div class="container hero-inner">
           <div class="hero-content reveal">
             <p class="eyebrow">Dịch vụ tại nhà</p>
-            <h1 class="hero-title"><span>PHUN XĂM THẨM MỸ</span><span>Tại Nhà ELLY SPA</span></h1>
+            <h1 class="hero-title"><span>PHUN XĂM THẨM MỸ</span><span>Tại Nhà ELLY</span></h1>
             <p class="hero-copy">
-              Chọn dịch vụ mày, môi hoặc mí phù hợp. ELLY SPA tư vấn trước về tình trạng, dáng/màu mong muốn,
+              Chọn dịch vụ mày, môi hoặc mí phù hợp. ELLY tư vấn trước về tình trạng, dáng/màu mong muốn,
               địa chỉ và khung giờ trước khi nhận lịch.
             </p>
             <div class="hero-actions">
@@ -74,7 +70,43 @@
         </div>
       </section>
     </main>
-
+    <div class="booking-popover" data-booking-popover aria-hidden="true">
+      <div class="booking-popover-backdrop" data-booking-close></div>
+      <section class="booking-popover-card" role="dialog" aria-modal="true" aria-labelledby="bookingPopupTitle">
+        <button class="booking-popover-close" type="button" data-booking-close aria-label="Đóng cửa sổ đặt lịch">×</button>
+        <div class="booking-popover-media">
+          <span class="booking-media-logo" aria-label="ELLY"><img class="brand-logo-img brand-logo-popover" src="assets/elly-logo.png" alt="ELLY" /></span>
+        </div>
+        <div class="booking-popover-content">
+          <p class="eyebrow booking-deal-badge" id="bookingPopupTitle">Ưu đãi đặt lịch hôm nay</p>
+          <p>Để lại thông tin, ELLY sẽ gọi xác nhận dịch vụ, địa chỉ và thời gian đến tận nơi.</p>
+          <p class="booking-selected-service" data-booking-selected>Dịch vụ bạn đang quan tâm</p>
+          <div class="booking-countdown" aria-label="Thời gian ưu đãi hôm nay">
+            <div><strong data-countdown-hours>00</strong><span>Giờ</span></div>
+            <div><strong data-countdown-minutes>00</strong><span>Phút</span></div>
+            <div><strong data-countdown-seconds>00</strong><span>Giây</span></div>
+          </div>
+          <div class="booking-offer booking-offer-popup" aria-label="Giá ưu đãi sau thời gian đếm ngược">
+            <span>Làm đẹp tại nhà</span><strong>Chỉ Từ 399K</strong><small>Giảm 65%</small>
+          </div>
+          <form class="popup-booking-form" id="popupBookingForm">
+            <div class="popup-form-grid">
+              <label><span>Họ tên</span><input type="text" name="fullName" placeholder="Nhập họ tên" autocomplete="name" maxlength="60" required /></label>
+              <label><span>Số điện thoại</span><input type="tel" name="phone" placeholder="0786266268" inputmode="tel" autocomplete="tel" pattern="[0-9]{9,11}" maxlength="16" required /></label>
+              <label><span>Dịch vụ quan tâm</span><select name="service" data-popup-service required><option value="">Chọn dịch vụ</option><option value="Phun môi collagen">Phun môi collagen</option><option value="Phun mày tán bột">Phun mày tán bột</option><option value="Điêu khắc chân mày">Điêu khắc chân mày</option><option value="Phun mí">Phun mí</option></select></label>
+              <label><span>Tỉnh/thành phố / khu vực</span><select name="province" required><option value="">Chọn khu vực</option><option>Long Thành</option><option>Đồng Nai</option><option>Biên Hòa</option><option>Thủ Đức</option><option>TP.HCM</option><option>Bình Hòa</option></select></label>
+              <label class="popup-form-full"><span>Địa chỉ cần phục vụ</span><input type="text" name="address" placeholder="Nhập số nhà, đường, phường/xã" autocomplete="street-address" maxlength="180" /></label>
+              <label class="popup-form-full"><span>Ghi chú</span><textarea name="note" rows="2" placeholder="Bạn muốn đặt khung giờ nào hoặc cần tư vấn thêm gì?" maxlength="260"></textarea></label>
+            </div>
+            <button class="btn btn-primary popup-submit" type="submit">Gửi thông tin tư vấn</button>
+            <p class="popup-form-message" data-popup-message role="status" aria-live="polite"></p>
+          </form>
+          <div class="booking-popover-actions"><a class="btn btn-secondary" href="tel:0786266268">Gọi Tư Vấn 1-1</a></div>
+        </div>
+      </section>
+    </div>
     <script src="script.js"></script>
   </body>
 </html>
+
+

@@ -309,12 +309,33 @@ p {
 
 .brand {
   display: inline-flex;
-  align-items: baseline;
+  align-items: center;
   gap: 0;
   font-family: var(--font-display);
   font-weight: 700;
   min-width: 118px;
   white-space: nowrap;
+}
+
+.brand-logo-img {
+  display: block;
+  width: auto;
+  height: 52px;
+  max-width: 150px;
+  object-fit: contain;
+}
+
+.brand-logo-inline {
+  display: inline-block;
+  height: clamp(58px, 11vw, 124px);
+  max-width: min(46vw, 360px);
+  margin-left: 0.08em;
+  vertical-align: -0.28em;
+}
+
+.brand-logo-popover {
+  height: 58px;
+  max-width: 172px;
 }
 
 .brand-text {
@@ -4215,6 +4236,16 @@ body.booking-popover-open {
 @media (max-width: 380px) {
   .container {
     width: min(100% - 24px, 1140px);
+  }
+
+  .brand-logo-img {
+    height: 40px;
+    max-width: 118px;
+  }
+
+  .brand-logo-inline {
+    height: clamp(48px, 18vw, 72px);
+    max-width: 58vw;
   }
 
   .brand {

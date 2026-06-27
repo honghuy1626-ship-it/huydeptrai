@@ -1,4 +1,4 @@
-const APPS_SCRIPT_URL = "https://script.google.com/macros/s/AKfycbzQkG1BLZvsvUizthvixSCMHQ6rit1bRDHEi0cpTN111eXiYgrfGXzb-KjBv1h3FaqUhA/exec";
+﻿const APPS_SCRIPT_URL = "https://script.google.com/macros/s/AKfycbzQkG1BLZvsvUizthvixSCMHQ6rit1bRDHEi0cpTN111eXiYgrfGXzb-KjBv1h3FaqUhA/exec";
 const BOOKING_RATE_KEY = "ellyBookingRate";
 const BOOKING_LIMIT = {
   maxAttempts: 3,
@@ -23,6 +23,7 @@ const popupForm = document.querySelector("#popupBookingForm");
 const popupMessage = document.querySelector("[data-popup-message]");
 const selectedServiceText = document.querySelector("[data-booking-selected]");
 const serviceSelect = document.querySelector("[data-popup-service]");
+const logoAssetPath = window.location.pathname.includes("/kien-thuc/") ? "../assets/elly-logo.png" : "assets/elly-logo.png";
 
 function cleanText(value, maxLength = 120) {
   return String(value || "")
@@ -191,7 +192,7 @@ document.addEventListener("click", (event) => {
 
   const href = link.getAttribute("href") || "";
 
-  if (href === "#booking") {
+  if (href === "#booking" || href === "index.html#booking" || href.endsWith("/index.html#booking")) {
     event.preventDefault();
     closeMenu();
     openBooking(link.dataset.service || "Dịch vụ bạn đang quan tâm");
@@ -320,8 +321,8 @@ async function submitBooking(form) {
   }
 
   const params = new URLSearchParams();
-  params.set("sheetName", "ELLY SPA - Đặt lịch");
-  params.set("source", "Website ELLY SPA");
+  params.set("sheetName", "ELLY - Đặt lịch");
+  params.set("source", "Website ELLY");
   params.set("createdAt", new Date().toLocaleString("vi-VN"));
   Object.entries(validation.payload).forEach(([key, value]) => {
     params.set(key, protectSheetValue(value));
@@ -342,7 +343,7 @@ if (popupForm) {
   popupForm.addEventListener("submit", async (event) => {
     event.preventDefault();
     const submit = popupForm.querySelector("button[type='submit']");
-    if (popupMessage) popupMessage.textContent = "ELLY SPA đang nhận thông tin của bạn...";
+    if (popupMessage) popupMessage.textContent = "ELLY đang nhận thông tin của bạn...";
     if (submit) {
       submit.disabled = true;
       submit.textContent = "Đang gửi thông tin...";
@@ -359,7 +360,7 @@ if (popupForm) {
         }
         return;
       }
-      if (popupMessage) popupMessage.textContent = "Đã gửi thông tin. ELLY SPA sẽ liên hệ xác nhận lịch sớm.";
+      if (popupMessage) popupMessage.textContent = "Đã gửi thông tin. ELLY sẽ liên hệ xác nhận lịch sớm.";
       popupForm.reset();
     } catch (error) {
       if (popupMessage) popupMessage.textContent = "Mạng chưa ổn định. Thông tin đã lưu tạm trên máy, bạn có thể bấm gọi trực tiếp.";
@@ -379,3 +380,4 @@ setupCountdown();
 if (window.location.hash === "#booking") {
   window.setTimeout(() => openBooking("Dịch vụ bạn đang quan tâm"), 250);
 }
+
