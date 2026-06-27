@@ -317,12 +317,51 @@ p {
   white-space: nowrap;
 }
 
+.site-header .brand {
+  gap: 9px;
+  min-width: 238px;
+}
+
 .brand-logo-img {
   display: block;
   width: auto;
   height: 52px;
   max-width: 150px;
   object-fit: contain;
+}
+
+.site-header .brand::after {
+  content: "Quyền năng phái đẹp";
+  display: inline-block;
+  max-width: 118px;
+  color: transparent;
+  font-family: var(--font-body);
+  font-size: 0.68rem;
+  font-weight: 900;
+  line-height: 1.08;
+  letter-spacing: 0.02em;
+  text-transform: uppercase;
+  white-space: normal;
+  background: linear-gradient(105deg, #815217 0%, #c18b24 30%, #fff2b8 48%, #d8a339 62%, #8d5a18 100%);
+  background-size: 240% auto;
+  background-clip: text;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  filter: drop-shadow(0 6px 13px rgba(196, 147, 74, 0.24));
+  animation: brandTaglineShine 3.8s ease-in-out infinite;
+}
+
+@keyframes brandTaglineShine {
+  0%,
+  100% {
+    background-position: 0% center;
+    transform: translateY(0);
+  }
+
+  50% {
+    background-position: 100% center;
+    transform: translateY(-1px);
+  }
 }
 
 .brand-logo-inline {
@@ -4233,6 +4272,30 @@ body.booking-popover-open {
   }
 }
 
+@media (max-width: 760px) {
+  .site-header .brand {
+    gap: 7px;
+    min-width: 190px;
+  }
+
+  .site-header .brand::after {
+    max-width: 92px;
+    font-size: 0.58rem;
+    line-height: 1.05;
+  }
+}
+
+@media (max-width: 480px) {
+  .site-header .brand {
+    min-width: 150px;
+  }
+
+  .site-header .brand::after {
+    max-width: 76px;
+    font-size: 0.5rem;
+  }
+}
+
 @media (max-width: 380px) {
   .container {
     width: min(100% - 24px, 1140px);
@@ -4251,6 +4314,14 @@ body.booking-popover-open {
   .brand {
     gap: 6px;
     min-width: 118px;
+  }
+
+  .site-header .brand {
+    min-width: 118px;
+  }
+
+  .site-header .brand::after {
+    display: none;
   }
 
   .brand-name {
