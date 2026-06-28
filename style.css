@@ -2179,6 +2179,62 @@ body.sample-lightbox-open .floating-actions {
   line-height: 1.55;
 }
 
+.seo-video-card .pricing-media {
+  min-height: 260px;
+  padding: 5px;
+  background:
+    linear-gradient(#fffaf4, #fffaf4) padding-box,
+    linear-gradient(135deg, rgba(255, 238, 184, 0.98), rgba(196, 147, 74, 0.82), rgba(116, 75, 50, 0.36)) border-box;
+  border: 1px solid transparent;
+  border-radius: 18px;
+  box-shadow:
+    0 18px 34px rgba(38, 23, 17, 0.14),
+    0 0 0 1px rgba(255, 255, 255, 0.72) inset,
+    0 0 26px rgba(217, 183, 127, 0.2);
+  transition: box-shadow 220ms ease, filter 220ms ease;
+}
+
+.seo-video-card .pricing-media::before {
+  inset: 5px;
+  border-radius: 13px;
+  background:
+    linear-gradient(180deg, transparent 58%, rgba(21, 17, 15, 0.32)),
+    radial-gradient(circle at 12% 10%, rgba(255, 255, 255, 0.18), transparent 28%);
+}
+
+.seo-video-card .pricing-media::after {
+  content: "";
+  position: absolute;
+  inset: 5px;
+  z-index: 2;
+  border: 1px solid rgba(255, 255, 255, 0.42);
+  border-radius: 13px;
+  box-shadow: 0 0 0 1px rgba(196, 147, 74, 0.22) inset;
+  pointer-events: none;
+}
+
+.seo-video-card .pricing-media video {
+  min-height: 260px;
+  border-radius: 13px;
+  transform: none;
+  transition: filter 220ms ease;
+}
+
+.seo-video-card:hover .pricing-media,
+.seo-video-card:focus-within .pricing-media {
+  filter: saturate(1.03);
+  box-shadow:
+    0 20px 38px rgba(38, 23, 17, 0.16),
+    0 0 0 1px rgba(255, 255, 255, 0.78) inset,
+    0 0 34px rgba(217, 183, 127, 0.3);
+}
+
+.seo-video-card:hover .pricing-media video,
+.seo-video-card:focus-within .pricing-media video {
+  filter: saturate(1.05) contrast(1.03);
+  transform: none;
+}
+
 .seo-advice-card {
   max-width: 760px;
   margin: 22px auto 0;
