@@ -122,16 +122,6 @@ function validateBooking(form) {
   return { ok: true, payload };
 }
 
-function saveBookingLocally(entry) {
-  try {
-    const saved = JSON.parse(localStorage.getItem("ellyBookings") || "[]");
-    saved.push(entry);
-    localStorage.setItem("ellyBookings", JSON.stringify(saved.slice(-20)));
-  } catch (error) {
-    localStorage.removeItem("ellyBookings");
-  }
-}
-
 function markInvalidField(form, fieldName) {
   const field = form.querySelector(`[name="${fieldName}"]`);
   if (!field) return;
@@ -328,8 +318,6 @@ async function submitBooking(form) {
     params.set(key, protectSheetValue(value));
   });
 
-  saveBookingLocally(Object.fromEntries(params.entries()));
-
   await fetch(APPS_SCRIPT_URL, {
     method: "POST",
     mode: "no-cors",
@@ -363,7 +351,7 @@ if (popupForm) {
       if (popupMessage) popupMessage.textContent = "Đã gửi thông tin. ELLY sẽ liên hệ xác nhận lịch sớm.";
       popupForm.reset();
     } catch (error) {
-      if (popupMessage) popupMessage.textContent = "Mạng chưa ổn định. Thông tin đã lưu tạm trên máy, bạn có thể bấm gọi trực tiếp.";
+      if (popupMessage) popupMessage.textContent = "Mạng chưa ổn định. Bạn vui lòng gửi lại hoặc bấm gọi trực tiếp để được hỗ trợ.";
     } finally {
       if (submit) {
         submit.disabled = false;

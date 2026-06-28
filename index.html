@@ -2,6 +2,9 @@
 <html lang="vi">
   <head>
     <meta charset="UTF-8" />
+    <meta http-equiv="Content-Security-Policy" content="default-src 'self'; base-uri 'self'; object-src 'none'; frame-ancestors 'none'; script-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com; img-src 'self' data: blob:; connect-src 'self' https://script.google.com https://script.googleusercontent.com; form-action 'self'; upgrade-insecure-requests" />
+    <meta name="referrer" content="strict-origin-when-cross-origin" />
+    <meta http-equiv="Permissions-Policy" content="camera=(), microphone=(), geolocation=(), payment=(), usb=(), fullscreen=(self)" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta
       name="description"
@@ -547,13 +550,13 @@
         <div>
           <h3>Kết nối nhanh</h3>
           <div class="footer-links">
-            <a href="https://www.facebook.com/profile.php?id=61555486805617" target="_blank" rel="noopener">Facebook</a>
-            <a href="https://zalo.me/0786266268" target="_blank" rel="noopener">Zalo</a>
-            <a href="https://m.me/61555486805617" target="_blank" rel="noopener">Messenger</a>
+            <a href="https://www.facebook.com/profile.php?id=61555486805617" target="_blank" rel="noopener noreferrer">Facebook</a>
+            <a href="https://zalo.me/0786266268" target="_blank" rel="noopener noreferrer">Zalo</a>
+            <a href="https://m.me/61555486805617" target="_blank" rel="noopener noreferrer">Messenger</a>
             <a
               href="https://www.google.com/maps/search/?api=1&query=17H%20B%C3%ACnh%20H%C3%B2a%2024%2C%20P.%20B%C3%ACnh%20H%C3%B2a%2C%20TP.%20H%E1%BB%93%20Ch%C3%AD%20Minh"
               target="_blank"
-              rel="noopener"
+              rel="noopener noreferrer"
             >
               Google Maps
             </a>
@@ -652,7 +655,7 @@
 
     <!-- Nút liên hệ nổi -->
     <div class="floating-actions" aria-label="Nút liên hệ nhanh">
-      <a class="float-btn zalo" href="https://zalo.me/0786266268" target="_blank" rel="noopener" aria-label="Chat Zalo">
+      <a class="float-btn zalo" href="https://zalo.me/0786266268" target="_blank" rel="noopener noreferrer" aria-label="Chat Zalo">
         <span>Zalo</span>
       </a>
       <a class="float-btn call" href="tel:0786266268" aria-label="Gọi ngay ELLY">
@@ -662,10 +665,10 @@
           </svg>
         </span>
       </a>
-      <a class="float-btn facebook" href="https://www.facebook.com/profile.php?id=61555486805617" target="_blank" rel="noopener" aria-label="Mở Facebook ELLY">
+      <a class="float-btn facebook" href="https://www.facebook.com/profile.php?id=61555486805617" target="_blank" rel="noopener noreferrer" aria-label="Mở Facebook ELLY">
         <span>f</span>
       </a>
-      <a class="float-btn messenger" href="https://m.me/61555486805617" target="_blank" rel="noopener" aria-label="Chat Messenger">
+      <a class="float-btn messenger" href="https://m.me/61555486805617" target="_blank" rel="noopener noreferrer" aria-label="Chat Messenger">
         <span>Chat</span>
       </a>
     </div>
