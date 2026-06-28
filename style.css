@@ -3448,10 +3448,11 @@ body.booking-popover-open {
   align-items: center;
   justify-content: center;
   padding: 0;
-  color: var(--white);
-  border: 0;
+  color: #2b1c12;
+  border: 1px solid rgba(255, 255, 255, 0.58);
   border-radius: 50%;
-  box-shadow: 0 12px 28px rgba(21, 17, 15, 0.18);
+  background: linear-gradient(135deg, #f8e7b5, var(--champagne) 54%, #b78136);
+  box-shadow: 0 12px 28px rgba(38, 23, 17, 0.2);
   font-size: 0.74rem;
   font-weight: 900;
   pointer-events: auto;
@@ -3467,7 +3468,7 @@ body.booking-popover-open {
   z-index: -1;
   border-radius: 50%;
   background: var(--float-glow, currentColor);
-  opacity: 0.18;
+  opacity: 0.16;
   animation: floatGlowPulse 3s ease-in-out infinite;
 }
 
@@ -3483,7 +3484,7 @@ body.booking-popover-open {
   align-items: center;
   justify-content: center;
   border-radius: 50%;
-  background: rgba(255, 255, 255, 0.14);
+  background: rgba(255, 255, 255, 0.23);
   line-height: 1;
 }
 
@@ -3499,8 +3500,8 @@ body.booking-popover-open {
 }
 
 .float-btn.call {
-  --float-glow: #11c915;
-  background: #11c915;
+  --float-glow: rgba(196, 147, 74, 0.72);
+  background: linear-gradient(135deg, #fff1c8, var(--champagne) 54%, #b78136);
   animation-delay: 0.3s;
 }
 
@@ -3509,27 +3510,72 @@ body.booking-popover-open {
 }
 
 .float-btn.zalo {
-  --float-glow: #1798ed;
-  background: #1798ed;
+  --float-glow: rgba(217, 183, 127, 0.74);
+  background: linear-gradient(135deg, #fff6da, #e1c177 54%, #bd8738);
   animation-delay: 0s;
 }
 
-.float-btn.facebook {
-  --float-glow: #1877f2;
-  background: #1877f2;
-  font-family: Arial, sans-serif;
-  font-size: 1.55rem;
-  animation-delay: 0.6s;
-}
-
 .float-btn.messenger {
-  --float-glow: #6c4df6;
-  background: #6c4df6;
+  --float-glow: rgba(116, 75, 50, 0.56);
+  background: linear-gradient(135deg, #f7e2af, #d1a45d 52%, var(--brown));
   font-size: 0.72rem;
   animation-delay: 0.9s;
 }
 
 /* Hiệu ứng xuất hiện khi cuộn */
+
+@media (max-width: 759px) {
+  body {
+    padding-bottom: 96px;
+  }
+
+  .floating-actions {
+    left: 12px;
+    right: 12px;
+    bottom: max(10px, env(safe-area-inset-bottom));
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 8px;
+    padding: 8px;
+    border: 1px solid rgba(196, 147, 74, 0.28);
+    border-radius: 20px;
+    background:
+      linear-gradient(135deg, rgba(255, 250, 244, 0.96), rgba(245, 224, 183, 0.92)),
+      rgba(255, 250, 244, 0.94);
+    box-shadow:
+      0 18px 34px rgba(38, 23, 17, 0.18),
+      0 0 0 1px rgba(255, 255, 255, 0.65) inset;
+    backdrop-filter: blur(14px);
+    pointer-events: auto;
+  }
+
+  .float-btn {
+    width: 100%;
+    height: 50px;
+    min-height: 50px;
+    border-radius: 14px;
+    font-size: 0.78rem;
+    box-shadow: 0 8px 18px rgba(38, 23, 17, 0.14);
+    animation-duration: 4s;
+  }
+
+  .float-btn::before {
+    inset: 3px;
+    border-radius: inherit;
+    opacity: 0.12;
+  }
+
+  .float-btn span {
+    width: 100%;
+    height: 100%;
+    border-radius: 12px;
+  }
+
+  .float-btn svg {
+    width: 22px;
+    height: 22px;
+  }
+}
+
 .reveal {
   opacity: 0;
   transform: translateY(22px);
