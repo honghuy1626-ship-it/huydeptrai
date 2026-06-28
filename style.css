@@ -2073,7 +2073,8 @@ body.sample-lightbox-open .floating-actions {
   pointer-events: none;
 }
 
-.pricing-media img {
+.pricing-media img,
+.pricing-media video {
   width: 100%;
   height: 100%;
   min-height: 168px;
@@ -2142,7 +2143,8 @@ body.sample-lightbox-open .floating-actions {
   user-select: none;
 }
 
-.pricing-card:hover .pricing-media img {
+.pricing-card:hover .pricing-media img,
+.pricing-card:hover .pricing-media video {
   filter: saturate(1.05) contrast(1.03);
   transform: scale(1.06);
 }
@@ -3787,7 +3789,8 @@ body.booking-popover-open {
   }
 
   .pricing-track,
-  .pricing-media img {
+  .pricing-media img,
+  .pricing-media video {
     min-height: 126px;
   }
 
