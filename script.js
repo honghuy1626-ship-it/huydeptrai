@@ -153,7 +153,7 @@ function openBooking(service = "") {
   }
   popover.classList.add("is-open");
   popover.setAttribute("aria-hidden", "false");
-  body.classList.add("popover-open");
+  body.classList.add("booking-popover-open");
   window.setTimeout(() => {
     const firstInput = popover.querySelector("input, select, textarea, button");
     if (firstInput) firstInput.focus({ preventScroll: true });
@@ -164,7 +164,7 @@ function closeBooking() {
   if (!popover) return;
   popover.classList.remove("is-open");
   popover.setAttribute("aria-hidden", "true");
-  body.classList.remove("popover-open");
+  body.classList.remove("booking-popover-open");
 }
 
 if (menuToggle && mainNav) {
@@ -182,7 +182,12 @@ document.addEventListener("click", (event) => {
 
   const href = link.getAttribute("href") || "";
 
-  if (href === "#booking" || href === "index.html#booking" || href.endsWith("/index.html#booking")) {
+  if (
+    link.hasAttribute("data-booking-open") ||
+    href === "#booking" ||
+    href === "index.html#booking" ||
+    href.endsWith("/index.html#booking")
+  ) {
     event.preventDefault();
     closeMenu();
     openBooking(link.dataset.service || "Dịch vụ bạn đang quan tâm");
