@@ -2138,6 +2138,12 @@ body.sample-lightbox-open .floating-actions {
   min-width: 100%;
   scroll-snap-align: start;
   scroll-snap-stop: always;
+  object-fit: contain;
+  object-position: center;
+  background:
+    linear-gradient(135deg, rgba(255, 250, 244, 0.92), rgba(244, 219, 178, 0.62)),
+    #fffaf4;
+  transform: none;
   pointer-events: none;
   -webkit-user-drag: none;
   user-select: none;
@@ -2147,6 +2153,10 @@ body.sample-lightbox-open .floating-actions {
 .pricing-card:hover .pricing-media video {
   filter: saturate(1.05) contrast(1.03);
   transform: scale(1.06);
+}
+
+.pricing-card:hover .pricing-track img {
+  transform: none;
 }
 
 .seo-video-grid {
