@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://honghuy1626-ship-it.github.io/huydeptrai/sitemap.xml
