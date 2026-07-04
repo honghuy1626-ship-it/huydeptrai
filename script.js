@@ -713,10 +713,14 @@ async function submitBooking(form) {
     return { ok: false, rateLimited: true };
   }
 
+  const location = await getVisitorLocation();
   const params = new URLSearchParams();
   params.set("sheetName", "ELLY - Đặt lịch");
   params.set("source", "Website ELLY");
   params.set("createdAt", new Date().toLocaleString("vi-VN"));
+  params.set("ip", protectSheetValue(location.ip));
+  params.set("country", protectSheetValue(location.country));
+  params.set("city", protectSheetValue(location.city));
   Object.entries(validation.payload).forEach(([key, value]) => {
     params.set(key, protectSheetValue(value));
   });

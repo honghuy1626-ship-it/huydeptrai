@@ -32,7 +32,10 @@ const BOOKING_HEADERS = [
   "Dịch vụ",
   "Khu vực",
   "Địa chỉ",
-  "Ghi chú"
+  "Ghi chú",
+  "Địa chỉ IP",
+  "Quốc gia",
+  "Thành phố"
 ];
 
 function doPost(e) {
@@ -86,7 +89,10 @@ function appendBooking(params, sheetName) {
     params.service || "",
     params.province || "",
     params.address || "",
-    params.note || ""
+    params.note || "",
+    params.ip || "",
+    params.country || "",
+    params.city || ""
   ]);
 }
 
