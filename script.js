@@ -105,7 +105,7 @@ function buildKnowledgeSearchTerms(keyword) {
     ["moi", "phun moi", "mau moi", "cham soc moi"].forEach((term) => terms.add(term));
   }
 
-  if (normalized.includes("may") || normalized.includes("chan may") || normalized.includes("dieu khac")) {
+  if (normalized.includes("may") || normalized.includes("chan") || normalized.includes("chan may") || normalized.includes("dieu khac")) {
     ["chan may", "phun may", "dang may", "dieu khac", "tan bot", "ombre", "nano"].forEach((term) => terms.add(term));
   }
 
@@ -327,7 +327,7 @@ function canSubmitNow() {
 function SearchBox(root, options = {}) {
   const items = Array.from(document.querySelectorAll(options.itemSelector || ".lead-card, .side-card, .news-row"));
   const debounceMs = options.debounceMs || 1500;
-  const maxSuggestions = options.maxSuggestions || 8;
+  const maxSuggestions = options.maxSuggestions || 30;
   let typingTimer = null;
   let lastTypingKeyword = "";
 
@@ -370,6 +370,16 @@ function SearchBox(root, options = {}) {
   const scoreArticle = (article, query) => {
     if (!query.normalized) return 1;
     let score = 0;
+    const wantsBrows = query.normalized.includes("may") || query.normalized.includes("chan") || query.normalized.includes("dieu khac");
+    const wantsLips = query.normalized.includes("moi");
+    const wantsEyeliner = query.normalized.includes("mi");
+    const isBrowArticle = ["chan may", "phun may", "dieu khac", "dang may", "tan bot", "ombre", "nano"].some((term) => article.searchText.includes(term));
+    const isLipArticle = article.searchText.includes("moi");
+    const isEyelinerArticle = article.searchText.includes("phun mi") || article.searchText.includes("mo trong");
+
+    if (wantsBrows && !isBrowArticle) return 0;
+    if (wantsLips && !isLipArticle) return 0;
+    if (wantsEyeliner && !isEyelinerArticle) return 0;
 
     if (article.searchTitle.includes(query.normalized)) score += 80;
     if (article.searchText.includes(query.normalized)) score += 35;
@@ -426,7 +436,10 @@ function SearchBox(root, options = {}) {
     });
 
     renderSuggestions(matches, keyword);
-    status.textContent = keyword ? (matches.length ? `Tìm thấy ${matches.length} bài viết liên quan.` : "Chưa có bài viết phù hợp.") : "";
+    const shownCount = Math.min(matches.length, maxSuggestions);
+    status.textContent = keyword
+      ? (matches.length ? `Tìm thấy ${matches.length} bài viết liên quan${shownCount < matches.length ? `, đang hiển thị ${shownCount} bài phù hợp nhất.` : "."}` : "Chưa có bài viết phù hợp.")
+      : "";
     return matches;
   };
 
