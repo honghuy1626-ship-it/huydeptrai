@@ -5,7 +5,32 @@ const BOOKING_RATE_KEY = "ellyBookingRate";
 const SEARCH_SESSION_KEY = "ellySearchSessionId";
 const SEARCH_LOG_DEMO_KEY = "ellySearchLogDemo";
 const SEARCH_LOCATION_KEY = "ellySearchLocation";
-const SEARCH_LOCATION_URL = "https://ipapi.co/json/";
+const SEARCH_LOCATION_SOURCES = [
+  {
+    url: "https://ipapi.co/json/",
+    map: (data) => ({
+      ip: data.ip,
+      country: data.country_name,
+      city: data.city
+    })
+  },
+  {
+    url: "https://ipwho.is/",
+    map: (data) => ({
+      ip: data.ip,
+      country: data.country,
+      city: data.city
+    })
+  },
+  {
+    url: "https://get.geojs.io/v1/ip/geo.json",
+    map: (data) => ({
+      ip: data.ip,
+      country: data.country,
+      city: data.city
+    })
+  }
+];
 const BOOKING_LIMIT = {
   maxAttempts: 3,
   windowMs: 10 * 60 * 1000,
@@ -147,38 +172,64 @@ async function getDeviceName() {
   }
 }
 
+function normalizeCountryName(country) {
+  return country === "Vietnam" || country === "Viet Nam" ? "Việt Nam" : country;
+}
+
+async function fetchJsonWithTimeout(url, timeoutMs = 2500) {
+  const controller = new AbortController();
+  const timer = window.setTimeout(() => controller.abort(), timeoutMs);
+
+  try {
+    const response = await fetch(url, {
+      method: "GET",
+      cache: "no-store",
+      signal: controller.signal
+    });
+    if (!response.ok) throw new Error("Location lookup failed");
+    return await response.json();
+  } finally {
+    window.clearTimeout(timer);
+  }
+}
+
 async function getVisitorLocation() {
   try {
     const cached = sessionStorage.getItem(SEARCH_LOCATION_KEY);
-    if (cached) return JSON.parse(cached);
+    if (cached) {
+      const location = JSON.parse(cached);
+      if (location.ip || location.country || location.city) return location;
+      sessionStorage.removeItem(SEARCH_LOCATION_KEY);
+    }
   } catch (error) {
     // Location lookup should never interrupt search logging.
   }
 
-  try {
-    const response = await fetch(SEARCH_LOCATION_URL, {
-      method: "GET",
-      cache: "no-store"
-    });
-    if (!response.ok) throw new Error("Location lookup failed");
-
-    const data = await response.json();
-    const location = {
-      ip: cleanText(data.ip, 80),
-      country: cleanText(data.country_name === "Vietnam" ? "Việt Nam" : data.country_name, 80),
-      city: cleanText(data.city, 80)
-    };
-
+  for (const source of SEARCH_LOCATION_SOURCES) {
     try {
-      sessionStorage.setItem(SEARCH_LOCATION_KEY, JSON.stringify(location));
-    } catch (error) {
-      // Cache is optional.
-    }
+      const data = await fetchJsonWithTimeout(source.url);
+      const mapped = source.map(data);
+      if (!mapped.ip && !mapped.country && !mapped.city) continue;
 
-    return location;
-  } catch (error) {
-    return { ip: "", country: "", city: "" };
+      const location = {
+        ip: cleanText(mapped.ip, 80),
+        country: cleanText(normalizeCountryName(mapped.country), 80),
+        city: cleanText(mapped.city, 80)
+      };
+
+      try {
+        sessionStorage.setItem(SEARCH_LOCATION_KEY, JSON.stringify(location));
+      } catch (error) {
+        // Cache is optional.
+      }
+
+      return location;
+    } catch (error) {
+      // Try the next lookup service.
+    }
   }
+
+  return { ip: "", country: "", city: "" };
 }
 
 async function buildSearchLogPayload(keyword, eventType) {
