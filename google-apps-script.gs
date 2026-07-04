@@ -56,7 +56,7 @@ function appendSearchLog(params) {
   const screenResolution = params.screenResolution || joinScreenResolution(params.screenWidth, params.screenHeight);
 
   sheet.appendRow([
-    params.timestamp || new Date(),
+    formatLogTime(params.timestamp),
     params.sessionId || "",
     params.keyword || "",
     translateEventType(params.eventType),
@@ -82,7 +82,7 @@ function appendBooking(params, sheetName) {
   const sheet = getSheetWithHeaders(sheetName, BOOKING_HEADERS);
 
   sheet.appendRow([
-    params.createdAt || new Date(),
+    formatLogTime(params.createdAt),
     params.source || "",
     params.fullName || "",
     params.phone || "",
@@ -125,6 +125,19 @@ function getSpreadsheet() {
 function joinScreenResolution(width, height) {
   if (!width || !height) return "";
   return width + "x" + height;
+}
+
+function formatLogTime(value) {
+  if (!value) {
+    return Utilities.formatDate(new Date(), "Asia/Ho_Chi_Minh", "dd/MM/yyyy HH:mm:ss");
+  }
+
+  const parsed = new Date(value);
+  if (!isNaN(parsed.getTime()) && String(value).indexOf("T") !== -1) {
+    return Utilities.formatDate(parsed, "Asia/Ho_Chi_Minh", "dd/MM/yyyy HH:mm:ss");
+  }
+
+  return value;
 }
 
 function translateEventType(value) {

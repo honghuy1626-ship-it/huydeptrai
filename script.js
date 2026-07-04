@@ -238,7 +238,7 @@ async function buildSearchLogPayload(keyword, eventType) {
   const location = await getVisitorLocation();
 
   return {
-    timestamp: new Date().toISOString(),
+    timestamp: new Date().toLocaleString("vi-VN"),
     sessionId: getOrCreateSessionId(),
     keyword: cleanText(keyword, 160),
     eventType,
