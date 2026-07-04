@@ -1,5 +1,11 @@
 ﻿const APPS_SCRIPT_URL = "https://script.google.com/macros/s/AKfycbzQkG1BLZvsvUizthvixSCMHQ6rit1bRDHEi0cpTN111eXiYgrfGXzb-KjBv1h3FaqUhA/exec";
+const SEARCH_LOG_APPS_SCRIPT_URL = APPS_SCRIPT_URL;
+const SEARCH_LOG_DEMO_MODE = false;
 const BOOKING_RATE_KEY = "ellyBookingRate";
+const SEARCH_SESSION_KEY = "ellySearchSessionId";
+const SEARCH_LOG_DEMO_KEY = "ellySearchLogDemo";
+const SEARCH_LOCATION_KEY = "ellySearchLocation";
+const SEARCH_LOCATION_URL = "https://ipapi.co/json/";
 const BOOKING_LIMIT = {
   maxAttempts: 3,
   windowMs: 10 * 60 * 1000,
@@ -49,6 +55,188 @@ function protectSheetValue(value) {
   return /^[=+\-@]/.test(cleanValue) ? `'${cleanValue}` : cleanValue;
 }
 
+function escapeHtml(value) {
+  return String(value || "")
+    .replace(/&/g, "&amp;")
+    .replace(/</g, "&lt;")
+    .replace(/>/g, "&gt;")
+    .replace(/"/g, "&quot;")
+    .replace(/'/g, "&#39;");
+}
+
+function normalizeSearchText(value) {
+  return cleanText(value, 500)
+    .toLocaleLowerCase("vi-VN")
+    .normalize("NFD")
+    .replace(/[\u0300-\u036f]/g, "")
+    .replace(/đ/g, "d");
+}
+
+function buildKnowledgeSearchTerms(keyword) {
+  const normalized = normalizeSearchText(keyword);
+  const terms = new Set(normalized.split(/\s+/).filter((term) => term.length >= 2));
+
+  if (normalized.includes("moi")) {
+    ["moi", "phun moi", "mau moi", "cham soc moi"].forEach((term) => terms.add(term));
+  }
+
+  if (normalized.includes("may") || normalized.includes("chan may") || normalized.includes("dieu khac")) {
+    ["chan may", "phun may", "dang may", "dieu khac", "tan bot", "ombre", "nano"].forEach((term) => terms.add(term));
+  }
+
+  if (normalized.includes("mi")) {
+    ["mi", "phun mi", "mo trong"].forEach((term) => terms.add(term));
+  }
+
+  if (normalized.includes("phun xam")) {
+    ["phun xam", "tu van", "tai nha"].forEach((term) => terms.add(term));
+  }
+
+  return { normalized, terms: Array.from(terms) };
+}
+
+function getOrCreateSessionId() {
+  try {
+    const existing = localStorage.getItem(SEARCH_SESSION_KEY);
+    if (existing) return existing;
+    const randomPart = window.crypto?.randomUUID ? window.crypto.randomUUID() : `${Date.now()}-${Math.random().toString(36).slice(2)}`;
+    const sessionId = `elly-${randomPart}`;
+    localStorage.setItem(SEARCH_SESSION_KEY, sessionId);
+    return sessionId;
+  } catch (error) {
+    return `elly-${Date.now()}-${Math.random().toString(36).slice(2)}`;
+  }
+}
+
+function detectDeviceType() {
+  const ua = navigator.userAgent || "";
+  if (/ipad|tablet|playbook|silk/i.test(ua) || (/android/i.test(ua) && !/mobile/i.test(ua))) return "Tablet";
+  if (/mobi|iphone|ipod|android|blackberry|phone/i.test(ua)) return "Mobile";
+  return "Desktop";
+}
+
+function detectOperatingSystem() {
+  const ua = navigator.userAgent || "";
+  const platform = navigator.userAgentData?.platform || navigator.platform || "";
+  if (/android/i.test(ua)) return "Android";
+  if (/iphone|ipad|ipod/i.test(ua)) return "iOS";
+  if (/win/i.test(platform)) return "Windows";
+  if (/mac/i.test(platform)) return "macOS";
+  if (/linux/i.test(platform)) return "Linux";
+  return platform || "";
+}
+
+function detectBrowser() {
+  const ua = navigator.userAgent || "";
+  if (/Edg\//.test(ua)) return "Microsoft Edge";
+  if (/OPR\//.test(ua)) return "Opera";
+  if (/Chrome\//.test(ua) && !/Chromium/.test(ua)) return "Chrome";
+  if (/Safari\//.test(ua) && !/Chrome\//.test(ua)) return "Safari";
+  if (/Firefox\//.test(ua)) return "Firefox";
+  return "";
+}
+
+async function getDeviceName() {
+  const uaData = navigator.userAgentData;
+  if (!uaData?.getHighEntropyValues) return "";
+  try {
+    const hints = await uaData.getHighEntropyValues(["model", "platform", "platformVersion"]);
+    return hints.model || "";
+  } catch (error) {
+    return "";
+  }
+}
+
+async function getVisitorLocation() {
+  try {
+    const cached = sessionStorage.getItem(SEARCH_LOCATION_KEY);
+    if (cached) return JSON.parse(cached);
+  } catch (error) {
+    // Location lookup should never interrupt search logging.
+  }
+
+  try {
+    const response = await fetch(SEARCH_LOCATION_URL, {
+      method: "GET",
+      cache: "no-store"
+    });
+    if (!response.ok) throw new Error("Location lookup failed");
+
+    const data = await response.json();
+    const location = {
+      ip: cleanText(data.ip, 80),
+      country: cleanText(data.country_name === "Vietnam" ? "Việt Nam" : data.country_name, 80),
+      city: cleanText(data.city, 80)
+    };
+
+    try {
+      sessionStorage.setItem(SEARCH_LOCATION_KEY, JSON.stringify(location));
+    } catch (error) {
+      // Cache is optional.
+    }
+
+    return location;
+  } catch (error) {
+    return { ip: "", country: "", city: "" };
+  }
+}
+
+async function buildSearchLogPayload(keyword, eventType) {
+  const screenWidth = String(window.screen?.width || "");
+  const screenHeight = String(window.screen?.height || "");
+  const location = await getVisitorLocation();
+
+  return {
+    timestamp: new Date().toISOString(),
+    sessionId: getOrCreateSessionId(),
+    keyword: cleanText(keyword, 160),
+    eventType,
+    pageTitle: document.title || "",
+    pathname: window.location.pathname || "",
+    referrer: document.referrer || "",
+    ip: location.ip,
+    country: location.country,
+    city: location.city,
+    deviceType: detectDeviceType(),
+    deviceName: await getDeviceName(),
+    operatingSystem: detectOperatingSystem(),
+    browser: detectBrowser(),
+    userAgent: navigator.userAgent || "",
+    language: navigator.language || "",
+    timezone: Intl.DateTimeFormat().resolvedOptions().timeZone || "",
+    screenWidth,
+    screenHeight,
+    screenResolution: screenWidth && screenHeight ? `${screenWidth}x${screenHeight}` : "",
+    platform: navigator.userAgentData?.platform || navigator.platform || ""
+  };
+}
+
+async function sendSearchLogToGoogleSheet(payload) {
+  if (SEARCH_LOG_DEMO_MODE || !SEARCH_LOG_APPS_SCRIPT_URL) {
+    try {
+      const rows = JSON.parse(localStorage.getItem(SEARCH_LOG_DEMO_KEY) || "[]");
+      rows.push(payload);
+      localStorage.setItem(SEARCH_LOG_DEMO_KEY, JSON.stringify(rows.slice(-100)));
+    } catch (error) {
+      // Demo mode should never interrupt search.
+    }
+    console.info("Search log demo:", payload);
+    return;
+  }
+
+  const params = new URLSearchParams();
+  params.set("sheetName", "ELLY - Search Logs");
+  Object.entries(payload).forEach(([key, value]) => {
+    params.set(key, protectSheetValue(value));
+  });
+
+  await fetch(SEARCH_LOG_APPS_SCRIPT_URL, {
+    method: "POST",
+    mode: "no-cors",
+    body: params
+  });
+}
+
 function isAllowedSelectValue(select, value) {
   if (!select || !value) return false;
   return Array.from(select.options).some((option) => option.value === value && option.value !== "");
@@ -83,6 +271,165 @@ function canSubmitNow() {
     return false;
   }
   return true;
+}
+
+function SearchBox(root, options = {}) {
+  const items = Array.from(document.querySelectorAll(options.itemSelector || ".lead-card, .side-card, .news-row"));
+  const debounceMs = options.debounceMs || 1500;
+  const maxSuggestions = options.maxSuggestions || 8;
+  let typingTimer = null;
+  let lastTypingKeyword = "";
+
+  root.innerHTML = `
+    <form class="knowledge-search-form" data-search-form role="search">
+      <input type="search" name="keyword" placeholder="Tìm bài viết trong Kiến thức" autocomplete="off" aria-label="Từ khóa tìm kiếm" />
+      <button type="submit">Tìm kiếm</button>
+    </form>
+    <p class="knowledge-search-status" data-search-status aria-live="polite"></p>
+    <div class="knowledge-search-results" data-search-results hidden></div>
+  `;
+
+  const form = root.querySelector("[data-search-form]");
+  const input = form.querySelector("input");
+  const status = root.querySelector("[data-search-status]");
+  const results = root.querySelector("[data-search-results]");
+
+  const articleData = items.map((item) => {
+    const link = item.matches("a[href]") ? item : item.querySelector("h2 a[href], .read-more[href], a[href]");
+    const image = item.querySelector("img");
+    const title = cleanText(item.querySelector("h2")?.textContent || link?.textContent || item.textContent, 180);
+    const excerpt = cleanText(item.querySelector("p")?.textContent || "", 180);
+    const category = cleanText(item.querySelector(".news-kicker")?.textContent || "Bài viết", 80);
+
+    return {
+      item,
+      href: link?.href || "",
+      imageSrc: image?.getAttribute("src") || "",
+      imageAlt: cleanText(image?.getAttribute("alt") || title, 120),
+      title,
+      excerpt,
+      category,
+      searchTitle: normalizeSearchText(title),
+      searchText: normalizeSearchText(`${category} ${title} ${excerpt} ${item.textContent}`)
+    };
+  });
+
+  const normalizeKeyword = () => cleanText(input.value, 160);
+
+  const scoreArticle = (article, query) => {
+    if (!query.normalized) return 1;
+    let score = 0;
+
+    if (article.searchTitle.includes(query.normalized)) score += 80;
+    if (article.searchText.includes(query.normalized)) score += 35;
+
+    query.terms.forEach((term) => {
+      if (article.searchTitle.includes(term)) score += 24;
+      if (article.searchText.includes(term)) score += 10;
+    });
+
+    if (query.normalized.includes("moi") && article.searchText.includes("moi")) score += 30;
+    if ((query.normalized.includes("may") || query.normalized.includes("dieu khac")) && article.searchText.includes("chan may")) score += 28;
+    if (query.normalized.includes("dieu khac") && article.searchText.includes("dieu khac")) score += 40;
+    if (query.normalized.includes("mi") && article.searchText.includes("phun mi")) score += 30;
+
+    return score;
+  };
+
+  const findMatches = (keyword) => {
+    const query = buildKnowledgeSearchTerms(keyword);
+    if (!query.normalized) return articleData.map((article) => ({ ...article, score: 1 }));
+
+    return articleData
+      .map((article) => ({ ...article, score: scoreArticle(article, query) }))
+      .filter((article) => article.score > 0)
+      .sort((a, b) => b.score - a.score || a.title.localeCompare(b.title, "vi"));
+  };
+
+  const renderSuggestions = (matches, keyword) => {
+    if (!keyword || matches.length === 0) {
+      results.hidden = true;
+      results.innerHTML = "";
+      return;
+    }
+
+    results.innerHTML = matches.slice(0, maxSuggestions).map((article) => `
+      <a class="knowledge-search-result" href="${escapeHtml(article.href)}">
+        ${article.imageSrc ? `<img src="${escapeHtml(article.imageSrc)}" alt="${escapeHtml(article.imageAlt)}" loading="lazy" />` : ""}
+        <div>
+          <span>${escapeHtml(article.category)}</span>
+          <strong>${escapeHtml(article.title)}</strong>
+          ${article.excerpt ? `<small>${escapeHtml(article.excerpt)}</small>` : ""}
+        </div>
+      </a>
+    `).join("");
+    results.hidden = false;
+  };
+
+  const applySearch = (keyword) => {
+    const matches = findMatches(keyword);
+    const visibleItems = new Set(matches.map((article) => article.item));
+
+    items.forEach((item) => {
+      item.hidden = keyword ? !visibleItems.has(item) : false;
+    });
+
+    renderSuggestions(matches, keyword);
+    status.textContent = keyword ? (matches.length ? `Tìm thấy ${matches.length} bài viết liên quan.` : "Chưa có bài viết phù hợp.") : "";
+    return matches;
+  };
+
+  const logKeyword = async (eventType) => {
+    const keyword = normalizeKeyword();
+    if (!keyword) return;
+    if (eventType === "typing") {
+      if (keyword.length < 3 || keyword === lastTypingKeyword) return;
+      lastTypingKeyword = keyword;
+    }
+    const payload = await buildSearchLogPayload(keyword, eventType);
+    await sendSearchLogToGoogleSheet(payload);
+  };
+
+  input.addEventListener("input", () => {
+    const keyword = normalizeKeyword();
+    applySearch(keyword);
+    window.clearTimeout(typingTimer);
+    typingTimer = window.setTimeout(() => {
+      logKeyword("typing").catch(() => {});
+    }, debounceMs);
+  });
+
+  form.addEventListener("submit", async (event) => {
+    event.preventDefault();
+    window.clearTimeout(typingTimer);
+    const keyword = normalizeKeyword();
+    if (!keyword) {
+      applySearch("");
+      return;
+    }
+    const matches = applySearch(keyword);
+    try {
+      await logKeyword("submit");
+    } catch (error) {
+      // Search should continue even if logging fails.
+    }
+    if (matches.length) {
+      matches[0].item.scrollIntoView({ behavior: "smooth", block: "start" });
+    }
+  });
+}
+
+function setupKnowledgeSearchBox() {
+  const root = document.querySelector("[data-search-box]");
+  if (!root) return;
+  SearchBox(root);
+
+  const toggleCompactSearch = () => {
+    root.classList.toggle("is-compact", window.scrollY > 120);
+  };
+
+  toggleCompactSearch();
+  window.addEventListener("scroll", toggleCompactSearch, { passive: true });
 }
 
 function validateBooking(form) {
@@ -369,6 +716,7 @@ if (popupForm) {
 setupHomeSlider();
 setupPricingCarousels();
 setupCountdown();
+setupKnowledgeSearchBox();
 
 if (window.location.hash === "#booking") {
   window.setTimeout(() => openBooking("Dịch vụ bạn đang quan tâm"), 250);
