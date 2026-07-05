@@ -5034,3 +5034,59 @@ body.booking-popover-open {
     font-size: 16px;
   }
 }
+
+.location-permission {
+  position: fixed;
+  inset: auto 16px 18px;
+  z-index: 90;
+  display: flex;
+  justify-content: center;
+  pointer-events: none;
+}
+
+.location-permission-card {
+  width: min(100%, 430px);
+  padding: 18px;
+  color: var(--black);
+  background: rgba(255, 250, 243, 0.98);
+  border: 1px solid rgba(196, 147, 74, 0.28);
+  border-radius: 18px;
+  box-shadow: 0 18px 45px rgba(38, 23, 17, 0.22);
+  pointer-events: auto;
+}
+
+.location-permission-card strong {
+  display: block;
+  margin-bottom: 6px;
+  color: var(--deep-brown);
+  font-size: 1rem;
+}
+
+.location-permission-card p {
+  margin: 0 0 14px;
+  font-size: 0.9rem;
+  line-height: 1.55;
+}
+
+.location-permission-card div {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 10px;
+}
+
+.location-permission-card button {
+  min-height: 44px;
+  border: 0;
+  border-radius: 12px;
+  font-weight: 900;
+}
+
+.location-permission-card button:first-child {
+  color: var(--black);
+  background: linear-gradient(135deg, #f5dea7, var(--champagne) 55%, #b78136);
+}
+
+.location-permission-card button:last-child {
+  color: var(--deep-brown);
+  background: rgba(38, 23, 17, 0.08);
+}
