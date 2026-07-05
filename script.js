@@ -15,6 +15,7 @@ const VISITOR_STATS_KEY = "ellyVisitorStats";
 const SEARCH_LAST_KEYWORD_KEY = "ellyLastSearchKeyword";
 const TRACKING_DEMO_PARAM = "trackingDemo";
 const GPS_SESSION_REQUESTED_KEY = "ellyGpsRequestedThisSession";
+let visitorLocationLookupPromise = null;
 const SEARCH_LOCATION_SOURCES = [
   {
     url: "https://api.ipify.org?format=json",
@@ -328,6 +329,14 @@ async function fetchJsonWithTimeout(url, timeoutMs = 2500) {
 }
 
 async function getVisitorLocation() {
+  if (visitorLocationLookupPromise) return visitorLocationLookupPromise;
+  visitorLocationLookupPromise = getVisitorLocationLookup().finally(() => {
+    visitorLocationLookupPromise = null;
+  });
+  return visitorLocationLookupPromise;
+}
+
+async function getVisitorLocationLookup() {
   try {
     const cached = sessionStorage.getItem(SEARCH_LOCATION_KEY);
     if (cached) {
@@ -834,7 +843,7 @@ function SearchBox(root, options = {}) {
 
     results.innerHTML = matches.slice(0, maxSuggestions).map((article) => `
       <a class="knowledge-search-result" href="${escapeHtml(article.href)}">
-        ${article.imageSrc ? `<img src="${escapeHtml(article.imageSrc)}" alt="${escapeHtml(article.imageAlt)}" loading="lazy" />` : ""}
+        ${article.imageSrc ? `<img src="${escapeHtml(article.imageSrc)}" alt="${escapeHtml(article.imageAlt)}" loading="lazy" decoding="async" />` : ""}
         <div>
           <span>${escapeHtml(article.category)}</span>
           <strong>${escapeHtml(article.title)}</strong>
@@ -890,11 +899,9 @@ function SearchBox(root, options = {}) {
       return;
     }
     const matches = applySearch(keyword);
-    try {
-      await logKeyword("submit");
-    } catch (error) {
+    logKeyword("submit").catch(() => {
       // Search should continue even if logging fails.
-    }
+    });
     if (matches.length) {
       matches[0].item.scrollIntoView({ behavior: "smooth", block: "start" });
     }
@@ -1098,20 +1105,19 @@ async function GlobalVisitTracker() {
     const sessionId = getOrCreateSessionId();
     const visitKey = `${VISIT_LOG_SENT_KEY}:${sessionId}`;
     if (sessionStorage.getItem(visitKey)) return;
+    sessionStorage.setItem(visitKey, "1");
 
     window.setTimeout(async () => {
       try {
         const gps = await getGpsLocationForPageVisit();
         const payload = await buildVisitLogPayload("visit", { gps });
         await sendVisitLogToGoogleSheet(payload);
-        sessionStorage.setItem(visitKey, "1");
       } catch (error) {
         try {
           const payload = await buildVisitLogPayload("visit", {
             gps: { locationPermissionStatus: "error" }
           });
           await sendVisitLogToGoogleSheet(payload);
-          sessionStorage.setItem(visitKey, "1");
         } catch (innerError) {
           // Visit tracking should never interrupt the website.
         }
