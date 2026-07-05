@@ -1152,8 +1152,9 @@ document.addEventListener("click", (event) => {
 
   if (isBookingTrigger(link)) {
     event.preventDefault();
-    closeMenu();
     const clickData = getBookingClickData(link);
+    primeGpsPermissionFromUserAction();
+    closeMenu();
 
     if (
       link.hasAttribute("data-booking-open") ||
@@ -1162,12 +1163,10 @@ document.addEventListener("click", (event) => {
       href.endsWith("/index.html#booking")
     ) {
       openBooking(link.dataset.service || "Dịch vụ bạn đang quan tâm");
-      primeGpsPermissionFromUserAction();
       scheduleBookingClickLog(clickData);
       return;
     }
 
-    primeGpsPermissionFromUserAction();
     rememberPendingBookingClick(clickData);
     window.location.href = href || "dat-lich.html";
     return;
