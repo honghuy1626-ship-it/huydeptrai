@@ -1083,11 +1083,6 @@ document.addEventListener("click", async (event) => {
   if (isBookingTrigger(link)) {
     event.preventDefault();
     closeMenu();
-    try {
-      await logBookingClick(link);
-    } catch (error) {
-      // Booking tracking should never block customers.
-    }
 
     if (
       link.hasAttribute("data-booking-open") ||
@@ -1096,9 +1091,15 @@ document.addEventListener("click", async (event) => {
       href.endsWith("/index.html#booking")
     ) {
       openBooking(link.dataset.service || "Dịch vụ bạn đang quan tâm");
+      logBookingClick(link).catch(() => {
+        // Booking tracking should never block customers.
+      });
       return;
     }
 
+    logBookingClick(link).catch(() => {
+      // Booking tracking should never block customers.
+    });
     window.location.href = href || "dat-lich.html";
     return;
   }
