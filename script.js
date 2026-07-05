@@ -12,6 +12,13 @@ const SEARCH_LOG_DEMO_KEY = "ellySearchLogDemo";
 const SEARCH_LOCATION_KEY = "ellySearchLocation";
 const SEARCH_LOCATION_SOURCES = [
   {
+    url: "https://api.ipify.org?format=json",
+    ipOnly: true,
+    map: (data) => ({
+      ip: data.ip
+    })
+  },
+  {
     url: "https://ipapi.co/json/",
     map: (data) => ({
       ip: data.ip,
@@ -245,14 +252,53 @@ async function getVisitorLocation() {
     // Location lookup should never interrupt search logging.
   }
 
+  let knownIp = "";
+
   for (const source of SEARCH_LOCATION_SOURCES) {
     try {
       const data = await fetchJsonWithTimeout(source.url);
       const mapped = source.map(data);
+      if (mapped.ip && !knownIp) knownIp = cleanText(mapped.ip, 80);
+
+      if (source.ipOnly && knownIp) {
+        try {
+          const ipGeoData = await fetchJsonWithTimeout(`https://ipapi.co/${encodeURIComponent(knownIp)}/json/`, 3000);
+          const ipGeo = {
+            ip: ipGeoData.ip || knownIp,
+            country: ipGeoData.country_name,
+            region: ipGeoData.region,
+            city: ipGeoData.city,
+            isp: ipGeoData.org,
+            timezone: ipGeoData.timezone
+          };
+
+          if (ipGeo.country || ipGeo.city || ipGeo.region || ipGeo.isp) {
+            const location = {
+              ip: cleanText(ipGeo.ip, 80),
+              country: cleanText(normalizeCountryName(ipGeo.country), 80),
+              region: cleanText(ipGeo.region, 100),
+              city: cleanText(ipGeo.city, 80),
+              isp: cleanText(ipGeo.isp, 120),
+              timezone: cleanText(ipGeo.timezone, 80)
+            };
+
+            try {
+              sessionStorage.setItem(SEARCH_LOCATION_KEY, JSON.stringify(location));
+            } catch (error) {
+              // Cache is optional.
+            }
+
+            return location;
+          }
+        } catch (error) {
+          // Keep the IP and continue with the fallback lookup services.
+        }
+      }
+
       if (!mapped.ip && !mapped.country && !mapped.city) continue;
 
       const location = {
-        ip: cleanText(mapped.ip, 80),
+        ip: cleanText(mapped.ip || knownIp, 80),
         country: cleanText(normalizeCountryName(mapped.country), 80),
         region: cleanText(mapped.region, 100),
         city: cleanText(mapped.city, 80),
@@ -272,7 +318,7 @@ async function getVisitorLocation() {
     }
   }
 
-  return { ip: "", country: "", region: "", city: "", isp: "", timezone: "" };
+  return { ip: knownIp, country: "", region: "", city: "", isp: "", timezone: "" };
 }
 
 async function getIpGeoLocation() {
