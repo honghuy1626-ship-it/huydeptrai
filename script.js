@@ -9,7 +9,6 @@ const VISIT_LOG_SENT_KEY = "ellyVisitLogSent";
 const BOOKING_CLICK_RATE_KEY = "ellyBookingClickRate";
 const PENDING_BOOKING_CLICK_KEY = "ellyPendingBookingClick";
 const GPS_CACHE_KEY = "ellyGpsLocation";
-const LOCATION_PROMPT_CHOICE_KEY = "ellyLocationPromptChoice";
 const SEARCH_LOG_DEMO_KEY = "ellySearchLogDemo";
 const SEARCH_LOCATION_KEY = "ellySearchLocation";
 const VISITOR_STATS_KEY = "ellyVisitorStats";
@@ -605,67 +604,7 @@ async function getGpsLocationForTracking({ askIfPrompt = false } = {}) {
   return gps;
 }
 
-function shouldShowLocationPermissionPopup() {
-  if (!("geolocation" in navigator)) return false;
-  const cached = readCachedGpsLocation();
-  if (cached?.locationPermissionStatus === "granted" || cached?.locationPermissionStatus === "denied" || cached?.locationPermissionStatus === "denied_by_user") {
-    return false;
-  }
-
-  try {
-    return sessionStorage.getItem(LOCATION_PROMPT_CHOICE_KEY) !== "asked";
-  } catch (error) {
-    return true;
-  }
-}
-
-function showLocationPermissionPopup() {
-  return new Promise((resolve) => {
-    const existing = document.querySelector("[data-location-permission]");
-    if (existing) existing.remove();
-
-    const popup = document.createElement("div");
-    popup.className = "location-permission";
-    popup.setAttribute("data-location-permission", "");
-    popup.innerHTML = `
-      <div class="location-permission-card" role="dialog" aria-modal="true" aria-labelledby="locationPermissionTitle">
-        <strong id="locationPermissionTitle">Cho phép ELLY cập nhật vị trí?</strong>
-        <p>ELLY PMU muốn dùng vị trí của bạn để tư vấn nội dung phù hợp với khu vực. Vị trí chính xác chỉ được sử dụng khi bạn cho phép.</p>
-        <div>
-          <button type="button" data-location-allow>Cho phép</button>
-          <button type="button" data-location-deny>Không cho phép</button>
-        </div>
-      </div>
-    `;
-
-    const finish = (choice) => {
-      try {
-        sessionStorage.setItem(LOCATION_PROMPT_CHOICE_KEY, "asked");
-      } catch (error) {
-        // Prompt memory is optional.
-      }
-      popup.remove();
-      resolve(choice);
-    };
-
-    popup.querySelector("[data-location-allow]").addEventListener("click", () => finish("allow"));
-    popup.querySelector("[data-location-deny]").addEventListener("click", () => finish("deny"));
-    document.body.appendChild(popup);
-  });
-}
-
 async function getGpsLocationForPageVisit() {
-  if (!shouldShowLocationPermissionPopup()) {
-    return getGpsLocationForTracking({ askIfPrompt: false });
-  }
-
-  const choice = await showLocationPermissionPopup();
-  if (choice !== "allow") {
-    const deniedByUser = { locationPermissionStatus: "denied_by_user", gpsRequested: "No" };
-    cacheGpsLocation(deniedByUser);
-    return deniedByUser;
-  }
-
   return getGpsLocationForTracking({ askIfPrompt: true });
 }
 
