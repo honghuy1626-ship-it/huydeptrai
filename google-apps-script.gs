@@ -47,6 +47,10 @@ const SEARCH_LOG_HEADERS = [
 const SEARCH_LOG_COLUMNS = {
   visitorId: 2,
   sessionId: 3,
+  gpsCity: 18,
+  gpsDistrict: 19,
+  latitude: 21,
+  longitude: 22,
   firstVisit: 35,
   lastVisit: 36,
   visitCount: 37,
@@ -65,7 +69,12 @@ const BOOKING_HEADERS = [
   "Ghi chú",
   "Địa chỉ IP",
   "Quốc gia",
-  "Thành phố"
+  "Thành phố",
+  "Visitor ID",
+  "GPS City",
+  "GPS District",
+  "Latitude",
+  "Longitude"
 ];
 
 function doPost(e) {
@@ -133,6 +142,7 @@ function appendSearchLog(params) {
 
 function appendBooking(params, sheetName) {
   const sheet = getSheetWithHeaders(sheetName, BOOKING_HEADERS);
+  const bookingTracking = getBookingTrackingFromSearchLogs(params);
 
   sheet.appendRow([
     formatLogTime(params.createdAt),
@@ -145,7 +155,12 @@ function appendBooking(params, sheetName) {
     params.note || "",
     params.ip || "",
     params.country || params.ipCountry || "",
-    params.city || params.ipCity || ""
+    params.city || params.ipCity || "",
+    bookingTracking.visitorId,
+    bookingTracking.gpsCity,
+    bookingTracking.gpsDistrict,
+    bookingTracking.latitude,
+    bookingTracking.longitude
   ]);
 }
 
@@ -233,6 +248,43 @@ function buildVisitorSummary(sheet, params) {
   if (currentSearchKeyword) summary.searchKeyword = currentSearchKeyword;
 
   return summary;
+}
+
+function getBookingTrackingFromSearchLogs(params) {
+  const tracking = {
+    visitorId: params.visitorId || "",
+    gpsCity: params.gpsCity || "",
+    gpsDistrict: params.gpsDistrict || "",
+    latitude: params.latitude || "",
+    longitude: params.longitude || ""
+  };
+
+  if (!tracking.visitorId) {
+    return tracking;
+  }
+
+  const spreadsheet = getSpreadsheet();
+  const searchSheet = spreadsheet.getSheetByName(SEARCH_LOG_SHEET_NAME);
+  if (!searchSheet || searchSheet.getLastRow() < 2) {
+    return tracking;
+  }
+
+  const values = searchSheet.getRange(2, 1, searchSheet.getLastRow() - 1, SEARCH_LOG_HEADERS.length).getValues();
+  for (let index = values.length - 1; index >= 0; index--) {
+    const row = values[index];
+    if (row[SEARCH_LOG_COLUMNS.visitorId - 1] !== tracking.visitorId) continue;
+
+    tracking.gpsCity = tracking.gpsCity || row[SEARCH_LOG_COLUMNS.gpsCity - 1] || "";
+    tracking.gpsDistrict = tracking.gpsDistrict || row[SEARCH_LOG_COLUMNS.gpsDistrict - 1] || "";
+    tracking.latitude = tracking.latitude || row[SEARCH_LOG_COLUMNS.latitude - 1] || "";
+    tracking.longitude = tracking.longitude || row[SEARCH_LOG_COLUMNS.longitude - 1] || "";
+
+    if (tracking.gpsCity || tracking.gpsDistrict || tracking.latitude || tracking.longitude) {
+      break;
+    }
+  }
+
+  return tracking;
 }
 
 function updateVisitorSummaryRows(sheet, visitorId, summary) {

@@ -5022,3 +5022,15 @@ body.booking-popover-open {
     transform: translateX(92%);
   }
 }
+
+@media (max-width: 768px) {
+  .booking-form input,
+  .booking-form select,
+  .booking-form textarea,
+  .popup-booking-form input,
+  .popup-booking-form select,
+  .popup-booking-form textarea,
+  .day-input-wrap input {
+    font-size: 16px;
+  }
+}

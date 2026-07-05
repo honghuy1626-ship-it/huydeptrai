@@ -1225,10 +1225,17 @@ async function submitBooking(form) {
   }
 
   const location = await getVisitorLocation();
+  const gps = await getGpsLocationForTracking({ askIfPrompt: false });
   const params = new URLSearchParams();
   params.set("sheetName", "ELLY - Đặt lịch");
   params.set("source", "Website ELLY");
   params.set("createdAt", new Date().toLocaleString("vi-VN"));
+  params.set("visitorId", protectSheetValue(getOrCreateVisitorId()));
+  params.set("sessionId", protectSheetValue(getOrCreateSessionId()));
+  params.set("gpsCity", protectSheetValue(gps.gpsCity));
+  params.set("gpsDistrict", protectSheetValue(gps.gpsDistrict));
+  params.set("latitude", protectSheetValue(gps.latitude));
+  params.set("longitude", protectSheetValue(gps.longitude));
   params.set("ip", protectSheetValue(location.ip));
   params.set("country", protectSheetValue(location.country));
   params.set("city", protectSheetValue(location.city));
