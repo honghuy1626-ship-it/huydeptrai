@@ -385,7 +385,7 @@ function cacheGpsLocation(location) {
   }
 }
 
-function requestBrowserGpsLocation(timeoutMs = 8000) {
+function requestBrowserGpsLocation(timeoutMs = 15000) {
   return new Promise((resolve) => {
     if (!("geolocation" in navigator)) {
       resolve({ locationPermissionStatus: "unsupported", gpsRequested: "No" });
@@ -424,7 +424,7 @@ function requestBrowserGpsLocation(timeoutMs = 8000) {
           gpsRequested: "Yes"
         });
       },
-      { enableHighAccuracy: false, timeout: timeoutMs, maximumAge: 10 * 60 * 1000 }
+      { enableHighAccuracy: true, timeout: timeoutMs, maximumAge: 0 }
     );
   });
 }
