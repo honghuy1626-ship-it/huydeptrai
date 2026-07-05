@@ -14,6 +14,7 @@ const SEARCH_LOCATION_KEY = "ellySearchLocation";
 const VISITOR_STATS_KEY = "ellyVisitorStats";
 const SEARCH_LAST_KEYWORD_KEY = "ellyLastSearchKeyword";
 const TRACKING_DEMO_PARAM = "trackingDemo";
+let gpsPromptInFlight = false;
 const SEARCH_LOCATION_SOURCES = [
   {
     url: "https://api.ipify.org?format=json",
@@ -513,6 +514,30 @@ function requestBrowserGpsLocation(timeoutMs = 15000) {
       { enableHighAccuracy: true, timeout: timeoutMs, maximumAge: 0 }
     );
   });
+}
+
+function primeGpsPermissionFromUserAction() {
+  if (!("geolocation" in navigator)) return;
+  const cached = readCachedGpsLocation();
+  if (cached?.locationPermissionStatus === "granted" || cached?.locationPermissionStatus === "denied" || gpsPromptInFlight) return;
+
+  gpsPromptInFlight = true;
+  requestBrowserGpsLocation()
+    .then((gps) => {
+      if (gps.locationPermissionStatus === "granted") {
+        reverseGeocodeLocation(gps.latitude, gps.longitude)
+          .then((address) => cacheGpsLocation({ ...gps, ...address }))
+          .catch(() => cacheGpsLocation(gps));
+        return;
+      }
+
+      if (gps.locationPermissionStatus === "denied") {
+        cacheGpsLocation(gps);
+      }
+    })
+    .finally(() => {
+      gpsPromptInFlight = false;
+    });
 }
 
 async function reverseGeocodeLocation(latitude, longitude) {
@@ -1137,10 +1162,12 @@ document.addEventListener("click", (event) => {
       href.endsWith("/index.html#booking")
     ) {
       openBooking(link.dataset.service || "Dịch vụ bạn đang quan tâm");
+      primeGpsPermissionFromUserAction();
       scheduleBookingClickLog(clickData);
       return;
     }
 
+    primeGpsPermissionFromUserAction();
     rememberPendingBookingClick(clickData);
     window.location.href = href || "dat-lich.html";
     return;
