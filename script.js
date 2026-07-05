@@ -966,10 +966,12 @@ function openBooking(service = "") {
   popover.classList.add("is-open");
   popover.setAttribute("aria-hidden", "false");
   body.classList.add("booking-popover-open");
-  window.setTimeout(() => {
-    const firstInput = popover.querySelector("input, select, textarea, button");
-    if (firstInput) firstInput.focus({ preventScroll: true });
-  }, 120);
+  if (window.matchMedia("(min-width: 769px)").matches) {
+    window.setTimeout(() => {
+      const firstInput = popover.querySelector("input, select, textarea, button");
+      if (firstInput) firstInput.focus({ preventScroll: true });
+    }, 120);
+  }
 }
 
 function closeBooking() {
@@ -1026,6 +1028,21 @@ async function logBookingClick(link) {
     gps
   });
   await sendVisitLogToGoogleSheet(payload);
+}
+
+function scheduleBookingClickLog(link) {
+  const runLog = () => {
+    logBookingClick(link).catch(() => {
+      // Booking tracking should never block customers.
+    });
+  };
+
+  if ("requestIdleCallback" in window) {
+    window.requestIdleCallback(runLog, { timeout: 1800 });
+    return;
+  }
+
+  window.setTimeout(runLog, 800);
 }
 
 async function GlobalVisitTracker() {
@@ -1091,15 +1108,11 @@ document.addEventListener("click", async (event) => {
       href.endsWith("/index.html#booking")
     ) {
       openBooking(link.dataset.service || "Dịch vụ bạn đang quan tâm");
-      logBookingClick(link).catch(() => {
-        // Booking tracking should never block customers.
-      });
+      scheduleBookingClickLog(link);
       return;
     }
 
-    logBookingClick(link).catch(() => {
-      // Booking tracking should never block customers.
-    });
+    scheduleBookingClickLog(link);
     window.location.href = href || "dat-lich.html";
     return;
   }
