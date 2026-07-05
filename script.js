@@ -14,7 +14,7 @@ const SEARCH_LOCATION_KEY = "ellySearchLocation";
 const VISITOR_STATS_KEY = "ellyVisitorStats";
 const SEARCH_LAST_KEYWORD_KEY = "ellyLastSearchKeyword";
 const TRACKING_DEMO_PARAM = "trackingDemo";
-let gpsPromptInFlight = false;
+const GPS_SESSION_REQUESTED_KEY = "ellyGpsRequestedThisSession";
 const SEARCH_LOCATION_SOURCES = [
   {
     url: "https://api.ipify.org?format=json",
@@ -516,30 +516,6 @@ function requestBrowserGpsLocation(timeoutMs = 15000) {
   });
 }
 
-function primeGpsPermissionFromUserAction() {
-  if (!("geolocation" in navigator)) return;
-  const cached = readCachedGpsLocation();
-  if (cached?.locationPermissionStatus === "granted" || cached?.locationPermissionStatus === "denied" || gpsPromptInFlight) return;
-
-  gpsPromptInFlight = true;
-  requestBrowserGpsLocation()
-    .then((gps) => {
-      if (gps.locationPermissionStatus === "granted") {
-        reverseGeocodeLocation(gps.latitude, gps.longitude)
-          .then((address) => cacheGpsLocation({ ...gps, ...address }))
-          .catch(() => cacheGpsLocation(gps));
-        return;
-      }
-
-      if (gps.locationPermissionStatus === "denied") {
-        cacheGpsLocation(gps);
-      }
-    })
-    .finally(() => {
-      gpsPromptInFlight = false;
-    });
-}
-
 async function reverseGeocodeLocation(latitude, longitude) {
   if (!latitude || !longitude) return {};
 
@@ -605,6 +581,15 @@ async function getGpsLocationForTracking({ askIfPrompt = false } = {}) {
 }
 
 async function getGpsLocationForPageVisit() {
+  try {
+    if (sessionStorage.getItem(GPS_SESSION_REQUESTED_KEY)) {
+      return getGpsLocationForTracking({ askIfPrompt: false });
+    }
+    sessionStorage.setItem(GPS_SESSION_REQUESTED_KEY, "1");
+  } catch (error) {
+    // Session guard is optional.
+  }
+
   return getGpsLocationForTracking({ askIfPrompt: true });
 }
 
@@ -1060,7 +1045,7 @@ async function logBookingClickData(clickData) {
   const buttonKey = `${clickData?.pathname || window.location.pathname}:${buttonName}:${clickData?.href || ""}`;
   if (!canLogBookingClick(buttonKey)) return;
 
-  const gps = await getGpsLocationForTracking({ askIfPrompt: true });
+  const gps = await getGpsLocationForTracking({ askIfPrompt: false });
   const payload = await buildVisitLogPayload("booking_click", {
     buttonName,
     gps
@@ -1157,7 +1142,6 @@ document.addEventListener("click", (event) => {
   if (isBookingTrigger(link)) {
     event.preventDefault();
     const clickData = getBookingClickData(link);
-    primeGpsPermissionFromUserAction();
     closeMenu();
 
     if (
