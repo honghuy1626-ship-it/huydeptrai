@@ -1,6 +1,14 @@
 const SEARCH_LOG_SHEET_NAME = "Search Logs";
+const BOOKING_SHEET_NAME = "ELLY - Đặt lịch";
 const DEFAULT_BOOKING_SHEET_NAME = "ELLY - Dat lich";
 const SPREADSHEET_ID = "";
+const CRM_NEW_STATUS = "NEW";
+const CRM_READ_STATUS = "READ";
+const CRM_NEW_CUSTOMER = "NEW CUSTOMER";
+const CRM_RETURNING_CUSTOMER = "RETURNING CUSTOMER";
+const CRM_NEW_COLOR = "#fff2cc";
+const CRM_RETURNING_COLOR = "#d9ead3";
+const CRM_READ_COLOR = "#ffffff";
 
 const SEARCH_LOG_HEADERS = [
   "Time",
@@ -41,7 +49,9 @@ const SEARCH_LOG_HEADERS = [
   "Last Visit",
   "Visit Count",
   "UTM Campaign",
-  "Search Keyword"
+  "Search Keyword",
+  "Customer Type",
+  "Status"
 ];
 
 const SEARCH_LOG_COLUMNS = {
@@ -55,7 +65,9 @@ const SEARCH_LOG_COLUMNS = {
   lastVisit: 36,
   visitCount: 37,
   utmCampaign: 38,
-  searchKeyword: 39
+  searchKeyword: 39,
+  customerType: 40,
+  status: 41
 };
 
 const BOOKING_HEADERS = [
@@ -74,12 +86,20 @@ const BOOKING_HEADERS = [
   "GPS City",
   "GPS District",
   "Latitude",
-  "Longitude"
+  "Longitude",
+  "Customer Type",
+  "Status"
 ];
+
+const BOOKING_COLUMNS = {
+  visitorId: 12,
+  customerType: 17,
+  status: 18
+};
 
 function doPost(e) {
   const params = e && e.parameter ? e.parameter : {};
-  const sheetName = params.sheetName || "";
+  const sheetName = String(params.sheetName || "").trim();
 
   if (sheetName === SEARCH_LOG_SHEET_NAME || sheetName === "ELLY - Search Logs") {
     appendSearchLog(params);
@@ -94,6 +114,7 @@ function appendSearchLog(params) {
   const sheet = getSheetWithHeaders(SEARCH_LOG_SHEET_NAME, SEARCH_LOG_HEADERS);
   const screenResolution = params.screenResolution || joinScreenResolution(params.screenWidth, params.screenHeight);
   const visitorSummary = buildVisitorSummary(sheet, params);
+  const customerType = getCustomerTypeForVisitor(sheet, SEARCH_LOG_COLUMNS.visitorId, params.visitorId);
 
   sheet.appendRow([
     formatLogTime(params.timestamp),
@@ -134,15 +155,19 @@ function appendSearchLog(params) {
     visitorSummary.lastVisit,
     visitorSummary.visitCount,
     visitorSummary.utmCampaign,
-    visitorSummary.searchKeyword
+    visitorSummary.searchKeyword,
+    customerType,
+    CRM_NEW_STATUS
   ]);
 
+  markNewCrmRow(sheet, sheet.getLastRow(), SEARCH_LOG_HEADERS.length, customerType);
   updateVisitorSummaryRows(sheet, params.visitorId, visitorSummary);
 }
 
 function appendBooking(params, sheetName) {
   const sheet = getSheetWithHeaders(sheetName, BOOKING_HEADERS);
   const bookingTracking = getBookingTrackingFromSearchLogs(params);
+  const customerType = getCustomerTypeForVisitor(sheet, BOOKING_COLUMNS.visitorId, bookingTracking.visitorId);
 
   sheet.appendRow([
     formatLogTime(params.createdAt),
@@ -160,8 +185,12 @@ function appendBooking(params, sheetName) {
     bookingTracking.gpsCity,
     bookingTracking.gpsDistrict,
     bookingTracking.latitude,
-    bookingTracking.longitude
+    bookingTracking.longitude,
+    customerType,
+    CRM_NEW_STATUS
   ]);
+
+  markNewCrmRow(sheet, sheet.getLastRow(), BOOKING_HEADERS.length, customerType);
 }
 
 function getSheetWithHeaders(sheetName, headers) {
@@ -184,6 +213,76 @@ function getSheetWithHeaders(sheetName, headers) {
   }
 
   return sheet;
+}
+
+function onOpen() {
+  SpreadsheetApp.getUi()
+    .createMenu("Đánh dấu đã đọc")
+    .addItem("Đánh dấu dòng đang chọn", "markSelectedRowAsRead")
+    .addToUi();
+}
+
+function onSelectionChange(e) {
+  if (!e || !e.range) return;
+  const sheet = e.range.getSheet();
+  const crmConfig = getCrmConfigForSheet(sheet);
+  if (!crmConfig) return;
+  markRowAsRead(sheet, e.range.getRow(), crmConfig);
+}
+
+function markSelectedRowAsRead() {
+  const sheet = SpreadsheetApp.getActiveSheet();
+  const activeRange = sheet.getActiveRange();
+  if (!activeRange) return;
+  const crmConfig = getCrmConfigForSheet(sheet);
+  if (!crmConfig) return;
+  markRowAsRead(sheet, activeRange.getRow(), crmConfig);
+}
+
+function getCrmConfigForSheet(sheet) {
+  const sheetName = sheet.getName().trim();
+  if (sheetName === SEARCH_LOG_SHEET_NAME) {
+    return {
+      headersLength: SEARCH_LOG_HEADERS.length,
+      statusColumn: SEARCH_LOG_COLUMNS.status
+    };
+  }
+
+  if (sheetName === BOOKING_SHEET_NAME || sheetName === DEFAULT_BOOKING_SHEET_NAME) {
+    return {
+      headersLength: BOOKING_HEADERS.length,
+      statusColumn: BOOKING_COLUMNS.status
+    };
+  }
+
+  return null;
+}
+
+function getCustomerTypeForVisitor(sheet, visitorIdColumn, visitorId) {
+  if (!visitorId || sheet.getLastRow() < 2) {
+    return CRM_NEW_CUSTOMER;
+  }
+
+  const visitorIds = sheet.getRange(2, visitorIdColumn, sheet.getLastRow() - 1, 1).getValues();
+  const hasExistingVisitor = visitorIds.some(function(row) {
+    return String(row[0] || "") === String(visitorId);
+  });
+
+  return hasExistingVisitor ? CRM_RETURNING_CUSTOMER : CRM_NEW_CUSTOMER;
+}
+
+function markNewCrmRow(sheet, rowNumber, headersLength, customerType) {
+  if (rowNumber < 2) return;
+  const color = customerType === CRM_RETURNING_CUSTOMER ? CRM_RETURNING_COLOR : CRM_NEW_COLOR;
+  sheet.getRange(rowNumber, 1, 1, headersLength).setBackground(color);
+}
+
+function markRowAsRead(sheet, rowNumber, crmConfig) {
+  if (rowNumber < 2) return;
+  const statusCell = sheet.getRange(rowNumber, crmConfig.statusColumn);
+  if (statusCell.getValue() !== CRM_NEW_STATUS) return;
+  statusCell.setValue(CRM_READ_STATUS);
+  sheet.getRange(rowNumber, 1, 1, crmConfig.headersLength).setBackground(CRM_READ_COLOR);
 }
 
 function buildVisitorSummary(sheet, params) {
