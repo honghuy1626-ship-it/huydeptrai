@@ -36,8 +36,23 @@ const SEARCH_LOG_HEADERS = [
   "Language",
   "Timezone",
   "Screen Resolution",
-  "Platform"
+  "Platform",
+  "First Visit",
+  "Last Visit",
+  "Visit Count",
+  "UTM Campaign",
+  "Search Keyword"
 ];
+
+const SEARCH_LOG_COLUMNS = {
+  visitorId: 2,
+  sessionId: 3,
+  firstVisit: 35,
+  lastVisit: 36,
+  visitCount: 37,
+  utmCampaign: 38,
+  searchKeyword: 39
+};
 
 const BOOKING_HEADERS = [
   "Thời gian",
@@ -69,6 +84,7 @@ function doPost(e) {
 function appendSearchLog(params) {
   const sheet = getSheetWithHeaders(SEARCH_LOG_SHEET_NAME, SEARCH_LOG_HEADERS);
   const screenResolution = params.screenResolution || joinScreenResolution(params.screenWidth, params.screenHeight);
+  const visitorSummary = buildVisitorSummary(sheet, params);
 
   sheet.appendRow([
     formatLogTime(params.timestamp),
@@ -104,8 +120,15 @@ function appendSearchLog(params) {
     params.language || "",
     params.timezone || params.ipTimezone || "",
     screenResolution,
-    params.platform || ""
+    params.platform || "",
+    visitorSummary.firstVisit,
+    visitorSummary.lastVisit,
+    visitorSummary.visitCount,
+    visitorSummary.utmCampaign,
+    visitorSummary.searchKeyword
   ]);
+
+  updateVisitorSummaryRows(sheet, params.visitorId, visitorSummary);
 }
 
 function appendBooking(params, sheetName) {
@@ -134,6 +157,10 @@ function getSheetWithHeaders(sheetName, headers) {
     sheet = spreadsheet.insertSheet(sheetName);
   }
 
+  if (sheet.getMaxColumns() < headers.length) {
+    sheet.insertColumnsAfter(sheet.getMaxColumns(), headers.length - sheet.getMaxColumns());
+  }
+
   if (sheet.getLastRow() === 0) {
     sheet.appendRow(headers);
     sheet.setFrozenRows(1);
@@ -142,6 +169,87 @@ function getSheetWithHeaders(sheetName, headers) {
   }
 
   return sheet;
+}
+
+function buildVisitorSummary(sheet, params) {
+  const now = formatLogTime(params.timestamp);
+  const visitorId = params.visitorId || "";
+  const sessionId = params.sessionId || "";
+  const currentSearchKeyword = params.searchKeyword || params.keyword || "";
+  const currentUtmCampaign = params.utmCampaign || "";
+
+  const summary = {
+    firstVisit: params.firstVisit ? formatLogTime(params.firstVisit) : now,
+    lastVisit: now,
+    visitCount: 1,
+    utmCampaign: currentUtmCampaign,
+    searchKeyword: currentSearchKeyword
+  };
+
+  if (!visitorId || sheet.getLastRow() < 2) {
+    return summary;
+  }
+
+  const values = sheet.getRange(2, 1, sheet.getLastRow() - 1, SEARCH_LOG_HEADERS.length).getValues();
+  const sessions = {};
+
+  values.forEach(function(row) {
+    if (row[SEARCH_LOG_COLUMNS.visitorId - 1] !== visitorId) return;
+
+    const existingFirstVisit = row[SEARCH_LOG_COLUMNS.firstVisit - 1];
+    const existingLastVisit = row[SEARCH_LOG_COLUMNS.lastVisit - 1];
+    const existingUtmCampaign = row[SEARCH_LOG_COLUMNS.utmCampaign - 1];
+    const existingSearchKeyword = row[SEARCH_LOG_COLUMNS.searchKeyword - 1];
+    const existingSessionId = row[SEARCH_LOG_COLUMNS.sessionId - 1];
+
+    if (existingSessionId) {
+      sessions[String(existingSessionId)] = true;
+    }
+
+    if (existingFirstVisit && (!summary.firstVisit || String(existingFirstVisit) < String(summary.firstVisit))) {
+      summary.firstVisit = existingFirstVisit;
+    }
+
+    if (existingLastVisit && String(existingLastVisit) > String(summary.lastVisit)) {
+      summary.lastVisit = existingLastVisit;
+    }
+
+    if (!summary.utmCampaign && existingUtmCampaign) {
+      summary.utmCampaign = existingUtmCampaign;
+    }
+
+    if (!summary.searchKeyword && existingSearchKeyword) {
+      summary.searchKeyword = existingSearchKeyword;
+    }
+  });
+
+  if (sessionId) {
+    sessions[String(sessionId)] = true;
+  }
+
+  summary.lastVisit = now;
+  summary.visitCount = Math.max(1, Object.keys(sessions).length);
+  if (currentUtmCampaign) summary.utmCampaign = currentUtmCampaign;
+  if (currentSearchKeyword) summary.searchKeyword = currentSearchKeyword;
+
+  return summary;
+}
+
+function updateVisitorSummaryRows(sheet, visitorId, summary) {
+  if (!visitorId || sheet.getLastRow() < 2) return;
+
+  const values = sheet.getRange(2, 1, sheet.getLastRow() - 1, SEARCH_LOG_HEADERS.length).getValues();
+  values.forEach(function(row, index) {
+    if (row[SEARCH_LOG_COLUMNS.visitorId - 1] !== visitorId) return;
+    const rowNumber = index + 2;
+    sheet.getRange(rowNumber, SEARCH_LOG_COLUMNS.firstVisit, 1, 5).setValues([[
+      summary.firstVisit,
+      summary.lastVisit,
+      summary.visitCount,
+      summary.utmCampaign,
+      summary.searchKeyword
+    ]]);
+  });
 }
 
 function getSpreadsheet() {

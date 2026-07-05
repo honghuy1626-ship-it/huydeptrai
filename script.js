@@ -10,6 +10,9 @@ const BOOKING_CLICK_RATE_KEY = "ellyBookingClickRate";
 const GPS_CACHE_KEY = "ellyGpsLocation";
 const SEARCH_LOG_DEMO_KEY = "ellySearchLogDemo";
 const SEARCH_LOCATION_KEY = "ellySearchLocation";
+const VISITOR_STATS_KEY = "ellyVisitorStats";
+const SEARCH_LAST_KEYWORD_KEY = "ellyLastSearchKeyword";
+const TRACKING_DEMO_PARAM = "trackingDemo";
 const SEARCH_LOCATION_SOURCES = [
   {
     url: "https://api.ipify.org?format=json",
@@ -177,6 +180,88 @@ function getOrCreateSessionId() {
     return sessionId;
   } catch (error) {
     return createTrackingId("session");
+  }
+}
+
+function isSearchLogDemoMode() {
+  try {
+    const params = new URLSearchParams(window.location.search);
+    if (params.get(TRACKING_DEMO_PARAM) === "1") {
+      sessionStorage.setItem(SEARCH_LOG_DEMO_KEY, "1");
+      return true;
+    }
+    return SEARCH_LOG_DEMO_MODE || sessionStorage.getItem(SEARCH_LOG_DEMO_KEY) === "1";
+  } catch (error) {
+    return SEARCH_LOG_DEMO_MODE;
+  }
+}
+
+function getUtmCampaignDetails() {
+  const params = new URLSearchParams(window.location.search);
+  const keys = ["utm_source", "utm_medium", "utm_campaign", "utm_term", "utm_content"];
+  return keys
+    .map((key) => {
+      const value = cleanText(params.get(key), 180);
+      return value ? `${key}=${value}` : "";
+    })
+    .filter(Boolean)
+    .join("; ");
+}
+
+function getLastSearchKeyword() {
+  try {
+    return cleanText(sessionStorage.getItem(SEARCH_LAST_KEYWORD_KEY), 160);
+  } catch (error) {
+    return "";
+  }
+}
+
+function setLastSearchKeyword(keyword) {
+  const cleanKeyword = cleanText(keyword, 160);
+  if (!cleanKeyword) return;
+  try {
+    sessionStorage.setItem(SEARCH_LAST_KEYWORD_KEY, cleanKeyword);
+  } catch (error) {
+    // Search keyword cache is optional.
+  }
+}
+
+function getVisitorStatsForPayload(visitorId, sessionId) {
+  const now = new Date().toISOString();
+
+  try {
+    const allStats = JSON.parse(localStorage.getItem(VISITOR_STATS_KEY) || "{}");
+    const stats = allStats[visitorId] || {
+      firstVisit: now,
+      lastVisit: "",
+      visitCount: 0,
+      sessions: []
+    };
+
+    if (!stats.firstVisit) stats.firstVisit = now;
+    if (!Array.isArray(stats.sessions)) stats.sessions = [];
+
+    if (sessionId && !stats.sessions.includes(sessionId)) {
+      stats.sessions.push(sessionId);
+      stats.visitCount = Number(stats.visitCount || 0) + 1;
+    }
+
+    stats.lastVisit = now;
+    stats.sessions = stats.sessions.slice(-80);
+    allStats[visitorId] = stats;
+    localStorage.setItem(VISITOR_STATS_KEY, JSON.stringify(allStats));
+
+    return {
+      firstVisit: stats.firstVisit,
+      lastVisit: stats.lastVisit,
+      visitCount: String(Math.max(1, Number(stats.visitCount || 1)))
+    };
+  } catch (error) {
+    return {
+      firstVisit: now,
+      lastVisit: now,
+      visitCount: "1"
+    };
   }
 }
 
@@ -497,10 +582,13 @@ async function buildVisitLogPayload(eventType, extra = {}) {
   const ipGeo = await getIpGeoLocation();
   const device = await getDeviceInfo();
   const gps = extra.gps || {};
+  const visitorId = getOrCreateVisitorId();
+  const sessionId = getOrCreateSessionId();
+  const visitorStats = getVisitorStatsForPayload(visitorId, sessionId);
   return {
     timestamp: new Date().toISOString(),
-    visitorId: getOrCreateVisitorId(),
-    sessionId: getOrCreateSessionId(),
+    visitorId,
+    sessionId,
     eventType,
     buttonName: cleanText(extra.buttonName, 120),
     source: extra.source || detectTrafficSource(),
@@ -508,6 +596,9 @@ async function buildVisitLogPayload(eventType, extra = {}) {
     pageTitle: document.title || "",
     pathname: window.location.pathname || "",
     referrer: document.referrer || "",
+    ...visitorStats,
+    utmCampaign: getUtmCampaignDetails(),
+    searchKeyword: getLastSearchKeyword(),
     ...ipGeo,
     gpsCountry: gps.gpsCountry || "",
     gpsRegion: gps.gpsRegion || "",
@@ -531,18 +622,26 @@ async function buildSearchLogPayload(keyword, eventType) {
   const screenWidth = String(window.screen?.width || "");
   const screenHeight = String(window.screen?.height || "");
   const location = await getVisitorLocation();
+  const visitorId = getOrCreateVisitorId();
+  const sessionId = getOrCreateSessionId();
+  const visitorStats = getVisitorStatsForPayload(visitorId, sessionId);
+  const searchKeyword = cleanText(keyword, 160);
+  setLastSearchKeyword(searchKeyword);
 
   return {
     timestamp: new Date().toLocaleString("vi-VN"),
-    visitorId: getOrCreateVisitorId(),
-    sessionId: getOrCreateSessionId(),
-    keyword: cleanText(keyword, 160),
+    visitorId,
+    sessionId,
+    keyword: searchKeyword,
+    searchKeyword,
     eventType,
     source: detectTrafficSource(),
     landingPage: sessionStorage.getItem("ellyLandingPage") || window.location.href,
     pageTitle: document.title || "",
     pathname: window.location.pathname || "",
     referrer: document.referrer || "",
+    ...visitorStats,
+    utmCampaign: getUtmCampaignDetails(),
     ip: location.ip,
     ipCountry: location.country,
     ipRegion: location.region,
@@ -565,7 +664,7 @@ async function buildSearchLogPayload(keyword, eventType) {
 }
 
 async function sendSearchLogToGoogleSheet(payload) {
-  if (SEARCH_LOG_DEMO_MODE || !SEARCH_LOG_APPS_SCRIPT_URL) {
+  if (isSearchLogDemoMode() || !SEARCH_LOG_APPS_SCRIPT_URL) {
     try {
       const rows = JSON.parse(localStorage.getItem(SEARCH_LOG_DEMO_KEY) || "[]");
       rows.push(payload);
