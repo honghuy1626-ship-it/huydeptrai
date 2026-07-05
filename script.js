@@ -554,8 +554,10 @@ async function getGpsLocationForTracking({ askIfPrompt = false } = {}) {
       const permission = await navigator.permissions.query({ name: "geolocation" });
       if (permission.state === "denied") {
         const denied = { locationPermissionStatus: "denied", gpsRequested: "No" };
-        cacheGpsLocation(denied);
-        return denied;
+        if (!askIfPrompt) {
+          cacheGpsLocation(denied);
+          return denied;
+        }
       }
       if (permission.state === "prompt" && !askIfPrompt) return { locationPermissionStatus: "prompt", gpsRequested: "No" };
     } catch (error) {
