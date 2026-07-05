@@ -7,6 +7,7 @@ const VISITOR_COOKIE_NAME = "visitorId";
 const VISITOR_COOKIE_DAYS = 365;
 const VISIT_LOG_SENT_KEY = "ellyVisitLogSent";
 const BOOKING_CLICK_RATE_KEY = "ellyBookingClickRate";
+const PENDING_BOOKING_CLICK_KEY = "ellyPendingBookingClick";
 const GPS_CACHE_KEY = "ellyGpsLocation";
 const SEARCH_LOG_DEMO_KEY = "ellySearchLogDemo";
 const SEARCH_LOCATION_KEY = "ellySearchLocation";
@@ -1017,9 +1018,17 @@ function canLogBookingClick(buttonKey) {
   return true;
 }
 
-async function logBookingClick(link) {
-  const buttonName = cleanText(link?.textContent || link?.getAttribute("aria-label") || "Đặt lịch", 120);
-  const buttonKey = `${window.location.pathname}:${buttonName}:${link?.getAttribute("href") || ""}`;
+function getBookingClickData(link) {
+  return {
+    buttonName: cleanText(link?.textContent || link?.getAttribute("aria-label") || "Đặt lịch", 120),
+    href: link?.getAttribute("href") || "",
+    pathname: window.location.pathname || ""
+  };
+}
+
+async function logBookingClickData(clickData) {
+  const buttonName = clickData?.buttonName || "Đặt lịch";
+  const buttonKey = `${clickData?.pathname || window.location.pathname}:${buttonName}:${clickData?.href || ""}`;
   if (!canLogBookingClick(buttonKey)) return;
 
   const gps = await getGpsLocationForTracking({ askIfPrompt: true });
@@ -1030,9 +1039,9 @@ async function logBookingClick(link) {
   await sendVisitLogToGoogleSheet(payload);
 }
 
-function scheduleBookingClickLog(link) {
+function scheduleBookingClickLog(clickData) {
   const runLog = () => {
-    logBookingClick(link).catch(() => {
+    logBookingClickData(clickData).catch(() => {
       // Booking tracking should never block customers.
     });
   };
@@ -1043,6 +1052,25 @@ function scheduleBookingClickLog(link) {
   }
 
   window.setTimeout(runLog, 800);
+}
+
+function rememberPendingBookingClick(clickData) {
+  try {
+    sessionStorage.setItem(PENDING_BOOKING_CLICK_KEY, JSON.stringify(clickData));
+  } catch (error) {
+    // Pending tracking is optional.
+  }
+}
+
+function flushPendingBookingClick() {
+  try {
+    const pending = sessionStorage.getItem(PENDING_BOOKING_CLICK_KEY);
+    if (!pending) return;
+    sessionStorage.removeItem(PENDING_BOOKING_CLICK_KEY);
+    scheduleBookingClickLog(JSON.parse(pending));
+  } catch (error) {
+    // Pending tracking should never interrupt the website.
+  }
 }
 
 async function GlobalVisitTracker() {
@@ -1091,7 +1119,7 @@ if (menuToggle && mainNav) {
   });
 }
 
-document.addEventListener("click", async (event) => {
+document.addEventListener("click", (event) => {
   const link = event.target.closest("a");
   if (!link) return;
 
@@ -1100,6 +1128,7 @@ document.addEventListener("click", async (event) => {
   if (isBookingTrigger(link)) {
     event.preventDefault();
     closeMenu();
+    const clickData = getBookingClickData(link);
 
     if (
       link.hasAttribute("data-booking-open") ||
@@ -1108,11 +1137,11 @@ document.addEventListener("click", async (event) => {
       href.endsWith("/index.html#booking")
     ) {
       openBooking(link.dataset.service || "Dịch vụ bạn đang quan tâm");
-      scheduleBookingClickLog(link);
+      scheduleBookingClickLog(clickData);
       return;
     }
 
-    scheduleBookingClickLog(link);
+    rememberPendingBookingClick(clickData);
     window.location.href = href || "dat-lich.html";
     return;
   }
@@ -1304,6 +1333,7 @@ setupHomeSlider();
 setupPricingCarousels();
 setupCountdown();
 setupKnowledgeSearchBox();
+flushPendingBookingClick();
 GlobalVisitTracker();
 BookingButtonTracker();
 
