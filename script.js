@@ -3,6 +3,11 @@ const SEARCH_LOG_APPS_SCRIPT_URL = APPS_SCRIPT_URL;
 const SEARCH_LOG_DEMO_MODE = false;
 const BOOKING_RATE_KEY = "ellyBookingRate";
 const SEARCH_SESSION_KEY = "ellySearchSessionId";
+const VISITOR_COOKIE_NAME = "visitorId";
+const VISITOR_COOKIE_DAYS = 365;
+const VISIT_LOG_SENT_KEY = "ellyVisitLogSent";
+const BOOKING_CLICK_RATE_KEY = "ellyBookingClickRate";
+const GPS_CACHE_KEY = "ellyGpsLocation";
 const SEARCH_LOG_DEMO_KEY = "ellySearchLogDemo";
 const SEARCH_LOCATION_KEY = "ellySearchLocation";
 const SEARCH_LOCATION_SOURCES = [
@@ -11,7 +16,10 @@ const SEARCH_LOCATION_SOURCES = [
     map: (data) => ({
       ip: data.ip,
       country: data.country_name,
-      city: data.city
+      region: data.region,
+      city: data.city,
+      isp: data.org,
+      timezone: data.timezone
     })
   },
   {
@@ -19,7 +27,10 @@ const SEARCH_LOCATION_SOURCES = [
     map: (data) => ({
       ip: data.ip,
       country: data.country,
-      city: data.city
+      region: data.region,
+      city: data.city,
+      isp: data.connection?.isp,
+      timezone: data.timezone?.id
     })
   },
   {
@@ -27,7 +38,10 @@ const SEARCH_LOCATION_SOURCES = [
     map: (data) => ({
       ip: data.ip,
       country: data.country,
-      city: data.city
+      region: data.region,
+      city: data.city,
+      isp: data.organization_name,
+      timezone: data.timezone
     })
   }
 ];
@@ -120,16 +134,42 @@ function buildKnowledgeSearchTerms(keyword) {
   return { normalized, terms: Array.from(terms) };
 }
 
+function createTrackingId(prefix) {
+  const randomPart = window.crypto?.randomUUID ? window.crypto.randomUUID() : `${Date.now()}-${Math.random().toString(36).slice(2)}`;
+  return `${prefix}-${randomPart}`;
+}
+
+function getCookieValue(name) {
+  const cookie = document.cookie.split("; ").find((item) => item.startsWith(`${name}=`));
+  return cookie ? decodeURIComponent(cookie.split("=").slice(1).join("=")) : "";
+}
+
+function setCookieValue(name, value, days) {
+  const expires = new Date(Date.now() + days * 24 * 60 * 60 * 1000).toUTCString();
+  document.cookie = `${name}=${encodeURIComponent(value)}; expires=${expires}; path=/; SameSite=Lax`;
+}
+
+function getOrCreateVisitorId() {
+  try {
+    const existing = getCookieValue(VISITOR_COOKIE_NAME);
+    if (existing) return existing;
+    const visitorId = createTrackingId("visitor");
+    setCookieValue(VISITOR_COOKIE_NAME, visitorId, VISITOR_COOKIE_DAYS);
+    return visitorId;
+  } catch (error) {
+    return createTrackingId("visitor");
+  }
+}
+
 function getOrCreateSessionId() {
   try {
-    const existing = localStorage.getItem(SEARCH_SESSION_KEY);
+    const existing = sessionStorage.getItem(SEARCH_SESSION_KEY);
     if (existing) return existing;
-    const randomPart = window.crypto?.randomUUID ? window.crypto.randomUUID() : `${Date.now()}-${Math.random().toString(36).slice(2)}`;
-    const sessionId = `elly-${randomPart}`;
-    localStorage.setItem(SEARCH_SESSION_KEY, sessionId);
+    const sessionId = createTrackingId("session");
+    sessionStorage.setItem(SEARCH_SESSION_KEY, sessionId);
     return sessionId;
   } catch (error) {
-    return `elly-${Date.now()}-${Math.random().toString(36).slice(2)}`;
+    return createTrackingId("session");
   }
 }
 
@@ -214,7 +254,10 @@ async function getVisitorLocation() {
       const location = {
         ip: cleanText(mapped.ip, 80),
         country: cleanText(normalizeCountryName(mapped.country), 80),
-        city: cleanText(mapped.city, 80)
+        region: cleanText(mapped.region, 100),
+        city: cleanText(mapped.city, 80),
+        isp: cleanText(mapped.isp, 120),
+        timezone: cleanText(mapped.timezone, 80)
       };
 
       try {
@@ -229,7 +272,213 @@ async function getVisitorLocation() {
     }
   }
 
-  return { ip: "", country: "", city: "" };
+  return { ip: "", country: "", region: "", city: "", isp: "", timezone: "" };
+}
+
+async function getIpGeoLocation() {
+  const location = await getVisitorLocation();
+  return {
+    ip: location.ip || "",
+    ipCountry: location.country || "",
+    ipRegion: location.region || "",
+    ipCity: location.city || "",
+    isp: location.isp || "",
+    ipTimezone: location.timezone || ""
+  };
+}
+
+function detectTrafficSource() {
+  const params = new URLSearchParams(window.location.search);
+  const utmSource = cleanText(params.get("utm_source"), 80);
+  const utmMedium = cleanText(params.get("utm_medium"), 80);
+  const utmCampaign = cleanText(params.get("utm_campaign"), 120);
+  if (utmSource) {
+    return [utmSource, utmMedium, utmCampaign].filter(Boolean).join(" / ");
+  }
+
+  const referrer = document.referrer || "";
+  if (/facebook\.com|fb\.com|l\.facebook\.com/i.test(referrer)) return "Facebook";
+  if (/google\./i.test(referrer)) return "Google";
+  if (/tiktok\.com/i.test(referrer)) return "TikTok";
+  if (/zalo\.me|zaloapp\.com/i.test(referrer)) return "Zalo";
+  return "Direct";
+}
+
+async function getDeviceInfo() {
+  const screenWidth = String(window.screen?.width || "");
+  const screenHeight = String(window.screen?.height || "");
+  return {
+    deviceType: detectDeviceType(),
+    deviceName: await getDeviceName(),
+    operatingSystem: detectOperatingSystem(),
+    browser: detectBrowser(),
+    userAgent: navigator.userAgent || "",
+    language: navigator.language || "",
+    timezone: Intl.DateTimeFormat().resolvedOptions().timeZone || "",
+    screenWidth,
+    screenHeight,
+    screenResolution: screenWidth && screenHeight ? `${screenWidth}x${screenHeight}` : "",
+    platform: navigator.userAgentData?.platform || navigator.platform || ""
+  };
+}
+
+function readCachedGpsLocation() {
+  try {
+    const cached = sessionStorage.getItem(GPS_CACHE_KEY);
+    return cached ? JSON.parse(cached) : null;
+  } catch (error) {
+    return null;
+  }
+}
+
+function cacheGpsLocation(location) {
+  try {
+    sessionStorage.setItem(GPS_CACHE_KEY, JSON.stringify(location));
+  } catch (error) {
+    // GPS cache is optional.
+  }
+}
+
+function requestBrowserGpsLocation(timeoutMs = 8000) {
+  return new Promise((resolve) => {
+    if (!("geolocation" in navigator)) {
+      resolve({ locationPermissionStatus: "unsupported", gpsRequested: "No" });
+      return;
+    }
+
+    let settled = false;
+    const timer = window.setTimeout(() => {
+      if (settled) return;
+      settled = true;
+      resolve({ locationPermissionStatus: "timeout", gpsRequested: "Yes" });
+    }, timeoutMs + 900);
+
+    navigator.geolocation.getCurrentPosition(
+      (position) => {
+        if (settled) return;
+        settled = true;
+        window.clearTimeout(timer);
+        resolve({
+          latitude: String(position.coords.latitude || ""),
+          longitude: String(position.coords.longitude || ""),
+          locationAccuracy: String(position.coords.accuracy || ""),
+          locationPermissionStatus: "granted",
+          gpsRequested: "Yes"
+        });
+      },
+      (error) => {
+        if (settled) return;
+        settled = true;
+        window.clearTimeout(timer);
+        resolve({
+          latitude: "",
+          longitude: "",
+          locationAccuracy: "",
+          locationPermissionStatus: error.code === error.PERMISSION_DENIED ? "denied" : "timeout",
+          gpsRequested: "Yes"
+        });
+      },
+      { enableHighAccuracy: false, timeout: timeoutMs, maximumAge: 10 * 60 * 1000 }
+    );
+  });
+}
+
+async function reverseGeocodeLocation(latitude, longitude) {
+  if (!latitude || !longitude) return {};
+
+  try {
+    const url = `https://nominatim.openstreetmap.org/reverse?format=jsonv2&lat=${encodeURIComponent(latitude)}&lon=${encodeURIComponent(longitude)}&accept-language=vi`;
+    const data = await fetchJsonWithTimeout(url, 4500);
+    const address = data.address || {};
+    return {
+      gpsCountry: cleanText(address.country, 100),
+      gpsRegion: cleanText(address.state || address.region, 100),
+      gpsCity: cleanText(address.city || address.town || address.province, 100),
+      gpsDistrict: cleanText(address.suburb || address.county || address.city_district, 100),
+      gpsWard: cleanText(address.quarter || address.neighbourhood || address.village, 100)
+    };
+  } catch (error) {
+    return {};
+  }
+}
+
+async function getGpsLocationForTracking({ askIfPrompt = false } = {}) {
+  const cached = readCachedGpsLocation();
+  if (cached?.locationPermissionStatus === "granted") {
+    return { ...cached, gpsRequested: "No" };
+  }
+  if (cached?.locationPermissionStatus === "denied") {
+    return { ...cached, gpsRequested: "No" };
+  }
+  if (!("geolocation" in navigator)) {
+    const unsupported = { locationPermissionStatus: "unsupported", gpsRequested: "No" };
+    cacheGpsLocation(unsupported);
+    return unsupported;
+  }
+
+  if (navigator.permissions?.query) {
+    try {
+      const permission = await navigator.permissions.query({ name: "geolocation" });
+      if (permission.state === "denied") {
+        const denied = { locationPermissionStatus: "denied", gpsRequested: "No" };
+        cacheGpsLocation(denied);
+        return denied;
+      }
+      if (permission.state === "prompt" && !askIfPrompt) return { locationPermissionStatus: "prompt", gpsRequested: "No" };
+    } catch (error) {
+      if (!askIfPrompt) return { locationPermissionStatus: "prompt", gpsRequested: "No" };
+    }
+  } else if (!askIfPrompt) {
+    return { locationPermissionStatus: "prompt", gpsRequested: "No" };
+  }
+
+  const gps = await requestBrowserGpsLocation();
+  if (gps.locationPermissionStatus === "granted") {
+    const address = await reverseGeocodeLocation(gps.latitude, gps.longitude);
+    const fullGps = { ...gps, ...address };
+    cacheGpsLocation(fullGps);
+    return fullGps;
+  }
+
+  if (gps.locationPermissionStatus === "denied") {
+    cacheGpsLocation(gps);
+  }
+
+  return gps;
+}
+
+async function buildVisitLogPayload(eventType, extra = {}) {
+  const ipGeo = await getIpGeoLocation();
+  const device = await getDeviceInfo();
+  const gps = extra.gps || {};
+  return {
+    timestamp: new Date().toISOString(),
+    visitorId: getOrCreateVisitorId(),
+    sessionId: getOrCreateSessionId(),
+    eventType,
+    buttonName: cleanText(extra.buttonName, 120),
+    source: extra.source || detectTrafficSource(),
+    landingPage: sessionStorage.getItem("ellyLandingPage") || window.location.href,
+    pageTitle: document.title || "",
+    pathname: window.location.pathname || "",
+    referrer: document.referrer || "",
+    ...ipGeo,
+    gpsCountry: gps.gpsCountry || "",
+    gpsRegion: gps.gpsRegion || "",
+    gpsCity: gps.gpsCity || "",
+    gpsDistrict: gps.gpsDistrict || "",
+    gpsWard: gps.gpsWard || "",
+    latitude: gps.latitude || "",
+    longitude: gps.longitude || "",
+    locationAccuracy: gps.locationAccuracy || "",
+    locationPermissionStatus: gps.locationPermissionStatus || "",
+    gpsRequested: gps.gpsRequested || "No",
+    ...device
+  };
+}
+
+async function sendVisitLogToGoogleSheet(payload) {
+  await sendSearchLogToGoogleSheet(payload);
 }
 
 async function buildSearchLogPayload(keyword, eventType) {
@@ -239,13 +488,20 @@ async function buildSearchLogPayload(keyword, eventType) {
 
   return {
     timestamp: new Date().toLocaleString("vi-VN"),
+    visitorId: getOrCreateVisitorId(),
     sessionId: getOrCreateSessionId(),
     keyword: cleanText(keyword, 160),
     eventType,
+    source: detectTrafficSource(),
+    landingPage: sessionStorage.getItem("ellyLandingPage") || window.location.href,
     pageTitle: document.title || "",
     pathname: window.location.pathname || "",
     referrer: document.referrer || "",
     ip: location.ip,
+    ipCountry: location.country,
+    ipRegion: location.region,
+    ipCity: location.city,
+    isp: location.isp,
     country: location.country,
     city: location.city,
     deviceType: detectDeviceType(),
@@ -276,7 +532,7 @@ async function sendSearchLogToGoogleSheet(payload) {
   }
 
   const params = new URLSearchParams();
-  params.set("sheetName", "ELLY - Search Logs");
+  params.set("sheetName", "Search Logs");
   Object.entries(payload).forEach(([key, value]) => {
     params.set(key, protectSheetValue(value));
   });
@@ -578,6 +834,92 @@ function closeBooking() {
   body.classList.remove("booking-popover-open");
 }
 
+function isBookingTrigger(link) {
+  const href = link?.getAttribute("href") || "";
+  const text = normalizeSearchText(link?.textContent || link?.getAttribute("aria-label") || "");
+  return (
+    link?.hasAttribute("data-booking-open") ||
+    href === "#booking" ||
+    href === "index.html#booking" ||
+    href.endsWith("/index.html#booking") ||
+    href.endsWith("/dat-lich.html") ||
+    href === "dat-lich.html" ||
+    /\b(dat lich|dat lich ngay|dang ky tu van|dang ky ngay|nhan tu van|book now|schedule)\b/.test(text)
+  );
+}
+
+function readBookingClickRate() {
+  try {
+    return JSON.parse(sessionStorage.getItem(BOOKING_CLICK_RATE_KEY) || "{}");
+  } catch (error) {
+    return {};
+  }
+}
+
+function canLogBookingClick(buttonKey) {
+  const now = Date.now();
+  const rate = readBookingClickRate();
+  const lastClick = Number(rate[buttonKey] || 0);
+  if (lastClick && now - lastClick < 5000) return false;
+  rate[buttonKey] = now;
+  try {
+    sessionStorage.setItem(BOOKING_CLICK_RATE_KEY, JSON.stringify(rate));
+  } catch (error) {
+    // Rate limit storage is optional.
+  }
+  return true;
+}
+
+async function logBookingClick(link) {
+  const buttonName = cleanText(link?.textContent || link?.getAttribute("aria-label") || "Đặt lịch", 120);
+  const buttonKey = `${window.location.pathname}:${buttonName}:${link?.getAttribute("href") || ""}`;
+  if (!canLogBookingClick(buttonKey)) return;
+
+  const gps = await getGpsLocationForTracking({ askIfPrompt: true });
+  const payload = await buildVisitLogPayload("booking_click", {
+    buttonName,
+    gps
+  });
+  await sendVisitLogToGoogleSheet(payload);
+}
+
+async function GlobalVisitTracker() {
+  try {
+    if (!sessionStorage.getItem("ellyLandingPage")) {
+      sessionStorage.setItem("ellyLandingPage", window.location.href);
+    }
+
+    const sessionId = getOrCreateSessionId();
+    const visitKey = `${VISIT_LOG_SENT_KEY}:${sessionId}`;
+    if (sessionStorage.getItem(visitKey)) return;
+
+    window.setTimeout(async () => {
+      try {
+        const gps = await getGpsLocationForTracking({ askIfPrompt: true });
+        const payload = await buildVisitLogPayload("visit", { gps });
+        await sendVisitLogToGoogleSheet(payload);
+        sessionStorage.setItem(visitKey, "1");
+      } catch (error) {
+        try {
+          const payload = await buildVisitLogPayload("visit", {
+            gps: { locationPermissionStatus: "error" }
+          });
+          await sendVisitLogToGoogleSheet(payload);
+          sessionStorage.setItem(visitKey, "1");
+        } catch (innerError) {
+          // Visit tracking should never interrupt the website.
+        }
+      }
+    }, 3000);
+  } catch (error) {
+    // Tracking should never interrupt the website.
+  }
+}
+
+function BookingButtonTracker() {
+  // Booking clicks are captured by the global click listener below.
+}
+
 if (menuToggle && mainNav) {
   menuToggle.addEventListener("click", () => {
     const willOpen = !mainNav.classList.contains("is-open");
@@ -587,21 +929,32 @@ if (menuToggle && mainNav) {
   });
 }
 
-document.addEventListener("click", (event) => {
+document.addEventListener("click", async (event) => {
   const link = event.target.closest("a");
   if (!link) return;
 
   const href = link.getAttribute("href") || "";
 
-  if (
-    link.hasAttribute("data-booking-open") ||
-    href === "#booking" ||
-    href === "index.html#booking" ||
-    href.endsWith("/index.html#booking")
-  ) {
+  if (isBookingTrigger(link)) {
     event.preventDefault();
     closeMenu();
-    openBooking(link.dataset.service || "Dịch vụ bạn đang quan tâm");
+    try {
+      await logBookingClick(link);
+    } catch (error) {
+      // Booking tracking should never block customers.
+    }
+
+    if (
+      link.hasAttribute("data-booking-open") ||
+      href === "#booking" ||
+      href === "index.html#booking" ||
+      href.endsWith("/index.html#booking")
+    ) {
+      openBooking(link.dataset.service || "Dịch vụ bạn đang quan tâm");
+      return;
+    }
+
+    window.location.href = href || "dat-lich.html";
     return;
   }
 
@@ -785,6 +1138,8 @@ setupHomeSlider();
 setupPricingCarousels();
 setupCountdown();
 setupKnowledgeSearchBox();
+GlobalVisitTracker();
+BookingButtonTracker();
 
 if (window.location.hash === "#booking") {
   window.setTimeout(() => openBooking("Dịch vụ bạn đang quan tâm"), 250);

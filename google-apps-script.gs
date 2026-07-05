@@ -1,50 +1,65 @@
-const SEARCH_LOG_SHEET_NAME = "ELLY - Search Logs";
+const SEARCH_LOG_SHEET_NAME = "Search Logs";
 const DEFAULT_BOOKING_SHEET_NAME = "ELLY - Dat lich";
 const SPREADSHEET_ID = "";
 
 const SEARCH_LOG_HEADERS = [
-  "Thời gian",
-  "Mã phiên",
-  "Từ khóa",
-  "Loại sự kiện",
-  "Tiêu đề trang",
-  "Đường dẫn",
-  "Trang giới thiệu",
-  "Địa chỉ IP",
-  "Quốc gia",
-  "Thành phố",
-  "Loại thiết bị",
-  "Tên thiết bị",
-  "Hệ điều hành",
-  "Trình duyệt",
+  "Time",
+  "Visitor ID",
+  "Session ID",
+  "Event Type",
+  "Button Name",
+  "Source",
+  "Landing Page",
+  "Page Title",
+  "Pathname",
+  "Referrer",
+  "IP Address",
+  "IP Country",
+  "IP Region",
+  "IP City",
+  "ISP",
+  "GPS Country",
+  "GPS Region",
+  "GPS City",
+  "GPS District",
+  "GPS Ward",
+  "Latitude",
+  "Longitude",
+  "Location Accuracy",
+  "Location Permission",
+  "GPS Requested",
+  "Device Type",
+  "Device Name",
+  "Operating System",
+  "Browser",
   "User Agent",
-  "Ngôn ngữ",
-  "Múi giờ",
-  "Độ phân giải màn hình",
-  "Nền tảng"
+  "Language",
+  "Timezone",
+  "Screen Resolution",
+  "Platform"
 ];
 
 const BOOKING_HEADERS = [
-  "Thời gian",
-  "Nguồn",
-  "Họ tên",
-  "Số điện thoại",
-  "Dịch vụ",
-  "Khu vực",
-  "Địa chỉ",
-  "Ghi chú",
-  "Địa chỉ IP",
-  "Quốc gia",
-  "Thành phố"
+  "Thoi gian",
+  "Nguon",
+  "Ho ten",
+  "So dien thoai",
+  "Dich vu",
+  "Khu vuc",
+  "Dia chi",
+  "Ghi chu",
+  "Dia chi IP",
+  "Quoc gia",
+  "Thanh pho"
 ];
 
 function doPost(e) {
   const params = e && e.parameter ? e.parameter : {};
   const sheetName = params.sheetName || "";
 
-  if (sheetName === SEARCH_LOG_SHEET_NAME) {
+  if (sheetName === SEARCH_LOG_SHEET_NAME || sheetName === "ELLY - Search Logs") {
     appendSearchLog(params);
-    return jsonResponse({ ok: true, type: "search" });
+    return jsonResponse({ ok: true, type: "search_log" });
   }
 
   appendBooking(params, sheetName || DEFAULT_BOOKING_SHEET_NAME);
@@ -57,22 +72,37 @@ function appendSearchLog(params) {
 
   sheet.appendRow([
     formatLogTime(params.timestamp),
+    params.visitorId || "",
     params.sessionId || "",
-    params.keyword || "",
     translateEventType(params.eventType),
+    params.buttonName || params.keyword || "",
+    params.source || "",
+    params.landingPage || "",
     params.pageTitle || "",
     params.pathname || "",
     params.referrer || "",
     params.ip || "",
-    params.country || "",
-    params.city || "",
+    params.ipCountry || params.country || "",
+    params.ipRegion || "",
+    params.ipCity || params.city || "",
+    params.isp || "",
+    params.gpsCountry || "",
+    params.gpsRegion || "",
+    params.gpsCity || "",
+    params.gpsDistrict || "",
+    params.gpsWard || "",
+    params.latitude || "",
+    params.longitude || "",
+    params.locationAccuracy || "",
+    params.locationPermissionStatus || "",
+    params.gpsRequested || "",
     translateDeviceType(params.deviceType),
     params.deviceName || "",
     translateOperatingSystem(params.operatingSystem),
     params.browser || "",
     params.userAgent || "",
     params.language || "",
-    params.timezone || "",
+    params.timezone || params.ipTimezone || "",
     screenResolution,
     params.platform || ""
   ]);
@@ -91,8 +121,8 @@ function appendBooking(params, sheetName) {
     params.address || "",
     params.note || "",
     params.ip || "",
-    params.country || "",
-    params.city || ""
+    params.country || params.ipCountry || "",
+    params.city || params.ipCity || ""
   ]);
 }
 
@@ -142,17 +172,20 @@ function formatLogTime(value) {
 
 function translateEventType(value) {
   const map = {
-    typing: "Đang gõ",
-    submit: "Bấm tìm kiếm"
+    visit: "Visit",
+    page_view: "Page View",
+    booking_click: "Booking Click",
+    typing: "Typing",
+    submit: "Search Submit"
   };
   return map[value] || value || "";
 }
 
 function translateDeviceType(value) {
   const map = {
-    Mobile: "Điện thoại",
-    Tablet: "Máy tính bảng",
-    Desktop: "Máy tính"
+    Mobile: "Dien thoai",
+    Tablet: "May tinh bang",
+    Desktop: "May tinh"
   };
   return map[value] || value || "";
 }
