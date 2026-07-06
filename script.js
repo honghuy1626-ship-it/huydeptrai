@@ -990,6 +990,13 @@ function openBooking(service = "") {
   popover.classList.add("is-open");
   popover.setAttribute("aria-hidden", "false");
   body.classList.add("booking-popover-open");
+  window.setTimeout(() => {
+    const card = popover.querySelector(".booking-popover-card");
+    const countdown = popover.querySelector(".booking-countdown");
+    if (card && countdown) {
+      card.scrollTo({ top: Math.max(0, countdown.offsetTop - 12), behavior: "auto" });
+    }
+  }, 40);
   if (window.matchMedia("(min-width: 769px)").matches) {
     window.setTimeout(() => {
       const firstInput = popover.querySelector("input, select, textarea, button");
