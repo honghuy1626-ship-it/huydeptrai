@@ -3458,6 +3458,85 @@ body.booking-popover-open {
   transform: translateY(16px);
 }
 
+.article-smart-cta {
+  margin: 30px 0;
+  color: inherit;
+}
+
+.article-smart-cta-inner {
+  display: grid;
+  gap: 10px;
+  padding: 0;
+}
+
+.article-smart-cta-badge {
+  width: fit-content;
+  padding: 0;
+  color: #8f4050;
+  background: transparent;
+  border-radius: 0;
+  font-size: 0.78rem;
+  font-weight: 900;
+}
+
+.article-smart-cta h2 {
+  margin: 0;
+  color: #7c3947;
+  font-size: 1.35rem;
+  line-height: 1.25;
+}
+
+.article-smart-cta p {
+  margin: 0;
+  color: #5e4a4f;
+}
+
+.article-content .article-smart-cta h2 {
+  margin: 0;
+  color: #7c3947;
+}
+
+.article-content .article-smart-cta p {
+  color: #5e4a4f;
+}
+
+.article-smart-price {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  align-items: baseline;
+}
+
+.article-smart-price-old {
+  color: #9b8b8f;
+  font-size: 1.05rem;
+  font-weight: 850;
+  text-decoration: line-through;
+}
+
+.article-smart-price strong {
+  color: #8f4050;
+  font-size: 1.75rem;
+  line-height: 1;
+  text-shadow: none;
+  animation: none;
+}
+
+.article-smart-home {
+  padding: 0;
+  color: #5e4a4f !important;
+  background: transparent;
+  border: 0;
+  border-radius: 0;
+  font-weight: 800;
+}
+
+.article-smart-button {
+  width: fit-content;
+  min-width: min(100%, 260px);
+  justify-content: center;
+}
+
 .floating-actions {
   position: fixed;
   z-index: 60;
@@ -5024,6 +5103,35 @@ body.booking-popover-open {
 }
 
 @media (max-width: 768px) {
+  .booking-popover {
+    align-items: end;
+    place-items: end center;
+    padding: 0;
+  }
+
+  .booking-popover-backdrop {
+    background: rgba(21, 17, 15, 0.68);
+  }
+
+  .booking-popover-card {
+    width: 100%;
+    max-height: 90svh;
+    border-radius: 22px 22px 0 0;
+  }
+
+  .booking-popover.is-open .booking-popover-card {
+    animation: bookingBottomSheetIn 300ms ease-out both;
+  }
+
+  .article-smart-cta {
+    margin: 24px 0;
+    border-radius: 8px;
+  }
+
+  .article-smart-button {
+    width: 100%;
+  }
+
   .booking-form input,
   .booking-form select,
   .booking-form textarea,
@@ -5032,5 +5140,17 @@ body.booking-popover-open {
   .popup-booking-form textarea,
   .day-input-wrap input {
     font-size: 16px;
+  }
+}
+
+@keyframes bookingBottomSheetIn {
+  from {
+    opacity: 0;
+    transform: translateY(100%);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
   }
 }
