@@ -82,6 +82,7 @@ const popupMessage = document.querySelector("[data-popup-message]");
 const selectedServiceText = document.querySelector("[data-booking-selected]");
 const serviceSelect = document.querySelector("[data-popup-service]");
 const logoAssetPath = window.location.pathname.includes("/kien-thuc/") ? "../assets/elly-logo.png" : "assets/elly-logo.png";
+let lastBookingTrigger = null;
 
 function cleanText(value, maxLength = 120) {
   return String(value || "")
@@ -985,7 +986,11 @@ function openBooking(service = "") {
   if (serviceSelect) {
     const safeService = cleanText(service, FIELD_LIMITS.service);
     const hasOption = Array.from(serviceSelect.options).some((option) => option.value === safeService);
-    serviceSelect.value = hasOption ? safeService : "";
+    if (safeService && !hasOption) {
+      const option = new Option(safeService, safeService);
+      serviceSelect.add(option);
+    }
+    serviceSelect.value = safeService || "";
   }
   popover.classList.add("is-open");
   popover.setAttribute("aria-hidden", "false");
@@ -997,12 +1002,10 @@ function openBooking(service = "") {
       card.scrollTo({ top: Math.max(0, countdown.offsetTop - 12), behavior: "auto" });
     }
   }, 40);
-  if (window.matchMedia("(min-width: 769px)").matches) {
-    window.setTimeout(() => {
-      const firstInput = popover.querySelector("input, select, textarea, button");
-      if (firstInput) firstInput.focus({ preventScroll: true });
-    }, 120);
-  }
+  window.setTimeout(() => {
+    const firstInput = popover.querySelector(".popup-booking-form input, .popup-booking-form select, .popup-booking-form textarea") || popover.querySelector("button");
+    if (firstInput) firstInput.focus({ preventScroll: true });
+  }, 120);
 }
 
 function closeBooking() {
@@ -1010,6 +1013,9 @@ function closeBooking() {
   popover.classList.remove("is-open");
   popover.setAttribute("aria-hidden", "true");
   body.classList.remove("booking-popover-open");
+  if (lastBookingTrigger && document.contains(lastBookingTrigger)) {
+    window.setTimeout(() => lastBookingTrigger.focus({ preventScroll: true }), 30);
+  }
 }
 
 function isBookingTrigger(link) {
@@ -1139,6 +1145,122 @@ function BookingButtonTracker() {
   // Booking clicks are captured by the global click listener below.
 }
 
+function detectArticleSmartCTAContext(articleContent) {
+  const text = normalizeSearchText(`${document.title} ${articleContent?.innerText || ""} ${window.location.pathname}`);
+  const hasAny = (terms) => terms.some((term) => text.includes(normalizeSearchText(term)));
+
+  if (hasAny(["phun mi", "mo trong", "mi mat"])) {
+    return {
+      service: "Phun mí",
+      originalPrice: "1.149K",
+      offerPrice: "399K",
+      message: "Đôi mắt thiếu điểm nhấn khi để mặt mộc? Phun mí giúp viền mắt rõ nét hơn mà không cần kẻ eyeliner mỗi ngày."
+    };
+  }
+
+  if (hasAny(["dieu khac chan may", "hairstroke", "soi may"])) {
+    return {
+      service: "Điêu khắc chân mày",
+      originalPrice: "2.280K",
+      offerPrice: "799K",
+      message: "Bạn muốn hàng chân mày tự nhiên như sợi thật? Điêu khắc chân mày giúp cải thiện dáng mày thưa, không đều một cách tinh tế."
+    };
+  }
+
+  if (hasAny(["phun may", "tan bot", "ombre", "nano", "chan may"])) {
+    return {
+      service: "Phun mày tán bột",
+      originalPrice: "1.425K",
+      offerPrice: "499K",
+      message: "Chân mày thưa, nhạt màu hoặc mất dáng khiến gương mặt kém sắc? ELLY PMU hỗ trợ tư vấn dáng mày phù hợp trước khi thực hiện."
+    };
+  }
+
+  if (hasAny(["khu tham moi", "moi tham"])) {
+    return {
+      service: "Phun môi / Khử thâm môi",
+      originalPrice: "1.710K",
+      offerPrice: "599K",
+      message: "Đôi môi thâm khiến bạn thiếu tự tin khi để mặt mộc? ELLY PMU đang có ưu đãi cải thiện môi thâm, giúp môi tươi tắn và tự nhiên hơn."
+    };
+  }
+
+  return {
+    service: "Phun môi / Khử thâm môi",
+    originalPrice: "1.710K",
+    offerPrice: "599K",
+    message: "Bạn muốn đôi môi tươi tắn hơn mà không cần tô son mỗi ngày? ELLY PMU đang có ưu đãi phun môi dành cho khách đặt lịch online."
+  };
+}
+
+function createArticleSmartCTA(context, index) {
+  const box = document.createElement("aside");
+  box.className = "article-smart-cta";
+  box.setAttribute("aria-label", "Ưu đãi đặt lịch ELLY PMU");
+  box.innerHTML = `
+    <div class="article-smart-cta-inner">
+      <span class="article-smart-cta-badge">Ưu đãi trong tháng</span>
+      <h2>${escapeHtml(context.service)}</h2>
+      <p>${escapeHtml(context.message)}</p>
+      <div class="article-smart-price" aria-label="Giá ưu đãi">
+        <span class="article-smart-price-old">Giá gốc ${escapeHtml(context.originalPrice)}</span>
+        <strong>Giảm còn ${escapeHtml(context.offerPrice)}</strong>
+      </div>
+      <p class="article-smart-home">🏠 ELLY PMU có hỗ trợ làm tận nhà theo lịch hẹn. Giá ưu đãi không thay đổi</p>
+      <a class="btn btn-primary article-smart-button" href="#booking" data-booking-open data-service="${escapeHtml(context.service)}">Đặt lịch nhận ưu đãi</a>
+    </div>
+  `;
+  box.dataset.smartCtaIndex = String(index);
+  return box;
+}
+
+function findConclusionHeading(articleContent) {
+  const headings = Array.from(articleContent.querySelectorAll("h2, h3"));
+  return headings.find((heading) => normalizeSearchText(heading.textContent).includes("ket luan")) || null;
+}
+
+function insertArticleSmartCTABeforeConclusion(articleContent, context) {
+  const conclusion = findConclusionHeading(articleContent);
+  const cta = createArticleSmartCTA(context, 1);
+  if (conclusion) {
+    articleContent.insertBefore(cta, conclusion);
+    return true;
+  }
+  articleContent.appendChild(cta);
+  return false;
+}
+
+function insertArticleSmartCTAMidArticle(articleContent, context) {
+  const blocks = Array.from(articleContent.children).filter((element) => {
+    if (element.matches(".article-breadcrumb, .knowledge-tag, .article-smart-cta, script, style")) return false;
+    return element.textContent.trim().length > 20;
+  });
+  if (blocks.length < 8) return false;
+
+  const targetIndex = Math.max(3, Math.min(blocks.length - 3, Math.floor(blocks.length * 0.48)));
+  const target = blocks[targetIndex];
+  if (!target) return false;
+
+  const cta = createArticleSmartCTA(context, 2);
+  target.insertAdjacentElement("afterend", cta);
+  return true;
+}
+
+function ArticleSmartCTA() {
+  const articleContent = document.querySelector(".article-content");
+  if (!articleContent || articleContent.querySelector(".article-smart-cta")) return;
+  if (!window.location.pathname.includes("/kien-thuc/")) return;
+
+  const context = detectArticleSmartCTAContext(articleContent);
+  const wordCount = (articleContent.innerText || "").trim().split(/\s+/).filter(Boolean).length;
+
+  if (wordCount >= 1000) {
+    insertArticleSmartCTAMidArticle(articleContent, context);
+  }
+
+  insertArticleSmartCTABeforeConclusion(articleContent, context);
+}
+
 if (menuToggle && mainNav) {
   menuToggle.addEventListener("click", () => {
     const willOpen = !mainNav.classList.contains("is-open");
@@ -1156,6 +1278,7 @@ document.addEventListener("click", (event) => {
 
   if (isBookingTrigger(link)) {
     event.preventDefault();
+    lastBookingTrigger = link;
     const clickData = getBookingClickData(link);
     closeMenu();
 
@@ -1362,6 +1485,7 @@ setupHomeSlider();
 setupPricingCarousels();
 setupCountdown();
 setupKnowledgeSearchBox();
+ArticleSmartCTA();
 flushPendingBookingClick();
 GlobalVisitTracker();
 BookingButtonTracker();
