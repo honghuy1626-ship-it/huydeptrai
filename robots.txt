@@ -2,4 +2,4 @@ User-agent: *
 Allow: /
 Disallow: /huydeptrai/kien-thuc/template-bai-viet-seo.html
 
-Sitemap: https://honghuy1626-ship-it.github.io/huydeptrai/sitemap.xml
+Sitemap: https://ellyphunxamtainha.com/sitemap.xml
