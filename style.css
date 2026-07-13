@@ -5102,6 +5102,41 @@ body.booking-popover-open {
   }
 }
 
+@media (min-width: 761px) {
+  .booking-offer {
+    grid-template-columns: 1fr;
+    align-content: center;
+    gap: 6px;
+    min-height: 122px;
+    padding: 16px 18px 18px;
+  }
+
+  .booking-offer span {
+    max-width: 170px;
+    font-size: 0.74rem;
+    line-height: 1.15;
+  }
+
+  .booking-offer strong {
+    max-width: 210px;
+    margin-top: 0;
+    font-size: clamp(2.05rem, 3.4vw, 3rem);
+    line-height: 0.94;
+    overflow-wrap: normal;
+    text-wrap: balance;
+  }
+
+  .booking-offer small {
+    position: absolute;
+    left: 18px;
+    bottom: 12px;
+    min-height: 26px;
+    padding: 0 10px;
+    font-size: 0.76rem;
+    z-index: 1;
+  }
+}
+
 @media (max-width: 768px) {
   .booking-popover {
     align-items: end;
