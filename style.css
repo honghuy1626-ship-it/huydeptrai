@@ -5189,3 +5189,51 @@ body.booking-popover-open {
     transform: translateY(0);
   }
 }
+
+/* Mobile header: menu left, logo centered, booking button hidden. */
+@media (max-width: 760px) {
+  .site-header .header-inner {
+    display: grid;
+    grid-template-columns: 46px minmax(0, 1fr) 46px;
+    align-items: center;
+    gap: 8px;
+  }
+
+  .site-header .brand {
+    grid-column: 2;
+    grid-row: 1;
+    justify-self: center;
+    justify-content: center;
+    width: fit-content;
+    max-width: min(190px, 100%);
+    text-align: left;
+  }
+
+  .site-header .header-actions {
+    grid-column: 1;
+    grid-row: 1;
+    justify-self: start;
+    display: flex;
+    align-items: center;
+  }
+
+  .site-header .header-actions .btn {
+    display: none;
+  }
+
+  .site-header .menu-toggle {
+    flex: 0 0 42px;
+    width: 42px;
+    height: 42px;
+  }
+}
+
+@media (max-width: 380px) {
+  .site-header .header-inner {
+    grid-template-columns: 42px minmax(0, 1fr) 42px;
+  }
+
+  .site-header .brand {
+    max-width: 156px;
+  }
+}
