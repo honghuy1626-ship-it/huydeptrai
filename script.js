@@ -1408,6 +1408,272 @@ function setupCountdown() {
   window.setInterval(tick, 1000);
 }
 
+function setupMobileBottomNav() {
+  if (document.querySelector(".mobile-bottom-nav")) return;
+
+  const hasTarget = (selector) => Boolean(document.querySelector(selector));
+  const homePrefix = window.location.pathname.includes("/kien-thuc/") ? "../" : "";
+  const bookingHref = hasTarget("#booking") ? "#booking" : `${homePrefix}index.html#booking`;
+  const promoHref = hasTarget("#pricing") ? "#pricing" : `${homePrefix}index.html#pricing`;
+  const consultHref = "https://zalo.me/0786266268";
+  const mapsHref = "https://www.google.com/maps/search/?api=1&query=17H%20B%C3%ACnh%20H%C3%B2a%2024%2C%20Ph%C6%B0%E1%BB%9Dng%20B%C3%ACnh%20H%C3%B2a%2C%20TP.HCM";
+
+  const icons = {
+    phone: '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.8 19.8 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6A19.8 19.8 0 0 1 2.12 4.18 2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.12.92.33 1.82.63 2.68a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.4-1.2a2 2 0 0 1 2.11-.45c.86.3 1.76.51 2.68.63A2 2 0 0 1 22 16.92Z"/></svg>',
+    calendar: '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M8 2v4M16 2v4M3 10h18"/><rect x="3" y="4" width="18" height="18" rx="3"/><path d="M8 14h.01M12 14h.01M16 14h.01M8 18h.01M12 18h.01M16 18h.01"/></svg>',
+    consult: '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 12a4 4 0 1 0-4-4 4 4 0 0 0 4 4Z"/><path d="M4 21a8 8 0 0 1 16 0"/><path d="M18.5 8.5h2a2 2 0 0 1 0 4h-1l-2 2v-6Z"/></svg>',
+    pin: '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 22s7-5.33 7-12a7 7 0 0 0-14 0c0 6.67 7 12 7 12Z"/><circle cx="12" cy="10" r="2.5"/></svg>',
+    gift: '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M20 12v10H4V12M2 7h20v5H2zM12 22V7"/><path d="M12 7H8.5A2.5 2.5 0 1 1 12 4.5V7Zm0 0h3.5A2.5 2.5 0 1 0 12 4.5V7Z"/></svg>'
+  };
+
+  const nav = document.createElement("nav");
+  nav.className = "mobile-bottom-nav";
+  nav.setAttribute("aria-label", "Điều hướng nhanh");
+  nav.innerHTML = `
+    <a class="mobile-nav-item" href="tel:0786266268" aria-label="Gọi điện">
+      <span class="mobile-nav-icon">${icons.phone}</span>
+      <span>Gọi điện</span>
+    </a>
+    <a class="mobile-nav-item" href="${bookingHref}" data-mobile-booking aria-label="Đặt lịch">
+      <span class="mobile-nav-icon">${icons.calendar}</span>
+      <span>Đặt lịch</span>
+    </a>
+    <a class="mobile-nav-item mobile-nav-main" href="${consultHref}" target="_blank" rel="noopener noreferrer" aria-label="Tư vấn ngay">
+      <span class="mobile-nav-main-circle">${icons.consult}</span>
+      <span class="mobile-nav-main-label">Tư vấn ngay</span>
+    </a>
+    <a class="mobile-nav-item" href="${mapsHref}" target="_blank" rel="noopener noreferrer" aria-label="Chỉ đường">
+      <span class="mobile-nav-icon">${icons.pin}</span>
+      <span>Chỉ đường</span>
+    </a>
+    <a class="mobile-nav-item" href="${promoHref}" data-mobile-anchor aria-label="Khuyến mãi">
+      <span class="mobile-nav-icon">${icons.gift}</span>
+      <span>Khuyến mãi</span>
+    </a>
+  `;
+
+  nav.addEventListener("click", (event) => {
+    const link = event.target.closest("a");
+    if (!link) return;
+
+    const href = link.getAttribute("href") || "";
+    if (link.hasAttribute("data-mobile-booking") && href === "#booking") {
+      event.preventDefault();
+      openBooking("Dịch vụ bạn đang quan tâm");
+      return;
+    }
+
+    if (href.startsWith("#")) {
+      const target = document.querySelector(href);
+      if (!target) return;
+      event.preventDefault();
+      target.scrollIntoView({ behavior: "smooth", block: "start" });
+    }
+  });
+
+  document.body.appendChild(nav);
+}
+
+const MOBILE_SITE_SEARCH_CACHE_KEY = "ellyMobileSiteSearchIndex";
+
+function getPageSummaryFromDocument(doc, fallbackUrl) {
+  const title = cleanText(
+    doc.querySelector("meta[property='og:title']")?.getAttribute("content") ||
+      doc.querySelector("title")?.textContent ||
+      doc.querySelector("h1")?.textContent ||
+      fallbackUrl,
+    180
+  );
+  const description = cleanText(
+    doc.querySelector("meta[name='description']")?.getAttribute("content") ||
+      doc.querySelector("meta[property='og:description']")?.getAttribute("content") ||
+      doc.querySelector("main p, article p, .article-content p, p")?.textContent ||
+      "",
+    220
+  );
+
+  return { title, description };
+}
+
+async function loadMobileSiteSearchIndex(homePrefix) {
+  try {
+    const cached = JSON.parse(sessionStorage.getItem(MOBILE_SITE_SEARCH_CACHE_KEY) || "null");
+    if (Array.isArray(cached?.items) && Date.now() - cached.createdAt < 6 * 60 * 60 * 1000) {
+      return cached.items;
+    }
+  } catch (error) {
+    // Search cache is optional.
+  }
+
+  const sitemapUrl = `${homePrefix}sitemap.xml`;
+  const sitemapResponse = await fetch(sitemapUrl, { cache: "force-cache" });
+  const sitemapText = await sitemapResponse.text();
+  const sitemapDoc = new DOMParser().parseFromString(sitemapText, "application/xml");
+  const locNodes = sitemapDoc.querySelectorAll("url loc").length
+    ? Array.from(sitemapDoc.querySelectorAll("url loc"))
+    : Array.from(sitemapDoc.getElementsByTagName("loc"));
+  const urls = locNodes
+    .map((loc) => cleanText(loc.textContent, 500))
+    .filter(Boolean)
+    .slice(0, 90);
+
+  const items = [];
+
+  for (const loc of urls) {
+    try {
+      const url = new URL(loc, window.location.origin);
+      const pathname = url.pathname === "/" ? "/index.html" : url.pathname;
+      const href = url.pathname === "/" ? "/" : pathname;
+      const fetchUrl = pathname.startsWith("/kien-thuc/")
+        ? `${homePrefix}${pathname.replace(/^\//, "")}`
+        : `${homePrefix}${pathname.replace(/^\//, "")}`;
+      const response = await fetch(fetchUrl, { cache: "force-cache" });
+      if (!response.ok) continue;
+
+      const html = await response.text();
+      const doc = new DOMParser().parseFromString(html, "text/html");
+      const summary = getPageSummaryFromDocument(doc, loc);
+      const pageText = cleanText(doc.body?.textContent || "", 6000);
+      const searchText = normalizeSearchText(`${summary.title} ${summary.description} ${pathname} ${pageText}`);
+
+      if (!summary.title || !searchText) continue;
+
+      items.push({
+        href,
+        title: summary.title,
+        description: summary.description,
+        searchText
+      });
+    } catch (error) {
+      // Skip pages that cannot be read; search should stay usable.
+    }
+  }
+
+  try {
+    sessionStorage.setItem(MOBILE_SITE_SEARCH_CACHE_KEY, JSON.stringify({ createdAt: Date.now(), items }));
+  } catch (error) {
+    // Cache is optional.
+  }
+
+  return items;
+}
+
+function setupMobileHeaderSearchButton() {
+  if (document.querySelector(".mobile-header-search")) return;
+
+  const headerInner = document.querySelector(".site-header .header-inner");
+  const homePrefix = window.location.pathname.includes("/kien-thuc/") ? "../" : "";
+  const searchButton = document.createElement("button");
+  const searchPanel = document.createElement("div");
+  let searchIndexPromise = null;
+
+  searchButton.className = "mobile-header-search";
+  searchButton.type = "button";
+  searchButton.setAttribute("aria-label", "Tìm kiếm website");
+  searchButton.setAttribute("aria-expanded", "false");
+  searchButton.setAttribute("aria-controls", "mobileSiteSearch");
+  searchButton.innerHTML = `
+    <svg viewBox="0 0 24 24" aria-hidden="true">
+      <circle cx="11" cy="11" r="7"></circle>
+      <path d="m20 20-4.35-4.35"></path>
+    </svg>
+  `;
+
+  searchPanel.className = "mobile-site-search";
+  searchPanel.id = "mobileSiteSearch";
+  searchPanel.hidden = true;
+  searchPanel.innerHTML = `
+    <form class="mobile-site-search-form" role="search">
+      <input type="search" autocomplete="off" placeholder="Tìm nội dung trên website" aria-label="Tìm nội dung trên website" />
+      <button type="button" aria-label="Đóng tìm kiếm">Đóng</button>
+    </form>
+    <div class="mobile-site-search-results" aria-live="polite"></div>
+  `;
+
+  const input = searchPanel.querySelector("input");
+  const closeButton = searchPanel.querySelector("button");
+  const results = searchPanel.querySelector(".mobile-site-search-results");
+
+  const closeSearch = () => {
+    searchPanel.hidden = true;
+    searchButton.setAttribute("aria-expanded", "false");
+    input.value = "";
+    results.innerHTML = "";
+  };
+
+  const openSearch = () => {
+    searchPanel.hidden = false;
+    searchButton.setAttribute("aria-expanded", "true");
+    if (!searchIndexPromise) {
+      searchIndexPromise = loadMobileSiteSearchIndex(homePrefix).catch(() => []);
+    }
+    window.setTimeout(() => input.focus({ preventScroll: true }), 80);
+  };
+
+  const renderSiteSuggestions = async () => {
+    const keyword = cleanText(input.value, 120);
+    const normalized = normalizeSearchText(keyword);
+
+    if (normalized.length < 2) {
+      results.innerHTML = "";
+      return;
+    }
+
+    const terms = normalized.split(/\s+/).filter(Boolean);
+    const index = await (searchIndexPromise || loadMobileSiteSearchIndex(homePrefix).catch(() => []));
+    const matches = index
+      .map((item) => {
+        let score = item.searchText.includes(normalized) ? 60 : 0;
+        terms.forEach((term) => {
+          if (item.searchText.includes(term)) score += 12;
+        });
+        return { ...item, score };
+      })
+      .filter((item) => item.score > 0)
+      .sort((a, b) => b.score - a.score || a.title.localeCompare(b.title, "vi"))
+      .slice(0, 8);
+
+    results.innerHTML = matches
+      .map((item) => `
+        <a href="${escapeHtml(item.href)}">
+          <strong>${escapeHtml(item.title)}</strong>
+          ${item.description ? `<span>${escapeHtml(item.description)}</span>` : ""}
+        </a>
+      `)
+      .join("");
+  };
+
+  searchButton.addEventListener("click", () => {
+    if (searchPanel.hidden) {
+      openSearch();
+    } else {
+      closeSearch();
+    }
+  });
+
+  input.addEventListener("input", () => {
+    renderSiteSuggestions().catch(() => {
+      results.innerHTML = "";
+    });
+  });
+
+  searchPanel.querySelector("form").addEventListener("submit", (event) => {
+    event.preventDefault();
+    const firstResult = results.querySelector("a");
+    if (firstResult) {
+      window.location.href = firstResult.href;
+    }
+  });
+
+  closeButton.addEventListener("click", closeSearch);
+  document.addEventListener("keydown", (event) => {
+    if (event.key === "Escape" && !searchPanel.hidden) closeSearch();
+  });
+
+  (headerInner || document.body).appendChild(searchButton);
+  document.body.appendChild(searchPanel);
+}
+
 async function submitBooking(form) {
   const validation = validateBooking(form);
 
@@ -1484,6 +1750,8 @@ if (popupForm) {
 setupHomeSlider();
 setupPricingCarousels();
 setupCountdown();
+setupMobileBottomNav();
+setupMobileHeaderSearchButton();
 setupKnowledgeSearchBox();
 ArticleSmartCTA();
 flushPendingBookingClick();
