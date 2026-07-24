@@ -177,12 +177,19 @@
 
               <h2>Câu Hỏi Thường Gặp</h2>
               <div class="faq-list">
-                <div><h3>Môi thâm bẩm sinh có phun được không?</h3><p>Có. Tuy nhiên, kỹ thuật viên cần đánh giá tình trạng thực tế để tư vấn quy trình phù hợp.</p></div>
-                <div><h3>Có cần khử thâm trước khi phun không?</h3><p>Không phải trường hợp nào cũng cần. Điều này phụ thuộc vào mức độ thâm của môi.</p></div>
-                <div><h3>Bao lâu thì màu ổn định?</h3><p>Thời gian ổn định màu khác nhau ở mỗi người và chịu ảnh hưởng bởi cơ địa cũng như cách chăm sóc.</p></div>
-              </div>
-
-              <h2>Kết Luận</h2>
+                <div class="faq-item">
+                  <button class="faq-question" type="button">Môi thâm bẩm sinh có phun được không?</button>
+                  <div class="faq-answer"><p>Có. Tuy nhiên, kỹ thuật viên cần đánh giá tình trạng thực tế để tư vấn quy trình phù hợp.</p></div>
+                </div>
+                <div class="faq-item">
+                  <button class="faq-question" type="button">Có cần khử thâm trước khi phun không?</button>
+                  <div class="faq-answer"><p>Không phải trường hợp nào cũng cần. Điều này phụ thuộc vào mức độ thâm của môi.</p></div>
+                </div>
+                <div class="faq-item">
+                  <button class="faq-question" type="button">Bao lâu thì màu ổn định?</button>
+                  <div class="faq-answer"><p>Thời gian ổn định màu khác nhau ở mỗi người và chịu ảnh hưởng bởi cơ địa cũng như cách chăm sóc.</p></div>
+                </div>
+              </div><h2>Kết Luận</h2>
               <p>Môi thâm hoàn toàn có thể cải thiện bằng phương pháp phun môi nếu được đánh giá đúng tình trạng và lựa chọn kỹ thuật phù hợp. Thay vì tự chọn màu theo xu hướng, bạn nên để kỹ thuật viên tư vấn dựa trên nền môi thực tế để đạt kết quả hài hòa và tự nhiên hơn.</p>
               <div class="tip-box">Nếu bạn chưa biết môi của mình thuộc mức độ thâm nào hoặc có cần xử lý nền trước khi phun hay không, hãy gửi ảnh môi mộc, chụp dưới ánh sáng tự nhiên cho ELLY PMU. Đội ngũ kỹ thuật viên sẽ đánh giá miễn phí và tư vấn phương án phù hợp với tình trạng môi của bạn.</div>
               <div class="hero-actions">
@@ -239,57 +246,53 @@
       <a class="float-btn messenger" href="https://m.me/61555486805617" target="_blank" rel="noopener noreferrer" aria-label="Chat Messenger"><span>Chat</span></a>
     </div>
 
-    <script src="../script.js"></script>
-    <div class="booking-popover" id="bookingPopover" aria-hidden="true">
-      <div class="booking-popover-backdrop" data-booking-close></div>
-      <section class="booking-popover-panel" role="dialog" aria-modal="true" aria-labelledby="bookingPopoverTitle">
-        <button class="booking-popover-close" type="button" aria-label="Đóng form đặt lịch" data-booking-close>×</button>
-        <div class="booking-popover-grid">
-          <div class="booking-popover-copy">
-            <p class="eyebrow">Đặt lịch tư vấn ELLY</p>
-            <h2 id="bookingPopoverTitle">Giữ lịch tư vấn phun xăm tại nhà</h2>
-            <p>ELLY SPA xác nhận dịch vụ, địa chỉ và khung giờ trước khi đến.</p>
-          </div>
-          <form class="booking-form" id="bookingForm" data-booking-form data-send-sheet="true">
-            <label><span>Họ và tên</span><input type="text" name="name" autocomplete="name" required /></label>
-            <label><span>Số điện thoại</span><input type="tel" name="phone" inputmode="tel" autocomplete="tel" required /></label>
-            <label><span>Dịch vụ quan tâm</span><select name="service" required><option value="">Chọn dịch vụ</option><option>Phun môi</option><option>Khử thâm môi</option><option>Phun mày</option><option>Phun mí</option></select></label>
-            <label><span>Tỉnh/Thành</span><select name="city" required><option value="">Chọn khu vực</option><option>TP.HCM</option><option>Bình Dương</option><option>Khu vực khác</option></select></label>
-            <label class="full"><span>Ghi chú</span><textarea name="note" rows="3" placeholder="Tình trạng môi hiện tại hoặc khung giờ thuận tiện"></textarea></label>
-            <button class="btn btn-primary full" type="submit">Gửi thông tin tư vấn</button>
-            <p class="form-status" data-form-status></p>
-          </form>
-        </div>
-      </section>
-    </div>
+    
 
-    <script type="application/ld+json">
-{
-  "@context": "https://schema.org",
-  "@graph": [
-    {
-      "@type": "Article",
-      "@id": "https://ellyphunxamtainha.com/kien-thuc/moi-tham-co-nen-phun-moi-khong.html#article",
-      "headline": "Môi Thâm Có Nên Phun Môi Không? Cách Xử Lý Hiệu Quả Cho Từng Mức Độ Thâm",
-      "description": "Môi thâm có phun môi được không? Tìm hiểu nguyên nhân môi thâm, phương pháp xử lý phù hợp và cách lựa chọn màu môi giúp lên màu đẹp tự nhiên.",
-      "image": "https://ellyphunxamtainha.com/assets/moi-tham-co-nen-phun-moi-khong-1.jpg",
-      "dateModified": "2026-07-07",
-      "author": {"@type": "Organization", "name": "ELLY PMU"},
-      "publisher": {"@type": "Organization", "name": "ELLY", "logo": {"@type": "ImageObject", "url": "https://ellyphunxamtainha.com/assets/elly-logo.png"}},
-      "mainEntityOfPage": "https://ellyphunxamtainha.com/kien-thuc/moi-tham-co-nen-phun-moi-khong.html"
-    },
-    {
-      "@type": "FAQPage",
-      "mainEntity": [
-        {"@type": "Question", "name": "Môi thâm bẩm sinh có phun được không?", "acceptedAnswer": {"@type": "Answer", "text": "Có. Tuy nhiên, kỹ thuật viên cần đánh giá tình trạng thực tế để tư vấn quy trình phù hợp."}},
-        {"@type": "Question", "name": "Có cần khử thâm trước khi phun không?", "acceptedAnswer": {"@type": "Answer", "text": "Không phải trường hợp nào cũng cần. Điều này phụ thuộc vào mức độ thâm của môi."}},
-        {"@type": "Question", "name": "Bao lâu thì màu ổn định?", "acceptedAnswer": {"@type": "Answer", "text": "Thời gian ổn định màu khác nhau ở mỗi người và chịu ảnh hưởng bởi cơ địa cũng như cách chăm sóc."}}
-      ]
-    }
-  ]
-}
+
+
+
+
+  
+
+  
+
+  
+
+  <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@type": "Article",
+        "headline": "Môi Bị Đen Có Phun Được Không? Cách Xử Lý Để Lên Màu Đẹp",
+        "description": "Môi bị đen, thâm bẩm sinh có phun được không? Tìm hiểu nguyên nhân môi đen, khi nào cần khử thâm trước và cách chọn màu môi giúp lên màu tự nhiên.",
+        "image": "https://ellyphunxamtainha.com/assets/moi-bi-den-co-phun-duoc-khong-1.png",
+        "author": {"@type": "Organization", "name": "ELLY PMU"},
+        "publisher": {"@type": "Organization", "name": "ELLY PMU", "logo": {"@type": "ImageObject", "url": "https://ellyphunxamtainha.com/assets/elly-logo.png"}},
+        "mainEntityOfPage": "https://ellyphunxamtainha.com/kien-thuc/moi-bi-den-co-phun-duoc-khong.html",
+        "dateModified": "2026-07-23"
+      }
     </script>
+    <script src="../script.js" defer></script>
+  
+    <script>
+      // Chỉ chỉnh riêng đoạn FAQ - bấm vào mới hiện
+      document.querySelectorAll('.faq-question').forEach(function(btn){
+        btn.addEventListener('click', function(){
+          var item = btn.closest('.faq-item');
+          var open = item.classList.contains('is-open');
+          document.querySelectorAll('.faq-item.is-open').forEach(function(o){ if(o!==item) o.classList.remove('is-open'); });
+          item.classList.toggle('is-open', !open);
+        });
+      });
+    </script>
+
   </body>
 </html>
+
+
+
+
+
+
+
 
 

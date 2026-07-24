@@ -163,13 +163,23 @@
 
               <h2>Câu Hỏi Thường Gặp</h2>
               <div class="faq-list">
-                <div><h3>Mặt tròn có nên làm mày ngang?</h3><p>Không nên làm quá ngang. Mày cong nhẹ thường giúp gương mặt cân đối và thon hơn.</p></div>
-                <div><h3>Mặt vuông nên làm mày gì?</h3><p>Mặt vuông thường hợp dáng mày cong mềm, giúp các đường nét trông hài hòa hơn.</p></div>
-                <div><h3>Có thể thay đổi dáng mày theo ý thích không?</h3><p>Có, nhưng nên điều chỉnh dựa trên tỷ lệ khuôn mặt để đảm bảo tính thẩm mỹ và độ tự nhiên.</p></div>
-                <div><h3>Kỹ thuật viên có vẽ thử trước không?</h3><p>Tại ELLY PMU, khách hàng sẽ được đo và vẽ thử dáng mày trước khi thực hiện. Chỉ khi khách hài lòng mới tiến hành phun mày.</p></div>
-              </div>
-
-              <h2>Kết Luận</h2>
+                <div class="faq-item">
+                  <button class="faq-question" type="button">Mặt tròn có nên làm mày ngang?</button>
+                  <div class="faq-answer"><p>Không nên làm quá ngang. Mày cong nhẹ thường giúp gương mặt cân đối và thon hơn.</p></div>
+                </div>
+                <div class="faq-item">
+                  <button class="faq-question" type="button">Mặt vuông nên làm mày gì?</button>
+                  <div class="faq-answer"><p>Mặt vuông thường hợp dáng mày cong mềm, giúp các đường nét trông hài hòa hơn.</p></div>
+                </div>
+                <div class="faq-item">
+                  <button class="faq-question" type="button">Có thể thay đổi dáng mày theo ý thích không?</button>
+                  <div class="faq-answer"><p>Có, nhưng nên điều chỉnh dựa trên tỷ lệ khuôn mặt để đảm bảo tính thẩm mỹ và độ tự nhiên.</p></div>
+                </div>
+                <div class="faq-item">
+                  <button class="faq-question" type="button">Kỹ thuật viên có vẽ thử trước không?</button>
+                  <div class="faq-answer"><p>Tại ELLY PMU, khách hàng sẽ được đo và vẽ thử dáng mày trước khi thực hiện. Chỉ khi khách hài lòng mới tiến hành phun mày.</p></div>
+                </div>
+              </div><h2>Kết Luận</h2>
               <p>Một đôi chân mày đẹp không phụ thuộc vào xu hướng mà phụ thuộc vào sự phù hợp với từng khuôn mặt. Chọn đúng dáng mày không chỉ giúp gương mặt cân đối hơn mà còn tạo cảm giác trẻ trung và tự nhiên trong nhiều năm.</p>
               <div class="tip-box">Nếu bạn chưa biết mình hợp với dáng mày nào, hãy gửi ảnh khuôn mặt chính diện và ảnh chân mày mộc cho ELLY PMU. Đội ngũ kỹ thuật viên sẽ tư vấn miễn phí, phác thảo dáng mày phù hợp trước khi thực hiện.</div>
               <div class="hero-actions">
@@ -226,69 +236,53 @@
       <a class="float-btn messenger" href="https://m.me/61555486805617" target="_blank" rel="noopener noreferrer" aria-label="Chat Messenger"><span>Chat</span></a>
     </div>
 
-    <script src="../script.js"></script>
-    <div class="booking-popover" id="bookingPopover" aria-hidden="true">
-      <div class="booking-popover-backdrop" data-booking-close></div>
-      <section class="booking-popover-panel" role="dialog" aria-modal="true" aria-labelledby="bookingPopoverTitle">
-        <button class="booking-popover-close" type="button" aria-label="Đóng form đặt lịch" data-booking-close>×</button>
-        <div class="booking-popover-grid">
-          <div class="booking-popover-copy">
-            <p class="eyebrow">Đặt lịch tư vấn ELLY</p>
-            <h2 id="bookingPopoverTitle">Giữ lịch tư vấn phun xăm tại nhà</h2>
-            <p>ELLY SPA xác nhận dịch vụ, địa chỉ và khung giờ trước khi đến.</p>
-          </div>
-          <form class="booking-form" id="bookingForm" data-booking-form data-send-sheet="true">
-            <label><span>Họ và tên</span><input type="text" name="name" autocomplete="name" required /></label>
-            <label><span>Số điện thoại</span><input type="tel" name="phone" inputmode="tel" autocomplete="tel" required /></label>
-            <label><span>Dịch vụ quan tâm</span><select name="service" required><option value="">Chọn dịch vụ</option><option>Phun môi</option><option>Khử thâm môi</option><option>Phun mày</option><option>Phun mí</option></select></label>
-            <label><span>Tỉnh/Thành</span><select name="city" required><option value="">Chọn khu vực</option><option>TP.HCM</option><option>Bình Dương</option><option>Khu vực khác</option></select></label>
-            <label class="full"><span>Ghi chú</span><textarea name="note" rows="3" placeholder="Tình trạng môi hiện tại hoặc khung giờ thuận tiện"></textarea></label>
-            <button class="btn btn-primary full" type="submit">Gửi thông tin tư vấn</button>
-            <p class="form-status" data-form-status></p>
-          </form>
-        </div>
-      </section>
-    </div>
+    
 
-    <script type="application/ld+json">
-{
-  "@context": "https://schema.org",
-  "@graph": [
-    {
-      "@type": "Article",
-      "@id": "https://ellyphunxamtainha.com/kien-thuc/cach-chon-dang-may-theo-khuon-mat.html#article",
-      "headline": "Cách Chọn Dáng Mày Theo Khuôn Mặt",
-      "description": "Hướng dẫn chọn dáng mày phù hợp với từng khuôn mặt như mặt tròn, mặt vuông, mặt dài, mặt trái xoan. Tư vấn từ chuyên gia ELLY PMU.",
-      "image": "https://ellyphunxamtainha.com/assets/cach-chon-dang-may-theo-khuon-mat-1.png",
-      "author": {"@type": "Organization", "name": "ELLY"},
-      "publisher": {"@type": "Organization", "name": "ELLY"},
-      "mainEntityOfPage": {"@type": "WebPage", "@id": "https://ellyphunxamtainha.com/kien-thuc/cach-chon-dang-may-theo-khuon-mat.html"},
-      "datePublished": "2026-07-07",
-      "dateModified": "2026-07-07"
-    },
-    {
-      "@type": "BreadcrumbList",
-      "@id": "https://ellyphunxamtainha.com/kien-thuc/cach-chon-dang-may-theo-khuon-mat.html#breadcrumb",
-      "itemListElement": [
-        {"@type": "ListItem", "position": 1, "name": "Trang chủ", "item": "https://ellyphunxamtainha.com/"},
-        {"@type": "ListItem", "position": 2, "name": "Kiến thức", "item": "https://ellyphunxamtainha.com/kien-thuc.html"},
-        {"@type": "ListItem", "position": 3, "name": "Cách Chọn Dáng Mày Theo Khuôn Mặt", "item": "https://ellyphunxamtainha.com/kien-thuc/cach-chon-dang-may-theo-khuon-mat.html"}
-      ]
-    },
-    {
-      "@type": "FAQPage",
-      "@id": "https://ellyphunxamtainha.com/kien-thuc/cach-chon-dang-may-theo-khuon-mat.html#faq",
-      "mainEntity": [
-        {"@type": "Question", "name": "Mặt tròn có nên làm mày ngang?", "acceptedAnswer": {"@type": "Answer", "text": "Không nên làm quá ngang. Mày cong nhẹ thường giúp gương mặt cân đối và thon hơn."}},
-        {"@type": "Question", "name": "Mặt vuông nên làm mày gì?", "acceptedAnswer": {"@type": "Answer", "text": "Mặt vuông thường hợp dáng mày cong mềm, giúp các đường nét trông hài hòa hơn."}},
-        {"@type": "Question", "name": "Có thể thay đổi dáng mày theo ý thích không?", "acceptedAnswer": {"@type": "Answer", "text": "Có, nhưng nên điều chỉnh dựa trên tỷ lệ khuôn mặt để đảm bảo tính thẩm mỹ và độ tự nhiên."}},
-        {"@type": "Question", "name": "Kỹ thuật viên có vẽ thử trước không?", "acceptedAnswer": {"@type": "Answer", "text": "Tại ELLY PMU, khách hàng sẽ được đo và vẽ thử dáng mày trước khi thực hiện. Chỉ khi khách hài lòng mới tiến hành phun mày."}}
-      ]
-    }
-  ]
-}
+
+
+
+
+  
+
+  
+
+  
+
+  <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@type": "Article",
+        "headline": "Môi Bị Đen Có Phun Được Không? Cách Xử Lý Để Lên Màu Đẹp",
+        "description": "Môi bị đen, thâm bẩm sinh có phun được không? Tìm hiểu nguyên nhân môi đen, khi nào cần khử thâm trước và cách chọn màu môi giúp lên màu tự nhiên.",
+        "image": "https://ellyphunxamtainha.com/assets/moi-bi-den-co-phun-duoc-khong-1.png",
+        "author": {"@type": "Organization", "name": "ELLY PMU"},
+        "publisher": {"@type": "Organization", "name": "ELLY PMU", "logo": {"@type": "ImageObject", "url": "https://ellyphunxamtainha.com/assets/elly-logo.png"}},
+        "mainEntityOfPage": "https://ellyphunxamtainha.com/kien-thuc/moi-bi-den-co-phun-duoc-khong.html",
+        "dateModified": "2026-07-23"
+      }
     </script>
+    <script src="../script.js" defer></script>
+  
+    <script>
+      // Chỉ chỉnh riêng đoạn FAQ - bấm vào mới hiện
+      document.querySelectorAll('.faq-question').forEach(function(btn){
+        btn.addEventListener('click', function(){
+          var item = btn.closest('.faq-item');
+          var open = item.classList.contains('is-open');
+          document.querySelectorAll('.faq-item.is-open').forEach(function(o){ if(o!==item) o.classList.remove('is-open'); });
+          item.classList.toggle('is-open', !open);
+        });
+      });
+    </script>
+
   </body>
 </html>
+
+
+
+
+
+
+
 
 

@@ -168,13 +168,23 @@
 
               <h2>Câu Hỏi Thường Gặp</h2>
               <div class="faq-list">
-                <div><h3>Sau phun môi bao lâu được ăn bình thường?</h3><p>Điều này phụ thuộc vào tốc độ hồi phục của từng người và hướng dẫn của cơ sở thực hiện.</p></div>
-                <div><h3>Có cần kiêng tuyệt đối tất cả các món trên không?</h3><p>Không phải ai cũng cần kiêng giống nhau. Hãy làm theo hướng dẫn của kỹ thuật viên và cân nhắc cơ địa của bản thân.</p></div>
-                <div><h3>Có nên uống nước cam?</h3><p>Nước cam có vitamin C, nhưng nếu môi còn nhạy cảm, nên uống bằng ống hút để hạn chế tiếp xúc trực tiếp.</p></div>
-                <div><h3>Sau phun môi có được ăn rau xanh không?</h3><p>Có. Rau xanh là nhóm thực phẩm nên bổ sung vì giúp cơ thể có thêm vitamin và chất xơ.</p></div>
-              </div>
-
-              <h2>Kết Luận</h2>
+                <div class="faq-item">
+                  <button class="faq-question" type="button">Sau phun môi bao lâu được ăn bình thường?</button>
+                  <div class="faq-answer"><p>Điều này phụ thuộc vào tốc độ hồi phục của từng người và hướng dẫn của cơ sở thực hiện.</p></div>
+                </div>
+                <div class="faq-item">
+                  <button class="faq-question" type="button">Có cần kiêng tuyệt đối tất cả các món trên không?</button>
+                  <div class="faq-answer"><p>Không phải ai cũng cần kiêng giống nhau. Hãy làm theo hướng dẫn của kỹ thuật viên và cân nhắc cơ địa của bản thân.</p></div>
+                </div>
+                <div class="faq-item">
+                  <button class="faq-question" type="button">Có nên uống nước cam?</button>
+                  <div class="faq-answer"><p>Nước cam có vitamin C, nhưng nếu môi còn nhạy cảm, nên uống bằng ống hút để hạn chế tiếp xúc trực tiếp.</p></div>
+                </div>
+                <div class="faq-item">
+                  <button class="faq-question" type="button">Sau phun môi có được ăn rau xanh không?</button>
+                  <div class="faq-answer"><p>Có. Rau xanh là nhóm thực phẩm nên bổ sung vì giúp cơ thể có thêm vitamin và chất xơ.</p></div>
+                </div>
+              </div><h2>Kết Luận</h2>
               <p>Chăm sóc đúng cách sau khi phun môi đóng vai trò quan trọng trong quá trình hồi phục và lên màu. Bên cạnh việc lựa chọn thực phẩm phù hợp, bạn cũng nên giữ môi sạch, không tự bóc lớp bong và tuân thủ hướng dẫn của kỹ thuật viên.</p>
               <div class="tip-box">Nếu bạn vừa phun môi và chưa biết chế độ chăm sóc nào phù hợp với tình trạng hiện tại, hãy liên hệ ELLY PMU để được tư vấn miễn phí. Đội ngũ kỹ thuật viên sẽ hướng dẫn chi tiết giúp bạn có đôi môi lên màu đẹp và tự nhiên.</div>
               <div class="hero-actions">
@@ -231,69 +241,53 @@
       <a class="float-btn messenger" href="https://m.me/61555486805617" target="_blank" rel="noopener noreferrer" aria-label="Chat Messenger"><span>Chat</span></a>
     </div>
 
-    <script src="../script.js"></script>
-    <div class="booking-popover" id="bookingPopover" aria-hidden="true">
-      <div class="booking-popover-backdrop" data-booking-close></div>
-      <section class="booking-popover-panel" role="dialog" aria-modal="true" aria-labelledby="bookingPopoverTitle">
-        <button class="booking-popover-close" type="button" aria-label="Đóng form đặt lịch" data-booking-close>×</button>
-        <div class="booking-popover-grid">
-          <div class="booking-popover-copy">
-            <p class="eyebrow">Đặt lịch tư vấn ELLY</p>
-            <h2 id="bookingPopoverTitle">Giữ lịch tư vấn phun xăm tại nhà</h2>
-            <p>ELLY SPA xác nhận dịch vụ, địa chỉ và khung giờ trước khi đến.</p>
-          </div>
-          <form class="booking-form" id="bookingForm" data-booking-form data-send-sheet="true">
-            <label><span>Họ và tên</span><input type="text" name="name" autocomplete="name" required /></label>
-            <label><span>Số điện thoại</span><input type="tel" name="phone" inputmode="tel" autocomplete="tel" required /></label>
-            <label><span>Dịch vụ quan tâm</span><select name="service" required><option value="">Chọn dịch vụ</option><option>Phun môi</option><option>Khử thâm môi</option><option>Phun mày</option><option>Phun mí</option></select></label>
-            <label><span>Tỉnh/Thành</span><select name="city" required><option value="">Chọn khu vực</option><option>TP.HCM</option><option>Bình Dương</option><option>Khu vực khác</option></select></label>
-            <label class="full"><span>Ghi chú</span><textarea name="note" rows="3" placeholder="Tình trạng môi hiện tại hoặc khung giờ thuận tiện"></textarea></label>
-            <button class="btn btn-primary full" type="submit">Gửi thông tin tư vấn</button>
-            <p class="form-status" data-form-status></p>
-          </form>
-        </div>
-      </section>
-    </div>
+    
 
-    <script type="application/ld+json">
-{
-  "@context": "https://schema.org",
-  "@graph": [
-    {
-      "@type": "Article",
-      "@id": "https://ellyphunxamtainha.com/kien-thuc/sau-phun-moi-kieng-an-gi.html#article",
-      "headline": "Sau Phun Môi Kiêng Ăn Gì? Hướng Dẫn Chăm Sóc Để Môi Lên Màu Đẹp",
-      "description": "Sau khi phun môi nên kiêng ăn gì và ăn gì để môi lên màu đẹp? Cùng ELLY PMU tìm hiểu chế độ ăn uống giúp môi nhanh hồi phục và lên màu tự nhiên.",
-      "image": "https://ellyphunxamtainha.com/assets/sau-phun-moi-kieng-an-gi-1.png",
-      "author": {"@type": "Organization", "name": "ELLY"},
-      "publisher": {"@type": "Organization", "name": "ELLY"},
-      "mainEntityOfPage": {"@type": "WebPage", "@id": "https://ellyphunxamtainha.com/kien-thuc/sau-phun-moi-kieng-an-gi.html"},
-      "datePublished": "2026-07-07",
-      "dateModified": "2026-07-07"
-    },
-    {
-      "@type": "BreadcrumbList",
-      "@id": "https://ellyphunxamtainha.com/kien-thuc/sau-phun-moi-kieng-an-gi.html#breadcrumb",
-      "itemListElement": [
-        {"@type": "ListItem", "position": 1, "name": "Trang chủ", "item": "https://ellyphunxamtainha.com/"},
-        {"@type": "ListItem", "position": 2, "name": "Kiến thức", "item": "https://ellyphunxamtainha.com/kien-thuc.html"},
-        {"@type": "ListItem", "position": 3, "name": "Sau Phun Môi Kiêng Ăn Gì?", "item": "https://ellyphunxamtainha.com/kien-thuc/sau-phun-moi-kieng-an-gi.html"}
-      ]
-    },
-    {
-      "@type": "FAQPage",
-      "@id": "https://ellyphunxamtainha.com/kien-thuc/sau-phun-moi-kieng-an-gi.html#faq",
-      "mainEntity": [
-        {"@type": "Question", "name": "Sau phun môi bao lâu được ăn bình thường?", "acceptedAnswer": {"@type": "Answer", "text": "Điều này phụ thuộc vào tốc độ hồi phục của từng người và hướng dẫn của cơ sở thực hiện."}},
-        {"@type": "Question", "name": "Có cần kiêng tuyệt đối tất cả các món trên không?", "acceptedAnswer": {"@type": "Answer", "text": "Không phải ai cũng cần kiêng giống nhau. Hãy làm theo hướng dẫn của kỹ thuật viên và cân nhắc cơ địa của bản thân."}},
-        {"@type": "Question", "name": "Có nên uống nước cam?", "acceptedAnswer": {"@type": "Answer", "text": "Nước cam có vitamin C, nhưng nếu môi còn nhạy cảm, nên uống bằng ống hút để hạn chế tiếp xúc trực tiếp."}},
-        {"@type": "Question", "name": "Sau phun môi có được ăn rau xanh không?", "acceptedAnswer": {"@type": "Answer", "text": "Có. Rau xanh là nhóm thực phẩm nên bổ sung vì giúp cơ thể có thêm vitamin và chất xơ."}}
-      ]
-    }
-  ]
-}
+
+
+
+
+  
+
+  
+
+  
+
+  <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@type": "Article",
+        "headline": "Môi Bị Đen Có Phun Được Không? Cách Xử Lý Để Lên Màu Đẹp",
+        "description": "Môi bị đen, thâm bẩm sinh có phun được không? Tìm hiểu nguyên nhân môi đen, khi nào cần khử thâm trước và cách chọn màu môi giúp lên màu tự nhiên.",
+        "image": "https://ellyphunxamtainha.com/assets/moi-bi-den-co-phun-duoc-khong-1.png",
+        "author": {"@type": "Organization", "name": "ELLY PMU"},
+        "publisher": {"@type": "Organization", "name": "ELLY PMU", "logo": {"@type": "ImageObject", "url": "https://ellyphunxamtainha.com/assets/elly-logo.png"}},
+        "mainEntityOfPage": "https://ellyphunxamtainha.com/kien-thuc/moi-bi-den-co-phun-duoc-khong.html",
+        "dateModified": "2026-07-23"
+      }
     </script>
+    <script src="../script.js" defer></script>
+  
+    <script>
+      // Chỉ chỉnh riêng đoạn FAQ - bấm vào mới hiện
+      document.querySelectorAll('.faq-question').forEach(function(btn){
+        btn.addEventListener('click', function(){
+          var item = btn.closest('.faq-item');
+          var open = item.classList.contains('is-open');
+          document.querySelectorAll('.faq-item.is-open').forEach(function(o){ if(o!==item) o.classList.remove('is-open'); });
+          item.classList.toggle('is-open', !open);
+        });
+      });
+    </script>
+
   </body>
 </html>
+
+
+
+
+
+
+
 
 

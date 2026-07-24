@@ -160,13 +160,23 @@
 
               <h2>Câu Hỏi Thường Gặp</h2>
               <div class="faq-list">
-                <div><h3>Phun môi có cần gây mê không?</h3><p>Thông thường chỉ cần ủ tê tại chỗ, không cần gây mê.</p></div>
-                <div><h3>Sau bao lâu môi hết khó chịu?</h3><p>Đa số khách hàng cảm thấy dễ chịu hơn sau vài ngày đầu, tùy cơ địa và cách chăm sóc.</p></div>
-                <div><h3>Phun môi lần đầu có đau hơn dặm lại không?</h3><p>Cảm giác có thể khác nhau ở từng người, nhưng nhìn chung đều ở mức có thể chịu được nếu thực hiện đúng kỹ thuật.</p></div>
-                <div><h3>Người sợ đau có nên phun môi không?</h3><p>Có thể cân nhắc nếu môi khỏe và được tư vấn kỹ. Bạn nên nói trước với kỹ thuật viên để quy trình nhẹ nhàng hơn.</p></div>
-              </div>
-
-              <h2>Kết Luận</h2>
+                <div class="faq-item">
+                  <button class="faq-question" type="button">Phun môi có cần gây mê không?</button>
+                  <div class="faq-answer"><p>Thông thường chỉ cần ủ tê tại chỗ, không cần gây mê.</p></div>
+                </div>
+                <div class="faq-item">
+                  <button class="faq-question" type="button">Sau bao lâu môi hết khó chịu?</button>
+                  <div class="faq-answer"><p>Đa số khách hàng cảm thấy dễ chịu hơn sau vài ngày đầu, tùy cơ địa và cách chăm sóc.</p></div>
+                </div>
+                <div class="faq-item">
+                  <button class="faq-question" type="button">Phun môi lần đầu có đau hơn dặm lại không?</button>
+                  <div class="faq-answer"><p>Cảm giác có thể khác nhau ở từng người, nhưng nhìn chung đều ở mức có thể chịu được nếu thực hiện đúng kỹ thuật.</p></div>
+                </div>
+                <div class="faq-item">
+                  <button class="faq-question" type="button">Người sợ đau có nên phun môi không?</button>
+                  <div class="faq-answer"><p>Có thể cân nhắc nếu môi khỏe và được tư vấn kỹ. Bạn nên nói trước với kỹ thuật viên để quy trình nhẹ nhàng hơn.</p></div>
+                </div>
+              </div><h2>Kết Luận</h2>
               <p>Phun môi không hoàn toàn không có cảm giác, nhưng với công nghệ hiện nay và quy trình đúng chuẩn, đa số khách hàng chỉ cảm thấy hơi châm chích nhẹ. Điều quan trọng là lựa chọn cơ sở uy tín và tuân thủ hướng dẫn chăm sóc để có đôi môi lên màu đẹp, tự nhiên.</p>
               <div class="tip-box">Nếu bạn vẫn còn băn khoăn về cảm giác khi phun môi hoặc chưa biết mình phù hợp với màu môi nào, hãy gửi ảnh môi mộc cho ELLY PMU. Đội ngũ kỹ thuật viên sẽ tư vấn miễn phí và giúp bạn lựa chọn phương pháp phù hợp.</div>
               <div class="hero-actions">
@@ -223,69 +233,53 @@
       <a class="float-btn messenger" href="https://m.me/61555486805617" target="_blank" rel="noopener noreferrer" aria-label="Chat Messenger"><span>Chat</span></a>
     </div>
 
-    <script src="../script.js"></script>
-    <div class="booking-popover" id="bookingPopover" aria-hidden="true">
-      <div class="booking-popover-backdrop" data-booking-close></div>
-      <section class="booking-popover-panel" role="dialog" aria-modal="true" aria-labelledby="bookingPopoverTitle">
-        <button class="booking-popover-close" type="button" aria-label="Đóng form đặt lịch" data-booking-close>×</button>
-        <div class="booking-popover-grid">
-          <div class="booking-popover-copy">
-            <p class="eyebrow">Đặt lịch tư vấn ELLY</p>
-            <h2 id="bookingPopoverTitle">Giữ lịch tư vấn phun xăm tại nhà</h2>
-            <p>ELLY SPA xác nhận dịch vụ, địa chỉ và khung giờ trước khi đến.</p>
-          </div>
-          <form class="booking-form" id="bookingForm" data-booking-form data-send-sheet="true">
-            <label><span>Họ và tên</span><input type="text" name="name" autocomplete="name" required /></label>
-            <label><span>Số điện thoại</span><input type="tel" name="phone" inputmode="tel" autocomplete="tel" required /></label>
-            <label><span>Dịch vụ quan tâm</span><select name="service" required><option value="">Chọn dịch vụ</option><option>Phun môi</option><option>Khử thâm môi</option><option>Phun mày</option><option>Phun mí</option></select></label>
-            <label><span>Tỉnh/Thành</span><select name="city" required><option value="">Chọn khu vực</option><option>TP.HCM</option><option>Bình Dương</option><option>Khu vực khác</option></select></label>
-            <label class="full"><span>Ghi chú</span><textarea name="note" rows="3" placeholder="Tình trạng môi hiện tại hoặc khung giờ thuận tiện"></textarea></label>
-            <button class="btn btn-primary full" type="submit">Gửi thông tin tư vấn</button>
-            <p class="form-status" data-form-status></p>
-          </form>
-        </div>
-      </section>
-    </div>
+    
 
-    <script type="application/ld+json">
-{
-  "@context": "https://schema.org",
-  "@graph": [
-    {
-      "@type": "Article",
-      "@id": "https://ellyphunxamtainha.com/kien-thuc/phun-moi-co-dau-khong.html#article",
-      "headline": "Phun Môi Có Đau Không? Những Điều Bạn Nên Biết Trước Khi Quyết Định",
-      "description": "Phun môi có đau không là thắc mắc của nhiều khách hàng trước khi làm đẹp. Tìm hiểu cảm giác khi phun môi, yếu tố ảnh hưởng và cách giảm khó chịu hiệu quả.",
-      "image": "https://ellyphunxamtainha.com/assets/phun-moi-co-dau-khong-1.png",
-      "author": {"@type": "Organization", "name": "ELLY"},
-      "publisher": {"@type": "Organization", "name": "ELLY"},
-      "mainEntityOfPage": {"@type": "WebPage", "@id": "https://ellyphunxamtainha.com/kien-thuc/phun-moi-co-dau-khong.html"},
-      "datePublished": "2026-06-29",
-      "dateModified": "2026-07-07"
-    },
-    {
-      "@type": "BreadcrumbList",
-      "@id": "https://ellyphunxamtainha.com/kien-thuc/phun-moi-co-dau-khong.html#breadcrumb",
-      "itemListElement": [
-        {"@type": "ListItem", "position": 1, "name": "Trang chủ", "item": "https://ellyphunxamtainha.com/"},
-        {"@type": "ListItem", "position": 2, "name": "Kiến thức", "item": "https://ellyphunxamtainha.com/kien-thuc.html"},
-        {"@type": "ListItem", "position": 3, "name": "Phun Môi Có Đau Không?", "item": "https://ellyphunxamtainha.com/kien-thuc/phun-moi-co-dau-khong.html"}
-      ]
-    },
-    {
-      "@type": "FAQPage",
-      "@id": "https://ellyphunxamtainha.com/kien-thuc/phun-moi-co-dau-khong.html#faq",
-      "mainEntity": [
-        {"@type": "Question", "name": "Phun môi có cần gây mê không?", "acceptedAnswer": {"@type": "Answer", "text": "Thông thường chỉ cần ủ tê tại chỗ, không cần gây mê."}},
-        {"@type": "Question", "name": "Sau bao lâu môi hết khó chịu?", "acceptedAnswer": {"@type": "Answer", "text": "Đa số khách hàng cảm thấy dễ chịu hơn sau vài ngày đầu, tùy cơ địa và cách chăm sóc."}},
-        {"@type": "Question", "name": "Phun môi lần đầu có đau hơn dặm lại không?", "acceptedAnswer": {"@type": "Answer", "text": "Cảm giác có thể khác nhau ở từng người, nhưng nhìn chung đều ở mức có thể chịu được nếu thực hiện đúng kỹ thuật."}},
-        {"@type": "Question", "name": "Người sợ đau có nên phun môi không?", "acceptedAnswer": {"@type": "Answer", "text": "Có thể cân nhắc nếu môi khỏe và được tư vấn kỹ. Bạn nên nói trước với kỹ thuật viên để quy trình nhẹ nhàng hơn."}}
-      ]
-    }
-  ]
-}
+
+
+
+
+  
+
+  
+
+  
+
+  <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@type": "Article",
+        "headline": "Môi Bị Đen Có Phun Được Không? Cách Xử Lý Để Lên Màu Đẹp",
+        "description": "Môi bị đen, thâm bẩm sinh có phun được không? Tìm hiểu nguyên nhân môi đen, khi nào cần khử thâm trước và cách chọn màu môi giúp lên màu tự nhiên.",
+        "image": "https://ellyphunxamtainha.com/assets/moi-bi-den-co-phun-duoc-khong-1.png",
+        "author": {"@type": "Organization", "name": "ELLY PMU"},
+        "publisher": {"@type": "Organization", "name": "ELLY PMU", "logo": {"@type": "ImageObject", "url": "https://ellyphunxamtainha.com/assets/elly-logo.png"}},
+        "mainEntityOfPage": "https://ellyphunxamtainha.com/kien-thuc/moi-bi-den-co-phun-duoc-khong.html",
+        "dateModified": "2026-07-23"
+      }
     </script>
+    <script src="../script.js" defer></script>
+  
+    <script>
+      // Chỉ chỉnh riêng đoạn FAQ - bấm vào mới hiện
+      document.querySelectorAll('.faq-question').forEach(function(btn){
+        btn.addEventListener('click', function(){
+          var item = btn.closest('.faq-item');
+          var open = item.classList.contains('is-open');
+          document.querySelectorAll('.faq-item.is-open').forEach(function(o){ if(o!==item) o.classList.remove('is-open'); });
+          item.classList.toggle('is-open', !open);
+        });
+      });
+    </script>
+
   </body>
 </html>
+
+
+
+
+
+
+
 
 

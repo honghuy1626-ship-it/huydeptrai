@@ -164,13 +164,19 @@
 
               <h2>Câu Hỏi Thường Gặp</h2>
               <div class="faq-list">
-                <div><h3>Điêu khắc có đau hơn phun mày không?</h3><p>Hai phương pháp đều được ủ tê trước khi thực hiện nên cảm giác khá nhẹ nhàng.</p></div>
-                <div><h3>Phương pháp nào giữ màu lâu hơn?</h3><p>Thông thường, phun mày có thời gian giữ màu lâu hơn điêu khắc.</p></div>
-                <div><h3>Có thể kết hợp cả hai không?</h3><p>Có. Một số kỹ thuật hiện nay kết hợp điêu khắc và phun để tạo hiệu ứng vừa có sợi vừa có độ chuyển màu tự nhiên.</p></div>
-                <div><h3>Phương pháp nào phù hợp với người mới?</h3><p>Điều này phụ thuộc vào nền chân mày và loại da. Bạn nên được tư vấn trực tiếp trước khi quyết định.</p></div>
-              </div>
-
-              <h2>Kết Luận</h2>
+                <div class="faq-item">
+                  <button class="faq-question" type="button">Phương pháp nào giữ màu lâu hơn?</button>
+                  <div class="faq-answer"><p>Thông thường, phun mày có thời gian giữ màu lâu hơn điêu khắc.</p></div>
+                </div>
+                <div class="faq-item">
+                  <button class="faq-question" type="button">Có thể kết hợp cả hai không?</button>
+                  <div class="faq-answer"><p>Có. Một số kỹ thuật hiện nay kết hợp điêu khắc và phun để tạo hiệu ứng vừa có sợi vừa có độ chuyển màu tự nhiên.</p></div>
+                </div>
+                <div class="faq-item">
+                  <button class="faq-question" type="button">Phương pháp nào phù hợp với người mới?</button>
+                  <div class="faq-answer"><p>Điều này phụ thuộc vào nền chân mày và loại da. Bạn nên được tư vấn trực tiếp trước khi quyết định.</p></div>
+                </div>
+              </div><h2>Kết Luận</h2>
               <p>Không có câu trả lời chung cho việc <strong>điêu khắc hay phun mày đẹp hơn</strong>. Điều quan trọng là lựa chọn phương pháp phù hợp với loại da, tình trạng chân mày và phong cách của chính bạn.</p>
               <div class="tip-box">Nếu vẫn còn phân vân, hãy gửi ảnh chân mày mộc cho ELLY PMU. Đội ngũ kỹ thuật viên sẽ phân tích miễn phí và tư vấn phương pháp phù hợp, giúp bạn sở hữu đôi chân mày hài hòa, tự nhiên và bền đẹp theo thời gian.</div>
               <div class="hero-actions">
@@ -227,69 +233,53 @@
       <a class="float-btn messenger" href="https://m.me/61555486805617" target="_blank" rel="noopener noreferrer" aria-label="Chat Messenger"><span>Chat</span></a>
     </div>
 
-    <script src="../script.js"></script>
-    <div class="booking-popover" id="bookingPopover" aria-hidden="true">
-      <div class="booking-popover-backdrop" data-booking-close></div>
-      <section class="booking-popover-panel" role="dialog" aria-modal="true" aria-labelledby="bookingPopoverTitle">
-        <button class="booking-popover-close" type="button" aria-label="Đóng form đặt lịch" data-booking-close>×</button>
-        <div class="booking-popover-grid">
-          <div class="booking-popover-copy">
-            <p class="eyebrow">Đặt lịch tư vấn ELLY</p>
-            <h2 id="bookingPopoverTitle">Giữ lịch tư vấn phun xăm tại nhà</h2>
-            <p>ELLY SPA xác nhận dịch vụ, địa chỉ và khung giờ trước khi đến.</p>
-          </div>
-          <form class="booking-form" id="bookingForm" data-booking-form data-send-sheet="true">
-            <label><span>Họ và tên</span><input type="text" name="name" autocomplete="name" required /></label>
-            <label><span>Số điện thoại</span><input type="tel" name="phone" inputmode="tel" autocomplete="tel" required /></label>
-            <label><span>Dịch vụ quan tâm</span><select name="service" required><option value="">Chọn dịch vụ</option><option>Phun môi</option><option>Khử thâm môi</option><option>Phun mày</option><option>Phun mí</option></select></label>
-            <label><span>Tỉnh/Thành</span><select name="city" required><option value="">Chọn khu vực</option><option>TP.HCM</option><option>Bình Dương</option><option>Khu vực khác</option></select></label>
-            <label class="full"><span>Ghi chú</span><textarea name="note" rows="3" placeholder="Tình trạng môi hiện tại hoặc khung giờ thuận tiện"></textarea></label>
-            <button class="btn btn-primary full" type="submit">Gửi thông tin tư vấn</button>
-            <p class="form-status" data-form-status></p>
-          </form>
-        </div>
-      </section>
-    </div>
+    
 
-    <script type="application/ld+json">
-{
-  "@context": "https://schema.org",
-  "@graph": [
-    {
-      "@type": "Article",
-      "@id": "https://ellyphunxamtainha.com/kien-thuc/dieu-khac-hay-phun-may-dep-hon.html#article",
-      "headline": "Điêu Khắc Hay Phun Mày Đẹp Hơn? So Sánh Chi Tiết Để Chọn Đúng Phương Pháp",
-      "description": "Nên điêu khắc hay phun mày? So sánh ưu nhược điểm, độ bền, chi phí và đối tượng phù hợp để lựa chọn phương pháp làm đẹp phù hợp nhất.",
-      "image": "https://ellyphunxamtainha.com/assets/dieu-khac-hay-phun-may-dep-hon.png",
-      "author": {"@type": "Organization", "name": "ELLY"},
-      "publisher": {"@type": "Organization", "name": "ELLY"},
-      "mainEntityOfPage": {"@type": "WebPage", "@id": "https://ellyphunxamtainha.com/kien-thuc/dieu-khac-hay-phun-may-dep-hon.html"},
-      "datePublished": "2026-07-04",
-      "dateModified": "2026-07-04"
-    },
-    {
-      "@type": "BreadcrumbList",
-      "@id": "https://ellyphunxamtainha.com/kien-thuc/dieu-khac-hay-phun-may-dep-hon.html#breadcrumb",
-      "itemListElement": [
-        {"@type": "ListItem", "position": 1, "name": "Trang chủ", "item": "https://ellyphunxamtainha.com/"},
-        {"@type": "ListItem", "position": 2, "name": "Kiến thức", "item": "https://ellyphunxamtainha.com/kien-thuc.html"},
-        {"@type": "ListItem", "position": 3, "name": "Điêu Khắc Hay Phun Mày Đẹp Hơn? So Sánh Chi Tiết Để Chọn Đúng Phương Pháp", "item": "https://ellyphunxamtainha.com/kien-thuc/dieu-khac-hay-phun-may-dep-hon.html"}
-      ]
-    },
-    {
-      "@type": "FAQPage",
-      "@id": "https://ellyphunxamtainha.com/kien-thuc/dieu-khac-hay-phun-may-dep-hon.html#faq",
-      "mainEntity": [
-        {"@type": "Question", "name": "Điêu khắc có đau hơn phun mày không?", "acceptedAnswer": {"@type": "Answer", "text": "Hai phương pháp đều được ủ tê trước khi thực hiện nên cảm giác khá nhẹ nhàng."}},
-        {"@type": "Question", "name": "Phương pháp nào giữ màu lâu hơn?", "acceptedAnswer": {"@type": "Answer", "text": "Thông thường, phun mày có thời gian giữ màu lâu hơn điêu khắc."}},
-        {"@type": "Question", "name": "Có thể kết hợp cả hai không?", "acceptedAnswer": {"@type": "Answer", "text": "Có. Một số kỹ thuật hiện nay kết hợp điêu khắc và phun để tạo hiệu ứng vừa có sợi vừa có độ chuyển màu tự nhiên."}},
-        {"@type": "Question", "name": "Phương pháp nào phù hợp với người mới?", "acceptedAnswer": {"@type": "Answer", "text": "Điều này phụ thuộc vào nền chân mày và loại da. Bạn nên được tư vấn trực tiếp trước khi quyết định."}}
-      ]
-    }
-  ]
-}
+
+
+
+
+  
+
+  
+
+  
+
+  <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@type": "Article",
+        "headline": "Môi Bị Đen Có Phun Được Không? Cách Xử Lý Để Lên Màu Đẹp",
+        "description": "Môi bị đen, thâm bẩm sinh có phun được không? Tìm hiểu nguyên nhân môi đen, khi nào cần khử thâm trước và cách chọn màu môi giúp lên màu tự nhiên.",
+        "image": "https://ellyphunxamtainha.com/assets/moi-bi-den-co-phun-duoc-khong-1.png",
+        "author": {"@type": "Organization", "name": "ELLY PMU"},
+        "publisher": {"@type": "Organization", "name": "ELLY PMU", "logo": {"@type": "ImageObject", "url": "https://ellyphunxamtainha.com/assets/elly-logo.png"}},
+        "mainEntityOfPage": "https://ellyphunxamtainha.com/kien-thuc/moi-bi-den-co-phun-duoc-khong.html",
+        "dateModified": "2026-07-23"
+      }
     </script>
+    <script src="../script.js" defer></script>
+  
+    <script>
+      // Chỉ chỉnh riêng đoạn FAQ - bấm vào mới hiện
+      document.querySelectorAll('.faq-question').forEach(function(btn){
+        btn.addEventListener('click', function(){
+          var item = btn.closest('.faq-item');
+          var open = item.classList.contains('is-open');
+          document.querySelectorAll('.faq-item.is-open').forEach(function(o){ if(o!==item) o.classList.remove('is-open'); });
+          item.classList.toggle('is-open', !open);
+        });
+      });
+    </script>
+
   </body>
 </html>
+
+
+
+
+
+
+
 
 

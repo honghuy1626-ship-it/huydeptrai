@@ -191,12 +191,19 @@
 
               <h2>Câu Hỏi Thường Gặp</h2>
               <div class="faq-list">
-                <div><h3>Da ngăm nên phun màu gì?</h3><p>Đỏ nâu, hồng đất hoặc đỏ gạch thường là những lựa chọn được cân nhắc nhiều. Tuy nhiên, màu phù hợp còn phụ thuộc vào nền môi và sở thích cá nhân.</p></div>
-                <div><h3>Màu nào tự nhiên nhất?</h3><p>Hồng đào, cam đào và hồng đất thường mang lại hiệu ứng tự nhiên trên nhiều khách hàng.</p></div>
-                <div><h3>Có thể đổi màu khi dặm lại không?</h3><p>Trong nhiều trường hợp có thể, nhưng kỹ thuật viên sẽ cần đánh giá màu môi hiện tại trước khi tư vấn.</p></div>
-              </div>
-
-              <h2>Kết Luận</h2>
+                <div class="faq-item">
+                  <button class="faq-question" type="button">Da ngăm nên phun màu gì?</button>
+                  <div class="faq-answer"><p>Đỏ nâu, hồng đất hoặc đỏ gạch thường là những lựa chọn được cân nhắc nhiều. Tuy nhiên, màu phù hợp còn phụ thuộc vào nền môi và sở thích cá nhân.</p></div>
+                </div>
+                <div class="faq-item">
+                  <button class="faq-question" type="button">Màu nào tự nhiên nhất?</button>
+                  <div class="faq-answer"><p>Hồng đào, cam đào và hồng đất thường mang lại hiệu ứng tự nhiên trên nhiều khách hàng.</p></div>
+                </div>
+                <div class="faq-item">
+                  <button class="faq-question" type="button">Có thể đổi màu khi dặm lại không?</button>
+                  <div class="faq-answer"><p>Trong nhiều trường hợp có thể, nhưng kỹ thuật viên sẽ cần đánh giá màu môi hiện tại trước khi tư vấn.</p></div>
+                </div>
+              </div><h2>Kết Luận</h2>
               <p>Không có một màu môi đẹp nhất dành cho tất cả mọi người. Màu môi phù hợp là màu hài hòa với làn da, nền môi và phong cách của chính bạn. Đừng chỉ chọn theo xu hướng, hãy để kỹ thuật viên đánh giá và tư vấn trước khi thực hiện.</p>
               <div class="tip-box">Nếu bạn chưa biết mình hợp với hồng đào, cam đào, đỏ nâu hay hồng đất, hãy gửi ảnh môi mộc chụp dưới ánh sáng tự nhiên cho ELLY PMU. Đội ngũ kỹ thuật viên sẽ tư vấn miễn phí màu môi phù hợp nhất với khuôn mặt và nhu cầu của bạn.</div>
               <div class="hero-actions">
@@ -253,57 +260,53 @@
       <a class="float-btn messenger" href="https://m.me/61555486805617" target="_blank" rel="noopener noreferrer" aria-label="Chat Messenger"><span>Chat</span></a>
     </div>
 
-    <script src="../script.js"></script>
-    <div class="booking-popover" id="bookingPopover" aria-hidden="true">
-      <div class="booking-popover-backdrop" data-booking-close></div>
-      <section class="booking-popover-panel" role="dialog" aria-modal="true" aria-labelledby="bookingPopoverTitle">
-        <button class="booking-popover-close" type="button" aria-label="Đóng form đặt lịch" data-booking-close>×</button>
-        <div class="booking-popover-grid">
-          <div class="booking-popover-copy">
-            <p class="eyebrow">Đặt lịch tư vấn ELLY</p>
-            <h2 id="bookingPopoverTitle">Giữ lịch tư vấn phun xăm tại nhà</h2>
-            <p>ELLY SPA xác nhận dịch vụ, địa chỉ và khung giờ trước khi đến.</p>
-          </div>
-          <form class="booking-form" id="bookingForm" data-booking-form data-send-sheet="true">
-            <label><span>Họ và tên</span><input type="text" name="name" autocomplete="name" required /></label>
-            <label><span>Số điện thoại</span><input type="tel" name="phone" inputmode="tel" autocomplete="tel" required /></label>
-            <label><span>Dịch vụ quan tâm</span><select name="service" required><option value="">Chọn dịch vụ</option><option>Phun môi</option><option>Khử thâm môi</option><option>Phun mày</option><option>Phun mí</option></select></label>
-            <label><span>Tỉnh/Thành</span><select name="city" required><option value="">Chọn khu vực</option><option>TP.HCM</option><option>Bình Dương</option><option>Khu vực khác</option></select></label>
-            <label class="full"><span>Ghi chú</span><textarea name="note" rows="3" placeholder="Tình trạng môi hiện tại hoặc khung giờ thuận tiện"></textarea></label>
-            <button class="btn btn-primary full" type="submit">Gửi thông tin tư vấn</button>
-            <p class="form-status" data-form-status></p>
-          </form>
-        </div>
-      </section>
-    </div>
+    
 
-    <script type="application/ld+json">
-{
-  "@context": "https://schema.org",
-  "@graph": [
-    {
-      "@type": "Article",
-      "@id": "https://ellyphunxamtainha.com/kien-thuc/phun-moi-mau-nao-dep.html#article",
-      "headline": "Phun Môi Màu Nào Đẹp? Top 15 Màu Phun Môi Đẹp Nhất Theo Từng Tông Da Và Độ Tuổi",
-      "description": "Phun môi màu nào đẹp và phù hợp với bạn? Khám phá 15 màu môi được yêu thích nhất, cách chọn màu theo tông da, độ tuổi và phong cách cùng ELLY PMU.",
-      "image": "https://ellyphunxamtainha.com/assets/phun-moi-mau-nao-dep-1.png",
-      "dateModified": "2026-07-07",
-      "author": {"@type": "Organization", "name": "ELLY PMU"},
-      "publisher": {"@type": "Organization", "name": "ELLY", "logo": {"@type": "ImageObject", "url": "https://ellyphunxamtainha.com/assets/elly-logo.png"}},
-      "mainEntityOfPage": "https://ellyphunxamtainha.com/kien-thuc/phun-moi-mau-nao-dep.html"
-    },
-    {
-      "@type": "FAQPage",
-      "mainEntity": [
-        {"@type": "Question", "name": "Da ngăm nên phun màu gì?", "acceptedAnswer": {"@type": "Answer", "text": "Đỏ nâu, hồng đất hoặc đỏ gạch thường là những lựa chọn được cân nhắc nhiều. Tuy nhiên, màu phù hợp còn phụ thuộc vào nền môi và sở thích cá nhân."}},
-        {"@type": "Question", "name": "Màu nào tự nhiên nhất?", "acceptedAnswer": {"@type": "Answer", "text": "Hồng đào, cam đào và hồng đất thường mang lại hiệu ứng tự nhiên trên nhiều khách hàng."}},
-        {"@type": "Question", "name": "Có thể đổi màu khi dặm lại không?", "acceptedAnswer": {"@type": "Answer", "text": "Trong nhiều trường hợp có thể, nhưng kỹ thuật viên sẽ cần đánh giá màu môi hiện tại trước khi tư vấn."}}
-      ]
-    }
-  ]
-}
+
+
+
+
+  
+
+  
+
+  
+
+  <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@type": "Article",
+        "headline": "Môi Bị Đen Có Phun Được Không? Cách Xử Lý Để Lên Màu Đẹp",
+        "description": "Môi bị đen, thâm bẩm sinh có phun được không? Tìm hiểu nguyên nhân môi đen, khi nào cần khử thâm trước và cách chọn màu môi giúp lên màu tự nhiên.",
+        "image": "https://ellyphunxamtainha.com/assets/moi-bi-den-co-phun-duoc-khong-1.png",
+        "author": {"@type": "Organization", "name": "ELLY PMU"},
+        "publisher": {"@type": "Organization", "name": "ELLY PMU", "logo": {"@type": "ImageObject", "url": "https://ellyphunxamtainha.com/assets/elly-logo.png"}},
+        "mainEntityOfPage": "https://ellyphunxamtainha.com/kien-thuc/moi-bi-den-co-phun-duoc-khong.html",
+        "dateModified": "2026-07-23"
+      }
     </script>
+    <script src="../script.js" defer></script>
+  
+    <script>
+      // Chỉ chỉnh riêng đoạn FAQ - bấm vào mới hiện
+      document.querySelectorAll('.faq-question').forEach(function(btn){
+        btn.addEventListener('click', function(){
+          var item = btn.closest('.faq-item');
+          var open = item.classList.contains('is-open');
+          document.querySelectorAll('.faq-item.is-open').forEach(function(o){ if(o!==item) o.classList.remove('is-open'); });
+          item.classList.toggle('is-open', !open);
+        });
+      });
+    </script>
+
   </body>
 </html>
+
+
+
+
+
+
+
 
 

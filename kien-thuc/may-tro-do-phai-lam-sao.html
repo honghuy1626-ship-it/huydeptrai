@@ -168,13 +168,23 @@
 
               <h2>Câu Hỏi Thường Gặp</h2>
               <div class="faq-list">
-                <div><h3>Mày trổ đỏ có sửa được không?</h3><p>Có. Hầu hết các trường hợp đều có thể xử lý bằng khử màu, phun phủ hoặc kết hợp laser.</p></div>
-                <div><h3>Có cần xóa hết mực cũ không?</h3><p>Không phải lúc nào cũng cần. Kỹ thuật viên sẽ đánh giá nền mực để đưa ra phương án phù hợp.</p></div>
-                <div><h3>Sửa mày trổ đỏ có đau không?</h3><p>Thông thường sẽ được ủ tê trước khi thực hiện nên cảm giác khá nhẹ nhàng.</p></div>
-                <div><h3>Sau khi sửa có giữ màu lâu không?</h3><p>Nếu xử lý đúng kỹ thuật và sử dụng mực chất lượng, màu có thể giữ đẹp trong nhiều năm.</p></div>
-              </div>
-
-              <h2>Kết Luận</h2>
+                <div class="faq-item">
+                  <button class="faq-question" type="button">Mày trổ đỏ có sửa được không?</button>
+                  <div class="faq-answer"><p>Có. Hầu hết các trường hợp đều có thể xử lý bằng khử màu, phun phủ hoặc kết hợp laser.</p></div>
+                </div>
+                <div class="faq-item">
+                  <button class="faq-question" type="button">Có cần xóa hết mực cũ không?</button>
+                  <div class="faq-answer"><p>Không phải lúc nào cũng cần. Kỹ thuật viên sẽ đánh giá nền mực để đưa ra phương án phù hợp.</p></div>
+                </div>
+                <div class="faq-item">
+                  <button class="faq-question" type="button">Sửa mày trổ đỏ có đau không?</button>
+                  <div class="faq-answer"><p>Thông thường sẽ được ủ tê trước khi thực hiện nên cảm giác khá nhẹ nhàng.</p></div>
+                </div>
+                <div class="faq-item">
+                  <button class="faq-question" type="button">Sau khi sửa có giữ màu lâu không?</button>
+                  <div class="faq-answer"><p>Nếu xử lý đúng kỹ thuật và sử dụng mực chất lượng, màu có thể giữ đẹp trong nhiều năm.</p></div>
+                </div>
+              </div><h2>Kết Luận</h2>
               <p>Mày trổ đỏ là tình trạng khá phổ biến sau nhiều năm phun xăm, đặc biệt nếu trước đây sử dụng công nghệ cũ hoặc mực kém chất lượng. Tuy nhiên, bạn không cần quá lo lắng vì phần lớn trường hợp đều có thể xử lý để lấy lại đôi chân mày hài hòa và tự nhiên.</p>
               <div class="tip-box">Nếu chân mày của bạn đang bị trổ đỏ, hãy gửi ảnh chân mày mộc cho ELLY PMU. Đội ngũ kỹ thuật viên sẽ đánh giá tình trạng thực tế và tư vấn phương án xử lý phù hợp trước khi thực hiện.</div>
               <div class="hero-actions">
@@ -231,69 +241,53 @@
       <a class="float-btn messenger" href="https://m.me/61555486805617" target="_blank" rel="noopener noreferrer" aria-label="Chat Messenger"><span>Chat</span></a>
     </div>
 
-    <script src="../script.js"></script>
-    <div class="booking-popover" id="bookingPopover" aria-hidden="true">
-      <div class="booking-popover-backdrop" data-booking-close></div>
-      <section class="booking-popover-panel" role="dialog" aria-modal="true" aria-labelledby="bookingPopoverTitle">
-        <button class="booking-popover-close" type="button" aria-label="Đóng form đặt lịch" data-booking-close>×</button>
-        <div class="booking-popover-grid">
-          <div class="booking-popover-copy">
-            <p class="eyebrow">Đặt lịch tư vấn ELLY</p>
-            <h2 id="bookingPopoverTitle">Giữ lịch tư vấn phun xăm tại nhà</h2>
-            <p>ELLY SPA xác nhận dịch vụ, địa chỉ và khung giờ trước khi đến.</p>
-          </div>
-          <form class="booking-form" id="bookingForm" data-booking-form data-send-sheet="true">
-            <label><span>Họ và tên</span><input type="text" name="name" autocomplete="name" required /></label>
-            <label><span>Số điện thoại</span><input type="tel" name="phone" inputmode="tel" autocomplete="tel" required /></label>
-            <label><span>Dịch vụ quan tâm</span><select name="service" required><option value="">Chọn dịch vụ</option><option>Phun môi</option><option>Khử thâm môi</option><option>Phun mày</option><option>Phun mí</option></select></label>
-            <label><span>Tỉnh/Thành</span><select name="city" required><option value="">Chọn khu vực</option><option>TP.HCM</option><option>Bình Dương</option><option>Khu vực khác</option></select></label>
-            <label class="full"><span>Ghi chú</span><textarea name="note" rows="3" placeholder="Tình trạng môi hiện tại hoặc khung giờ thuận tiện"></textarea></label>
-            <button class="btn btn-primary full" type="submit">Gửi thông tin tư vấn</button>
-            <p class="form-status" data-form-status></p>
-          </form>
-        </div>
-      </section>
-    </div>
+    
 
-    <script type="application/ld+json">
-{
-  "@context": "https://schema.org",
-  "@graph": [
-    {
-      "@type": "Article",
-      "@id": "https://ellyphunxamtainha.com/kien-thuc/may-tro-do-phai-lam-sao.html#article",
-      "headline": "Mày Trổ Đỏ Phải Làm Sao? Cách Xử Lý Hiệu Quả Và An Toàn",
-      "description": "Chân mày bị trổ đỏ sau nhiều năm có xử lý được không? Tìm hiểu nguyên nhân, cách khắc phục và những lưu ý quan trọng trước khi sửa mày.",
-      "image": "https://ellyphunxamtainha.com/assets/may-tro-do-phai-lam-sao-1.png",
-      "author": {"@type": "Organization", "name": "ELLY"},
-      "publisher": {"@type": "Organization", "name": "ELLY"},
-      "mainEntityOfPage": {"@type": "WebPage", "@id": "https://ellyphunxamtainha.com/kien-thuc/may-tro-do-phai-lam-sao.html"},
-      "datePublished": "2026-07-07",
-      "dateModified": "2026-07-07"
-    },
-    {
-      "@type": "BreadcrumbList",
-      "@id": "https://ellyphunxamtainha.com/kien-thuc/may-tro-do-phai-lam-sao.html#breadcrumb",
-      "itemListElement": [
-        {"@type": "ListItem", "position": 1, "name": "Trang chủ", "item": "https://ellyphunxamtainha.com/"},
-        {"@type": "ListItem", "position": 2, "name": "Kiến thức", "item": "https://ellyphunxamtainha.com/kien-thuc.html"},
-        {"@type": "ListItem", "position": 3, "name": "Mày Trổ Đỏ Phải Làm Sao?", "item": "https://ellyphunxamtainha.com/kien-thuc/may-tro-do-phai-lam-sao.html"}
-      ]
-    },
-    {
-      "@type": "FAQPage",
-      "@id": "https://ellyphunxamtainha.com/kien-thuc/may-tro-do-phai-lam-sao.html#faq",
-      "mainEntity": [
-        {"@type": "Question", "name": "Mày trổ đỏ có sửa được không?", "acceptedAnswer": {"@type": "Answer", "text": "Có. Hầu hết các trường hợp đều có thể xử lý bằng khử màu, phun phủ hoặc kết hợp laser."}},
-        {"@type": "Question", "name": "Có cần xóa hết mực cũ không?", "acceptedAnswer": {"@type": "Answer", "text": "Không phải lúc nào cũng cần. Kỹ thuật viên sẽ đánh giá nền mực để đưa ra phương án phù hợp."}},
-        {"@type": "Question", "name": "Sửa mày trổ đỏ có đau không?", "acceptedAnswer": {"@type": "Answer", "text": "Thông thường sẽ được ủ tê trước khi thực hiện nên cảm giác khá nhẹ nhàng."}},
-        {"@type": "Question", "name": "Sau khi sửa có giữ màu lâu không?", "acceptedAnswer": {"@type": "Answer", "text": "Nếu xử lý đúng kỹ thuật và sử dụng mực chất lượng, màu có thể giữ đẹp trong nhiều năm."}}
-      ]
-    }
-  ]
-}
+
+
+
+
+  
+
+  
+
+  
+
+  <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@type": "Article",
+        "headline": "Môi Bị Đen Có Phun Được Không? Cách Xử Lý Để Lên Màu Đẹp",
+        "description": "Môi bị đen, thâm bẩm sinh có phun được không? Tìm hiểu nguyên nhân môi đen, khi nào cần khử thâm trước và cách chọn màu môi giúp lên màu tự nhiên.",
+        "image": "https://ellyphunxamtainha.com/assets/moi-bi-den-co-phun-duoc-khong-1.png",
+        "author": {"@type": "Organization", "name": "ELLY PMU"},
+        "publisher": {"@type": "Organization", "name": "ELLY PMU", "logo": {"@type": "ImageObject", "url": "https://ellyphunxamtainha.com/assets/elly-logo.png"}},
+        "mainEntityOfPage": "https://ellyphunxamtainha.com/kien-thuc/moi-bi-den-co-phun-duoc-khong.html",
+        "dateModified": "2026-07-23"
+      }
     </script>
+    <script src="../script.js" defer></script>
+  
+    <script>
+      // Chỉ chỉnh riêng đoạn FAQ - bấm vào mới hiện
+      document.querySelectorAll('.faq-question').forEach(function(btn){
+        btn.addEventListener('click', function(){
+          var item = btn.closest('.faq-item');
+          var open = item.classList.contains('is-open');
+          document.querySelectorAll('.faq-item.is-open').forEach(function(o){ if(o!==item) o.classList.remove('is-open'); });
+          item.classList.toggle('is-open', !open);
+        });
+      });
+    </script>
+
   </body>
 </html>
+
+
+
+
+
+
+
 
 

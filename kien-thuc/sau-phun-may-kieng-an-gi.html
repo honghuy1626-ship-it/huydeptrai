@@ -253,122 +253,53 @@
       </a>
     </div>
 
-    <script src="../script.js"></script>
+    
 
-    <div class="booking-popover" id="bookingPopover" aria-hidden="true">
-      <div class="booking-popover-backdrop" data-booking-close></div>
-      <section class="booking-popover-panel" role="dialog" aria-modal="true" aria-labelledby="bookingPopoverTitle">
-        <button class="booking-popover-close" type="button" aria-label="Đóng form đặt lịch" data-booking-close>×</button>
-        <div class="booking-popover-grid">
-          <div class="booking-popover-copy">
-            <p class="eyebrow">Đặt lịch tư vấn ELLY</p>
-            <h2 id="bookingPopoverTitle">Giữ lịch tư vấn phun xăm tại nhà</h2>
-            <p>ELLY SPA xác nhận dịch vụ, địa chỉ và khung giờ trước khi đến.</p>
-          </div>
-          <form class="booking-form" id="bookingForm" data-booking-form data-send-sheet="true">
-            <label><span>Họ và tên</span><input type="text" name="name" autocomplete="name" required /></label>
-            <label><span>Số điện thoại</span><input type="tel" name="phone" inputmode="tel" autocomplete="tel" required /></label>
-            <label><span>Dịch vụ quan tâm</span><select name="service" required><option value="">Chọn dịch vụ</option><option>Phun môi</option><option>Khử thâm môi</option><option>Phun mày</option><option>Phun mí</option></select></label>
-            <label><span>Tỉnh/Thành</span><select name="city" required><option value="">Chọn khu vực</option><option>TP.HCM</option><option>Bình Dương</option><option>Khu vực khác</option></select></label>
-            <label class="full"><span>Ghi chú</span><textarea name="note" rows="3" placeholder="Tình trạng môi hiện tại hoặc khung giờ thuận tiện"></textarea></label>
-            <button class="btn btn-primary full" type="submit">Gửi thông tin tư vấn</button>
-            <p class="form-status" data-form-status></p>
-          </form>
-        </div>
-      </section>
-    </div>
 
-    <script type="application/ld+json">
-{
-      "@context": "https://schema.org",
-      "@graph": [
-            {
-                  "@type": "Article",
-                  "@id": "https://ellyphunxamtainha.com/kien-thuc/sau-phun-may-kieng-an-gi.html#article",
-                  "headline": "Sau phun mày kiêng ăn gì? 8 thực phẩm nên tránh để chân mày lên màu đẹp",
-                  "description": "Sau phun mày kiêng ăn gì? ELLY gợi ý 8 nhóm thực phẩm nên hạn chế, món nên bổ sung và cách chăm sóc giúp chân mày hồi phục, lên màu đều.",
-                  "image": "https://ellyphunxamtainha.com/assets/sau-phun-may-kieng-an-gi.jpg",
-                  "author": {
-                        "@type": "Organization",
-                        "name": "ELLY"
-                  },
-                  "publisher": {
-                        "@type": "Organization",
-                        "name": "ELLY"
-                  },
-                  "mainEntityOfPage": {
-                        "@type": "WebPage",
-                        "@id": "https://ellyphunxamtainha.com/kien-thuc/sau-phun-may-kieng-an-gi.html"
-                  },
-                  "datePublished": "2026-07-02",
-                  "dateModified": "2026-07-02"
-            },
-            {
-                  "@type": "BreadcrumbList",
-                  "@id": "https://ellyphunxamtainha.com/kien-thuc/sau-phun-may-kieng-an-gi.html#breadcrumb",
-                  "itemListElement": [
-                        {
-                              "@type": "ListItem",
-                              "position": 1,
-                              "name": "Trang chủ",
-                              "item": "https://ellyphunxamtainha.com/"
-                        },
-                        {
-                              "@type": "ListItem",
-                              "position": 2,
-                              "name": "Kiến thức",
-                              "item": "https://ellyphunxamtainha.com/kien-thuc.html"
-                        },
-                        {
-                              "@type": "ListItem",
-                              "position": 3,
-                              "name": "Sau phun mày kiêng ăn gì",
-                              "item": "https://ellyphunxamtainha.com/kien-thuc/sau-phun-may-kieng-an-gi.html"
-                        }
-                  ]
-            },
-            {
-                  "@type": "FAQPage",
-                  "@id": "https://ellyphunxamtainha.com/kien-thuc/sau-phun-may-kieng-an-gi.html#faq",
-                  "mainEntity": [
-                        {
-                              "@type": "Question",
-                              "name": "Sau phun mày bao lâu thì ăn bình thường?",
-                              "acceptedAnswer": {
-                                    "@type": "Answer",
-                                    "text": "Thường sau khi chân mày bong ổn định, khoảng 7-14 ngày, bạn có thể ăn uống gần như bình thường. Nếu cơ địa nhạy cảm, nên hỏi kỹ thuật viên trước."
-                              }
-                        },
-                        {
-                              "@type": "Question",
-                              "name": "Có được uống cà phê sau phun mày không?",
-                              "acceptedAnswer": {
-                                    "@type": "Answer",
-                                    "text": "Có thể dùng ít nếu cơ thể quen, nhưng nên hạn chế trong vài ngày đầu và ưu tiên uống đủ nước để da hồi phục tốt hơn."
-                              }
-                        },
-                        {
-                              "@type": "Question",
-                              "name": "Có cần kiêng thịt gà không?",
-                              "acceptedAnswer": {
-                                    "@type": "Answer",
-                                    "text": "Không phải ai cũng cần kiêng. Nếu bạn từng ngứa hoặc khó lành khi ăn thịt gà trong lúc có vết thương, nên hạn chế ngắn ngày và theo dõi cơ địa."
-                              }
-                        },
-                        {
-                              "@type": "Question",
-                              "name": "Ăn trái cây có giúp màu lên đẹp hơn không?",
-                              "acceptedAnswer": {
-                                    "@type": "Answer",
-                                    "text": "Trái cây không làm đổi màu mực, nhưng giúp cơ thể khỏe hơn và hỗ trợ quá trình hồi phục. Màu đẹp vẫn cần kỹ thuật đúng và chăm sóc đúng."
-                              }
-                        }
-                  ]
-            }
-      ]
-}
+
+
+
+  
+
+  
+
+  
+
+  <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@type": "Article",
+        "headline": "Môi Bị Đen Có Phun Được Không? Cách Xử Lý Để Lên Màu Đẹp",
+        "description": "Môi bị đen, thâm bẩm sinh có phun được không? Tìm hiểu nguyên nhân môi đen, khi nào cần khử thâm trước và cách chọn màu môi giúp lên màu tự nhiên.",
+        "image": "https://ellyphunxamtainha.com/assets/moi-bi-den-co-phun-duoc-khong-1.png",
+        "author": {"@type": "Organization", "name": "ELLY PMU"},
+        "publisher": {"@type": "Organization", "name": "ELLY PMU", "logo": {"@type": "ImageObject", "url": "https://ellyphunxamtainha.com/assets/elly-logo.png"}},
+        "mainEntityOfPage": "https://ellyphunxamtainha.com/kien-thuc/moi-bi-den-co-phun-duoc-khong.html",
+        "dateModified": "2026-07-23"
+      }
     </script>
+    <script src="../script.js" defer></script>
+  
+    <script>
+      // Chỉ chỉnh riêng đoạn FAQ - bấm vào mới hiện
+      document.querySelectorAll('.faq-question').forEach(function(btn){
+        btn.addEventListener('click', function(){
+          var item = btn.closest('.faq-item');
+          var open = item.classList.contains('is-open');
+          document.querySelectorAll('.faq-item.is-open').forEach(function(o){ if(o!==item) o.classList.remove('is-open'); });
+          item.classList.toggle('is-open', !open);
+        });
+      });
+    </script>
+
   </body>
 </html>
+
+
+
+
+
+
+
 
 

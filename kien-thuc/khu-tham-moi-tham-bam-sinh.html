@@ -197,21 +197,19 @@
 
             <h2>Câu Hỏi Thường Gặp</h2>
             <div class="faq-list">
-              <div>
-                <h3>Môi thâm bẩm sinh có khử được không?</h3>
-                <p>Nhiều trường hợp có thể cải thiện, tuy nhiên cần được đánh giá trực tiếp.</p>
-              </div>
-              <div>
-                <h3>Có cần khử thâm nhiều lần không?</h3>
-                <p>Tùy mức độ sắc tố và cơ địa của từng khách hàng.</p>
-              </div>
-              <div>
-                <h3>Sau khi khử thâm có cần phun môi không?</h3>
-                <p>Điều này phụ thuộc vào nhu cầu và tình trạng môi sau khi được cải thiện.</p>
-              </div>
-            </div>
-
-            <div class="offer-box">
+                <div class="faq-item">
+                  <button class="faq-question" type="button">Môi thâm bẩm sinh có khử được không?</button>
+                  <div class="faq-answer"><p>Nhiều trường hợp có thể cải thiện, tuy nhiên cần được đánh giá trực tiếp.</p></div>
+                </div>
+                <div class="faq-item">
+                  <button class="faq-question" type="button">Có cần khử thâm nhiều lần không?</button>
+                  <div class="faq-answer"><p>Tùy mức độ sắc tố và cơ địa của từng khách hàng.</p></div>
+                </div>
+                <div class="faq-item">
+                  <button class="faq-question" type="button">Sau khi khử thâm có cần phun môi không?</button>
+                  <div class="faq-answer"><p>Điều này phụ thuộc vào nhu cầu và tình trạng môi sau khi được cải thiện.</p></div>
+                </div>
+              </div><div class="offer-box">
               <strong>Đừng để đôi môi thâm là rào cản cho sự tự tin.</strong>
               <p>Một đôi môi đều màu giúp gương mặt tươi tắn hơn và giảm phụ thuộc vào son môi mỗi ngày.</p>
             </div>
@@ -270,21 +268,53 @@
       </section>
     </div>
 
-    <script type="application/ld+json">
+    
+
+
+
+
+
+  
+
+  
+
+  
+
+  <script type="application/ld+json">
       {
         "@context": "https://schema.org",
         "@type": "Article",
-        "headline": "Khử Thâm Môi Thâm Bẩm Sinh Có Hiệu Quả Không? Giải Đáp Chi Tiết",
-        "description": "Môi thâm bẩm sinh có khử được không? Tìm hiểu nguyên nhân môi thâm bẩm sinh, đối tượng phù hợp, quy trình thực hiện và cách chăm sóc sau khử thâm.",
-        "image": "https://ellyphunxamtainha.com/assets/khu-tham-moi-tham-bam-sinh-1.jpg",
+        "headline": "Môi Bị Đen Có Phun Được Không? Cách Xử Lý Để Lên Màu Đẹp",
+        "description": "Môi bị đen, thâm bẩm sinh có phun được không? Tìm hiểu nguyên nhân môi đen, khi nào cần khử thâm trước và cách chọn màu môi giúp lên màu tự nhiên.",
+        "image": "https://ellyphunxamtainha.com/assets/moi-bi-den-co-phun-duoc-khong-1.png",
         "author": {"@type": "Organization", "name": "ELLY PMU"},
         "publisher": {"@type": "Organization", "name": "ELLY PMU", "logo": {"@type": "ImageObject", "url": "https://ellyphunxamtainha.com/assets/elly-logo.png"}},
-        "mainEntityOfPage": "https://ellyphunxamtainha.com/kien-thuc/khu-tham-moi-tham-bam-sinh.html",
-        "dateModified": "2026-07-10"
+        "mainEntityOfPage": "https://ellyphunxamtainha.com/kien-thuc/moi-bi-den-co-phun-duoc-khong.html",
+        "dateModified": "2026-07-23"
       }
     </script>
     <script src="../script.js" defer></script>
+  
+    <script>
+      // Chỉ chỉnh riêng đoạn FAQ - bấm vào mới hiện
+      document.querySelectorAll('.faq-question').forEach(function(btn){
+        btn.addEventListener('click', function(){
+          var item = btn.closest('.faq-item');
+          var open = item.classList.contains('is-open');
+          document.querySelectorAll('.faq-item.is-open').forEach(function(o){ if(o!==item) o.classList.remove('is-open'); });
+          item.classList.toggle('is-open', !open);
+        });
+      });
+    </script>
+
   </body>
 </html>
+
+
+
+
+
+
+
 
 

@@ -164,25 +164,23 @@
 
             <h2>Câu Hỏi Thường Gặp</h2>
             <div class="faq-list">
-              <div>
-                <h3>Phun môi 10 ngày chưa bong có sao không?</h3>
-                <p>Ở một số người, quá trình bong có thể diễn ra chậm hơn do cơ địa và nhiều yếu tố khác. Nếu không có dấu hiệu bất thường, bạn nên tiếp tục chăm sóc theo hướng dẫn của kỹ thuật viên.</p>
-              </div>
-              <div>
-                <h3>Vì sao môi sau phun bong chậm?</h3>
-                <p>Môi có thể bong chậm do cơ địa, nền môi ban đầu, cách chăm sóc hoặc việc môi thường xuyên bị tác động trong quá trình hồi phục.</p>
-              </div>
-              <div>
-                <h3>Bong chậm có làm môi không lên màu không?</h3>
-                <p>Không thể kết luận chỉ dựa vào tốc độ bong. Màu môi còn phụ thuộc vào quá trình hồi phục và nhiều yếu tố khác.</p>
-              </div>
-              <div>
-                <h3>Có nên tự bóc môi để bong nhanh hơn?</h3>
-                <p>Không. Bạn nên để lớp bong diễn ra tự nhiên và tránh tác động mạnh lên môi.</p>
-              </div>
-            </div>
-
-            <div class="offer-box">
+                <div class="faq-item">
+                  <button class="faq-question" type="button">Phun môi 10 ngày chưa bong có sao không?</button>
+                  <div class="faq-answer"><p>Ở một số người, quá trình bong có thể diễn ra chậm hơn do cơ địa và nhiều yếu tố khác. Nếu không có dấu hiệu bất thường, bạn nên tiếp tục chăm sóc theo hướng dẫn của kỹ thuật viên.</p></div>
+                </div>
+                <div class="faq-item">
+                  <button class="faq-question" type="button">Vì sao môi sau phun bong chậm?</button>
+                  <div class="faq-answer"><p>Môi có thể bong chậm do cơ địa, nền môi ban đầu, cách chăm sóc hoặc việc môi thường xuyên bị tác động trong quá trình hồi phục.</p></div>
+                </div>
+                <div class="faq-item">
+                  <button class="faq-question" type="button">Bong chậm có làm môi không lên màu không?</button>
+                  <div class="faq-answer"><p>Không thể kết luận chỉ dựa vào tốc độ bong. Màu môi còn phụ thuộc vào quá trình hồi phục và nhiều yếu tố khác.</p></div>
+                </div>
+                <div class="faq-item">
+                  <button class="faq-question" type="button">Có nên tự bóc môi để bong nhanh hơn?</button>
+                  <div class="faq-answer"><p>Không. Bạn nên để lớp bong diễn ra tự nhiên và tránh tác động mạnh lên môi.</p></div>
+                </div>
+              </div><div class="offer-box">
               <strong>Hồi phục chậm không đồng nghĩa với kết quả không tốt.</strong>
               <p>Điều quan trọng là bạn kiên nhẫn, chăm sóc đúng cách và theo dõi tình trạng môi theo hướng dẫn của kỹ thuật viên. Nếu có bất kỳ dấu hiệu nào khiến bạn lo lắng, hãy để chuyên viên kiểm tra thay vì tự xử lý tại nhà.</p>
             </div>
@@ -242,21 +240,53 @@
       </section>
     </div>
 
-    <script type="application/ld+json">
+    
+
+
+
+
+
+  
+
+  
+
+  
+
+  <script type="application/ld+json">
       {
         "@context": "https://schema.org",
         "@type": "Article",
-        "headline": "Phun Môi 10 Ngày Chưa Bong Có Sao Không? Chuyên Gia Giải Đáp",
-        "description": "Phun môi 10 ngày chưa bong có sao không? Tìm hiểu nguyên nhân môi bong chậm, cách chăm sóc đúng và khi nào nên liên hệ kỹ thuật viên để được kiểm tra.",
-        "image": "https://ellyphunxamtainha.com/assets/phun-moi-10-ngay-chua-bong-1.png",
+        "headline": "Môi Bị Đen Có Phun Được Không? Cách Xử Lý Để Lên Màu Đẹp",
+        "description": "Môi bị đen, thâm bẩm sinh có phun được không? Tìm hiểu nguyên nhân môi đen, khi nào cần khử thâm trước và cách chọn màu môi giúp lên màu tự nhiên.",
+        "image": "https://ellyphunxamtainha.com/assets/moi-bi-den-co-phun-duoc-khong-1.png",
         "author": {"@type": "Organization", "name": "ELLY PMU"},
         "publisher": {"@type": "Organization", "name": "ELLY PMU", "logo": {"@type": "ImageObject", "url": "https://ellyphunxamtainha.com/assets/elly-logo.png"}},
-        "mainEntityOfPage": "https://ellyphunxamtainha.com/kien-thuc/phun-moi-10-ngay-chua-bong.html",
-        "dateModified": "2026-07-13"
+        "mainEntityOfPage": "https://ellyphunxamtainha.com/kien-thuc/moi-bi-den-co-phun-duoc-khong.html",
+        "dateModified": "2026-07-23"
       }
     </script>
     <script src="../script.js" defer></script>
+  
+    <script>
+      // Chỉ chỉnh riêng đoạn FAQ - bấm vào mới hiện
+      document.querySelectorAll('.faq-question').forEach(function(btn){
+        btn.addEventListener('click', function(){
+          var item = btn.closest('.faq-item');
+          var open = item.classList.contains('is-open');
+          document.querySelectorAll('.faq-item.is-open').forEach(function(o){ if(o!==item) o.classList.remove('is-open'); });
+          item.classList.toggle('is-open', !open);
+        });
+      });
+    </script>
+
   </body>
 </html>
+
+
+
+
+
+
+
 
 

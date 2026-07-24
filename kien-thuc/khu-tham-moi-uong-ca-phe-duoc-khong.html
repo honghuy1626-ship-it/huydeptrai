@@ -177,25 +177,23 @@
 
             <h2>Câu Hỏi Thường Gặp</h2>
             <div class="faq-list">
-              <div>
-                <h3>Sau khử thâm môi bao lâu thì uống cà phê được?</h3>
-                <p>Điều này phụ thuộc vào tình trạng hồi phục và hướng dẫn của kỹ thuật viên. Bạn nên trao đổi trực tiếp để được tư vấn phù hợp.</p>
-              </div>
-              <div>
-                <h3>Có nên dùng ống hút khi uống nước?</h3>
-                <p>Một số trường hợp có thể được hướng dẫn sử dụng ống hút trong giai đoạn đầu. Hãy làm theo chỉ dẫn của cơ sở thực hiện.</p>
-              </div>
-              <div>
-                <h3>Nếu lỡ uống cà phê thì có sao không?</h3>
-                <p>Nếu bạn lo lắng về quá trình hồi phục, hãy liên hệ kỹ thuật viên để được hướng dẫn cụ thể thay vì tự xử lý.</p>
-              </div>
-              <div>
-                <h3>Sau khử thâm môi nên uống gì?</h3>
-                <p>Nên ưu tiên nước lọc và các lựa chọn nhẹ nhàng, ít đường, không quá nóng hoặc quá lạnh.</p>
-              </div>
-            </div>
-
-            <div class="offer-box">
+                <div class="faq-item">
+                  <button class="faq-question" type="button">Sau khử thâm môi bao lâu thì uống cà phê được?</button>
+                  <div class="faq-answer"><p>Điều này phụ thuộc vào tình trạng hồi phục và hướng dẫn của kỹ thuật viên. Bạn nên trao đổi trực tiếp để được tư vấn phù hợp.</p></div>
+                </div>
+                <div class="faq-item">
+                  <button class="faq-question" type="button">Có nên dùng ống hút khi uống nước?</button>
+                  <div class="faq-answer"><p>Một số trường hợp có thể được hướng dẫn sử dụng ống hút trong giai đoạn đầu. Hãy làm theo chỉ dẫn của cơ sở thực hiện.</p></div>
+                </div>
+                <div class="faq-item">
+                  <button class="faq-question" type="button">Nếu lỡ uống cà phê thì có sao không?</button>
+                  <div class="faq-answer"><p>Nếu bạn lo lắng về quá trình hồi phục, hãy liên hệ kỹ thuật viên để được hướng dẫn cụ thể thay vì tự xử lý.</p></div>
+                </div>
+                <div class="faq-item">
+                  <button class="faq-question" type="button">Sau khử thâm môi nên uống gì?</button>
+                  <div class="faq-answer"><p>Nên ưu tiên nước lọc và các lựa chọn nhẹ nhàng, ít đường, không quá nóng hoặc quá lạnh.</p></div>
+                </div>
+              </div><div class="offer-box">
               <strong>Đừng để những thông tin truyền miệng khiến bạn hoang mang.</strong>
               <p>Mỗi đôi môi có cơ địa khác nhau. Một buổi tư vấn đúng sẽ giúp bạn biết cách chăm sóc phù hợp thay vì phải thử nhiều mẹo chưa được kiểm chứng.</p>
             </div>
@@ -255,21 +253,53 @@
       </section>
     </div>
 
-    <script type="application/ld+json">
+    
+
+
+
+
+
+  
+
+  
+
+  
+
+  <script type="application/ld+json">
       {
         "@context": "https://schema.org",
         "@type": "Article",
-        "headline": "Khử Thâm Môi Uống Cà Phê Được Không? Giải Đáp Chi Tiết",
-        "description": "Sau khử thâm môi uống cà phê được không? Tìm hiểu những lưu ý về đồ uống, cách chăm sóc môi và những điều giúp môi hồi phục tự nhiên.",
-        "image": "https://ellyphunxamtainha.com/assets/khu-tham-moi-uong-ca-phe-duoc-khong-1.png",
+        "headline": "Môi Bị Đen Có Phun Được Không? Cách Xử Lý Để Lên Màu Đẹp",
+        "description": "Môi bị đen, thâm bẩm sinh có phun được không? Tìm hiểu nguyên nhân môi đen, khi nào cần khử thâm trước và cách chọn màu môi giúp lên màu tự nhiên.",
+        "image": "https://ellyphunxamtainha.com/assets/moi-bi-den-co-phun-duoc-khong-1.png",
         "author": {"@type": "Organization", "name": "ELLY PMU"},
         "publisher": {"@type": "Organization", "name": "ELLY PMU", "logo": {"@type": "ImageObject", "url": "https://ellyphunxamtainha.com/assets/elly-logo.png"}},
-        "mainEntityOfPage": "https://ellyphunxamtainha.com/kien-thuc/khu-tham-moi-uong-ca-phe-duoc-khong.html",
-        "dateModified": "2026-07-10"
+        "mainEntityOfPage": "https://ellyphunxamtainha.com/kien-thuc/moi-bi-den-co-phun-duoc-khong.html",
+        "dateModified": "2026-07-23"
       }
     </script>
     <script src="../script.js" defer></script>
+  
+    <script>
+      // Chỉ chỉnh riêng đoạn FAQ - bấm vào mới hiện
+      document.querySelectorAll('.faq-question').forEach(function(btn){
+        btn.addEventListener('click', function(){
+          var item = btn.closest('.faq-item');
+          var open = item.classList.contains('is-open');
+          document.querySelectorAll('.faq-item.is-open').forEach(function(o){ if(o!==item) o.classList.remove('is-open'); });
+          item.classList.toggle('is-open', !open);
+        });
+      });
+    </script>
+
   </body>
 </html>
+
+
+
+
+
+
+
 
 

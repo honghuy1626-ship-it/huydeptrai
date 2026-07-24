@@ -212,21 +212,19 @@
 
             <h2>Câu Hỏi Thường Gặp</h2>
             <div class="faq-list">
-              <div>
-                <h3>Nam giới hút thuốc có khử thâm được không?</h3>
-                <p>Nhiều trường hợp vẫn có thể cải thiện, tuy nhiên cần được kỹ thuật viên đánh giá trực tiếp.</p>
-              </div>
-              <div>
-                <h3>Khử thâm môi cho nam có đau không?</h3>
-                <p>Cảm giác sẽ khác nhau tùy cơ địa, trước khi thực hiện thường sẽ có bước ủ tê theo quy trình của cơ sở.</p>
-              </div>
-              <div>
-                <h3>Sau bao lâu môi hồi phục?</h3>
-                <p>Thời gian hồi phục phụ thuộc vào cơ địa và cách chăm sóc của từng người.</p>
-              </div>
-            </div>
-
-            <div class="offer-box">
+                <div class="faq-item">
+                  <button class="faq-question" type="button">Nam giới hút thuốc có khử thâm được không?</button>
+                  <div class="faq-answer"><p>Nhiều trường hợp vẫn có thể cải thiện, tuy nhiên cần được kỹ thuật viên đánh giá trực tiếp.</p></div>
+                </div>
+                <div class="faq-item">
+                  <button class="faq-question" type="button">Khử thâm môi cho nam có đau không?</button>
+                  <div class="faq-answer"><p>Cảm giác sẽ khác nhau tùy cơ địa, trước khi thực hiện thường sẽ có bước ủ tê theo quy trình của cơ sở.</p></div>
+                </div>
+                <div class="faq-item">
+                  <button class="faq-question" type="button">Sau bao lâu môi hồi phục?</button>
+                  <div class="faq-answer"><p>Thời gian hồi phục phụ thuộc vào cơ địa và cách chăm sóc của từng người.</p></div>
+                </div>
+              </div><div class="offer-box">
               <strong>Đầu tư cho ngoại hình cũng là đầu tư cho sự tự tin.</strong>
               <p>Một đôi môi đều màu giúp gương mặt sáng hơn và tạo thiện cảm trong giao tiếp hằng ngày. Nếu bạn đang cân nhắc khử thâm môi, hãy bắt đầu bằng một buổi tư vấn để hiểu rõ tình trạng của mình.</p>
             </div>
@@ -284,21 +282,53 @@
       </section>
     </div>
 
-    <script type="application/ld+json">
+    
+
+
+
+
+
+  
+
+  
+
+  
+
+  <script type="application/ld+json">
       {
         "@context": "https://schema.org",
         "@type": "Article",
-        "headline": "Khử Thâm Môi Cho Nam Có Hiệu Quả Không? Những Điều Cần Biết",
-        "description": "Khử thâm môi cho nam có hiệu quả không? Tìm hiểu nguyên nhân môi thâm ở nam giới, quy trình thực hiện, đối tượng phù hợp và những lưu ý quan trọng.",
-        "image": "https://ellyphunxamtainha.com/assets/khu-tham-moi-cho-nam-1.png",
+        "headline": "Môi Bị Đen Có Phun Được Không? Cách Xử Lý Để Lên Màu Đẹp",
+        "description": "Môi bị đen, thâm bẩm sinh có phun được không? Tìm hiểu nguyên nhân môi đen, khi nào cần khử thâm trước và cách chọn màu môi giúp lên màu tự nhiên.",
+        "image": "https://ellyphunxamtainha.com/assets/moi-bi-den-co-phun-duoc-khong-1.png",
         "author": {"@type": "Organization", "name": "ELLY PMU"},
         "publisher": {"@type": "Organization", "name": "ELLY PMU", "logo": {"@type": "ImageObject", "url": "https://ellyphunxamtainha.com/assets/elly-logo.png"}},
-        "mainEntityOfPage": "https://ellyphunxamtainha.com/kien-thuc/khu-tham-moi-cho-nam.html",
-        "dateModified": "2026-07-10"
+        "mainEntityOfPage": "https://ellyphunxamtainha.com/kien-thuc/moi-bi-den-co-phun-duoc-khong.html",
+        "dateModified": "2026-07-23"
       }
     </script>
     <script src="../script.js" defer></script>
+  
+    <script>
+      // Chỉ chỉnh riêng đoạn FAQ - bấm vào mới hiện
+      document.querySelectorAll('.faq-question').forEach(function(btn){
+        btn.addEventListener('click', function(){
+          var item = btn.closest('.faq-item');
+          var open = item.classList.contains('is-open');
+          document.querySelectorAll('.faq-item.is-open').forEach(function(o){ if(o!==item) o.classList.remove('is-open'); });
+          item.classList.toggle('is-open', !open);
+        });
+      });
+    </script>
+
   </body>
 </html>
+
+
+
+
+
+
+
 
 

@@ -161,21 +161,19 @@
 
             <h2>Câu Hỏi Thường Gặp</h2>
             <div class="faq-list">
-              <div>
-                <h3>Lỡ hôn sau phun môi có bị mất màu không?</h3>
-                <p>Không thể kết luận chỉ dựa vào một lần tiếp xúc. Kết quả còn phụ thuộc vào tình trạng môi và quá trình hồi phục. Nếu lo lắng, bạn nên liên hệ cơ sở thực hiện để được kiểm tra.</p>
-              </div>
-              <div>
-                <h3>Hôn sau phun môi có làm môi bong sớm không?</h3>
-                <p>Việc môi bong diễn ra theo quá trình hồi phục tự nhiên. Bạn nên hạn chế các tác động trực tiếp lên môi trong giai đoạn đầu theo hướng dẫn của kỹ thuật viên.</p>
-              </div>
-              <div>
-                <h3>Nếu lỡ hôn khi môi chưa bong thì phải làm sao?</h3>
-                <p>Tiếp tục chăm sóc môi đúng hướng dẫn và theo dõi tình trạng môi. Nếu xuất hiện dấu hiệu bất thường, hãy liên hệ kỹ thuật viên để được hỗ trợ.</p>
-              </div>
-            </div>
-
-            <div class="offer-box">
+                <div class="faq-item">
+                  <button class="faq-question" type="button">Lỡ hôn sau phun môi có bị mất màu không?</button>
+                  <div class="faq-answer"><p>Không thể kết luận chỉ dựa vào một lần tiếp xúc. Kết quả còn phụ thuộc vào tình trạng môi và quá trình hồi phục. Nếu lo lắng, bạn nên liên hệ cơ sở thực hiện để được kiểm tra.</p></div>
+                </div>
+                <div class="faq-item">
+                  <button class="faq-question" type="button">Hôn sau phun môi có làm môi bong sớm không?</button>
+                  <div class="faq-answer"><p>Việc môi bong diễn ra theo quá trình hồi phục tự nhiên. Bạn nên hạn chế các tác động trực tiếp lên môi trong giai đoạn đầu theo hướng dẫn của kỹ thuật viên.</p></div>
+                </div>
+                <div class="faq-item">
+                  <button class="faq-question" type="button">Nếu lỡ hôn khi môi chưa bong thì phải làm sao?</button>
+                  <div class="faq-answer"><p>Tiếp tục chăm sóc môi đúng hướng dẫn và theo dõi tình trạng môi. Nếu xuất hiện dấu hiệu bất thường, hãy liên hệ kỹ thuật viên để được hỗ trợ.</p></div>
+                </div>
+              </div><div class="offer-box">
               <strong>Chăm sóc đúng quan trọng hơn việc quá lo lắng.</strong>
               <p>Trong quá trình hồi phục, những tình huống ngoài ý muốn đôi khi vẫn có thể xảy ra. Điều quan trọng là bình tĩnh, chăm sóc môi đúng cách và nhận tư vấn từ kỹ thuật viên khi cần.</p>
             </div>
@@ -234,21 +232,53 @@
       </section>
     </div>
 
-    <script type="application/ld+json">
+    
+
+
+
+
+
+  
+
+  
+
+  
+
+  <script type="application/ld+json">
       {
         "@context": "https://schema.org",
         "@type": "Article",
-        "headline": "Lỡ Hôn Sau Khi Phun Môi Có Sao Không? Cách Xử Lý Đúng",
-        "description": "Lỡ hôn sau khi phun môi có sao không? Tìm hiểu những ảnh hưởng có thể xảy ra, cách xử lý đúng và cách chăm sóc để môi hồi phục đẹp, lên màu tự nhiên.",
-        "image": "https://ellyphunxamtainha.com/assets/lo-hon-sau-khi-phun-moi-co-sao-khong-1.png",
+        "headline": "Môi Bị Đen Có Phun Được Không? Cách Xử Lý Để Lên Màu Đẹp",
+        "description": "Môi bị đen, thâm bẩm sinh có phun được không? Tìm hiểu nguyên nhân môi đen, khi nào cần khử thâm trước và cách chọn màu môi giúp lên màu tự nhiên.",
+        "image": "https://ellyphunxamtainha.com/assets/moi-bi-den-co-phun-duoc-khong-1.png",
         "author": {"@type": "Organization", "name": "ELLY PMU"},
         "publisher": {"@type": "Organization", "name": "ELLY PMU", "logo": {"@type": "ImageObject", "url": "https://ellyphunxamtainha.com/assets/elly-logo.png"}},
-        "mainEntityOfPage": "https://ellyphunxamtainha.com/kien-thuc/lo-hon-sau-khi-phun-moi-co-sao-khong.html",
-        "dateModified": "2026-07-12"
+        "mainEntityOfPage": "https://ellyphunxamtainha.com/kien-thuc/moi-bi-den-co-phun-duoc-khong.html",
+        "dateModified": "2026-07-23"
       }
     </script>
     <script src="../script.js" defer></script>
+  
+    <script>
+      // Chỉ chỉnh riêng đoạn FAQ - bấm vào mới hiện
+      document.querySelectorAll('.faq-question').forEach(function(btn){
+        btn.addEventListener('click', function(){
+          var item = btn.closest('.faq-item');
+          var open = item.classList.contains('is-open');
+          document.querySelectorAll('.faq-item.is-open').forEach(function(o){ if(o!==item) o.classList.remove('is-open'); });
+          item.classList.toggle('is-open', !open);
+        });
+      });
+    </script>
+
   </body>
 </html>
+
+
+
+
+
+
+
 
 

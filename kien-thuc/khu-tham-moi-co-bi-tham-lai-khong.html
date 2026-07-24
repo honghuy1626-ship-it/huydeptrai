@@ -183,21 +183,19 @@
 
             <h2>Câu Hỏi Thường Gặp</h2>
             <div class="faq-list">
-              <div>
-                <h3>Môi thâm bẩm sinh có dễ bị thâm lại không?</h3>
-                <p>Điều này còn phụ thuộc vào cơ địa và cách chăm sóc sau khi thực hiện.</p>
-              </div>
-              <div>
-                <h3>Sau bao lâu màu môi ổn định?</h3>
-                <p>Thời gian hồi phục sẽ khác nhau ở mỗi người. Bạn nên theo dõi tình trạng môi và chăm sóc theo hướng dẫn.</p>
-              </div>
-              <div>
-                <h3>Nếu môi sậm màu hơn có cần khử thâm lại không?</h3>
-                <p>Bạn nên để kỹ thuật viên kiểm tra trực tiếp trước khi quyết định thực hiện thêm bất kỳ dịch vụ nào.</p>
-              </div>
-            </div>
-
-            <div class="offer-box">
+                <div class="faq-item">
+                  <button class="faq-question" type="button">Môi thâm bẩm sinh có dễ bị thâm lại không?</button>
+                  <div class="faq-answer"><p>Điều này còn phụ thuộc vào cơ địa và cách chăm sóc sau khi thực hiện.</p></div>
+                </div>
+                <div class="faq-item">
+                  <button class="faq-question" type="button">Sau bao lâu màu môi ổn định?</button>
+                  <div class="faq-answer"><p>Thời gian hồi phục sẽ khác nhau ở mỗi người. Bạn nên theo dõi tình trạng môi và chăm sóc theo hướng dẫn.</p></div>
+                </div>
+                <div class="faq-item">
+                  <button class="faq-question" type="button">Nếu môi sậm màu hơn có cần khử thâm lại không?</button>
+                  <div class="faq-answer"><p>Bạn nên để kỹ thuật viên kiểm tra trực tiếp trước khi quyết định thực hiện thêm bất kỳ dịch vụ nào.</p></div>
+                </div>
+              </div><div class="offer-box">
               <strong>Đừng chờ đến khi môi thâm rõ hơn mới tìm cách khắc phục.</strong>
               <p>Việc được tư vấn sớm sẽ giúp bạn hiểu rõ tình trạng môi và lựa chọn giải pháp phù hợp, thay vì tự áp dụng các phương pháp chưa được kiểm chứng.</p>
             </div>
@@ -254,21 +252,53 @@
       </section>
     </div>
 
-    <script type="application/ld+json">
+    
+
+
+
+
+
+  
+
+  
+
+  
+
+  <script type="application/ld+json">
       {
         "@context": "https://schema.org",
         "@type": "Article",
-        "headline": "Khử Thâm Môi Có Bị Thâm Lại Không? Giải Đáp Chi Tiết",
-        "description": "Khử thâm môi có bị thâm lại không? Tìm hiểu nguyên nhân môi thâm trở lại, cách chăm sóc và những lưu ý giúp duy trì đôi môi tươi tắn lâu dài.",
-        "image": "https://ellyphunxamtainha.com/assets/khu-tham-moi-co-bi-tham-lai-khong-1.png",
+        "headline": "Môi Bị Đen Có Phun Được Không? Cách Xử Lý Để Lên Màu Đẹp",
+        "description": "Môi bị đen, thâm bẩm sinh có phun được không? Tìm hiểu nguyên nhân môi đen, khi nào cần khử thâm trước và cách chọn màu môi giúp lên màu tự nhiên.",
+        "image": "https://ellyphunxamtainha.com/assets/moi-bi-den-co-phun-duoc-khong-1.png",
         "author": {"@type": "Organization", "name": "ELLY PMU"},
         "publisher": {"@type": "Organization", "name": "ELLY PMU", "logo": {"@type": "ImageObject", "url": "https://ellyphunxamtainha.com/assets/elly-logo.png"}},
-        "mainEntityOfPage": "https://ellyphunxamtainha.com/kien-thuc/khu-tham-moi-co-bi-tham-lai-khong.html",
-        "dateModified": "2026-07-10"
+        "mainEntityOfPage": "https://ellyphunxamtainha.com/kien-thuc/moi-bi-den-co-phun-duoc-khong.html",
+        "dateModified": "2026-07-23"
       }
     </script>
     <script src="../script.js" defer></script>
+  
+    <script>
+      // Chỉ chỉnh riêng đoạn FAQ - bấm vào mới hiện
+      document.querySelectorAll('.faq-question').forEach(function(btn){
+        btn.addEventListener('click', function(){
+          var item = btn.closest('.faq-item');
+          var open = item.classList.contains('is-open');
+          document.querySelectorAll('.faq-item.is-open').forEach(function(o){ if(o!==item) o.classList.remove('is-open'); });
+          item.classList.toggle('is-open', !open);
+        });
+      });
+    </script>
+
   </body>
 </html>
+
+
+
+
+
+
+
 
 

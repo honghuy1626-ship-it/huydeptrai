@@ -174,25 +174,23 @@
 
             <h2>Câu Hỏi Thường Gặp</h2>
             <div class="faq-list">
-              <div>
-                <h3>Sau khử thâm môi bao lâu thì ăn uống bình thường?</h3>
-                <p>Thời điểm này sẽ khác nhau tùy vào tình trạng hồi phục. Bạn nên làm theo hướng dẫn của kỹ thuật viên.</p>
-              </div>
-              <div>
-                <h3>Nếu lỡ ăn hải sản thì có sao không?</h3>
-                <p>Nếu bạn có bất kỳ lo lắng nào sau khi ăn, hãy liên hệ cơ sở thực hiện để được hướng dẫn thay vì tự xử lý.</p>
-              </div>
-              <div>
-                <h3>Có cần kiêng tất cả thực phẩm dễ gây dị ứng không?</h3>
-                <p>Việc điều chỉnh chế độ ăn nên dựa trên tình trạng sức khỏe và hướng dẫn cá nhân hóa từ kỹ thuật viên.</p>
-              </div>
-              <div>
-                <h3>Sau khử thâm môi nên ăn gì?</h3>
-                <p>Bạn có thể ưu tiên rau xanh, trái cây, uống đủ nước và thực phẩm phù hợp với sức khỏe cá nhân.</p>
-              </div>
-            </div>
-
-            <div class="offer-box">
+                <div class="faq-item">
+                  <button class="faq-question" type="button">Sau khử thâm môi bao lâu thì ăn uống bình thường?</button>
+                  <div class="faq-answer"><p>Thời điểm này sẽ khác nhau tùy vào tình trạng hồi phục. Bạn nên làm theo hướng dẫn của kỹ thuật viên.</p></div>
+                </div>
+                <div class="faq-item">
+                  <button class="faq-question" type="button">Nếu lỡ ăn hải sản thì có sao không?</button>
+                  <div class="faq-answer"><p>Nếu bạn có bất kỳ lo lắng nào sau khi ăn, hãy liên hệ cơ sở thực hiện để được hướng dẫn thay vì tự xử lý.</p></div>
+                </div>
+                <div class="faq-item">
+                  <button class="faq-question" type="button">Có cần kiêng tất cả thực phẩm dễ gây dị ứng không?</button>
+                  <div class="faq-answer"><p>Việc điều chỉnh chế độ ăn nên dựa trên tình trạng sức khỏe và hướng dẫn cá nhân hóa từ kỹ thuật viên.</p></div>
+                </div>
+                <div class="faq-item">
+                  <button class="faq-question" type="button">Sau khử thâm môi nên ăn gì?</button>
+                  <div class="faq-answer"><p>Bạn có thể ưu tiên rau xanh, trái cây, uống đủ nước và thực phẩm phù hợp với sức khỏe cá nhân.</p></div>
+                </div>
+              </div><div class="offer-box">
               <strong>Một chế độ chăm sóc phù hợp giúp bạn yên tâm hơn.</strong>
               <p>Thay vì quá lo lắng về từng món ăn, hãy tập trung vào việc chăm sóc môi đúng cách và trao đổi với kỹ thuật viên nếu có bất kỳ thắc mắc nào trong quá trình hồi phục.</p>
             </div>
@@ -280,21 +278,53 @@
       </section>
     </div>
 
-    <script type="application/ld+json">
+    
+
+
+
+
+
+  
+
+  
+
+  
+
+  <script type="application/ld+json">
       {
         "@context": "https://schema.org",
         "@type": "Article",
-        "headline": "Khử Thâm Môi Có Ăn Hải Sản Được Không? Chuyên Gia Giải Đáp",
-        "description": "Khử thâm môi có ăn hải sản được không? Tìm hiểu chế độ ăn uống sau khi khử thâm môi, những lưu ý quan trọng và cách chăm sóc giúp môi hồi phục tốt.",
-        "image": "https://ellyphunxamtainha.com/assets/khu-tham-moi-co-an-hai-san-duoc-khong-1.png",
+        "headline": "Môi Bị Đen Có Phun Được Không? Cách Xử Lý Để Lên Màu Đẹp",
+        "description": "Môi bị đen, thâm bẩm sinh có phun được không? Tìm hiểu nguyên nhân môi đen, khi nào cần khử thâm trước và cách chọn màu môi giúp lên màu tự nhiên.",
+        "image": "https://ellyphunxamtainha.com/assets/moi-bi-den-co-phun-duoc-khong-1.png",
         "author": {"@type": "Organization", "name": "ELLY PMU"},
         "publisher": {"@type": "Organization", "name": "ELLY PMU", "logo": {"@type": "ImageObject", "url": "https://ellyphunxamtainha.com/assets/elly-logo.png"}},
-        "mainEntityOfPage": "https://ellyphunxamtainha.com/kien-thuc/khu-tham-moi-co-an-hai-san-duoc-khong.html",
-        "dateModified": "2026-07-11"
+        "mainEntityOfPage": "https://ellyphunxamtainha.com/kien-thuc/moi-bi-den-co-phun-duoc-khong.html",
+        "dateModified": "2026-07-23"
       }
     </script>
-    <script src="../script.js"></script>
+    <script src="../script.js" defer></script>
+  
+    <script>
+      // Chỉ chỉnh riêng đoạn FAQ - bấm vào mới hiện
+      document.querySelectorAll('.faq-question').forEach(function(btn){
+        btn.addEventListener('click', function(){
+          var item = btn.closest('.faq-item');
+          var open = item.classList.contains('is-open');
+          document.querySelectorAll('.faq-item.is-open').forEach(function(o){ if(o!==item) o.classList.remove('is-open'); });
+          item.classList.toggle('is-open', !open);
+        });
+      });
+    </script>
+
   </body>
 </html>
+
+
+
+
+
+
+
 
 

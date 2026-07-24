@@ -169,25 +169,23 @@
 
             <h2>Câu Hỏi Thường Gặp</h2>
             <div class="faq-list">
-              <div>
-                <h3>Phun môi mấy ngày thì bong?</h3>
-                <p>Thời gian bong khác nhau ở mỗi người và phụ thuộc vào cơ địa, cách chăm sóc cũng như quá trình hồi phục thực tế.</p>
-              </div>
-              <div>
-                <h3>Môi chưa bong có bình thường không?</h3>
-                <p>Mỗi người có tốc độ hồi phục khác nhau. Nếu bạn lo lắng, hãy liên hệ cơ sở thực hiện để được kiểm tra.</p>
-              </div>
-              <div>
-                <h3>Bong chậm có ảnh hưởng đến màu môi không?</h3>
-                <p>Không thể kết luận chỉ dựa trên tốc độ bong. Bạn nên tiếp tục chăm sóc đúng hướng dẫn và theo dõi quá trình hồi phục.</p>
-              </div>
-              <div>
-                <h3>Có nên tự bóc lớp bong không?</h3>
-                <p>Không nên. Việc bóc lớp bong có thể làm môi nhạy cảm hơn và ảnh hưởng đến quá trình hồi phục tự nhiên.</p>
-              </div>
-            </div>
-
-            <div class="offer-box">
+                <div class="faq-item">
+                  <button class="faq-question" type="button">Phun môi mấy ngày thì bong?</button>
+                  <div class="faq-answer"><p>Thời gian bong khác nhau ở mỗi người và phụ thuộc vào cơ địa, cách chăm sóc cũng như quá trình hồi phục thực tế.</p></div>
+                </div>
+                <div class="faq-item">
+                  <button class="faq-question" type="button">Môi chưa bong có bình thường không?</button>
+                  <div class="faq-answer"><p>Mỗi người có tốc độ hồi phục khác nhau. Nếu bạn lo lắng, hãy liên hệ cơ sở thực hiện để được kiểm tra.</p></div>
+                </div>
+                <div class="faq-item">
+                  <button class="faq-question" type="button">Bong chậm có ảnh hưởng đến màu môi không?</button>
+                  <div class="faq-answer"><p>Không thể kết luận chỉ dựa trên tốc độ bong. Bạn nên tiếp tục chăm sóc đúng hướng dẫn và theo dõi quá trình hồi phục.</p></div>
+                </div>
+                <div class="faq-item">
+                  <button class="faq-question" type="button">Có nên tự bóc lớp bong không?</button>
+                  <div class="faq-answer"><p>Không nên. Việc bóc lớp bong có thể làm môi nhạy cảm hơn và ảnh hưởng đến quá trình hồi phục tự nhiên.</p></div>
+                </div>
+              </div><div class="offer-box">
               <strong>Chăm sóc đúng giúp môi hồi phục tự nhiên.</strong>
               <p>Đừng quá sốt ruột nếu môi chưa bong như mong đợi. Điều quan trọng là kiên nhẫn, chăm sóc đúng cách và trao đổi với kỹ thuật viên khi cần thiết.</p>
             </div>
@@ -247,21 +245,53 @@
       </section>
     </div>
 
-    <script type="application/ld+json">
+    
+
+
+
+
+
+  
+
+  
+
+  
+
+  <script type="application/ld+json">
       {
         "@context": "https://schema.org",
         "@type": "Article",
-        "headline": "Phun Môi Mấy Ngày Thì Bong? Tiến Trình Bong Chuẩn Theo Từng Ngày",
-        "description": "Phun môi mấy ngày thì bong? Tìm hiểu tiến trình bong môi theo từng giai đoạn, những dấu hiệu hồi phục bình thường và cách chăm sóc giúp môi lên màu đẹp.",
-        "image": "https://ellyphunxamtainha.com/assets/phun-moi-may-ngay-thi-bong-1.png",
+        "headline": "Môi Bị Đen Có Phun Được Không? Cách Xử Lý Để Lên Màu Đẹp",
+        "description": "Môi bị đen, thâm bẩm sinh có phun được không? Tìm hiểu nguyên nhân môi đen, khi nào cần khử thâm trước và cách chọn màu môi giúp lên màu tự nhiên.",
+        "image": "https://ellyphunxamtainha.com/assets/moi-bi-den-co-phun-duoc-khong-1.png",
         "author": {"@type": "Organization", "name": "ELLY PMU"},
         "publisher": {"@type": "Organization", "name": "ELLY PMU", "logo": {"@type": "ImageObject", "url": "https://ellyphunxamtainha.com/assets/elly-logo.png"}},
-        "mainEntityOfPage": "https://ellyphunxamtainha.com/kien-thuc/phun-moi-may-ngay-thi-bong.html",
-        "dateModified": "2026-07-13"
+        "mainEntityOfPage": "https://ellyphunxamtainha.com/kien-thuc/moi-bi-den-co-phun-duoc-khong.html",
+        "dateModified": "2026-07-23"
       }
     </script>
     <script src="../script.js" defer></script>
+  
+    <script>
+      // Chỉ chỉnh riêng đoạn FAQ - bấm vào mới hiện
+      document.querySelectorAll('.faq-question').forEach(function(btn){
+        btn.addEventListener('click', function(){
+          var item = btn.closest('.faq-item');
+          var open = item.classList.contains('is-open');
+          document.querySelectorAll('.faq-item.is-open').forEach(function(o){ if(o!==item) o.classList.remove('is-open'); });
+          item.classList.toggle('is-open', !open);
+        });
+      });
+    </script>
+
   </body>
 </html>
+
+
+
+
+
+
+
 
 

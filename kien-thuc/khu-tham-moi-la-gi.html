@@ -188,14 +188,27 @@
 
             <h2>Câu Hỏi Thường Gặp</h2>
             <div class="faq-list">
-              <div><h3>Khử thâm môi là gì?</h3><p>Là phương pháp hỗ trợ cải thiện sắc tố môi để môi đều màu và tươi tắn hơn.</p></div>
-              <div><h3>Môi thâm bẩm sinh có khử được không?</h3><p>Nhiều trường hợp có thể được tư vấn phương án phù hợp sau khi đánh giá trực tiếp.</p></div>
-              <div><h3>Khử thâm môi có đau không?</h3><p>Thông thường sẽ có bước ủ tê theo quy trình trước khi thực hiện nên cảm giác thường ở mức có thể chịu được.</p></div>
-              <div><h3>Bao lâu môi hồi phục?</h3><p>Tùy cơ địa và cách chăm sóc của từng người.</p></div>
-              <div><h3>Có cần dặm lại không?</h3><p>Kỹ thuật viên sẽ đánh giá sau khi môi hồi phục hoàn toàn.</p></div>
-            </div>
-
-            <div class="offer-box">
+                <div class="faq-item">
+                  <button class="faq-question" type="button">Khử thâm môi là gì?</button>
+                  <div class="faq-answer"><p>Là phương pháp hỗ trợ cải thiện sắc tố môi để môi đều màu và tươi tắn hơn.</p></div>
+                </div>
+                <div class="faq-item">
+                  <button class="faq-question" type="button">Môi thâm bẩm sinh có khử được không?</button>
+                  <div class="faq-answer"><p>Nhiều trường hợp có thể được tư vấn phương án phù hợp sau khi đánh giá trực tiếp.</p></div>
+                </div>
+                <div class="faq-item">
+                  <button class="faq-question" type="button">Khử thâm môi có đau không?</button>
+                  <div class="faq-answer"><p>Thông thường sẽ có bước ủ tê theo quy trình trước khi thực hiện nên cảm giác thường ở mức có thể chịu được.</p></div>
+                </div>
+                <div class="faq-item">
+                  <button class="faq-question" type="button">Bao lâu môi hồi phục?</button>
+                  <div class="faq-answer"><p>Tùy cơ địa và cách chăm sóc của từng người.</p></div>
+                </div>
+                <div class="faq-item">
+                  <button class="faq-question" type="button">Có cần dặm lại không?</button>
+                  <div class="faq-answer"><p>Kỹ thuật viên sẽ đánh giá sau khi môi hồi phục hoàn toàn.</p></div>
+                </div>
+              </div><div class="offer-box">
               <strong>Đừng để đôi môi thâm làm bạn mất tự tin.</strong>
               <p>Một buổi tư vấn đúng có thể giúp bạn hiểu rõ tình trạng môi và lựa chọn phương án phù hợp thay vì chỉ dựa vào thông tin trên Internet.</p>
             </div>
@@ -284,21 +297,53 @@
       </section>
     </div>
 
-    <script type="application/ld+json">
+    
+
+
+
+
+
+  
+
+  
+
+  
+
+  <script type="application/ld+json">
       {
         "@context": "https://schema.org",
         "@type": "Article",
-        "headline": "Khử Thâm Môi Là Gì? Từ A-Z Quy Trình, Chi Phí, Chăm Sóc",
-        "description": "Khử thâm môi là gì? Tìm hiểu quy trình, đối tượng phù hợp, thời gian hồi phục, chi phí, chăm sóc sau thực hiện và những câu hỏi thường gặp.",
-        "image": "https://ellyphunxamtainha.com/assets/khu-tham-moi-la-gi-1.jpg",
+        "headline": "Môi Bị Đen Có Phun Được Không? Cách Xử Lý Để Lên Màu Đẹp",
+        "description": "Môi bị đen, thâm bẩm sinh có phun được không? Tìm hiểu nguyên nhân môi đen, khi nào cần khử thâm trước và cách chọn màu môi giúp lên màu tự nhiên.",
+        "image": "https://ellyphunxamtainha.com/assets/moi-bi-den-co-phun-duoc-khong-1.png",
         "author": {"@type": "Organization", "name": "ELLY PMU"},
         "publisher": {"@type": "Organization", "name": "ELLY PMU", "logo": {"@type": "ImageObject", "url": "https://ellyphunxamtainha.com/assets/elly-logo.png"}},
-        "mainEntityOfPage": "https://ellyphunxamtainha.com/kien-thuc/khu-tham-moi-la-gi.html",
-        "dateModified": "2026-07-11"
+        "mainEntityOfPage": "https://ellyphunxamtainha.com/kien-thuc/moi-bi-den-co-phun-duoc-khong.html",
+        "dateModified": "2026-07-23"
       }
     </script>
-    <script src="../script.js"></script>
+    <script src="../script.js" defer></script>
+  
+    <script>
+      // Chỉ chỉnh riêng đoạn FAQ - bấm vào mới hiện
+      document.querySelectorAll('.faq-question').forEach(function(btn){
+        btn.addEventListener('click', function(){
+          var item = btn.closest('.faq-item');
+          var open = item.classList.contains('is-open');
+          document.querySelectorAll('.faq-item.is-open').forEach(function(o){ if(o!==item) o.classList.remove('is-open'); });
+          item.classList.toggle('is-open', !open);
+        });
+      });
+    </script>
+
   </body>
 </html>
+
+
+
+
+
+
+
 
 

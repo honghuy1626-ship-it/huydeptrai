@@ -173,13 +173,23 @@
 
               <h2>Câu Hỏi Thường Gặp</h2>
               <div class="faq-list">
-                <div><h3>Da dầu có nên phun mày không?</h3><p>Có. Da dầu không phải là chống chỉ định của phun mày, nhưng cần chọn kỹ thuật phù hợp.</p></div>
-                <div><h3>Da dầu giữ màu được bao lâu?</h3><p>Thông thường khoảng 2-4 năm, tùy cơ địa, kỹ thuật thực hiện và cách chăm sóc sau khi làm.</p></div>
-                <div><h3>Có cần dặm màu sớm hơn không?</h3><p>Một số trường hợp da dầu có thể cần dặm sớm hơn da thường để duy trì màu đẹp và đều.</p></div>
-                <div><h3>Có cần thay đổi quy trình chăm sóc không?</h3><p>Không quá nhiều. Bạn chỉ cần tuân thủ hướng dẫn của kỹ thuật viên và giữ vùng chân mày sạch, khô trong giai đoạn đầu.</p></div>
-              </div>
-
-              <h2>Kết Luận</h2>
+                <div class="faq-item">
+                  <button class="faq-question" type="button">Da dầu có nên phun mày không?</button>
+                  <div class="faq-answer"><p>Có. Da dầu không phải là chống chỉ định của phun mày, nhưng cần chọn kỹ thuật phù hợp.</p></div>
+                </div>
+                <div class="faq-item">
+                  <button class="faq-question" type="button">Da dầu giữ màu được bao lâu?</button>
+                  <div class="faq-answer"><p>Thông thường khoảng 2-4 năm, tùy cơ địa, kỹ thuật thực hiện và cách chăm sóc sau khi làm.</p></div>
+                </div>
+                <div class="faq-item">
+                  <button class="faq-question" type="button">Có cần dặm màu sớm hơn không?</button>
+                  <div class="faq-answer"><p>Một số trường hợp da dầu có thể cần dặm sớm hơn da thường để duy trì màu đẹp và đều.</p></div>
+                </div>
+                <div class="faq-item">
+                  <button class="faq-question" type="button">Có cần thay đổi quy trình chăm sóc không?</button>
+                  <div class="faq-answer"><p>Không quá nhiều. Bạn chỉ cần tuân thủ hướng dẫn của kỹ thuật viên và giữ vùng chân mày sạch, khô trong giai đoạn đầu.</p></div>
+                </div>
+              </div><h2>Kết Luận</h2>
               <p>Da dầu hoàn toàn có thể phun mày đẹp và bền nếu lựa chọn đúng công nghệ và chăm sóc đúng cách. Thay vì quá lo lắng về loại da của mình, hãy tìm một cơ sở uy tín với đội ngũ kỹ thuật viên có kinh nghiệm để được tư vấn phương pháp phù hợp.</p>
               <div class="tip-box">Nếu bạn chưa biết tình trạng da hiện tại có phù hợp với Nano, Ombre hay kỹ thuật khác, hãy gửi ảnh chân mày mộc cho ELLY PMU. Đội ngũ kỹ thuật viên sẽ tư vấn miễn phí và giúp bạn lựa chọn giải pháp phù hợp nhất.</div>
               <div class="hero-actions">
@@ -236,69 +246,53 @@
       <a class="float-btn messenger" href="https://m.me/61555486805617" target="_blank" rel="noopener noreferrer" aria-label="Chat Messenger"><span>Chat</span></a>
     </div>
 
-    <script src="../script.js"></script>
-    <div class="booking-popover" id="bookingPopover" aria-hidden="true">
-      <div class="booking-popover-backdrop" data-booking-close></div>
-      <section class="booking-popover-panel" role="dialog" aria-modal="true" aria-labelledby="bookingPopoverTitle">
-        <button class="booking-popover-close" type="button" aria-label="Đóng form đặt lịch" data-booking-close>×</button>
-        <div class="booking-popover-grid">
-          <div class="booking-popover-copy">
-            <p class="eyebrow">Đặt lịch tư vấn ELLY</p>
-            <h2 id="bookingPopoverTitle">Giữ lịch tư vấn phun xăm tại nhà</h2>
-            <p>ELLY SPA xác nhận dịch vụ, địa chỉ và khung giờ trước khi đến.</p>
-          </div>
-          <form class="booking-form" id="bookingForm" data-booking-form data-send-sheet="true">
-            <label><span>Họ và tên</span><input type="text" name="name" autocomplete="name" required /></label>
-            <label><span>Số điện thoại</span><input type="tel" name="phone" inputmode="tel" autocomplete="tel" required /></label>
-            <label><span>Dịch vụ quan tâm</span><select name="service" required><option value="">Chọn dịch vụ</option><option>Phun môi</option><option>Khử thâm môi</option><option>Phun mày</option><option>Phun mí</option></select></label>
-            <label><span>Tỉnh/Thành</span><select name="city" required><option value="">Chọn khu vực</option><option>TP.HCM</option><option>Bình Dương</option><option>Khu vực khác</option></select></label>
-            <label class="full"><span>Ghi chú</span><textarea name="note" rows="3" placeholder="Tình trạng môi hiện tại hoặc khung giờ thuận tiện"></textarea></label>
-            <button class="btn btn-primary full" type="submit">Gửi thông tin tư vấn</button>
-            <p class="form-status" data-form-status></p>
-          </form>
-        </div>
-      </section>
-    </div>
+    
 
-    <script type="application/ld+json">
-{
-  "@context": "https://schema.org",
-  "@graph": [
-    {
-      "@type": "Article",
-      "@id": "https://ellyphunxamtainha.com/kien-thuc/phun-may-cho-da-dau-co-ben-khong.html#article",
-      "headline": "Phun Mày Cho Da Dầu Có Bền Không? Bí Quyết Giữ Màu Đẹp Lâu",
-      "description": "Da dầu có nên phun mày không? Tìm hiểu độ bền, kỹ thuật phù hợp và cách chăm sóc giúp chân mày lên màu đẹp, giữ lâu theo tư vấn từ ELLY PMU.",
-      "image": "https://ellyphunxamtainha.com/assets/phun-may-cho-da-dau-co-ben-khong.png",
-      "author": {"@type": "Organization", "name": "ELLY"},
-      "publisher": {"@type": "Organization", "name": "ELLY"},
-      "mainEntityOfPage": {"@type": "WebPage", "@id": "https://ellyphunxamtainha.com/kien-thuc/phun-may-cho-da-dau-co-ben-khong.html"},
-      "datePublished": "2026-07-07",
-      "dateModified": "2026-07-07"
-    },
-    {
-      "@type": "BreadcrumbList",
-      "@id": "https://ellyphunxamtainha.com/kien-thuc/phun-may-cho-da-dau-co-ben-khong.html#breadcrumb",
-      "itemListElement": [
-        {"@type": "ListItem", "position": 1, "name": "Trang chủ", "item": "https://ellyphunxamtainha.com/"},
-        {"@type": "ListItem", "position": 2, "name": "Kiến thức", "item": "https://ellyphunxamtainha.com/kien-thuc.html"},
-        {"@type": "ListItem", "position": 3, "name": "Phun Mày Cho Da Dầu Có Bền Không?", "item": "https://ellyphunxamtainha.com/kien-thuc/phun-may-cho-da-dau-co-ben-khong.html"}
-      ]
-    },
-    {
-      "@type": "FAQPage",
-      "@id": "https://ellyphunxamtainha.com/kien-thuc/phun-may-cho-da-dau-co-ben-khong.html#faq",
-      "mainEntity": [
-        {"@type": "Question", "name": "Da dầu có nên phun mày không?", "acceptedAnswer": {"@type": "Answer", "text": "Có. Da dầu không phải là chống chỉ định của phun mày, nhưng cần chọn kỹ thuật phù hợp."}},
-        {"@type": "Question", "name": "Da dầu giữ màu được bao lâu?", "acceptedAnswer": {"@type": "Answer", "text": "Thông thường khoảng 2-4 năm, tùy cơ địa, kỹ thuật thực hiện và cách chăm sóc sau khi làm."}},
-        {"@type": "Question", "name": "Có cần dặm màu sớm hơn không?", "acceptedAnswer": {"@type": "Answer", "text": "Một số trường hợp da dầu có thể cần dặm sớm hơn da thường để duy trì màu đẹp và đều."}},
-        {"@type": "Question", "name": "Có cần thay đổi quy trình chăm sóc không?", "acceptedAnswer": {"@type": "Answer", "text": "Không quá nhiều. Bạn chỉ cần tuân thủ hướng dẫn của kỹ thuật viên và giữ vùng chân mày sạch, khô trong giai đoạn đầu."}}
-      ]
-    }
-  ]
-}
+
+
+
+
+  
+
+  
+
+  
+
+  <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@type": "Article",
+        "headline": "Môi Bị Đen Có Phun Được Không? Cách Xử Lý Để Lên Màu Đẹp",
+        "description": "Môi bị đen, thâm bẩm sinh có phun được không? Tìm hiểu nguyên nhân môi đen, khi nào cần khử thâm trước và cách chọn màu môi giúp lên màu tự nhiên.",
+        "image": "https://ellyphunxamtainha.com/assets/moi-bi-den-co-phun-duoc-khong-1.png",
+        "author": {"@type": "Organization", "name": "ELLY PMU"},
+        "publisher": {"@type": "Organization", "name": "ELLY PMU", "logo": {"@type": "ImageObject", "url": "https://ellyphunxamtainha.com/assets/elly-logo.png"}},
+        "mainEntityOfPage": "https://ellyphunxamtainha.com/kien-thuc/moi-bi-den-co-phun-duoc-khong.html",
+        "dateModified": "2026-07-23"
+      }
     </script>
+    <script src="../script.js" defer></script>
+  
+    <script>
+      // Chỉ chỉnh riêng đoạn FAQ - bấm vào mới hiện
+      document.querySelectorAll('.faq-question').forEach(function(btn){
+        btn.addEventListener('click', function(){
+          var item = btn.closest('.faq-item');
+          var open = item.classList.contains('is-open');
+          document.querySelectorAll('.faq-item.is-open').forEach(function(o){ if(o!==item) o.classList.remove('is-open'); });
+          item.classList.toggle('is-open', !open);
+        });
+      });
+    </script>
+
   </body>
 </html>
+
+
+
+
+
+
+
 
 
