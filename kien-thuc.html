@@ -24,7 +24,8 @@
     <title>Kiến thức chăm sóc mày môi | ELLY</title>
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-<link href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@400;500;600;700;800&family=Playfair+Display:wght@600;700&display=swap&subset=vietnamese" rel="stylesheet" />    <link rel="stylesheet" href="style.css" />
+    <link href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@400;500;600;700;800&family=Playfair+Display:wght@600;700&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="style.css" />
     <style>
       .knowledge-news{padding-top:96px;background:#fff;color:#2b2023}
       .knowledge-search{position:sticky;top:72px;z-index:20;margin:0;border-bottom:1px solid rgba(99,53,57,.12);border-top:1px solid rgba(99,53,57,.08);background:rgba(255,255,255,.96);padding:7px 0;box-shadow:0 8px 22px rgba(67,37,41,.05);backdrop-filter:blur(10px);transition:padding .2s ease,box-shadow .2s ease}
@@ -78,12 +79,114 @@
       .news-cta p{color:rgba(255,255,255,.86);line-height:1.65}
       @media(max-width:980px){.news-layout,.news-body{grid-template-columns:1fr}.side-grid{grid-template-columns:1fr 1fr}.news-sidebar{position:static;border-left:0;padding-left:0}}
       @media(max-width:680px){.side-grid,.news-row{grid-template-columns:1fr}.knowledge-news{padding-top:82px}.knowledge-search{top:66px;padding:5px 0}.knowledge-search-form{grid-template-columns:minmax(0,1fr) 92px;gap:6px}.knowledge-search-form input{min-height:36px;font-size:16px}.knowledge-search-form button{min-height:36px;font-size:.9rem}.knowledge-search.is-compact .knowledge-search-form input{min-height:32px;font-size:16px}.knowledge-search.is-compact .knowledge-search-form button{min-height:32px;font-size:.86rem}.knowledge-search-status{font-size:.86rem;margin-top:5px}.knowledge-search-results{max-height:300px}.knowledge-search-result{grid-template-columns:54px minmax(0,1fr);padding:7px 9px}.knowledge-search-result img{width:54px;height:46px}.knowledge-search-result small{display:none}}
-    </style>
+    
+      /* ===== PHÂN TRANG KIỂU HÌNH 2 - 1 2 3 4 ... 21 > ===== */
+      .news-pagination{display:flex;justify-content:center;align-items:center;gap:10px;margin:36px 0 20px;flex-wrap:wrap}
+      .news-pagination button{width:40px;height:40px;border-radius:50%;border:1.5px solid #222;background:#fff;color:#222;font-weight:700;font-size:.95rem;cursor:pointer;transition:all .18s ease;display:grid;place-items:center}
+      .news-pagination button:hover{border-color:#4a256a;color:#4a256a}
+      .news-pagination button.is-active{background:#3d1f5f;border-color:#3d1f5f;color:#fff;box-shadow:0 6px 16px rgba(61,31,95,.28)}
+      .news-pagination button:disabled{opacity:.35;cursor:not-allowed}
+      .news-pagination .dots{width:40px;height:40px;display:grid;place-items:center;border:1.5px dashed #aaa;border-radius:50%;color:#666;font-weight:700}
+      /* Ẩn bài không thuộc trang hiện tại */
+      .news-row.is-hidden{display:none !important}
+      /* Badge ngày Th7 như hình bạn gửi */
+      .news-row{position:relative}
+      .news-date-badge{position:absolute;top:12px;left:12px;z-index:2;background:#fff;border-radius:12px;padding:6px 10px;box-shadow:0 4px 12px rgba(0,0,0,.12);text-align:center;line-height:1;font-weight:800;color:#222;min-width:42px}
+      .news-date-badge b{display:block;font-size:1.1rem}
+      .news-date-badge span{display:block;font-size:.75rem;color:#666;margin-top:2px}
+      .news-thumb{position:relative;overflow:hidden;border-radius:12px}
+
+    
+      :root{ --elly-brown:#543729; }
+      .elly-kien-thuc-wrap{ width:100%; max-width:1140px; margin:0 auto; }
+      .elly-knowledge-list{ display:grid; gap:0; }
+      .elly-knowledge-item{
+        display:grid;
+        grid-template-columns:168px minmax(0,1fr);
+        gap:16px;
+        align-items:center;
+        padding:14px 0;
+        border-bottom:1px solid rgba(84,55,41,.12);
+      }
+      .elly-knowledge-thumb{ overflow:hidden; border-radius:14px; background:#f6ece3; display:block; }
+      .elly-knowledge-thumb img{ width:100%; height:98px; object-fit:cover; border-radius:14px; display:block; }
+      .elly-kicker{ display:inline-flex; margin:0 0 4px; color:var(--elly-brown); font-weight:800; font-size:.72rem; text-transform:uppercase; }
+      .elly-knowledge-title{ margin:0; font-size:1.06rem; line-height:1.35; font-weight:700; color:#211611; display:-webkit-box; -webkit-line-clamp:2; -webkit-box-orient:vertical; overflow:hidden; }
+      .elly-knowledge-title a{ color:inherit; text-decoration:none; }
+      .elly-knowledge-title a:hover{ color:var(--elly-brown); }
+      .elly-knowledge-line{ width:28px; height:2.5px; background:var(--elly-brown); border-radius:2px; margin-top:8px; }
+      .elly-knowledge-item.is-hidden{ display:none !important; }
+      .elly-pagination{
+        display:flex; justify-content:center; align-items:center; gap:10px;
+        margin:36px 0 24px; flex-wrap:wrap; padding-top:22px;
+        border-top:1px solid rgba(84,55,41,.1);
+      }
+      .elly-pagination button{
+        width:42px; height:42px; border-radius:50%;
+        border:1.5px solid #2b211e; background:#fff; color:#2b211e;
+        font-weight:700; font-size:.95rem; cursor:pointer;
+        display:grid; place-items:center; transition:all .18s;
+      }
+      .elly-pagination button:hover{ border-color:var(--elly-brown); color:var(--elly-brown); }
+      .elly-pagination button.is-active{ background:var(--elly-brown); border-color:var(--elly-brown); color:#fff; }
+      .elly-pagination .dots{ width:42px; height:42px; display:grid; place-items:center; border:1.5px dashed #b8a89d; border-radius:50%; color:#8a7a71; font-weight:700; }
+      .elly-trending-wrap{
+        margin:28px 0 20px;
+        border:1px solid rgba(84,55,41,.14);
+        border-radius:14px;
+        background:#fffaf6;
+        overflow:hidden;
+      }
+      .elly-trending-header{ display:flex; justify-content:space-between; align-items:center; padding:14px 16px; cursor:pointer; background:#fff; }
+      .elly-trending-header h2{ margin:0; font-size:1.05rem; color:#211611; display:flex; align-items:center; gap:8px; }
+      .elly-trending-header h2 i{ font-style:normal; background:var(--elly-brown); color:#fff; font-size:.7rem; padding:3px 7px; border-radius:999px; }
+      .elly-trending-toggle{ width:32px; height:32px; border-radius:50%; border:1.5px solid #2b211e; background:#fff; display:grid; place-items:center; font-weight:800; }
+      .elly-trending-wrap.is-collapsed .elly-trending-content{ display:none; }
+      .elly-trending-content{ padding:0 16px 14px; display:grid; gap:0; }
+      .elly-trending-item{ display:flex; gap:10px; padding:10px 0; border-top:1px solid rgba(84,55,41,.1); text-decoration:none; color:#3b2a20; font-weight:600; font-size:.92rem; }
+      .elly-trending-item:first-child{ border-top:0; }
+      .elly-trending-item:hover{ color:var(--elly-brown); }
+      .elly-trending-item::before{ content:'🔥'; }
+      .elly-trending-note{ font-size:.78rem; color:#8a7a71; padding:8px 16px 12px; background:#fdf2e8; border-top:1px dashed rgba(84,55,41,.15); }
+      @media(max-width:680px){
+        .elly-knowledge-item{ grid-template-columns:112px 1fr; gap:12px; }
+        .elly-knowledge-thumb img{ height:78px; border-radius:12px; }
+        .elly-knowledge-title{ font-size:.94rem; }
+        .elly-pagination button,.elly-pagination .dots{ width:38px; height:38px; }
+      }
+
+    
+      .knowledge-search-form{position:relative;}
+      .elly-search-clear{
+        position:absolute;
+        right:126px;
+        top:50%;
+        transform:translateY(-50%);
+        width:28px; height:28px;
+        border-radius:50%;
+        border:1px solid rgba(84,55,41,.25);
+        background:#fff;
+        color:#543729;
+        font-weight:800;
+        font-size:14px;
+        line-height:1;
+        display:none;
+        place-items:center;
+        cursor:pointer;
+        z-index:2;
+      }
+      .elly-search-clear.is-show{ display:grid; }
+      .elly-search-clear:hover{ background:var(--elly-brown); color:#fff; border-color:var(--elly-brown); }
+      @media(max-width:680px){
+        .elly-search-clear{ right:94px; }
+      }
+
+</style>
   </head>
   <body>
     <header class="site-header" data-header>
       <div class="container header-inner">
-        <a class="brand" href="/" aria-label="ELLY trang chủ"><img class="brand-logo-img" src="d:\huydeptraivai\assets\elly_spa_vertical_black_large.png" alt="ELLY" decoding="async" /></a>
+        <a class="brand" href="/" aria-label="ELLY trang chủ"><img class="brand-logo-img" src="assets/elly-logo.png" alt="ELLY" decoding="async" /></a>
         <nav class="main-nav" id="mainNav" aria-label="Dieu huong chinh">
           <a href="/">Trang ch&#7911;</a>
           <a href="dich-vu.html">Phun x&#259;m t&#7841;i nh&#224;</a>
@@ -101,7 +204,16 @@
       </div>
     </header>
     <main class="knowledge-news">
-      <div class="knowledge-search" data-search-box></div>
+      
+      <div class="knowledge-search" data-search-box>
+        <form class="knowledge-search-form" id="ellySearchForm" onsubmit="return false;">
+          <input type="text" id="ellySearchInput" placeholder="Tìm kiếm: khử thâm, phun môi, phun mày..." autocomplete="off"><button type="button" class="elly-search-clear" id="ellySearchClear" aria-label="Thoát tìm kiếm">✕</button>
+          <button type="button" id="ellySearchBtn">Tìm</button>
+        </form>
+        <div class="knowledge-search-status" id="ellySearchStatus" style="display:none" style="display:none">Tìm trong 66 bài kiến thức - gõ từ khóa và xem kết quả ngay</div>
+        <div class="knowledge-search-results" id="ellySearchResults" hidden></div>
+      </div>
+
       <div class="news-topline"><div class="container"><strong>Kiến thức</strong><a href="kien-thuc/khu-tham-moi-la-gi.html">Khử thâm môi là gì</a>
 <a href="kien-thuc/khu-tham-moi-co-an-hai-san-duoc-khong.html">Khử thâm môi có ăn hải sản được không</a>
 <a href="kien-thuc/khu-tham-moi-uong-ca-phe-duoc-khong.html">Khử thâm môi uống cà phê được không</a>
@@ -159,633 +271,555 @@
 <a href="kien-thuc/chon-dang-may-theo-khuon-mat.html">Chọn dáng mày theo khuôn mặt để không bị già</a>
 <a href="kien-thuc/cham-soc-chan-may-sau-phun.html">Chăm sóc chân mày sau phun để màu không loang</a></div></div>
       <section class="container news-heading">
-        <p class="eyebrow">Mục kiến thức làm đẹp tại nhà ELLY</p>
-        <h1>Sợ phun môi phun mày không như ý?       Đừng lo đã có đội ngũ chăm sóc nhà ELLY giúp bạn lên màu đẹp tự nhiên</h1>
+        <p class="eyebrow">Kiến thức làm đẹp tại nhà ELLY</p>
+      
 
       </section>
-      <section class="container news-layout">
-        <div class="news-list"><article class="news-row">
-              <a class="news-thumb" href="kien-thuc/moi-bi-den-co-phun-duoc-khong.html"><img src="d:\huydeptraivai\assets\hinh-nen-moi-tham.jpg" alt="Môi bị đen có phun được không" loading="lazy" decoding="async" /></a>
-              <div>
-                <span class="news-kicker">Bài nổi bật</span>
-                <h2><a href="kien-thuc/moi-bi-den-co-phun-duoc-khong.html">Môi bị đen có phun được không? Cách xử lý để lên màu đẹp</a></h2>
-                <p>Môi bị đen vẫn phun được, nhưng cần xử lý nền thâm trước. Tìm hiểu cách đánh giá cấp độ thâm và chọn màu phù hợp.</p>
-                <a class="read-more" href="kien-thuc/moi-bi-den-co-phun-duoc-khong.html">Đọc bài tư vấn</a>
-              </div>
-        <a class="lead-card" href="kien-thuc/khu-tham-moi-la-gi.html">
-          <img src="assets/khu-tham-moi-la-gi-1.jpg" alt="Khách hàng trước và sau khi cải thiện sắc tố môi" loading="eager" decoding="async" />
-          <span class="news-kicker">Tư Vấn Phun Môi</span>
-          <h2>Khử thâm môi là gì? Tất cả những điều bạn cần biết</h2>
-          <p>Tìm hiểu quy trình, đối tượng phù hợp, thời gian hồi phục, chi phí và cách chăm sóc sau khi khử thâm môi.</p>
-        </a>
-        <div class="side-grid"><a class="side-card" href="kien-thuc/so-phun-moi-qua-dam-nen-chon-mau-nao.html">
-              <img src="assets/pricing-moi-1.jpg" alt="Sợ phun môi quá đậm thì nên chọn màu nào?" loading="lazy" decoding="async" />
-              <span class="news-kicker">Kiến thức làm đẹp</span>
-              <h2>Sợ phun môi quá đậm thì nên chọn màu nào?</h2>
-              <p>Nhiều khách muốn môi tươi nhưng sợ màu quá đỏ, quá già hoặc nhìn như trang điểm đậm mỗi ngày.</p>
-            </a>
-<a class="side-card" href="kien-thuc/phun-moi-collagen-co-dau-khong.html">
-              <img src="assets/pricing-mkka-colagennha1.jpg" alt="Phun môi collagen có đau không và bao lâu thì bong?" loading="lazy" decoding="async" />
-              <span class="news-kicker">Kiến thức làm đẹp</span>
-              <h2>Phun môi collagen có đau không và bao lâu thì bong?</h2>
-              <p>Khách muốn làm môi nhưng ngại đau, sợ sưng lâu hoặc không biết mấy ngày mới sinh hoạt bình thường.</p>
-            </a>
-<a class="side-card" href="kien-thuc/cham-soc-moi-sau-phun-7-ngay-dau.html">
-              <img src="assets/cham-soc-moi.jpg" alt="Chăm sóc môi sau phun trong 7 ngày đầu sao cho lên màu đẹp?" loading="lazy" decoding="async" />
-              <span class="news-kicker">Kiến thức làm đẹp</span>
-              <h2>Chăm sóc môi sau phun trong 7 ngày đầu sao cho lên màu đẹp?</h2>
-              <p>Làm môi xong mà chăm sóc sai có thể khiến môi khô, bong không đều hoặc màu lên kém tươi.</p>
-            </a>
-<a class="side-card" href="kien-thuc/sau-phun-moi-nen-an-gi-va-kieng-gi.html">
-              <img src="assets/moi-dang-an.png" alt="Sau phun môi nên ăn gì và kiêng gì để môi nhanh ổn định?" loading="lazy" decoding="async" />
-              <span class="news-kicker">Kiến thức làm đẹp</span>
-              <h2>Sau phun môi nên ăn gì và kiêng gì để môi nhanh ổn định?</h2>
-              <p>Khách thường rối vì nghe quá nhiều lời kiêng khác nhau, không biết ăn gì để môi hồi phục tốt.</p>
-            </a></div>
-      </section>
-      <section class="container news-body">
-        <div class="news-list"><article class="news-row">
-              <a class="news-thumb" href="kien-thuc/khu-tham-moi-la-gi.html"><img src="assets/khu-tham-moi-la-gi-1.jpg" alt="Khử thâm môi là gì và những điều cần biết trước khi thực hiện" loading="lazy" decoding="async" /></a>
-              <div>
-                <span class="news-kicker">Khử thâm môi</span>
-                <h2><a href="kien-thuc/khu-tham-moi-la-gi.html">Khử thâm môi là gì? Tất cả những điều bạn cần biết</a></h2>
-                <p>Tìm hiểu quy trình, đối tượng phù hợp, thời gian hồi phục, chi phí, chăm sóc sau thực hiện và những câu hỏi thường gặp.</p>
-                <a class="read-more" href="kien-thuc/khu-tham-moi-la-gi.html">Đọc bài tư vấn</a>
-              </div>
-            </article><article class="news-row">
-              <a class="news-thumb" href="kien-thuc/khu-tham-moi-co-an-hai-san-duoc-khong.html"><img src="assets/khu-tham-moi-co-an-hai-san-duoc-khong-1.png" alt="Khách hàng xây dựng chế độ ăn uống sau khi khử thâm môi" loading="lazy" decoding="async" /></a>
-              <div>
-                <span class="news-kicker">Chăm sóc sau khử thâm</span>
-                <h2><a href="kien-thuc/khu-tham-moi-co-an-hai-san-duoc-khong.html">Khử thâm môi có ăn hải sản được không?</a></h2>
-                <p>Giải đáp chế độ ăn uống sau khi khử thâm môi, khi nào cần cẩn thận với hải sản và cách chăm sóc giúp môi hồi phục tự nhiên.</p>
-                <a class="read-more" href="kien-thuc/khu-tham-moi-co-an-hai-san-duoc-khong.html">Đọc bài tư vấn</a>
-              </div>
-            </article><article class="news-row">
-              <a class="news-thumb" href="kien-thuc/khu-tham-moi-uong-ca-phe-duoc-khong.html"><img src="assets/khu-tham-moi-uong-ca-phe-duoc-khong-1.png" alt="Khách hàng băn khoăn về việc uống cà phê sau khi khử thâm môi" loading="lazy" decoding="async" /></a>
-              <div>
-                <span class="news-kicker">Chăm sóc sau khử thâm</span>
-                <h2><a href="kien-thuc/khu-tham-moi-uong-ca-phe-duoc-khong.html">Khử thâm môi uống cà phê được không?</a></h2>
-                <p>Giải đáp sau khử thâm môi uống cà phê, trà sữa, nước ngọt được không và nên uống gì để môi hồi phục tự nhiên.</p>
-                <a class="read-more" href="kien-thuc/khu-tham-moi-uong-ca-phe-duoc-khong.html">Đọc bài tư vấn</a>
-              </div>
-            </article><article class="news-row">
-              <a class="news-thumb" href="kien-thuc/khu-tham-moi-kieng-gi.html"><img src="assets/khu-tham-moi-kieng-gi-1.png" alt="Chăm sóc môi đúng cách sau khi khử thâm môi" loading="lazy" decoding="async" /></a>
-              <div>
-                <span class="news-kicker">Chăm sóc sau khử thâm</span>
-                <h2><a href="kien-thuc/khu-tham-moi-kieng-gi.html">Khử thâm môi kiêng gì? 8 điều giúp môi hồi phục đẹp hơn</a></h2>
-                <p>Hướng dẫn sau khử thâm môi kiêng gì, nên ăn gì, uống cà phê được không và cách chăm sóc để môi hồi phục tự nhiên.</p>
-                <a class="read-more" href="kien-thuc/khu-tham-moi-kieng-gi.html">Đọc bài tư vấn</a>
-              </div>
-            </article><article class="news-row">
-              <a class="news-thumb" href="kien-thuc/khu-tham-moi-co-an-toan-khong.html"><img src="assets/khu-tham-moi-co-an-toan-khong-1.png" alt="Kỹ thuật viên tư vấn khử thâm môi trước khi thực hiện" loading="lazy" decoding="async" /></a>
-              <div>
-                <span class="news-kicker">Khử thâm môi</span>
-                <h2><a href="kien-thuc/khu-tham-moi-co-an-toan-khong.html">Khử thâm môi có an toàn không?</a></h2>
-                <p>Giải đáp khử thâm môi có nguy hiểm không, yếu tố quyết định độ an toàn và cách chọn địa chỉ uy tín trước khi thực hiện.</p>
-                <a class="read-more" href="kien-thuc/khu-tham-moi-co-an-toan-khong.html">Đọc bài tư vấn</a>
-              </div>
-            </article><article class="news-row">
-              <a class="news-thumb" href="kien-thuc/khu-tham-moi-tham-bam-sinh.html"><img src="assets/khu-tham-moi-tham-bam-sinh-1.jpg" alt="Khách hàng có môi thâm bẩm sinh trước khi tư vấn khử thâm môi" loading="lazy" decoding="async" /></a>
-              <div>
-                <span class="news-kicker">Khử thâm môi</span>
-                <h2><a href="kien-thuc/khu-tham-moi-tham-bam-sinh.html">Khử thâm môi thâm bẩm sinh có hiệu quả không?</a></h2>
-                <p>Tìm hiểu môi thâm bẩm sinh có khử được không, khi nào cần xử lý nền môi và cách chăm sóc để cải thiện sắc tố tự nhiên.</p>
-                <a class="read-more" href="kien-thuc/khu-tham-moi-tham-bam-sinh.html">Đọc bài tư vấn</a>
-              </div>
-            </article><article class="news-row">
-              <a class="news-thumb" href="kien-thuc/khu-tham-moi-cho-nam.html"><img src="assets/khu-tham-moi-cho-nam-1.png" alt="Nam giới tư vấn khử thâm môi để cải thiện sắc tố môi" loading="lazy" decoding="async" /></a>
-              <div>
-                <span class="news-kicker">Khử thâm môi cho nam</span>
-                <h2><a href="kien-thuc/khu-tham-moi-cho-nam.html">Khử thâm môi cho nam có hiệu quả không?</a></h2>
-                <p>Giải đáp nguyên nhân môi nam giới bị thâm, chi phí, cảm giác khi làm, độ bền màu và cách chăm sóc sau khử thâm.</p>
-                <a class="read-more" href="kien-thuc/khu-tham-moi-cho-nam.html">Đọc bài tư vấn</a>
-              </div>
-            </article><article class="news-row">
-              <a class="news-thumb" href="kien-thuc/khu-tham-moi-co-bi-tham-lai-khong.html"><img src="assets/khu-tham-moi-co-bi-tham-lai-khong-1.png" alt="Đôi môi hồng hào tự nhiên sau khi khử thâm môi" loading="lazy" decoding="async" /></a>
-              <div>
-                <span class="news-kicker">Khử thâm môi</span>
-                <h2><a href="kien-thuc/khu-tham-moi-co-bi-tham-lai-khong.html">Khử thâm môi có bị thâm lại không?</a></h2>
-                <p>Tìm hiểu nguyên nhân môi thâm trở lại, cách chăm sóc môi sau khử thâm và thói quen giúp giữ môi hồng lâu hơn.</p>
-                <a class="read-more" href="kien-thuc/khu-tham-moi-co-bi-tham-lai-khong.html">Đọc bài tư vấn</a>
-              </div>
-            </article><article class="news-row">
-              <a class="news-thumb" href="kien-thuc/khu-tham-moi-bao-lau-thi-len-mau.html"><img src="assets/khu-tham-moi-bao-lau-thi-len-mau.jpg" alt="Khử thâm môi bao lâu thì lên màu đẹp" loading="lazy" decoding="async" /></a>
-              <div>
-                <span class="news-kicker">Khử thâm môi</span>
-                <h2><a href="kien-thuc/khu-tham-moi-bao-lau-thi-len-mau.html">Khử thâm môi bao lâu thì lên màu đẹp?</a></h2>
-                <p>Theo dõi lộ trình hồi phục sau khử thâm môi, từ lúc môi vừa làm xong, bắt đầu bong đến khi màu môi dần ổn định tự nhiên.</p>
-                <a class="read-more" href="kien-thuc/khu-tham-moi-bao-lau-thi-len-mau.html">Đọc bài tư vấn</a>
-              </div>
-            </article><article class="news-row">
-              <a class="news-thumb" href="kien-thuc/phun-moi-mau-nude.html"><img src="assets/phun-moi-mau-nude-1.png" alt="Phun môi màu nude có đẹp không và hợp với ai" loading="lazy" decoding="async" /></a>
-              <div>
-                <span class="news-kicker">Tư vấn chọn màu môi</span>
-                <h2><a href="kien-thuc/phun-moi-mau-nude.html">Phun môi màu nude có đẹp không? Hợp với ai?</a></h2>
-                <p>Khám phá ưu điểm của màu nude, ai phù hợp, trường hợp nên cân nhắc và cách chăm sóc để môi lên màu tự nhiên.</p>
-                <a class="read-more" href="kien-thuc/phun-moi-mau-nude.html">Đọc bài tư vấn</a>
-              </div>
-            </article><article class="news-row">
-              <a class="news-thumb" href="kien-thuc/phun-moi-mau-nao-dep.html"><img src="assets/phun-moi-mau-nao-dep-1.png" alt="Bảng màu phun môi đẹp được tư vấn theo từng tông da" loading="lazy" decoding="async" /></a>
-              <div>
-                <span class="news-kicker">Tư vấn chọn màu môi</span>
-                <h2><a href="kien-thuc/phun-moi-mau-nao-dep.html">Phun môi màu nào đẹp? Top 15 màu hot nhất</a></h2>
-                <p>Tổng hợp các màu phun môi đẹp, cách chọn theo tông da, độ tuổi và nền môi để màu lên tự nhiên, hài hòa hơn.</p>
-                <a class="read-more" href="kien-thuc/phun-moi-mau-nao-dep.html">Đọc bài tư vấn</a>
-              </div>
-            </article><article class="news-row">
-              <a class="news-thumb" href="kien-thuc/phun-moi-mau-do-cam.html"><img src="assets/phun-moi-mau-do-cam-1.png" alt="Khách hàng với đôi môi màu đỏ cam tự nhiên sau phun" loading="lazy" decoding="async" /></a>
-              <div>
-                <span class="news-kicker">Tư vấn phun môi</span>
-                <h2><a href="kien-thuc/phun-moi-mau-do-cam.html">Phun môi màu đỏ cam có đẹp không? Hợp với ai?</a></h2>
-                <p>Tìm hiểu màu đỏ cam hợp với ai, ưu điểm của gam màu rạng rỡ này và cách chăm sóc để môi lên màu đẹp tự nhiên.</p>
-                <a class="read-more" href="kien-thuc/phun-moi-mau-do-cam.html">Đọc bài tư vấn</a>
-              </div>
-            </article><article class="news-row">
-              <a class="news-thumb" href="kien-thuc/phun-moi-mau-hong-dat.html"><img src="assets/phun-moi-mau-hong-dat-1.png" alt="Khách hàng với đôi môi màu hồng đất tự nhiên sau phun" loading="lazy" decoding="async" /></a>
-              <div>
-                <span class="news-kicker">Tư vấn phun môi</span>
-                <h2><a href="kien-thuc/phun-moi-mau-hong-dat.html">Phun môi màu hồng đất có đẹp không? Hợp với ai?</a></h2>
-                <p>Khám phá màu hồng đất hợp với ai, ưu điểm của gam màu thanh lịch này và cách chăm sóc để môi lên màu tự nhiên.</p>
-                <a class="read-more" href="kien-thuc/phun-moi-mau-hong-dat.html">Đọc bài tư vấn</a>
-              </div>
-            </article><article class="news-row">
-              <a class="news-thumb" href="kien-thuc/phun-moi-mau-do-nau.html"><img src="assets/phun-moi-mau-do-nau-1.png" alt="Đôi môi màu đỏ nâu tự nhiên sau khi phun trên khách hàng" loading="lazy" decoding="async" /></a>
-              <div>
-                <span class="news-kicker">Tư vấn phun môi</span>
-                <h2><a href="kien-thuc/phun-moi-mau-do-nau.html">Phun môi màu đỏ nâu có đẹp không? Hợp với ai?</a></h2>
-                <p>Tìm hiểu màu đỏ nâu hợp với ai, ưu điểm của gam màu sang trọng này và cách chăm sóc để môi lên màu đẹp.</p>
-                <a class="read-more" href="kien-thuc/phun-moi-mau-do-nau.html">Đọc bài tư vấn</a>
-              </div>
-            </article><article class="news-row">
-              <a class="news-thumb" href="kien-thuc/phun-moi-mau-cam-dao.html"><img src="assets/phun-moi-mau-cam-dao-1.png" alt="Đôi môi màu cam đào tự nhiên sau khi phun trên khách hàng" loading="lazy" decoding="async" /></a>
-              <div>
-                <span class="news-kicker">Tư vấn phun môi</span>
-                <h2><a href="kien-thuc/phun-moi-mau-cam-dao.html">Phun môi màu cam đào có đẹp không? Hợp với ai?</a></h2>
-                <p>Giải đáp màu cam đào hợp với ai, ưu điểm của gam màu trẻ trung này và cách chăm sóc để môi lên màu tự nhiên.</p>
-                <a class="read-more" href="kien-thuc/phun-moi-mau-cam-dao.html">Đọc bài tư vấn</a>
-              </div>
-            </article><article class="news-row">
-              <a class="news-thumb" href="kien-thuc/phun-moi-mau-hong-dao.html"><img src="assets/phun-moi-mau-hong-dao-1.png" alt="Khách hàng với đôi môi màu hồng đào tự nhiên sau phun" loading="lazy" decoding="async" /></a>
-              <div>
-                <span class="news-kicker">Tư vấn phun môi</span>
-                <h2><a href="kien-thuc/phun-moi-mau-hong-dao.html">Phun môi màu hồng đào có đẹp không? Hợp với ai?</a></h2>
-                <p>Tìm hiểu màu hồng đào hợp với ai, ưu điểm của gam màu tự nhiên này và cách chăm sóc để môi lên màu hài hòa.</p>
-                <a class="read-more" href="kien-thuc/phun-moi-mau-hong-dao.html">Đọc bài tư vấn</a>
-              </div>
-            </article><article class="news-row">
-              <a class="news-thumb" href="kien-thuc/moi-tham-co-nen-phun-moi-khong.html"><img src="assets/moi-tham-co-nen-phun-moi-khong-1.jpg" alt="Môi thâm có nên phun môi không và cách xử lý phù hợp" loading="lazy" decoding="async" /></a>
-              <div>
-                <span class="news-kicker">Tư vấn phun môi</span>
-                <h2><a href="kien-thuc/moi-tham-co-nen-phun-moi-khong.html">Môi thâm có nên phun môi không? Cách xử lý hiệu quả</a></h2>
-                <p>Giải đáp môi thâm có phun được không, khi nào cần xử lý nền và cách chọn màu môi giúp lên màu hài hòa tự nhiên.</p>
-                <a class="read-more" href="kien-thuc/moi-tham-co-nen-phun-moi-khong.html">Đọc bài tư vấn</a>
-              </div>
-            </article><article class="news-row">
-              <a class="news-thumb" href="kien-thuc/phun-moi-tai-nha.html"><img src="assets/phun-moi-tai-nha-1.png" alt="Kỹ thuật viên thực hiện phun môi tại nhà cho khách hàng" loading="lazy" decoding="async" /></a>
-              <div>
-                <span class="news-kicker">Phun môi tại nhà</span>
-                <h2><a href="kien-thuc/phun-moi-tai-nha.html">Phun môi tại nhà an toàn, đẹp tự nhiên</a></h2>
-                <p>Tìm hiểu dịch vụ phun môi tại nhà, đối tượng phù hợp, quy trình thực hiện và cách chăm sóc để môi lên màu tự nhiên.</p>
-                <a class="read-more" href="kien-thuc/phun-moi-tai-nha.html">Đọc bài tư vấn</a>
-              </div>
-            </article><article class="news-row">
-              <a class="news-thumb" href="kien-thuc/phun-moi-collagen-la-gi.html"><img src="assets/phun-moi-collagen-la-gi-1.png" alt="Phun môi Collagen là gì? Có thực sự tốt không" loading="lazy" decoding="async" /></a>
-              <div>
-                <span class="news-kicker">Phun môi collagen</span>
-                <h2><a href="kien-thuc/phun-moi-collagen-la-gi.html">Phun môi Collagen là gì? Có thực sự tốt không?</a></h2>
-                <p>Giải thích ưu điểm, điểm khác biệt, đối tượng phù hợp và cách chăm sóc sau phun môi Collagen.</p>
-                <a class="read-more" href="kien-thuc/phun-moi-collagen-la-gi.html">Đọc bài tư vấn</a>
-              </div>
-            </article><article class="news-row">
-              <a class="news-thumb" href="kien-thuc/lich-cham-soc-moi-sau-phun.html"><img src="assets/lich-cham-soc-moi-sau-phun-1.png" alt="Giai đoạn đầu sau khi phun môi" loading="lazy" decoding="async" /></a>
-              <div>
-                <span class="news-kicker">Chăm sóc sau phun môi</span>
-                <h2><a href="kien-thuc/lich-cham-soc-moi-sau-phun.html">Lịch chăm sóc môi sau phun từ ngày 1 đến ngày 30</a></h2>
-                <p>Hướng dẫn chăm sóc môi theo từng giai đoạn sau phun để môi hồi phục tự nhiên và ổn định màu tốt hơn.</p>
-                <a class="read-more" href="kien-thuc/lich-cham-soc-moi-sau-phun.html">Đọc bài tư vấn</a>
-              </div>
-            </article><article class="news-row">
-              <a class="news-thumb" href="kien-thuc/phun-moi-may-ngay-thi-bong.html"><img src="assets/phun-moi-may-ngay-thi-bong-1.png" alt="Khách hàng theo dõi quá trình hồi phục sau phun môi" loading="lazy" decoding="async" /></a>
-              <div>
-                <span class="news-kicker">Chăm sóc sau phun môi</span>
-                <h2><a href="kien-thuc/phun-moi-may-ngay-thi-bong.html">Phun môi mấy ngày thì bong? Tiến trình hồi phục bạn nên biết</a></h2>
-                <p>Tìm hiểu tiến trình bong môi theo từng giai đoạn, dấu hiệu hồi phục bình thường và cách chăm sóc sau phun môi.</p>
-                <a class="read-more" href="kien-thuc/phun-moi-may-ngay-thi-bong.html">Đọc bài tư vấn</a>
-              </div>
-            </article><article class="news-row">
-              <a class="news-thumb" href="kien-thuc/phun-moi-10-ngay-chua-bong.html"><img src="assets/phun-moi-10-ngay-chua-bong-1.png" alt="Khách hàng dưỡng môi đúng cách trong quá trình hồi phục" loading="lazy" decoding="async" /></a>
-              <div>
-                <span class="news-kicker">Chăm sóc sau phun môi</span>
-                <h2><a href="kien-thuc/phun-moi-10-ngay-chua-bong.html">Phun môi 10 ngày chưa bong có sao không?</a></h2>
-                <p>Tìm hiểu nguyên nhân môi bong chậm, cách chăm sóc đúng và khi nào nên liên hệ kỹ thuật viên.</p>
-                <a class="read-more" href="kien-thuc/phun-moi-10-ngay-chua-bong.html">Đọc bài tư vấn</a>
-              </div>
-            </article><article class="news-row">
-              <a class="news-thumb" href="kien-thuc/bong-qua-som-sau-phun-moi.html"><img src="assets/bong-qua-som-sau-phun-moi-1.png" alt="Khách hàng trong giai đoạn hồi phục sau phun môi" loading="lazy" decoding="async" /></a>
-              <div>
-                <span class="news-kicker">Chăm sóc sau phun môi</span>
-                <h2><a href="kien-thuc/bong-qua-som-sau-phun-moi.html">Bong quá sớm sau phun môi có ảnh hưởng màu không?</a></h2>
-                <p>Giải đáp môi bong sớm sau phun có sao không, nguyên nhân thường gặp và cách chăm sóc để môi hồi phục tự nhiên.</p>
-                <a class="read-more" href="kien-thuc/bong-qua-som-sau-phun-moi.html">Đọc bài tư vấn</a>
-              </div>
-            </article><article class="news-row">
-              <a class="news-thumb" href="kien-thuc/7-dieu-can-kieng-sau-phun-moi.html"><img src="assets/7-dieu-can-kieng-sau-phun-moi-1.png" alt="Khách hàng kiểm tra môi sau khi phun môi" loading="lazy" decoding="async" /></a>
-              <div>
-                <span class="news-kicker">Chăm sóc sau phun môi</span>
-                <h2><a href="kien-thuc/7-dieu-can-kieng-sau-phun-moi.html">7 điều cần kiêng sau phun môi để môi lên màu đẹp</a></h2>
-                <p>Tổng hợp những điều nên kiêng và cách chăm sóc sau phun môi để môi hồi phục thuận lợi, lên màu tự nhiên hơn.</p>
-                <a class="read-more" href="kien-thuc/7-dieu-can-kieng-sau-phun-moi.html">Đọc bài tư vấn</a>
-              </div>
-            </article><article class="news-row">
-              <a class="news-thumb" href="kien-thuc/lo-hon-sau-khi-phun-moi-co-sao-khong.html"><img src="assets/lo-hon-sau-khi-phun-moi-co-sao-khong-1.png" alt="Chăm sóc môi đúng cách sau khi phun" loading="lazy" decoding="async" /></a>
-              <div>
-                <span class="news-kicker">Chăm sóc sau phun môi</span>
-                <h2><a href="kien-thuc/lo-hon-sau-khi-phun-moi-co-sao-khong.html">Lỡ hôn sau khi phun môi có sao không?</a></h2>
-                <p>Hướng dẫn cách xử lý khi lỡ hôn sau phun môi, dấu hiệu cần theo dõi và cách chăm sóc để môi hồi phục tự nhiên.</p>
-                <a class="read-more" href="kien-thuc/lo-hon-sau-khi-phun-moi-co-sao-khong.html">Đọc bài tư vấn</a>
-              </div>
-            </article><article class="news-row">
-              <a class="news-thumb" href="kien-thuc/phun-moi-bao-lau-duoc-danh-son.html"><img src="assets/phun-moi-bao-lau-duoc-danh-son-1.png" alt="Khách hàng chuẩn bị đánh son sau khi môi hồi phục" loading="lazy" decoding="async" /></a>
-              <div>
-                <span class="news-kicker">Chăm sóc sau phun môi</span>
-                <h2><a href="kien-thuc/phun-moi-bao-lau-duoc-danh-son.html">Sau phun môi bao lâu được đánh son, skincare và trang điểm?</a></h2>
-                <p>Tìm hiểu khi nào môi đủ ổn định để đánh son, skincare và trang điểm lại mà không ảnh hưởng đến quá trình hồi phục.</p>
-                <a class="read-more" href="kien-thuc/phun-moi-bao-lau-duoc-danh-son.html">Đọc bài tư vấn</a>
-              </div>
-            </article><article class="news-row">
-              <a class="news-thumb" href="kien-thuc/sau-phun-moi-bao-lau-duoc-danh-son.html"><img src="assets/sau-phun-moi-bao-lau-duoc-danh-son-1.png" alt="Sau phun môi bao lâu được đánh son" loading="lazy" decoding="async" /></a>
-              <div>
-                <span class="news-kicker">Chăm sóc sau phun môi</span>
-                <h2><a href="kien-thuc/sau-phun-moi-bao-lau-duoc-danh-son.html">Sau phun môi bao lâu được đánh son? Thời điểm an toàn và những lưu ý quan trọng</a></h2>
-                <p>Tìm hiểu khi nào môi đủ ổn định để dùng son, nên chọn loại son nào và cách giữ màu môi đẹp sau khi hồi phục.</p>
-                <a class="read-more" href="kien-thuc/sau-phun-moi-bao-lau-duoc-danh-son.html">Đọc bài tư vấn</a>
-              </div>
-            </article><article class="news-row">
-              <a class="news-thumb" href="kien-thuc/sau-phun-moi-kieng-an-gi.html"><img src="assets/sau-phun-moi-kieng-an-gi-1.png" alt="Sau phun môi kiêng ăn gì? 15 thực phẩm nên và không nên ăn" loading="lazy" decoding="async" /></a>
-              <div>
-                <span class="news-kicker">Chăm sóc sau phun môi</span>
-                <h2><a href="kien-thuc/sau-phun-moi-kieng-an-gi.html">Sau phun môi kiêng ăn gì? 15 thực phẩm nên và không nên ăn</a></h2>
-                <p>Gợi ý những món nên kiêng, món nên bổ sung và các lưu ý chăm sóc để môi nhanh hồi phục, lên màu tự nhiên hơn.</p>
-                <a class="read-more" href="kien-thuc/sau-phun-moi-kieng-an-gi.html">Đọc bài tư vấn</a>
-              </div>
-            </article><article class="news-row">
-              <a class="news-thumb" href="kien-thuc/cach-chon-dang-may-theo-khuon-mat.html"><img src="assets/cach-chon-dang-may-theo-khuon-mat-1.png" alt="Cách chọn dáng mày theo khuôn mặt" loading="lazy" decoding="async" /></a>
-              <div>
-                <span class="news-kicker">Dáng mày</span>
-                <h2><a href="kien-thuc/cach-chon-dang-may-theo-khuon-mat.html">Cách chọn dáng mày theo khuôn mặt: bí quyết giúp gương mặt hài hòa và trẻ trung</a></h2>
-                <p>Hướng dẫn chọn dáng mày cho mặt tròn, mặt vuông, mặt dài, mặt trái xoan và các dáng khuôn mặt phổ biến.</p>
-                <a class="read-more" href="kien-thuc/cach-chon-dang-may-theo-khuon-mat.html">Đọc bài tư vấn</a>
-              </div>
-            </article><article class="news-row">
-              <a class="news-thumb" href="kien-thuc/bao-nhieu-tuoi-duoc-phun-may.html"><img src="assets/bao-nhieu-tuoi-duoc-phun-may-1.png" alt="Bao nhiêu tuổi được phun mày" loading="lazy" decoding="async" /></a>
-              <div>
-                <span class="news-kicker">Tư vấn phun mày</span>
-                <h2><a href="kien-thuc/bao-nhieu-tuoi-duoc-phun-may.html">Bao nhiêu tuổi được phun mày? Độ tuổi phù hợp và những lưu ý quan trọng</a></h2>
-                <p>Thông thường nên phun mày từ 18 tuổi trở lên; dưới 18 tuổi cần cân nhắc kỹ, còn người lớn tuổi vẫn có thể làm nếu sức khỏe phù hợp.</p>
-                <a class="read-more" href="kien-thuc/bao-nhieu-tuoi-duoc-phun-may.html">Đọc bài tư vấn</a>
-              </div>
-            </article><article class="news-row">
-              <a class="news-thumb" href="kien-thuc/co-nen-phun-may-khi-dang-mang-thai.html"><img src="assets/co-nen-phun-may-khi-dang-mang-thai-1.png" alt="Có nên phun mày khi đang mang thai" loading="lazy" decoding="async" /></a>
-              <div>
-                <span class="news-kicker">An toàn khi làm đẹp</span>
-                <h2><a href="kien-thuc/co-nen-phun-may-khi-dang-mang-thai.html">Có nên phun mày khi đang mang thai? Những điều cần biết trước khi quyết định</a></h2>
-                <p>Phụ nữ mang thai nên trì hoãn phun mày để ưu tiên an toàn cho mẹ và bé, đồng thời chọn giải pháp trang điểm tạm thời phù hợp hơn.</p>
-                <a class="read-more" href="kien-thuc/co-nen-phun-may-khi-dang-mang-thai.html">Đọc bài tư vấn</a>
-              </div>
-            </article><article class="news-row">
-              <a class="news-thumb" href="kien-thuc/may-bi-xanh-sau-nhieu-nam-co-xu-ly-duoc-khong.html"><img src="assets/may-bi-xanh-sau-nhieu-nam-1.png" alt="Mày bị xanh sau nhiều năm có xử lý được không" loading="lazy" decoding="async" /></a>
-              <div>
-                <span class="news-kicker">Sửa mày cũ</span>
-                <h2><a href="kien-thuc/may-bi-xanh-sau-nhieu-nam-co-xu-ly-duoc-khong.html">Mày bị xanh sau nhiều năm có xử lý được không?</a></h2>
-                <p>Chân mày chuyển xanh xám hoặc xanh đen sau nhiều năm có thể xử lý nếu đánh giá đúng nền mực và chọn phương pháp phù hợp.</p>
-                <a class="read-more" href="kien-thuc/may-bi-xanh-sau-nhieu-nam-co-xu-ly-duoc-khong.html">Đọc bài tư vấn</a>
-              </div>
-            </article><article class="news-row">
-              <a class="news-thumb" href="kien-thuc/may-tro-do-phai-lam-sao.html"><img src="assets/may-tro-do-phai-lam-sao-1.png" alt="Mày trổ đỏ phải làm sao và cách xử lý chân mày trổ đỏ" loading="lazy" decoding="async" /></a>
-              <div>
-                <span class="news-kicker">Sửa mày cũ</span>
-                <h2><a href="kien-thuc/may-tro-do-phai-lam-sao.html">Mày trổ đỏ phải làm sao? Nguyên nhân và cách xử lý hiệu quả</a></h2>
-                <p>Giải thích nguyên nhân chân mày chuyển đỏ sau nhiều năm và các cách xử lý như phun phủ, khử màu hoặc laser khi cần.</p>
-                <a class="read-more" href="kien-thuc/may-tro-do-phai-lam-sao.html">Đọc bài tư vấn</a>
-              </div>
-            </article>
-<article class="news-row">
-              <a class="news-thumb" href="kien-thuc/nguoi-lon-tuoi-nen-chon-kieu-chan-may-nao.html"><img src="assets/nguoi-lon-tuoi-chon-kieu-chan-may-1.png" alt="Người lớn tuổi nên chọn kiểu chân mày nào để trẻ trung hơn" loading="lazy" decoding="async" /></a>
-              <div>
-                <span class="news-kicker">Tư vấn chân mày</span>
-                <h2><a href="kien-thuc/nguoi-lon-tuoi-nen-chon-kieu-chan-may-nao.html">Người lớn tuổi nên chọn kiểu chân mày nào để gương mặt trẻ trung hơn?</a></h2>
-                <p>Gợi ý dáng mày cong nhẹ, ngang cong nhẹ và Ombre tự nhiên giúp gương mặt trung niên mềm, sáng và hài hòa hơn.</p>
-                <a class="read-more" href="kien-thuc/nguoi-lon-tuoi-nen-chon-kieu-chan-may-nao.html">Đọc bài tư vấn</a>
-              </div>
-            </article>
-<article class="news-row">
-              <a class="news-thumb" href="kien-thuc/phun-may-cho-da-dau-co-ben-khong.html"><img src="assets/phun-may-cho-da-dau-co-ben-khong.png" alt="Phun mày cho da dầu có bền không và cách giữ màu lâu" loading="lazy" decoding="async" /></a>
-              <div>
-                <span class="news-kicker">Tư vấn chân mày</span>
-                <h2><a href="kien-thuc/phun-may-cho-da-dau-co-ben-khong.html">Phun mày cho da dầu có bền không? Bí quyết giữ màu đẹp lâu</a></h2>
-                <p>Giải đáp da dầu có nên phun mày không, nên chọn Nano hay Ombre và cách chăm sóc để màu lên đều, giữ lâu hơn.</p>
-                <a class="read-more" href="kien-thuc/phun-may-cho-da-dau-co-ben-khong.html">Đọc bài tư vấn</a>
-              </div>
-            </article>
-<article class="news-row">
-              <a class="news-thumb" href="kien-thuc/sau-phun-may-kieng-an-gi.html"><img src="assets/kieng-may-sau-phun.JPG" alt="Sau phun mày kiêng ăn gì để chân mày lên màu đẹp" loading="lazy" decoding="async" /></a>
-              <div>
-                <span class="news-kicker">Chăm sóc chân mày</span>
-                <h2><a href="kien-thuc/sau-phun-may-kieng-an-gi.html">Sau phun mày kiêng ăn gì? 8 thực phẩm nên tránh để lên màu đẹp</a></h2>
-                <p>Gợi ý món nên hạn chế, thực phẩm nên bổ sung và cách chăm sóc để vùng chân mày hồi phục ổn định sau phun.</p>
-                <a class="read-more" href="kien-thuc/sau-phun-may-kieng-an-gi.html">Đọc bài tư vấn</a>
-              </div>
-            </article>
-<article class="news-row">
-              <a class="news-thumb" href="kien-thuc/phun-may-bao-lau-thi-bong.html"><img src="assets/phun-may-bao-lau-thi-bong.jpg" alt="Phun mày bao lâu thì bong và quá trình hồi phục chân mày" loading="lazy" decoding="async" /></a>
-              <div>
-                <span class="news-kicker">Chăm sóc chân mày</span>
-                <h2><a href="kien-thuc/phun-may-bao-lau-thi-bong.html">Phun mày bao lâu thì bong? Quá trình hồi phục và cách chăm sóc</a></h2>
-                <p>Giải thích mấy ngày chân mày bắt đầu bong, màu sau bong có nhạt không và cách chăm sóc để mày lên màu đẹp.</p>
-                <a class="read-more" href="kien-thuc/phun-may-bao-lau-thi-bong.html">Đọc bài tư vấn</a>
-              </div>
-            </article>
-<article class="news-row">
-              <a class="news-thumb" href="kien-thuc/sau-phun-may-bao-lau-duoc-rua-mat.html"><img src="assets/sau-phun-may-bao-lau-duoc-rua-mat.png" alt="Sau phun mày bao lâu được rửa mặt và cách chăm sóc đúng" loading="lazy" decoding="async" /></a>
-              <div>
-                <span class="news-kicker">Chăm sóc chân mày</span>
-                <h2><a href="kien-thuc/sau-phun-may-bao-lau-duoc-rua-mat.html">Sau phun mày bao lâu được rửa mặt? Hướng dẫn chăm sóc đúng</a></h2>
-                <p>Giải đáp thời điểm rửa mặt sau phun mày, cách vệ sinh an toàn và những điều cần tránh để màu lên đều đẹp.</p>
-                <a class="read-more" href="kien-thuc/sau-phun-may-bao-lau-duoc-rua-mat.html">Đọc bài tư vấn</a>
-              </div>
-            </article>
-<article class="news-row">
-              <a class="news-thumb" href="kien-thuc/phun-may-giu-duoc-bao-lau.html"><img src="assets/7-yeu-to.JPG" alt="Phun mày giữ được bao lâu và cách giữ màu đẹp tự nhiên" loading="lazy" decoding="async" /></a>
-              <div>
-                <span class="news-kicker">Chăm sóc chân mày</span>
-                <h2><a href="kien-thuc/phun-may-giu-duoc-bao-lau.html">Phun mày giữ được bao lâu? 7 yếu tố quyết định độ bền màu</a></h2>
-                <p>Giải thích độ bền màu theo loại da, kỹ thuật, mực phun, chăm sóc sau làm và thời điểm nên dặm lại.</p>
-                <a class="read-more" href="kien-thuc/phun-may-giu-duoc-bao-lau.html">Đọc bài tư vấn</a>
-              </div>
-            </article>
-<article class="news-row">
-              <a class="news-thumb" href="kien-thuc/phun-may-co-dau-khong.html"><img src="assets/phun-may-dieu-khac-chan-may.jpg" alt="Phun mày có đau không và cảm giác thật trước khi làm" loading="lazy" decoding="async" /></a>
-              <div>
-                <span class="news-kicker">GIẢI ĐÁP MỌI THẮC MẮC</span>
-                <h2><a href="kien-thuc/phun-may-co-dau-khong.html">Phun mày có đau không? Cảm giác thật trước khi làm</a></h2>
-                <p>Giải đáp cảm giác khi phun mày, yếu tố khiến khách thấy đau hơn và cách chăm sóc để chân mày bong đẹp.</p>
-                <a class="read-more" href="kien-thuc/phun-may-co-dau-khong.html">Đọc bài tư vấn</a>
-              </div>
-            </article>
-<article class="news-row">
-              <a class="news-thumb" href="kien-thuc/phun-may-hay-dieu-khac-chan-may.html"><img src="assets/dieu-khac-hay-phun.jpg" alt="Phun mày hay điêu khắc chân mày để hợp khuôn mặt" loading="lazy" decoding="async" /></a>
-              <div>
-                <span class="news-kicker">Tư vấn chân mày</span>
-                <h2><a href="kien-thuc/phun-may-hay-dieu-khac-chan-may.html">Phun mày hay điêu khắc chân mày? Cách chọn phương pháp hợp khuôn mặt</a></h2>
-                <p>So sánh phun mày và điêu khắc theo loại da, nền chân mày, hiệu ứng thẩm mỹ và dáng mặt để chọn đúng trước khi làm.</p>
-                <a class="read-more" href="kien-thuc/phun-may-hay-dieu-khac-chan-may.html">Đọc bài tư vấn</a>
-              </div>
-            </article>
-<article class="news-row">
-              <a class="news-thumb" href="kien-thuc/dieu-khac-hay-phun-may-dep-hon.html"><img src="assets/dieu-khac-hay-phun-may-dep-hon.png" alt="Điêu khắc hay phun mày đẹp hơn và cách chọn phương pháp phù hợp" loading="lazy" decoding="async" /></a>
-              <div>
-                <span class="news-kicker">Tư vấn chân mày</span>
-                <h2><a href="kien-thuc/dieu-khac-hay-phun-may-dep-hon.html">Điêu khắc hay phun mày đẹp hơn? So sánh chi tiết</a></h2>
-                <p>So sánh điêu khắc và phun mày theo hiệu ứng, loại da, độ bền, thời gian thực hiện và cách chọn đúng phương pháp.</p>
-                <a class="read-more" href="kien-thuc/dieu-khac-hay-phun-may-dep-hon.html">Đọc bài tư vấn</a>
-              </div>
-            </article>
-<article class="news-row">
-              <a class="news-thumb" href="kien-thuc/phun-may-ombre-la-gi.html"><img src="assets/phun-may-ombre-la-gi.jpg" alt="Phun mày Ombre là gì và hiệu ứng chân mày tự nhiên" loading="lazy" decoding="async" /></a>
-              <div>
-                <span class="news-kicker">Tư vấn chân mày</span>
-                <h2><a href="kien-thuc/phun-may-ombre-la-gi.html">Phun mày Ombre là gì? Ưu điểm và ai nên thực hiện</a></h2>
-                <p>Tìm hiểu hiệu ứng chuyển màu Ombre, ưu điểm, đối tượng phù hợp, độ bền màu và cách chăm sóc sau khi làm.</p>
-                <a class="read-more" href="kien-thuc/phun-may-ombre-la-gi.html">Đọc bài tư vấn</a>
-              </div>
-            </article>
-<article class="news-row">
-              <a class="news-thumb" href="kien-thuc/phun-may-nano-co-tot-khong.html"><img src="assets/phun-may-nano-co-tot-khong.png" alt="Phun mày Nano có tốt không và dáng chân mày tự nhiên" loading="lazy" decoding="async" /></a>
-              <div>
-                <span class="news-kicker">Tư vấn chân mày</span>
-                <h2><a href="kien-thuc/phun-may-nano-co-tot-khong.html">Phun mày Nano có tốt không? Ưu điểm, độ bền và chi phí</a></h2>
-                <p>Tìm hiểu ưu nhược điểm của phun mày Nano, độ bền màu, đối tượng phù hợp và cách chọn kỹ thuật viên uy tín.</p>
-                <a class="read-more" href="kien-thuc/phun-may-nano-co-tot-khong.html">Đọc bài tư vấn</a>
-              </div>
-            </article>
-<article class="news-row">
-              <a class="news-thumb" href="kien-thuc/cac-loai-mau-moi-hop-cho-u30.html"><img src="assets/mau-moi-u30.png" alt="Các loại màu môi hợp cho U30 trẻ, tươi nhưng không bị quá nổi" loading="lazy" decoding="async" /></a>
-              <div>
-                <span class="news-kicker">Tư vấn chọn màu</span>
-                <h2><a href="kien-thuc/cac-loai-mau-moi-hop-cho-u30.html">Các loại màu môi hợp cho U30: trẻ, tươi nhưng không bị quá nổi</a></h2>
-                <p>Gợi ý hồng đào, cam đào, đỏ cam, hồng đất và đỏ đất nhẹ cho khách U30 muốn môi tươi tự nhiên, dễ đi làm.</p>
-                <a class="read-more" href="kien-thuc/cac-loai-mau-moi-hop-cho-u30.html">Đọc bài tư vấn</a>
-              </div>
-            </article>
-<article class="news-row">
-              <a class="news-thumb" href="kien-thuc/phun-moi-co-dau-khong.html"><img src="assets/phun-moi-co-dau-khong-1.png" alt="Phun môi có đau không? Giải đáp chi tiết trước khi làm" loading="lazy" decoding="async" /></a>
-              <div>
-                <span class="news-kicker">Giải đáp phun môi</span>
-                <h2><a href="kien-thuc/phun-moi-co-dau-khong.html">Phun môi có đau không? Giải đáp chi tiết trước khi làm</a></h2>
-                <p>Tìm hiểu cảm giác khi phun môi, các yếu tố ảnh hưởng đến mức độ đau và cách giảm khó chịu sau khi làm.</p>
-                <a class="read-more" href="kien-thuc/phun-moi-co-dau-khong.html">Đọc bài tư vấn</a>
-              </div>
-            </article>
-<article class="news-row">
-              <a class="news-thumb" href="kien-thuc/chon-mau-moi-theo-mau-da.html"><img src="assets/mau-theo0-da.jpg" alt="Chọn màu môi theo màu da để không bị xỉn mặt" loading="lazy" decoding="async" /></a>
-              <div>
-                <span class="news-kicker">GIẢI ĐÁP MỌI THẮC MẮC</span>
-                <h2><a href="kien-thuc/chon-mau-moi-theo-mau-da.html">Chọn màu môi theo màu da để không bị xỉn mặt</a></h2>
-                <p>Chọn sai màu môi có thể làm da trông tối hơn, gương mặt già hơn hoặc màu không hợp phong cách.</p>
-                <a class="read-more" href="kien-thuc/chon-mau-moi-theo-mau-da.html">Đọc bài tư vấn</a>
-              </div>
-            </article>
-<article class="news-row">
-              <a class="news-thumb" href="kien-thuc/phun-may-tan-bot-hop-voi-ai.html"><img src="assets/chan-may-thua.JPG" alt="Chân mày thưa có nên phun mày tán bột không?" loading="lazy" decoding="async" /></a>
-              <div>
-                <span class="news-kicker">GIẢI ĐÁP MỌI THẮC MẮC</span>
-                <h2><a href="kien-thuc/phun-may-tan-bot-hop-voi-ai.html">Chân mày thưa có nên phun mày tán bột không?</a></h2>
-                <p>Chân mày thưa làm mặt nhạt, sáng nào cũng phải kẻ nhưng nhiều khách sợ phun xong bị đậm và cứng.</p>
-                <a class="read-more" href="kien-thuc/phun-may-tan-bot-hop-voi-ai.html">Đọc bài tư vấn</a>
-              </div>
-            </article>
-<article class="news-row">
-              <a class="news-thumb" href="kien-thuc/dieu-khac-chan-may-co-tu-nhien-khong.html"><img src="assets/pricing-dieu-khac-1.jpg" alt="Điêu khắc chân mày có tự nhiên không?" loading="lazy" decoding="async" /></a>
-              <div>
-                <span class="news-kicker">GIẢI ĐÁP MỌI THẮC MẮC</span>
-                <h2><a href="kien-thuc/dieu-khac-chan-may-co-tu-nhien-khong.html">Điêu khắc chân mày có tự nhiên không?</a></h2>
-                <p>Khách thích chân mày như sợi thật nhưng không biết nền mày của mình có hợp điêu khắc hay không.</p>
-                <a class="read-more" href="kien-thuc/dieu-khac-chan-may-co-tu-nhien-khong.html">Đọc bài tư vấn</a>
-              </div>
-            </article>
-<article class="news-row">
-              <a class="news-thumb" href="kien-thuc/chon-dang-may-theo-khuon-mat.html"><img src="assets/pricing-dieu-khac-4.jpg" alt="Chọn dáng mày theo khuôn mặt để không bị già" loading="lazy" decoding="async" /></a>
-              <div>
-                <span class="news-kicker">GIẢI ĐÁP MỌI THẮC MẮC</span>
-                <h2><a href="kien-thuc/chon-dang-may-theo-khuon-mat.html">Chọn dáng mày theo khuôn mặt để không bị già</a></h2>
-                <p>Dáng mày sai có thể làm mặt dữ, già hoặc mất cân đối dù màu mày rất đẹp.</p>
-                <a class="read-more" href="kien-thuc/chon-dang-may-theo-khuon-mat.html">Đọc bài tư vấn</a>
-              </div>
-            </article>
-<article class="news-row">
-              <a class="news-thumb" href="kien-thuc/cham-soc-chan-may-sau-phun.html"><img src="assets/pricing-tan-bot-3.jpg" alt="Chăm sóc chân mày sau phun để màu không loang" loading="lazy" decoding="async" /></a>
-              <div>
-                <span class="news-kicker">GIẢI ĐÁP MỌI THẮC MẮC</span>
-                <h2><a href="kien-thuc/cham-soc-chan-may-sau-phun.html">Chăm sóc chân mày sau phun để màu không loang</a></h2>
-                <p>Sau khi làm mày, khách hay lo mày bong không đều, chỗ đậm chỗ nhạt hoặc lỡ tay bóc vảy.</p>
-                <a class="read-more" href="kien-thuc/cham-soc-chan-may-sau-phun.html">Đọc bài tư vấn</a>
-              </div>
-            </article>
-<article class="news-row">
-              <a class="news-thumb" href="kien-thuc/phun-mi-mo-trong-co-dang-lam-khong.html"><img src="assets/pricing-mi-2.jpg" alt="Mắt nhạt có nên phun mí mở tròng không?" loading="lazy" decoding="async" /></a>
-              <div>
-                <span class="news-kicker">GIẢI ĐÁP MỌI THẮC MẮC</span>
-                <h2><a href="kien-thuc/phun-mi-mo-trong-co-dang-lam-khong.html">Mắt nhạt có nên phun mí mở tròng không?</a></h2>
-                <p>Mắt thiếu nét làm mặt kém tỉnh táo, nhưng khách sợ phun mí bị đậm như kẻ eyeliner.</p>
-                <a class="read-more" href="kien-thuc/phun-mi-mo-trong-co-dang-lam-khong.html">Đọc bài tư vấn</a>
-              </div>
-            </article>
-<article class="news-row">
-              <a class="news-thumb" href="kien-thuc/phun-xam-tai-nha-co-an-toan-khong.html"><img src="assets/elly-spa-home-service.jpg" alt="Phun xăm tại nhà có an toàn và tiện không?" loading="lazy" decoding="async" /></a>
-              <div>
-                <span class="news-kicker">GIẢI ĐÁP MỌI THẮC MẮC</span>
-                <h2><a href="kien-thuc/phun-xam-tai-nha-co-an-toan-khong.html">Phun xăm tại nhà có an toàn và tiện không?</a></h2>
-                <p>Khách bận rộn muốn làm đẹp tại nhà nhưng lo dụng cụ, quy trình và chất lượng có đảm bảo không.</p>
-                <a class="read-more" href="kien-thuc/phun-xam-tai-nha-co-an-toan-khong.html">Đọc bài tư vấn</a>
-              </div>
-            </article>
-<article class="news-row">
-              <a class="news-thumb" href="kien-thuc/quy-trinh-tu-van-truoc-khi-phun-xam.html"><img src="assets/hee-kka.png" alt="Tư vấn trước khi phun xăm cần hỏi những gì?" loading="lazy" decoding="async" /></a>
-              <div>
-                <span class="news-kicker">GIẢI ĐÁP MỌI THẮC MẮC</span>
-                <h2><a href="kien-thuc/quy-trinh-tu-van-truoc-khi-phun-xam.html">Tư vấn trước khi phun xăm cần hỏi những gì?</a></h2>
-                <p>Khách sợ chọn sai dịch vụ, sai màu hoặc không biết kết quả sau bong sẽ khác thế nào.</p>
-                <a class="read-more" href="kien-thuc/quy-trinh-tu-van-truoc-khi-phun-xam.html">Đọc bài tư vấn</a>
-              </div>
-            </article>
-<article class="news-row">
-              <a class="news-thumb" href="kien-thuc/mau-moi-sau-phun-bao-lau-on-dinh.html"><img src="assets/pricing-moi-3.jpg" alt="Màu môi sau phun bao lâu thì ổn định?" loading="lazy" decoding="async" /></a>
-              <div>
-                <span class="news-kicker">GIẢI ĐÁP MỌI THẮC MẮC</span>
-                <h2><a href="kien-thuc/mau-moi-sau-phun-bao-lau-on-dinh.html">Màu môi sau phun bao lâu thì ổn định?</a></h2>
-                <p>Sau bong môi có lúc nhạt, lúc đậm làm khách lo không biết kết quả cuối cùng có đẹp không.</p>
-                <a class="read-more" href="kien-thuc/mau-moi-sau-phun-bao-lau-on-dinh.html">Đọc bài tư vấn</a>
-              </div>
-            </article>
-<article class="news-row">
-              <a class="news-thumb" href="kien-thuc/khi-nao-can-dam-lai-moi-may.html"><img src="assets/combo-moimay.jpg" alt="Khi nào cần dặm lại môi hoặc chân mày?" loading="lazy" decoding="async" /></a>
-              <div>
-                <span class="news-kicker">GIẢI ĐÁP MỌI THẮC MẮC</span>
-                <h2><a href="kien-thuc/khi-nao-can-dam-lai-moi-may.html">Khi nào cần dặm lại môi hoặc chân mày?</a></h2>
-                <p>Khách thấy màu nhạt sau bong nên lo phải làm lại ngay, nhưng dặm quá sớm có thể không phù hợp.</p>
-                <a class="read-more" href="kien-thuc/khi-nao-can-dam-lai-moi-may.html">Đọc bài tư vấn</a>
-              </div>
-            </article>
-<article class="news-row">
-              <a class="news-thumb" href="kien-thuc/lam-sao-de-mau-moi-ben-lau.html"><img src="assets/pricing-moi-4.jpg" alt="Làm sao để màu môi bền lâu và không bị khô xỉn?" loading="lazy" decoding="async" /></a>
-              <div>
-                <span class="news-kicker">GIẢI ĐÁP MỌI THẮC MẮC</span>
-                <h2><a href="kien-thuc/lam-sao-de-mau-moi-ben-lau.html">Làm sao để màu môi bền lâu và không bị khô xỉn?</a></h2>
-                <p>Khách sợ phun môi đẹp lúc đầu nhưng sau đó môi khô, xỉn hoặc nhanh nhạt màu.</p>
-                <a class="read-more" href="kien-thuc/lam-sao-de-mau-moi-ben-lau.html">Đọc bài tư vấn</a>
-              </div>
-            </article>
-<article class="news-row">
-              <a class="news-thumb" href="kien-thuc/lam-may-moi-co-bi-gia-khong.html"><img src="assets/hero-beauty-team.png" alt="Làm mày môi có bị già không?" loading="lazy" decoding="async" /></a>
-              <div>
-                <span class="news-kicker">GIẢI ĐÁP MỌI THẮC MẮC</span>
-                <h2><a href="kien-thuc/lam-may-moi-co-bi-gia-khong.html">Làm mày môi có bị già không?</a></h2>
-                <p>Khách muốn đẹp hơn nhưng sợ làm xong bị già, dữ hoặc nhìn quá khác so với bình thường.</p>
-                <a class="read-more" href="kien-thuc/lam-may-moi-co-bi-gia-khong.html">Đọc bài tư vấn</a>
-              </div>
-            </article>
-<article class="news-row">
-              <a class="news-thumb" href="kien-thuc/khach-trung-nien-chon-mau-moi-dang-may.html"><img src="assets/co-bi-gia-khong.jpg" alt="Khách trung niên nên chọn màu môi và dáng mày thế nào?" loading="lazy" decoding="async" /></a>
-              <div>
-                <span class="news-kicker">GIẢI ĐÁP MỌI THẮC MẮC</span>
-                <h2><a href="kien-thuc/khach-trung-nien-chon-mau-moi-dang-may.html">Khách trung niên nên chọn màu môi và dáng mày thế nào?</a></h2>
-                <p>Khách trung niên thường muốn mặt tươi hơn nhưng sợ màu quá trẻ, dáng quá sắc hoặc không hợp tuổi.</p>
-                <a class="read-more" href="kien-thuc/khach-trung-nien-chon-mau-moi-dang-may.html">Đọc bài tư vấn</a>
-              </div>
-            </article>
-<article class="news-row">
-              <a class="news-thumb" href="kien-thuc/chuan-bi-gi-truoc-khi-phun-xam.html"><img src="assets/elly-phun-xam.png" alt="Cần chuẩn bị gì trước khi phun xăm mày môi tại nhà?" loading="lazy" decoding="async" /></a>
-              <div>
-                <span class="news-kicker">GIẢI ĐÁP MỌI THẮC MẮC</span>
-                <h2><a href="kien-thuc/chuan-bi-gi-truoc-khi-phun-xam.html">Cần chuẩn bị gì trước khi phun xăm mày môi tại nhà?</a></h2>
-                <p>Khách đặt lịch rồi nhưng không biết trước buổi làm cần chuẩn bị ảnh, không gian hay lưu ý gì.</p>
-                <a class="read-more" href="kien-thuc/chuan-bi-gi-truoc-khi-phun-xam.html">Đọc bài tư vấn</a>
-              </div>
-            </article>
-<article class="news-row">
-              <a class="news-thumb" href="kien-thuc/nen-lam-moi-hay-lam-may-truoc.html"><img src="assets/moi-hay-may.png" alt="Nên làm môi hay làm mày trước nếu chưa biết bắt đầu từ đâu?" loading="lazy" decoding="async" /></a>
-              <div>
-                <span class="news-kicker">GIẢI ĐÁP MỌI THẮC MẮC</span>
-                <h2><a href="kien-thuc/nen-lam-moi-hay-lam-may-truoc.html">Nên làm môi hay làm mày trước nếu chưa biết bắt đầu từ đâu?</a></h2>
-                <p>Khách muốn làm đẹp nhưng phân vân nên làm môi, mày hay mí trước để thấy thay đổi rõ nhất.</p>
-                <a class="read-more" href="kien-thuc/nen-lam-moi-hay-lam-may-truoc.html">Đọc bài tư vấn</a>
-              </div>
-            </article></div>
-        <aside class="news-sidebar">
-          <h2>Chủ đề được quan tâm</h2>
-          <a href="kien-thuc/khu-tham-moi-uong-ca-phe-duoc-khong.html">Khử thâm môi uống cà phê được không</a>
-          <a href="kien-thuc/khu-tham-moi-kieng-gi.html">Khử thâm môi kiêng gì</a>
-          <a href="kien-thuc/khu-tham-moi-co-an-toan-khong.html">Khử thâm môi có an toàn không</a>
-          <a href="kien-thuc/khu-tham-moi-tham-bam-sinh.html">Khử thâm môi thâm bẩm sinh</a>
-          <a href="kien-thuc/khu-tham-moi-bao-lau-thi-len-mau.html">Khử thâm môi bao lâu thì lên màu</a>
-          <a href="kien-thuc/khu-tham-moi-cho-nam.html">Khử thâm môi cho nam</a>
-          <a href="kien-thuc/khu-tham-moi-co-bi-tham-lai-khong.html">Khử thâm môi có bị thâm lại không</a>
-          <a href="kien-thuc/khu-tham-moi-la-gi.html">Khử thâm môi là gì</a>
-          <a href="kien-thuc/phun-moi-mau-nude.html">Phun môi màu nude</a>
-          <a href="kien-thuc/phun-moi-mau-nao-dep.html">Phun môi màu nào đẹp</a>
-          <a href="kien-thuc/phun-moi-mau-do-cam.html">Phun môi màu đỏ cam</a>
-          <a href="kien-thuc/phun-moi-mau-hong-dat.html">Phun môi màu hồng đất</a>
-          <a href="kien-thuc/phun-moi-mau-do-nau.html">Phun môi màu đỏ nâu</a>
-          <a href="kien-thuc/phun-moi-mau-cam-dao.html">Phun môi màu cam đào</a>
-          <a href="kien-thuc/phun-moi-mau-hong-dao.html">Phun môi màu hồng đào</a>
-          <a href="kien-thuc/moi-tham-co-nen-phun-moi-khong.html">Môi thâm có nên phun môi không</a>
-          <a href="kien-thuc/phun-moi-tai-nha.html">Phun môi tại nhà</a>
-          <a href="kien-thuc/phun-moi-collagen-la-gi.html">Phun môi Collagen là gì</a>
-          <a href="kien-thuc/phun-moi-bao-lau-duoc-danh-son.html">Phun môi bao lâu được đánh son</a>
-          <a href="kien-thuc/lo-hon-sau-khi-phun-moi-co-sao-khong.html">Lỡ hôn sau phun môi</a>
-          <a href="kien-thuc/7-dieu-can-kieng-sau-phun-moi.html">7 điều cần kiêng sau phun môi</a>
-          <a href="kien-thuc/bong-qua-som-sau-phun-moi.html">Bong quá sớm sau phun môi</a>
-          <a href="kien-thuc/lich-cham-soc-moi-sau-phun.html">Lịch chăm sóc môi sau phun</a>
-          <a href="kien-thuc/phun-moi-10-ngay-chua-bong.html">Phun môi 10 ngày chưa bong</a>
-          <a href="kien-thuc/phun-moi-may-ngay-thi-bong.html">Phun môi mấy ngày thì bong</a>
-          <a href="kien-thuc/sau-phun-moi-bao-lau-duoc-danh-son.html">Sau phun môi bao lâu được đánh son</a>
-          <a href="kien-thuc/sau-phun-moi-kieng-an-gi.html">Sau phun môi kiêng ăn gì</a>
-          <a href="kien-thuc/cach-chon-dang-may-theo-khuon-mat.html">Cách chọn dáng mày theo khuôn mặt</a>
-          <a href="kien-thuc/bao-nhieu-tuoi-duoc-phun-may.html">Bao nhiêu tuổi được phun mày</a>
-          <a href="kien-thuc/co-nen-phun-may-khi-dang-mang-thai.html">Có nên phun mày khi mang thai</a>
-          <a href="kien-thuc/may-bi-xanh-sau-nhieu-nam-co-xu-ly-duoc-khong.html">Mày bị xanh sau nhiều năm</a>
-          <a href="kien-thuc/may-tro-do-phai-lam-sao.html">Mày trổ đỏ phải làm sao</a>
-<a href="kien-thuc/nguoi-lon-tuoi-nen-chon-kieu-chan-may-nao.html">Người lớn tuổi nên chọn kiểu chân mày nào</a>
-<a href="kien-thuc/phun-may-cho-da-dau-co-ben-khong.html">Phun mày cho da dầu có bền không</a>
-<a href="kien-thuc/sau-phun-may-kieng-an-gi.html">Sau phun mày kiêng ăn gì</a>
-<a href="kien-thuc/phun-may-bao-lau-thi-bong.html">Phun mày bao lâu thì bong</a>
-<a href="kien-thuc/sau-phun-may-bao-lau-duoc-rua-mat.html">Sau phun mày bao lâu được rửa mặt</a>
-<a href="kien-thuc/phun-may-giu-duoc-bao-lau.html">Phun mày giữ được bao lâu</a>
-<a href="kien-thuc/phun-may-co-dau-khong.html">Phun mày có đau không</a>
-<a href="kien-thuc/phun-may-hay-dieu-khac-chan-may.html">Phun mày hay điêu khắc chân mày</a>
-<a href="kien-thuc/dieu-khac-hay-phun-may-dep-hon.html">Điêu khắc hay phun mày đẹp hơn</a>
-<a href="kien-thuc/phun-may-ombre-la-gi.html">Phun mày Ombre là gì</a>
-<a href="kien-thuc/phun-may-nano-co-tot-khong.html">Phun mày Nano có tốt không</a>
-<a href="kien-thuc/cac-loai-mau-moi-hop-cho-u30.html">Các loại màu môi hợp cho U30</a>
-<a href="kien-thuc/phun-moi-co-dau-khong.html">Phun môi có đau không</a>
-<a href="kien-thuc/moi-tham-nen-phun-mau-gi.html">Môi thâm nên phun màu gì để mặt tươi hơn</a>
-<a href="kien-thuc/so-phun-moi-qua-dam-nen-chon-mau-nao.html">Sợ phun môi quá đậm thì nên chọn màu nào</a>
-<a href="kien-thuc/phun-moi-collagen-co-dau-khong.html">Phun môi collagen có đau không và bao lâu thì bong</a>
-<a href="kien-thuc/cham-soc-moi-sau-phun-7-ngay-dau.html">Chăm sóc môi sau phun trong 7 ngày đầu sao cho lên màu đẹp</a>
-<a href="kien-thuc/sau-phun-moi-nen-an-gi-va-kieng-gi.html">Sau phun môi nên ăn gì và kiêng gì để môi nhanh ổn định</a>
-<a href="kien-thuc/chon-mau-moi-theo-mau-da.html">Chọn màu môi theo màu da để không bị xỉn mặt</a>
-<a href="kien-thuc/phun-may-tan-bot-hop-voi-ai.html">Chân mày thưa có nên phun mày tán bột không</a>
-<a href="kien-thuc/dieu-khac-chan-may-co-tu-nhien-khong.html">Điêu khắc chân mày có tự nhiên không</a>
-<a href="kien-thuc/chon-dang-may-theo-khuon-mat.html">Chọn dáng mày theo khuôn mặt để không bị già</a>
-<a href="kien-thuc/cham-soc-chan-may-sau-phun.html">Chăm sóc chân mày sau phun để màu không loang</a>
-          <div class="news-cta">
-            <h2>Chưa biết chọn dịch vụ nào?</h2>
-            <p>Để lại số điện thoại và khu vực, ELLY sẽ gọi lại tư vấn màu môi, dáng mày và lịch làm tại nhà phù hợp.</p>
-            <a class="btn btn-primary" href="#booking" data-booking-open>Đặt lịch tư vấn</a>
-          </div>
-        </aside>
-      </section>
-    </main>
+<section class="container news-body" style="display:block; padding-top:12px;">
+  <div class="elly-kien-thuc-wrap">
+    <div id="ellyKnowledgeList" class="elly-knowledge-list">
+      <article class="elly-knowledge-item">
+        <a class="elly-knowledge-thumb" href="kien-thuc/moi-bi-den-co-phun-duoc-khong.html"><img src="assets/hinh-nen-moi-tham.jpg" alt="Môi bị đen có phun được không? Cách xử lý để lên màu đẹp" loading="lazy"></a>
+        <div class="elly-knowledge-content">
+          <span class="elly-kicker">BÀI NỔI BẬT</span>
+          <h2 class="elly-knowledge-title"><a href="kien-thuc/moi-bi-den-co-phun-duoc-khong.html">Môi bị đen có phun được không? Cách xử lý để lên màu đẹp</a></h2>
+          <div class="elly-knowledge-line"></div>
+        </div>
+      </article>
+      <article class="elly-knowledge-item">
+        <a class="elly-knowledge-thumb" href="kien-thuc/nen-lam-moi-hay-lam-may-truoc.html"><img src="assets/moi-hay-may.png" alt="Nên làm môi hay làm mày trước nếu chưa biết bắt đầu từ đâu?" loading="lazy"></a>
+        <div class="elly-knowledge-content">
+          <span class="elly-kicker">GIẢI ĐÁP MỌI THẮC MẮC</span>
+          <h2 class="elly-knowledge-title"><a href="kien-thuc/nen-lam-moi-hay-lam-may-truoc.html">Nên làm môi hay làm mày trước nếu chưa biết bắt đầu từ đâu?</a></h2>
+          <div class="elly-knowledge-line"></div>
+        </div>
+      </article>
+      <article class="elly-knowledge-item">
+        <a class="elly-knowledge-thumb" href="kien-thuc/chuan-bi-gi-truoc-khi-phun-xam.html"><img src="assets/elly-phun-xam.png" alt="Cần chuẩn bị gì trước khi phun xăm mày môi tại nhà?" loading="lazy"></a>
+        <div class="elly-knowledge-content">
+          <span class="elly-kicker">GIẢI ĐÁP MỌI THẮC MẮC</span>
+          <h2 class="elly-knowledge-title"><a href="kien-thuc/chuan-bi-gi-truoc-khi-phun-xam.html">Cần chuẩn bị gì trước khi phun xăm mày môi tại nhà?</a></h2>
+          <div class="elly-knowledge-line"></div>
+        </div>
+      </article>
+      <article class="elly-knowledge-item">
+        <a class="elly-knowledge-thumb" href="kien-thuc/khach-trung-nien-chon-mau-moi-dang-may.html"><img src="assets/co-bi-gia-khong.jpg" alt="Khách trung niên nên chọn màu môi và dáng mày thế nào?" loading="lazy"></a>
+        <div class="elly-knowledge-content">
+          <span class="elly-kicker">GIẢI ĐÁP MỌI THẮC MẮC</span>
+          <h2 class="elly-knowledge-title"><a href="kien-thuc/khach-trung-nien-chon-mau-moi-dang-may.html">Khách trung niên nên chọn màu môi và dáng mày thế nào?</a></h2>
+          <div class="elly-knowledge-line"></div>
+        </div>
+      </article>
+      <article class="elly-knowledge-item">
+        <a class="elly-knowledge-thumb" href="kien-thuc/lam-may-moi-co-bi-gia-khong.html"><img src="assets/hero-beauty-team.png" alt="Làm mày môi có bị già không?" loading="lazy"></a>
+        <div class="elly-knowledge-content">
+          <span class="elly-kicker">GIẢI ĐÁP MỌI THẮC MẮC</span>
+          <h2 class="elly-knowledge-title"><a href="kien-thuc/lam-may-moi-co-bi-gia-khong.html">Làm mày môi có bị già không?</a></h2>
+          <div class="elly-knowledge-line"></div>
+        </div>
+      </article>
+      <article class="elly-knowledge-item">
+        <a class="elly-knowledge-thumb" href="kien-thuc/lam-sao-de-mau-moi-ben-lau.html"><img src="assets/pricing-moi-4.jpg" alt="Làm sao để màu môi bền lâu và không bị khô xỉn?" loading="lazy"></a>
+        <div class="elly-knowledge-content">
+          <span class="elly-kicker">GIẢI ĐÁP MỌI THẮC MẮC</span>
+          <h2 class="elly-knowledge-title"><a href="kien-thuc/lam-sao-de-mau-moi-ben-lau.html">Làm sao để màu môi bền lâu và không bị khô xỉn?</a></h2>
+          <div class="elly-knowledge-line"></div>
+        </div>
+      </article>
+      <article class="elly-knowledge-item">
+        <a class="elly-knowledge-thumb" href="kien-thuc/khi-nao-can-dam-lai-moi-may.html"><img src="assets/combo-moimay.jpg" alt="Khi nào cần dặm lại môi hoặc chân mày?" loading="lazy"></a>
+        <div class="elly-knowledge-content">
+          <span class="elly-kicker">GIẢI ĐÁP MỌI THẮC MẮC</span>
+          <h2 class="elly-knowledge-title"><a href="kien-thuc/khi-nao-can-dam-lai-moi-may.html">Khi nào cần dặm lại môi hoặc chân mày?</a></h2>
+          <div class="elly-knowledge-line"></div>
+        </div>
+      </article>
+      <article class="elly-knowledge-item">
+        <a class="elly-knowledge-thumb" href="kien-thuc/mau-moi-sau-phun-bao-lau-on-dinh.html"><img src="assets/pricing-moi-3.jpg" alt="Màu môi sau phun bao lâu thì ổn định?" loading="lazy"></a>
+        <div class="elly-knowledge-content">
+          <span class="elly-kicker">GIẢI ĐÁP MỌI THẮC MẮC</span>
+          <h2 class="elly-knowledge-title"><a href="kien-thuc/mau-moi-sau-phun-bao-lau-on-dinh.html">Màu môi sau phun bao lâu thì ổn định?</a></h2>
+          <div class="elly-knowledge-line"></div>
+        </div>
+      </article>
+      <article class="elly-knowledge-item">
+        <a class="elly-knowledge-thumb" href="kien-thuc/quy-trinh-tu-van-truoc-khi-phun-xam.html"><img src="assets/hee-kka.png" alt="Tư vấn trước khi phun xăm cần hỏi những gì?" loading="lazy"></a>
+        <div class="elly-knowledge-content">
+          <span class="elly-kicker">GIẢI ĐÁP MỌI THẮC MẮC</span>
+          <h2 class="elly-knowledge-title"><a href="kien-thuc/quy-trinh-tu-van-truoc-khi-phun-xam.html">Tư vấn trước khi phun xăm cần hỏi những gì?</a></h2>
+          <div class="elly-knowledge-line"></div>
+        </div>
+      </article>
+      <article class="elly-knowledge-item">
+        <a class="elly-knowledge-thumb" href="kien-thuc/phun-xam-tai-nha-co-an-toan-khong.html"><img src="assets/elly-spa-home-service.jpg" alt="Phun xăm tại nhà có an toàn và tiện không?" loading="lazy"></a>
+        <div class="elly-knowledge-content">
+          <span class="elly-kicker">GIẢI ĐÁP MỌI THẮC MẮC</span>
+          <h2 class="elly-knowledge-title"><a href="kien-thuc/phun-xam-tai-nha-co-an-toan-khong.html">Phun xăm tại nhà có an toàn và tiện không?</a></h2>
+          <div class="elly-knowledge-line"></div>
+        </div>
+      </article>
+      <article class="elly-knowledge-item">
+        <a class="elly-knowledge-thumb" href="kien-thuc/phun-mi-mo-trong-co-dang-lam-khong.html"><img src="assets/pricing-mi-2.jpg" alt="Mắt nhạt có nên phun mí mở tròng không?" loading="lazy"></a>
+        <div class="elly-knowledge-content">
+          <span class="elly-kicker">GIẢI ĐÁP MỌI THẮC MẮC</span>
+          <h2 class="elly-knowledge-title"><a href="kien-thuc/phun-mi-mo-trong-co-dang-lam-khong.html">Mắt nhạt có nên phun mí mở tròng không?</a></h2>
+          <div class="elly-knowledge-line"></div>
+        </div>
+      </article>
+      <article class="elly-knowledge-item">
+        <a class="elly-knowledge-thumb" href="kien-thuc/cham-soc-chan-may-sau-phun.html"><img src="assets/pricing-tan-bot-3.jpg" alt="Chăm sóc chân mày sau phun để màu không loang" loading="lazy"></a>
+        <div class="elly-knowledge-content">
+          <span class="elly-kicker">GIẢI ĐÁP MỌI THẮC MẮC</span>
+          <h2 class="elly-knowledge-title"><a href="kien-thuc/cham-soc-chan-may-sau-phun.html">Chăm sóc chân mày sau phun để màu không loang</a></h2>
+          <div class="elly-knowledge-line"></div>
+        </div>
+      </article>
+      <article class="elly-knowledge-item">
+        <a class="elly-knowledge-thumb" href="kien-thuc/chon-dang-may-theo-khuon-mat.html"><img src="assets/pricing-dieu-khac-4.jpg" alt="Chọn dáng mày theo khuôn mặt để không bị già" loading="lazy"></a>
+        <div class="elly-knowledge-content">
+          <span class="elly-kicker">GIẢI ĐÁP MỌI THẮC MẮC</span>
+          <h2 class="elly-knowledge-title"><a href="kien-thuc/chon-dang-may-theo-khuon-mat.html">Chọn dáng mày theo khuôn mặt để không bị già</a></h2>
+          <div class="elly-knowledge-line"></div>
+        </div>
+      </article>
+      <article class="elly-knowledge-item">
+        <a class="elly-knowledge-thumb" href="kien-thuc/dieu-khac-chan-may-co-tu-nhien-khong.html"><img src="assets/pricing-dieu-khac-1.jpg" alt="Điêu khắc chân mày có tự nhiên không?" loading="lazy"></a>
+        <div class="elly-knowledge-content">
+          <span class="elly-kicker">GIẢI ĐÁP MỌI THẮC MẮC</span>
+          <h2 class="elly-knowledge-title"><a href="kien-thuc/dieu-khac-chan-may-co-tu-nhien-khong.html">Điêu khắc chân mày có tự nhiên không?</a></h2>
+          <div class="elly-knowledge-line"></div>
+        </div>
+      </article>
+      <article class="elly-knowledge-item">
+        <a class="elly-knowledge-thumb" href="kien-thuc/phun-may-tan-bot-hop-voi-ai.html"><img src="assets/chan-may-thua.JPG" alt="Chân mày thưa có nên phun mày tán bột không?" loading="lazy"></a>
+        <div class="elly-knowledge-content">
+          <span class="elly-kicker">GIẢI ĐÁP MỌI THẮC MẮC</span>
+          <h2 class="elly-knowledge-title"><a href="kien-thuc/phun-may-tan-bot-hop-voi-ai.html">Chân mày thưa có nên phun mày tán bột không?</a></h2>
+          <div class="elly-knowledge-line"></div>
+        </div>
+      </article>
+      <article class="elly-knowledge-item">
+        <a class="elly-knowledge-thumb" href="kien-thuc/chon-mau-moi-theo-mau-da.html"><img src="assets/mau-theo0-da.jpg" alt="Chọn màu môi theo màu da để không bị xỉn mặt" loading="lazy"></a>
+        <div class="elly-knowledge-content">
+          <span class="elly-kicker">GIẢI ĐÁP MỌI THẮC MẮC</span>
+          <h2 class="elly-knowledge-title"><a href="kien-thuc/chon-mau-moi-theo-mau-da.html">Chọn màu môi theo màu da để không bị xỉn mặt</a></h2>
+          <div class="elly-knowledge-line"></div>
+        </div>
+      </article>
+      <article class="elly-knowledge-item">
+        <a class="elly-knowledge-thumb" href="kien-thuc/phun-moi-co-dau-khong.html"><img src="assets/phun-moi-co-dau-khong-1.png" alt="Phun môi có đau không? Giải đáp chi tiết trước khi làm" loading="lazy"></a>
+        <div class="elly-knowledge-content">
+          <span class="elly-kicker">GIẢI ĐÁP PHUN MÔI</span>
+          <h2 class="elly-knowledge-title"><a href="kien-thuc/phun-moi-co-dau-khong.html">Phun môi có đau không? Giải đáp chi tiết trước khi làm</a></h2>
+          <div class="elly-knowledge-line"></div>
+        </div>
+      </article>
+      <article class="elly-knowledge-item">
+        <a class="elly-knowledge-thumb" href="kien-thuc/cac-loai-mau-moi-hop-cho-u30.html"><img src="assets/mau-moi-u30.png" alt="Các loại màu môi hợp cho U30: trẻ, tươi nhưng không bị quá nổi" loading="lazy"></a>
+        <div class="elly-knowledge-content">
+          <span class="elly-kicker">TƯ VẤN CHỌN MÀU</span>
+          <h2 class="elly-knowledge-title"><a href="kien-thuc/cac-loai-mau-moi-hop-cho-u30.html">Các loại màu môi hợp cho U30: trẻ, tươi nhưng không bị quá nổi</a></h2>
+          <div class="elly-knowledge-line"></div>
+        </div>
+      </article>
+      <article class="elly-knowledge-item">
+        <a class="elly-knowledge-thumb" href="kien-thuc/phun-may-nano-co-tot-khong.html"><img src="assets/phun-may-nano-co-tot-khong.png" alt="Phun mày Nano có tốt không? Ưu điểm, độ bền và chi phí" loading="lazy"></a>
+        <div class="elly-knowledge-content">
+          <span class="elly-kicker">TƯ VẤN CHÂN MÀY</span>
+          <h2 class="elly-knowledge-title"><a href="kien-thuc/phun-may-nano-co-tot-khong.html">Phun mày Nano có tốt không? Ưu điểm, độ bền và chi phí</a></h2>
+          <div class="elly-knowledge-line"></div>
+        </div>
+      </article>
+      <article class="elly-knowledge-item">
+        <a class="elly-knowledge-thumb" href="kien-thuc/phun-may-ombre-la-gi.html"><img src="assets/phun-may-ombre-la-gi.jpg" alt="Phun mày Ombre là gì? Ưu điểm và ai nên thực hiện" loading="lazy"></a>
+        <div class="elly-knowledge-content">
+          <span class="elly-kicker">TƯ VẤN CHÂN MÀY</span>
+          <h2 class="elly-knowledge-title"><a href="kien-thuc/phun-may-ombre-la-gi.html">Phun mày Ombre là gì? Ưu điểm và ai nên thực hiện</a></h2>
+          <div class="elly-knowledge-line"></div>
+        </div>
+      </article>
+      <article class="elly-knowledge-item">
+        <a class="elly-knowledge-thumb" href="kien-thuc/dieu-khac-hay-phun-may-dep-hon.html"><img src="assets/dieu-khac-hay-phun-may-dep-hon.png" alt="Điêu khắc hay phun mày đẹp hơn? So sánh chi tiết" loading="lazy"></a>
+        <div class="elly-knowledge-content">
+          <span class="elly-kicker">TƯ VẤN CHÂN MÀY</span>
+          <h2 class="elly-knowledge-title"><a href="kien-thuc/dieu-khac-hay-phun-may-dep-hon.html">Điêu khắc hay phun mày đẹp hơn? So sánh chi tiết</a></h2>
+          <div class="elly-knowledge-line"></div>
+        </div>
+      </article>
+      <article class="elly-knowledge-item">
+        <a class="elly-knowledge-thumb" href="kien-thuc/phun-may-hay-dieu-khac-chan-may.html"><img src="assets/dieu-khac-hay-phun.jpg" alt="Phun mày hay điêu khắc chân mày? Cách chọn phương pháp hợp khuôn mặt" loading="lazy"></a>
+        <div class="elly-knowledge-content">
+          <span class="elly-kicker">TƯ VẤN CHÂN MÀY</span>
+          <h2 class="elly-knowledge-title"><a href="kien-thuc/phun-may-hay-dieu-khac-chan-may.html">Phun mày hay điêu khắc chân mày? Cách chọn phương pháp hợp khuôn mặt</a></h2>
+          <div class="elly-knowledge-line"></div>
+        </div>
+      </article>
+      <article class="elly-knowledge-item">
+        <a class="elly-knowledge-thumb" href="kien-thuc/phun-may-co-dau-khong.html"><img src="assets/phun-may-dieu-khac-chan-may.jpg" alt="Phun mày có đau không? Cảm giác thật trước khi làm" loading="lazy"></a>
+        <div class="elly-knowledge-content">
+          <span class="elly-kicker">GIẢI ĐÁP MỌI THẮC MẮC</span>
+          <h2 class="elly-knowledge-title"><a href="kien-thuc/phun-may-co-dau-khong.html">Phun mày có đau không? Cảm giác thật trước khi làm</a></h2>
+          <div class="elly-knowledge-line"></div>
+        </div>
+      </article>
+      <article class="elly-knowledge-item">
+        <a class="elly-knowledge-thumb" href="kien-thuc/phun-may-giu-duoc-bao-lau.html"><img src="assets/7-yeu-to.JPG" alt="Phun mày giữ được bao lâu? 7 yếu tố quyết định độ bền màu" loading="lazy"></a>
+        <div class="elly-knowledge-content">
+          <span class="elly-kicker">CHĂM SÓC CHÂN MÀY</span>
+          <h2 class="elly-knowledge-title"><a href="kien-thuc/phun-may-giu-duoc-bao-lau.html">Phun mày giữ được bao lâu? 7 yếu tố quyết định độ bền màu</a></h2>
+          <div class="elly-knowledge-line"></div>
+        </div>
+      </article>
+      <article class="elly-knowledge-item">
+        <a class="elly-knowledge-thumb" href="kien-thuc/sau-phun-may-bao-lau-duoc-rua-mat.html"><img src="assets/sau-phun-may-bao-lau-duoc-rua-mat.png" alt="Sau phun mày bao lâu được rửa mặt? Hướng dẫn chăm sóc đúng" loading="lazy"></a>
+        <div class="elly-knowledge-content">
+          <span class="elly-kicker">CHĂM SÓC CHÂN MÀY</span>
+          <h2 class="elly-knowledge-title"><a href="kien-thuc/sau-phun-may-bao-lau-duoc-rua-mat.html">Sau phun mày bao lâu được rửa mặt? Hướng dẫn chăm sóc đúng</a></h2>
+          <div class="elly-knowledge-line"></div>
+        </div>
+      </article>
+      <article class="elly-knowledge-item">
+        <a class="elly-knowledge-thumb" href="kien-thuc/phun-may-bao-lau-thi-bong.html"><img src="assets/phun-may-bao-lau-thi-bong.jpg" alt="Phun mày bao lâu thì bong? Quá trình hồi phục và cách chăm sóc" loading="lazy"></a>
+        <div class="elly-knowledge-content">
+          <span class="elly-kicker">CHĂM SÓC CHÂN MÀY</span>
+          <h2 class="elly-knowledge-title"><a href="kien-thuc/phun-may-bao-lau-thi-bong.html">Phun mày bao lâu thì bong? Quá trình hồi phục và cách chăm sóc</a></h2>
+          <div class="elly-knowledge-line"></div>
+        </div>
+      </article>
+      <article class="elly-knowledge-item">
+        <a class="elly-knowledge-thumb" href="kien-thuc/sau-phun-may-kieng-an-gi.html"><img src="assets/kieng-may-sau-phun.JPG" alt="Sau phun mày kiêng ăn gì? 8 thực phẩm nên tránh để lên màu đẹp" loading="lazy"></a>
+        <div class="elly-knowledge-content">
+          <span class="elly-kicker">CHĂM SÓC CHÂN MÀY</span>
+          <h2 class="elly-knowledge-title"><a href="kien-thuc/sau-phun-may-kieng-an-gi.html">Sau phun mày kiêng ăn gì? 8 thực phẩm nên tránh để lên màu đẹp</a></h2>
+          <div class="elly-knowledge-line"></div>
+        </div>
+      </article>
+      <article class="elly-knowledge-item">
+        <a class="elly-knowledge-thumb" href="kien-thuc/phun-may-cho-da-dau-co-ben-khong.html"><img src="assets/phun-may-cho-da-dau-co-ben-khong.png" alt="Phun mày cho da dầu có bền không? Bí quyết giữ màu đẹp lâu" loading="lazy"></a>
+        <div class="elly-knowledge-content">
+          <span class="elly-kicker">TƯ VẤN CHÂN MÀY</span>
+          <h2 class="elly-knowledge-title"><a href="kien-thuc/phun-may-cho-da-dau-co-ben-khong.html">Phun mày cho da dầu có bền không? Bí quyết giữ màu đẹp lâu</a></h2>
+          <div class="elly-knowledge-line"></div>
+        </div>
+      </article>
+      <article class="elly-knowledge-item">
+        <a class="elly-knowledge-thumb" href="kien-thuc/nguoi-lon-tuoi-nen-chon-kieu-chan-may-nao.html"><img src="assets/nguoi-lon-tuoi-chon-kieu-chan-may-1.png" alt="Người lớn tuổi nên chọn kiểu chân mày nào để gương mặt trẻ trung hơn?" loading="lazy"></a>
+        <div class="elly-knowledge-content">
+          <span class="elly-kicker">TƯ VẤN CHÂN MÀY</span>
+          <h2 class="elly-knowledge-title"><a href="kien-thuc/nguoi-lon-tuoi-nen-chon-kieu-chan-may-nao.html">Người lớn tuổi nên chọn kiểu chân mày nào để gương mặt trẻ trung hơn?</a></h2>
+          <div class="elly-knowledge-line"></div>
+        </div>
+      </article>
+      <article class="elly-knowledge-item">
+        <a class="elly-knowledge-thumb" href="kien-thuc/may-tro-do-phai-lam-sao.html"><img src="assets/may-tro-do-phai-lam-sao-1.png" alt="Mày trổ đỏ phải làm sao? Nguyên nhân và cách xử lý hiệu quả" loading="lazy"></a>
+        <div class="elly-knowledge-content">
+          <span class="elly-kicker">SỬA MÀY CŨ</span>
+          <h2 class="elly-knowledge-title"><a href="kien-thuc/may-tro-do-phai-lam-sao.html">Mày trổ đỏ phải làm sao? Nguyên nhân và cách xử lý hiệu quả</a></h2>
+          <div class="elly-knowledge-line"></div>
+        </div>
+      </article>
+      <article class="elly-knowledge-item">
+        <a class="elly-knowledge-thumb" href="kien-thuc/may-bi-xanh-sau-nhieu-nam-co-xu-ly-duoc-khong.html"><img src="assets/may-bi-xanh-sau-nhieu-nam-1.png" alt="Mày bị xanh sau nhiều năm có xử lý được không?" loading="lazy"></a>
+        <div class="elly-knowledge-content">
+          <span class="elly-kicker">SỬA MÀY CŨ</span>
+          <h2 class="elly-knowledge-title"><a href="kien-thuc/may-bi-xanh-sau-nhieu-nam-co-xu-ly-duoc-khong.html">Mày bị xanh sau nhiều năm có xử lý được không?</a></h2>
+          <div class="elly-knowledge-line"></div>
+        </div>
+      </article>
+      <article class="elly-knowledge-item">
+        <a class="elly-knowledge-thumb" href="kien-thuc/co-nen-phun-may-khi-dang-mang-thai.html"><img src="assets/co-nen-phun-may-khi-dang-mang-thai-1.png" alt="Có nên phun mày khi đang mang thai? Những điều cần biết trước khi quyết định" loading="lazy"></a>
+        <div class="elly-knowledge-content">
+          <span class="elly-kicker">AN TOÀN KHI LÀM ĐẸP</span>
+          <h2 class="elly-knowledge-title"><a href="kien-thuc/co-nen-phun-may-khi-dang-mang-thai.html">Có nên phun mày khi đang mang thai? Những điều cần biết trước khi quyết định</a></h2>
+          <div class="elly-knowledge-line"></div>
+        </div>
+      </article>
+      <article class="elly-knowledge-item">
+        <a class="elly-knowledge-thumb" href="kien-thuc/bao-nhieu-tuoi-duoc-phun-may.html"><img src="assets/bao-nhieu-tuoi-duoc-phun-may-1.png" alt="Bao nhiêu tuổi được phun mày? Độ tuổi phù hợp và những lưu ý quan trọng" loading="lazy"></a>
+        <div class="elly-knowledge-content">
+          <span class="elly-kicker">TƯ VẤN PHUN MÀY</span>
+          <h2 class="elly-knowledge-title"><a href="kien-thuc/bao-nhieu-tuoi-duoc-phun-may.html">Bao nhiêu tuổi được phun mày? Độ tuổi phù hợp và những lưu ý quan trọng</a></h2>
+          <div class="elly-knowledge-line"></div>
+        </div>
+      </article>
+      <article class="elly-knowledge-item">
+        <a class="elly-knowledge-thumb" href="kien-thuc/cach-chon-dang-may-theo-khuon-mat.html"><img src="assets/cach-chon-dang-may-theo-khuon-mat-1.png" alt="Cách chọn dáng mày theo khuôn mặt: bí quyết giúp gương mặt hài hòa và trẻ trung" loading="lazy"></a>
+        <div class="elly-knowledge-content">
+          <span class="elly-kicker">DÁNG MÀY</span>
+          <h2 class="elly-knowledge-title"><a href="kien-thuc/cach-chon-dang-may-theo-khuon-mat.html">Cách chọn dáng mày theo khuôn mặt: bí quyết giúp gương mặt hài hòa và trẻ trung</a></h2>
+          <div class="elly-knowledge-line"></div>
+        </div>
+      </article>
+      <article class="elly-knowledge-item">
+        <a class="elly-knowledge-thumb" href="kien-thuc/sau-phun-moi-kieng-an-gi.html"><img src="assets/sau-phun-moi-kieng-an-gi-1.png" alt="Sau phun môi kiêng ăn gì? 15 thực phẩm nên và không nên ăn" loading="lazy"></a>
+        <div class="elly-knowledge-content">
+          <span class="elly-kicker">CHĂM SÓC SAU PHUN MÔI</span>
+          <h2 class="elly-knowledge-title"><a href="kien-thuc/sau-phun-moi-kieng-an-gi.html">Sau phun môi kiêng ăn gì? 15 thực phẩm nên và không nên ăn</a></h2>
+          <div class="elly-knowledge-line"></div>
+        </div>
+      </article>
+      <article class="elly-knowledge-item">
+        <a class="elly-knowledge-thumb" href="kien-thuc/sau-phun-moi-bao-lau-duoc-danh-son.html"><img src="assets/sau-phun-moi-bao-lau-duoc-danh-son-1.png" alt="Sau phun môi bao lâu được đánh son? Thời điểm an toàn và những lưu ý quan trọng" loading="lazy"></a>
+        <div class="elly-knowledge-content">
+          <span class="elly-kicker">CHĂM SÓC SAU PHUN MÔI</span>
+          <h2 class="elly-knowledge-title"><a href="kien-thuc/sau-phun-moi-bao-lau-duoc-danh-son.html">Sau phun môi bao lâu được đánh son? Thời điểm an toàn và những lưu ý quan trọng</a></h2>
+          <div class="elly-knowledge-line"></div>
+        </div>
+      </article>
+      <article class="elly-knowledge-item">
+        <a class="elly-knowledge-thumb" href="kien-thuc/phun-moi-bao-lau-duoc-danh-son.html"><img src="assets/phun-moi-bao-lau-duoc-danh-son-1.png" alt="Sau phun môi bao lâu được đánh son, skincare và trang điểm?" loading="lazy"></a>
+        <div class="elly-knowledge-content">
+          <span class="elly-kicker">CHĂM SÓC SAU PHUN MÔI</span>
+          <h2 class="elly-knowledge-title"><a href="kien-thuc/phun-moi-bao-lau-duoc-danh-son.html">Sau phun môi bao lâu được đánh son, skincare và trang điểm?</a></h2>
+          <div class="elly-knowledge-line"></div>
+        </div>
+      </article>
+      <article class="elly-knowledge-item">
+        <a class="elly-knowledge-thumb" href="kien-thuc/lo-hon-sau-khi-phun-moi-co-sao-khong.html"><img src="assets/lo-hon-sau-khi-phun-moi-co-sao-khong-1.png" alt="Lỡ hôn sau khi phun môi có sao không?" loading="lazy"></a>
+        <div class="elly-knowledge-content">
+          <span class="elly-kicker">CHĂM SÓC SAU PHUN MÔI</span>
+          <h2 class="elly-knowledge-title"><a href="kien-thuc/lo-hon-sau-khi-phun-moi-co-sao-khong.html">Lỡ hôn sau khi phun môi có sao không?</a></h2>
+          <div class="elly-knowledge-line"></div>
+        </div>
+      </article>
+      <article class="elly-knowledge-item">
+        <a class="elly-knowledge-thumb" href="kien-thuc/7-dieu-can-kieng-sau-phun-moi.html"><img src="assets/7-dieu-can-kieng-sau-phun-moi-1.png" alt="7 điều cần kiêng sau phun môi để môi lên màu đẹp" loading="lazy"></a>
+        <div class="elly-knowledge-content">
+          <span class="elly-kicker">CHĂM SÓC SAU PHUN MÔI</span>
+          <h2 class="elly-knowledge-title"><a href="kien-thuc/7-dieu-can-kieng-sau-phun-moi.html">7 điều cần kiêng sau phun môi để môi lên màu đẹp</a></h2>
+          <div class="elly-knowledge-line"></div>
+        </div>
+      </article>
+      <article class="elly-knowledge-item">
+        <a class="elly-knowledge-thumb" href="kien-thuc/bong-qua-som-sau-phun-moi.html"><img src="assets/bong-qua-som-sau-phun-moi-1.png" alt="Bong quá sớm sau phun môi có ảnh hưởng màu không?" loading="lazy"></a>
+        <div class="elly-knowledge-content">
+          <span class="elly-kicker">CHĂM SÓC SAU PHUN MÔI</span>
+          <h2 class="elly-knowledge-title"><a href="kien-thuc/bong-qua-som-sau-phun-moi.html">Bong quá sớm sau phun môi có ảnh hưởng màu không?</a></h2>
+          <div class="elly-knowledge-line"></div>
+        </div>
+      </article>
+      <article class="elly-knowledge-item">
+        <a class="elly-knowledge-thumb" href="kien-thuc/phun-moi-10-ngay-chua-bong.html"><img src="assets/phun-moi-10-ngay-chua-bong-1.png" alt="Phun môi 10 ngày chưa bong có sao không?" loading="lazy"></a>
+        <div class="elly-knowledge-content">
+          <span class="elly-kicker">CHĂM SÓC SAU PHUN MÔI</span>
+          <h2 class="elly-knowledge-title"><a href="kien-thuc/phun-moi-10-ngay-chua-bong.html">Phun môi 10 ngày chưa bong có sao không?</a></h2>
+          <div class="elly-knowledge-line"></div>
+        </div>
+      </article>
+      <article class="elly-knowledge-item">
+        <a class="elly-knowledge-thumb" href="kien-thuc/phun-moi-may-ngay-thi-bong.html"><img src="assets/phun-moi-may-ngay-thi-bong-1.png" alt="Phun môi mấy ngày thì bong? Tiến trình hồi phục bạn nên biết" loading="lazy"></a>
+        <div class="elly-knowledge-content">
+          <span class="elly-kicker">CHĂM SÓC SAU PHUN MÔI</span>
+          <h2 class="elly-knowledge-title"><a href="kien-thuc/phun-moi-may-ngay-thi-bong.html">Phun môi mấy ngày thì bong? Tiến trình hồi phục bạn nên biết</a></h2>
+          <div class="elly-knowledge-line"></div>
+        </div>
+      </article>
+      <article class="elly-knowledge-item">
+        <a class="elly-knowledge-thumb" href="kien-thuc/lich-cham-soc-moi-sau-phun.html"><img src="assets/lich-cham-soc-moi-sau-phun-1.png" alt="Lịch chăm sóc môi sau phun từ ngày 1 đến ngày 30" loading="lazy"></a>
+        <div class="elly-knowledge-content">
+          <span class="elly-kicker">CHĂM SÓC SAU PHUN MÔI</span>
+          <h2 class="elly-knowledge-title"><a href="kien-thuc/lich-cham-soc-moi-sau-phun.html">Lịch chăm sóc môi sau phun từ ngày 1 đến ngày 30</a></h2>
+          <div class="elly-knowledge-line"></div>
+        </div>
+      </article>
+      <article class="elly-knowledge-item">
+        <a class="elly-knowledge-thumb" href="kien-thuc/phun-moi-collagen-la-gi.html"><img src="assets/phun-moi-collagen-la-gi-1.png" alt="Phun môi Collagen là gì? Có thực sự tốt không?" loading="lazy"></a>
+        <div class="elly-knowledge-content">
+          <span class="elly-kicker">PHUN MÔI COLLAGEN</span>
+          <h2 class="elly-knowledge-title"><a href="kien-thuc/phun-moi-collagen-la-gi.html">Phun môi Collagen là gì? Có thực sự tốt không?</a></h2>
+          <div class="elly-knowledge-line"></div>
+        </div>
+      </article>
+      <article class="elly-knowledge-item">
+        <a class="elly-knowledge-thumb" href="kien-thuc/phun-moi-tai-nha.html"><img src="assets/phun-moi-tai-nha-1.png" alt="Phun môi tại nhà an toàn, đẹp tự nhiên" loading="lazy"></a>
+        <div class="elly-knowledge-content">
+          <span class="elly-kicker">PHUN MÔI TẠI NHÀ</span>
+          <h2 class="elly-knowledge-title"><a href="kien-thuc/phun-moi-tai-nha.html">Phun môi tại nhà an toàn, đẹp tự nhiên</a></h2>
+          <div class="elly-knowledge-line"></div>
+        </div>
+      </article>
+      <article class="elly-knowledge-item">
+        <a class="elly-knowledge-thumb" href="kien-thuc/moi-tham-co-nen-phun-moi-khong.html"><img src="assets/moi-tham-co-nen-phun-moi-khong-1.jpg" alt="Môi thâm có nên phun môi không? Cách xử lý hiệu quả" loading="lazy"></a>
+        <div class="elly-knowledge-content">
+          <span class="elly-kicker">TƯ VẤN PHUN MÔI</span>
+          <h2 class="elly-knowledge-title"><a href="kien-thuc/moi-tham-co-nen-phun-moi-khong.html">Môi thâm có nên phun môi không? Cách xử lý hiệu quả</a></h2>
+          <div class="elly-knowledge-line"></div>
+        </div>
+      </article>
+      <article class="elly-knowledge-item">
+        <a class="elly-knowledge-thumb" href="kien-thuc/phun-moi-mau-hong-dao.html"><img src="assets/phun-moi-mau-hong-dao-1.png" alt="Phun môi màu hồng đào có đẹp không? Hợp với ai?" loading="lazy"></a>
+        <div class="elly-knowledge-content">
+          <span class="elly-kicker">TƯ VẤN PHUN MÔI</span>
+          <h2 class="elly-knowledge-title"><a href="kien-thuc/phun-moi-mau-hong-dao.html">Phun môi màu hồng đào có đẹp không? Hợp với ai?</a></h2>
+          <div class="elly-knowledge-line"></div>
+        </div>
+      </article>
+      <article class="elly-knowledge-item">
+        <a class="elly-knowledge-thumb" href="kien-thuc/phun-moi-mau-cam-dao.html"><img src="assets/phun-moi-mau-cam-dao-1.png" alt="Phun môi màu cam đào có đẹp không? Hợp với ai?" loading="lazy"></a>
+        <div class="elly-knowledge-content">
+          <span class="elly-kicker">TƯ VẤN PHUN MÔI</span>
+          <h2 class="elly-knowledge-title"><a href="kien-thuc/phun-moi-mau-cam-dao.html">Phun môi màu cam đào có đẹp không? Hợp với ai?</a></h2>
+          <div class="elly-knowledge-line"></div>
+        </div>
+      </article>
+      <article class="elly-knowledge-item">
+        <a class="elly-knowledge-thumb" href="kien-thuc/phun-moi-mau-do-nau.html"><img src="assets/phun-moi-mau-do-nau-1.png" alt="Phun môi màu đỏ nâu có đẹp không? Hợp với ai?" loading="lazy"></a>
+        <div class="elly-knowledge-content">
+          <span class="elly-kicker">TƯ VẤN PHUN MÔI</span>
+          <h2 class="elly-knowledge-title"><a href="kien-thuc/phun-moi-mau-do-nau.html">Phun môi màu đỏ nâu có đẹp không? Hợp với ai?</a></h2>
+          <div class="elly-knowledge-line"></div>
+        </div>
+      </article>
+      <article class="elly-knowledge-item">
+        <a class="elly-knowledge-thumb" href="kien-thuc/phun-moi-mau-hong-dat.html"><img src="assets/phun-moi-mau-hong-dat-1.png" alt="Phun môi màu hồng đất có đẹp không? Hợp với ai?" loading="lazy"></a>
+        <div class="elly-knowledge-content">
+          <span class="elly-kicker">TƯ VẤN PHUN MÔI</span>
+          <h2 class="elly-knowledge-title"><a href="kien-thuc/phun-moi-mau-hong-dat.html">Phun môi màu hồng đất có đẹp không? Hợp với ai?</a></h2>
+          <div class="elly-knowledge-line"></div>
+        </div>
+      </article>
+      <article class="elly-knowledge-item">
+        <a class="elly-knowledge-thumb" href="kien-thuc/phun-moi-mau-do-cam.html"><img src="assets/phun-moi-mau-do-cam-1.png" alt="Phun môi màu đỏ cam có đẹp không? Hợp với ai?" loading="lazy"></a>
+        <div class="elly-knowledge-content">
+          <span class="elly-kicker">TƯ VẤN PHUN MÔI</span>
+          <h2 class="elly-knowledge-title"><a href="kien-thuc/phun-moi-mau-do-cam.html">Phun môi màu đỏ cam có đẹp không? Hợp với ai?</a></h2>
+          <div class="elly-knowledge-line"></div>
+        </div>
+      </article>
+      <article class="elly-knowledge-item">
+        <a class="elly-knowledge-thumb" href="kien-thuc/phun-moi-mau-nao-dep.html"><img src="assets/phun-moi-mau-nao-dep-1.png" alt="Phun môi màu nào đẹp? Top 15 màu hot nhất" loading="lazy"></a>
+        <div class="elly-knowledge-content">
+          <span class="elly-kicker">TƯ VẤN CHỌN MÀU MÔI</span>
+          <h2 class="elly-knowledge-title"><a href="kien-thuc/phun-moi-mau-nao-dep.html">Phun môi màu nào đẹp? Top 15 màu hot nhất</a></h2>
+          <div class="elly-knowledge-line"></div>
+        </div>
+      </article>
+      <article class="elly-knowledge-item">
+        <a class="elly-knowledge-thumb" href="kien-thuc/phun-moi-mau-nude.html"><img src="assets/phun-moi-mau-nude-1.png" alt="Phun môi màu nude có đẹp không? Hợp với ai?" loading="lazy"></a>
+        <div class="elly-knowledge-content">
+          <span class="elly-kicker">TƯ VẤN CHỌN MÀU MÔI</span>
+          <h2 class="elly-knowledge-title"><a href="kien-thuc/phun-moi-mau-nude.html">Phun môi màu nude có đẹp không? Hợp với ai?</a></h2>
+          <div class="elly-knowledge-line"></div>
+        </div>
+      </article>
+      <article class="elly-knowledge-item">
+        <a class="elly-knowledge-thumb" href="kien-thuc/khu-tham-moi-bao-lau-thi-len-mau.html"><img src="assets/khu-tham-moi-bao-lau-thi-len-mau.jpg" alt="Khử thâm môi bao lâu thì lên màu đẹp?" loading="lazy"></a>
+        <div class="elly-knowledge-content">
+          <span class="elly-kicker">KHỬ THÂM MÔI</span>
+          <h2 class="elly-knowledge-title"><a href="kien-thuc/khu-tham-moi-bao-lau-thi-len-mau.html">Khử thâm môi bao lâu thì lên màu đẹp?</a></h2>
+          <div class="elly-knowledge-line"></div>
+        </div>
+      </article>
+      <article class="elly-knowledge-item">
+        <a class="elly-knowledge-thumb" href="kien-thuc/khu-tham-moi-co-bi-tham-lai-khong.html"><img src="assets/khu-tham-moi-co-bi-tham-lai-khong-1.png" alt="Khử thâm môi có bị thâm lại không?" loading="lazy"></a>
+        <div class="elly-knowledge-content">
+          <span class="elly-kicker">KHỬ THÂM MÔI</span>
+          <h2 class="elly-knowledge-title"><a href="kien-thuc/khu-tham-moi-co-bi-tham-lai-khong.html">Khử thâm môi có bị thâm lại không?</a></h2>
+          <div class="elly-knowledge-line"></div>
+        </div>
+      </article>
+      <article class="elly-knowledge-item">
+        <a class="elly-knowledge-thumb" href="kien-thuc/khu-tham-moi-cho-nam.html"><img src="assets/khu-tham-moi-cho-nam-1.png" alt="Khử thâm môi cho nam có hiệu quả không?" loading="lazy"></a>
+        <div class="elly-knowledge-content">
+          <span class="elly-kicker">KHỬ THÂM MÔI CHO NAM</span>
+          <h2 class="elly-knowledge-title"><a href="kien-thuc/khu-tham-moi-cho-nam.html">Khử thâm môi cho nam có hiệu quả không?</a></h2>
+          <div class="elly-knowledge-line"></div>
+        </div>
+      </article>
+      <article class="elly-knowledge-item">
+        <a class="elly-knowledge-thumb" href="kien-thuc/khu-tham-moi-tham-bam-sinh.html"><img src="assets/khu-tham-moi-tham-bam-sinh-1.jpg" alt="Khử thâm môi thâm bẩm sinh có hiệu quả không?" loading="lazy"></a>
+        <div class="elly-knowledge-content">
+          <span class="elly-kicker">KHỬ THÂM MÔI</span>
+          <h2 class="elly-knowledge-title"><a href="kien-thuc/khu-tham-moi-tham-bam-sinh.html">Khử thâm môi thâm bẩm sinh có hiệu quả không?</a></h2>
+          <div class="elly-knowledge-line"></div>
+        </div>
+      </article>
+      <article class="elly-knowledge-item">
+        <a class="elly-knowledge-thumb" href="kien-thuc/khu-tham-moi-co-an-toan-khong.html"><img src="assets/khu-tham-moi-co-an-toan-khong-1.png" alt="Khử thâm môi có an toàn không?" loading="lazy"></a>
+        <div class="elly-knowledge-content">
+          <span class="elly-kicker">KHỬ THÂM MÔI</span>
+          <h2 class="elly-knowledge-title"><a href="kien-thuc/khu-tham-moi-co-an-toan-khong.html">Khử thâm môi có an toàn không?</a></h2>
+          <div class="elly-knowledge-line"></div>
+        </div>
+      </article>
+      <article class="elly-knowledge-item">
+        <a class="elly-knowledge-thumb" href="kien-thuc/khu-tham-moi-kieng-gi.html"><img src="assets/khu-tham-moi-kieng-gi-1.png" alt="Khử thâm môi kiêng gì? 8 điều giúp môi hồi phục đẹp hơn" loading="lazy"></a>
+        <div class="elly-knowledge-content">
+          <span class="elly-kicker">CHĂM SÓC SAU KHỬ THÂM</span>
+          <h2 class="elly-knowledge-title"><a href="kien-thuc/khu-tham-moi-kieng-gi.html">Khử thâm môi kiêng gì? 8 điều giúp môi hồi phục đẹp hơn</a></h2>
+          <div class="elly-knowledge-line"></div>
+        </div>
+      </article>
+      <article class="elly-knowledge-item">
+        <a class="elly-knowledge-thumb" href="kien-thuc/khu-tham-moi-uong-ca-phe-duoc-khong.html"><img src="assets/khu-tham-moi-uong-ca-phe-duoc-khong-1.png" alt="Khử thâm môi uống cà phê được không?" loading="lazy"></a>
+        <div class="elly-knowledge-content">
+          <span class="elly-kicker">CHĂM SÓC SAU KHỬ THÂM</span>
+          <h2 class="elly-knowledge-title"><a href="kien-thuc/khu-tham-moi-uong-ca-phe-duoc-khong.html">Khử thâm môi uống cà phê được không?</a></h2>
+          <div class="elly-knowledge-line"></div>
+        </div>
+      </article>
+      <article class="elly-knowledge-item">
+        <a class="elly-knowledge-thumb" href="kien-thuc/khu-tham-moi-co-an-hai-san-duoc-khong.html"><img src="assets/khu-tham-moi-co-an-hai-san-duoc-khong-1.png" alt="Khử thâm môi có ăn hải sản được không?" loading="lazy"></a>
+        <div class="elly-knowledge-content">
+          <span class="elly-kicker">CHĂM SÓC SAU KHỬ THÂM</span>
+          <h2 class="elly-knowledge-title"><a href="kien-thuc/khu-tham-moi-co-an-hai-san-duoc-khong.html">Khử thâm môi có ăn hải sản được không?</a></h2>
+          <div class="elly-knowledge-line"></div>
+        </div>
+      </article>
+      <article class="elly-knowledge-item">
+        <a class="elly-knowledge-thumb" href="kien-thuc/khu-tham-moi-la-gi.html"><img src="assets/khu-tham-moi-la-gi-1.jpg" alt="Khử thâm môi là gì? Tất cả những điều bạn cần biết" loading="lazy"></a>
+        <div class="elly-knowledge-content">
+          <span class="elly-kicker">KHỬ THÂM MÔI</span>
+          <h2 class="elly-knowledge-title"><a href="kien-thuc/khu-tham-moi-la-gi.html">Khử thâm môi là gì? Tất cả những điều bạn cần biết</a></h2>
+          <div class="elly-knowledge-line"></div>
+        </div>
+      </article>
+      <article class="elly-knowledge-item">
+        <a class="elly-knowledge-thumb" href="kien-thuc/sau-phun-moi-nen-an-gi-va-kieng-gi.html"><img src="assets/moi-dang-an.png" alt="Sau phun môi nên ăn gì và kiêng gì để môi nhanh ổn định?" loading="lazy"></a>
+        <div class="elly-knowledge-content">
+          <span class="elly-kicker">KIẾN THỨC LÀM ĐẸP</span>
+          <h2 class="elly-knowledge-title"><a href="kien-thuc/sau-phun-moi-nen-an-gi-va-kieng-gi.html">Sau phun môi nên ăn gì và kiêng gì để môi nhanh ổn định?</a></h2>
+          <div class="elly-knowledge-line"></div>
+        </div>
+      </article>
+      <article class="elly-knowledge-item">
+        <a class="elly-knowledge-thumb" href="kien-thuc/cham-soc-moi-sau-phun-7-ngay-dau.html"><img src="assets/cham-soc-moi.jpg" alt="Chăm sóc môi sau phun trong 7 ngày đầu sao cho lên màu đẹp?" loading="lazy"></a>
+        <div class="elly-knowledge-content">
+          <span class="elly-kicker">KIẾN THỨC LÀM ĐẸP</span>
+          <h2 class="elly-knowledge-title"><a href="kien-thuc/cham-soc-moi-sau-phun-7-ngay-dau.html">Chăm sóc môi sau phun trong 7 ngày đầu sao cho lên màu đẹp?</a></h2>
+          <div class="elly-knowledge-line"></div>
+        </div>
+      </article>
+      <article class="elly-knowledge-item">
+        <a class="elly-knowledge-thumb" href="kien-thuc/phun-moi-collagen-co-dau-khong.html"><img src="assets/pricing-mkka-colagennha1.jpg" alt="Phun môi collagen có đau không và bao lâu thì bong?" loading="lazy"></a>
+        <div class="elly-knowledge-content">
+          <span class="elly-kicker">KIẾN THỨC LÀM ĐẸP</span>
+          <h2 class="elly-knowledge-title"><a href="kien-thuc/phun-moi-collagen-co-dau-khong.html">Phun môi collagen có đau không và bao lâu thì bong?</a></h2>
+          <div class="elly-knowledge-line"></div>
+        </div>
+      </article>
+      <article class="elly-knowledge-item">
+        <a class="elly-knowledge-thumb" href="kien-thuc/so-phun-moi-qua-dam-nen-chon-mau-nao.html"><img src="assets/pricing-moi-1.jpg" alt="Sợ phun môi quá đậm thì nên chọn màu nào?" loading="lazy"></a>
+        <div class="elly-knowledge-content">
+          <span class="elly-kicker">KIẾN THỨC LÀM ĐẸP</span>
+          <h2 class="elly-knowledge-title"><a href="kien-thuc/so-phun-moi-qua-dam-nen-chon-mau-nao.html">Sợ phun môi quá đậm thì nên chọn màu nào?</a></h2>
+          <div class="elly-knowledge-line"></div>
+        </div>
+      </article>
+    </div>
+    <div id="ellyPagination" class="elly-pagination"></div>
+    <div class="elly-trending-wrap is-collapsed" id="ellyTrendingWrap">
+      <div class="elly-trending-header" id="ellyTrendingHeader">
+        <h2>Chủ đề được quan tâm <i>HOT TREND VN</i></h2>
+        <button class="elly-trending-toggle">⌃</button>
+      </div>
+      <div class="elly-trending-content" id="ellyTrendingContent"></div>
+      <div class="elly-trending-note" id="ellyTrendingNote">Đang tải top tìm kiếm hôm nay tại Việt Nam...</div>
+    </div>
+  </div>
+</section>
+
+</main>
     <div class="booking-popover" data-booking-popover aria-hidden="true">
       <div class="booking-popover-backdrop" data-booking-close></div>
       <section class="booking-popover-card" role="dialog" aria-modal="true" aria-labelledby="bookingPopupTitle">
@@ -839,5 +873,328 @@
     </div>
 
     <script src="script.js"></script>
-  </body>
+  
+    <script>
+    // PHÂN TRANG CHO TRANG KIẾN THỨC - 10 bài / trang
+    document.addEventListener('DOMContentLoaded', function(){
+      var list = document.querySelector('.news-list');
+      var pagination = document.getElementById('newsPagination');
+      if(!list || !pagination) return;
+      var items = Array.from(list.querySelectorAll('.news-row'));
+      var perPage = 10;
+      var totalPages = Math.ceil(items.length / perPage);
+      var current = 1;
+
+      function renderPage(page){
+        current = page;
+        var start = (page-1)*perPage;
+        var end = start + perPage;
+        items.forEach(function(el, idx){
+          el.classList.toggle('is-hidden', idx < start || idx >= end);
+        });
+        renderControls();
+        window.scrollTo({top: list.offsetTop - 120, behavior: 'smooth'});
+      }
+
+      function renderControls(){
+        pagination.innerHTML = '';
+        // Nút prev
+        // Helper tạo nút
+        function btn(label, page, disabled, active){
+          var b = document.createElement('button');
+          b.textContent = label;
+          if(active) b.classList.add('is-active');
+          if(disabled) b.disabled = true;
+          if(!disabled){
+            b.addEventListener('click', function(){ renderPage(page); });
+          }
+          return b;
+        }
+
+        // Trang 1..4 luôn hiện, ... , cuối
+        var pages = [];
+        if(totalPages <= 7){
+          for(var i=1;i<=totalPages;i++) pages.push(i);
+        } else {
+          pages = [1,2,3,4,'...', totalPages];
+          if(current > 4 && current < totalPages){
+            pages = [1, '...', current-1, current, current+1, '...', totalPages];
+          } else if(current <=4){
+            pages = [1,2,3,4,5,'...', totalPages];
+          } else {
+            pages = [1,'...', totalPages-3, totalPages-2, totalPages-1, totalPages];
+          }
+        }
+
+        pages.forEach(function(p){
+          if(p === '...'){
+            var d = document.createElement('div');
+            d.className = 'dots';
+            d.textContent = '...';
+            pagination.appendChild(d);
+          } else {
+            pagination.appendChild(btn(String(p), p, false, p===current));
+          }
+        });
+
+        // Nút next >
+        var next = btn('›', Math.min(totalPages, current+1), current===totalPages, false);
+        next.style.fontSize = '1.3rem';
+        pagination.appendChild(next);
+      }
+
+      // Thêm badge ngày mẫu như hình bạn gửi cho 10 bài đầu để giống demo
+      items.forEach(function(el, idx){
+        if(!el.querySelector('.news-date-badge')){
+          var thumb = el.querySelector('.news-thumb');
+          if(thumb){
+            var badge = document.createElement('div');
+            badge.className = 'news-date-badge';
+            // random ngày 13-15 cho giống hình
+            var day = 13 + (idx % 3);
+            badge.innerHTML = '<b>'+day+'</b><span>Th7</span>';
+            thumb.appendChild(badge);
+          }
+        }
+      });
+
+      renderPage(1);
+    });
+    </script>
+
+  
+<script>
+document.addEventListener('DOMContentLoaded', function(){
+  const list = document.getElementById('ellyKnowledgeList');
+  const pagination = document.getElementById('ellyPagination');
+  const items = Array.from(list.querySelectorAll('.elly-knowledge-item'));
+  const perPage = 10;
+  const totalPages = Math.ceil(items.length / perPage);
+  let current = 1;
+  function renderPage(page){
+    current = page;
+    const start = (page-1)*perPage;
+    const end = start + perPage;
+    items.forEach((el, idx)=>{ el.classList.toggle('is-hidden', idx < start || idx >= end); });
+    renderControls();
+    window.scrollTo({top: list.offsetTop - 120, behavior:'smooth'});
+  }
+  function renderControls(){
+    pagination.innerHTML = '';
+    function btn(label, page, disabled, active){
+      const b = document.createElement('button');
+      b.textContent = label;
+      if(active) b.classList.add('is-active');
+      if(disabled) b.disabled = true;
+      if(!disabled) b.addEventListener('click', ()=>renderPage(page));
+      return b;
+    }
+    let pages = [];
+    if(totalPages <= 7){ for(let i=1;i<=totalPages;i++) pages.push(i); }
+    else{ if(current <= 4) pages = [1,2,3,4,5,'...', totalPages]; else if(current >= totalPages-3) pages = [1,'...', totalPages-3, totalPages-2, totalPages-1, totalPages]; else pages = [1,'...', current-1, current, current+1,'...', totalPages]; }
+    pages.forEach(p=>{ if(p==='...'){ const d=document.createElement('div'); d.className='dots'; d.textContent='...'; pagination.appendChild(d); } else { pagination.appendChild(btn(String(p), p, false, p===current)); } });
+    const next = btn('›', Math.min(totalPages, current+1), current===totalPages, false); next.style.fontSize='1.5rem'; pagination.appendChild(next);
+  }
+  renderPage(1);
+
+  // Trending
+  const trendingData = [["kien-thuc/moi-bi-den-co-phun-duoc-khong.html", "Môi bị đen có phun được không? Cách xử lý để lên màu đẹp"], ["kien-thuc/nen-lam-moi-hay-lam-may-truoc.html", "Nên làm môi hay làm mày trước nếu chưa biết bắt đầu từ đâu?"], ["kien-thuc/chuan-bi-gi-truoc-khi-phun-xam.html", "Cần chuẩn bị gì trước khi phun xăm mày môi tại nhà?"], ["kien-thuc/khach-trung-nien-chon-mau-moi-dang-may.html", "Khách trung niên nên chọn màu môi và dáng mày thế nào?"], ["kien-thuc/lam-may-moi-co-bi-gia-khong.html", "Làm mày môi có bị già không?"], ["kien-thuc/lam-sao-de-mau-moi-ben-lau.html", "Làm sao để màu môi bền lâu và không bị khô xỉn?"], ["kien-thuc/khi-nao-can-dam-lai-moi-may.html", "Khi nào cần dặm lại môi hoặc chân mày?"], ["kien-thuc/mau-moi-sau-phun-bao-lau-on-dinh.html", "Màu môi sau phun bao lâu thì ổn định?"], ["kien-thuc/quy-trinh-tu-van-truoc-khi-phun-xam.html", "Tư vấn trước khi phun xăm cần hỏi những gì?"], ["kien-thuc/phun-xam-tai-nha-co-an-toan-khong.html", "Phun xăm tại nhà có an toàn và tiện không?"]];
+  const content = document.getElementById('ellyTrendingContent');
+  const note = document.getElementById('ellyTrendingNote');
+  const wrap = document.getElementById('ellyTrendingWrap');
+  const header = document.getElementById('ellyTrendingHeader');
+  function getTodaySeed(){ const now = new Date(); return now.getFullYear()*10000 + (now.getMonth()+1)*100 + now.getDate(); }
+  function shuffleByDate(arr, seed){ let a=[...arr]; for(let i=a.length-1;i>0;i--){ const j=(seed+i*7)%(i+1); [a[i],a[j]]=[a[j],a[i]]; } return a; }
+  function renderTrending(){
+    const shuffled = shuffleByDate(trendingData, getTodaySeed());
+    content.innerHTML='';
+    shuffled.forEach(([href,title])=>{ const a=document.createElement('a'); a.className='elly-trending-item'; a.href=href; a.textContent=title; content.appendChild(a); });
+    note.textContent = `Top tìm kiếm nhiều trên Google tại Việt Nam - cập nhật ngày ${new Date().toLocaleDateString('vi-VN')}`;
+  }
+  renderTrending();
+  header.addEventListener('click', ()=>{ wrap.classList.toggle('is-collapsed'); });
+});
+</script>
+
+
+
+
+<script>
+// FIX Ô TÌM KIẾM - GỢI Ý HIỂN THỊ BÀI NHƯ TRƯỚC - KHÔNG DẤU VẪN RA
+document.addEventListener('DOMContentLoaded', function(){
+  const input = document.getElementById('ellySearchInput');
+  const resultsBox = document.getElementById('ellySearchResults');
+  const statusBox = document.getElementById('ellySearchStatus');
+  const list = document.getElementById('ellyKnowledgeList');
+  const pagination = document.getElementById('ellyPagination');
+  if(!input || !list || !resultsBox) return;
+
+  const items = Array.from(list.querySelectorAll('.elly-knowledge-item'));
+  function normalize(str){
+    return str.toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g,'').replace(/đ/g,'d').replace(/Đ/g,'d');
+  }
+
+  const allData = items.map(el => {
+    const a = el.querySelector('.elly-knowledge-title a');
+    const img = el.querySelector('img');
+    const kicker = el.querySelector('.elly-kicker');
+    const title = a ? a.textContent.trim() : '';
+    return {
+      el: el,
+      href: a ? a.getAttribute('href') : '#',
+      title: title,
+      img: img ? img.getAttribute('src') : '',
+      kicker: kicker ? kicker.textContent.trim() : 'KIẾN THỨC LÀM ĐẸP',
+      norm: normalize(title + ' ' + (kicker ? kicker.textContent : ''))
+    };
+  });
+
+  // Lưu hàm renderPage gốc để khôi phục
+  let currentPage = 1;
+  const perPage = 10;
+  function restoreList(){
+    if(pagination) pagination.style.display = 'flex';
+    // hiện lại theo phân trang
+    const totalPages = Math.ceil(allData.length / perPage);
+    allData.forEach((d, idx)=>{
+      const inPage = idx >= (currentPage-1)*perPage && idx < currentPage*perPage;
+      d.el.classList.toggle('is-hidden', !inPage);
+    });
+  }
+
+  function showAll(){
+    restoreList();
+    resultsBox.hidden = true;
+    resultsBox.innerHTML = '';
+    statusBox.style.display='none';
+  }
+
+  function doSearch(rawQuery){
+    const q = rawQuery.trim();
+    const nq = normalize(q);
+    if(!q || nq.length < 2){
+      showAll();
+      return;
+    }
+    const matched = allData.filter(d => d.norm.includes(nq) || normalize(d.title).includes(nq));
+    statusBox.style.display='block'; statusBox.textContent=`Tìm thấy ${matched.length} bài cho "${q}"`;
+    
+    // Đổ gợi ý ra dropdown - CÓ ẢNH + TIÊU ĐỀ
+    resultsBox.innerHTML = '';
+    if(matched.length === 0){
+      resultsBox.innerHTML = '<div style="padding:14px; color:#745d63; line-height:1.5;">Không thấy bài nào với "' + q + '".<br>Thử: <b>phun moi</b>, <b>khu tham</b>, <b>phun may</b>, <b>collagen</b></div>';
+    }else{
+      matched.slice(0,10).forEach(d => {
+        const row = document.createElement('a');
+        row.className = 'knowledge-search-result';
+        row.href = d.href;
+        row.innerHTML = `
+          <img src="${d.img}" alt="" onerror="this.style.background='#f6ece3'">
+          <div>
+            <span>${d.kicker}</span>
+            <strong>${d.title}</strong>
+            <small>${d.title}</small>
+          </div>
+        `;
+        resultsBox.appendChild(row);
+      });
+      if(matched.length > 10){
+        const more = document.createElement('div');
+        more.style.cssText = 'padding:8px 10px; text-align:center; color:#8a7a71; font-size:.85rem;';
+        more.textContent = `+ ${matched.length - 10} bài khác nữa...`;
+        resultsBox.appendChild(more);
+      }
+    }
+    resultsBox.hidden = false;
+    resultsBox.style.display = 'grid';
+
+    // Lọc luôn list chính bên dưới để thấy ngay
+    allData.forEach(d => {
+      const isMatch = d.norm.includes(nq);
+      d.el.classList.toggle('is-hidden', !isMatch);
+    });
+    if(pagination) pagination.style.display = 'none';
+  }
+
+  // Gõ là ra ngay - không cần bấm nút
+  input.addEventListener('input', function(){
+    doSearch(this.value);
+  });
+  input.addEventListener('keyup', function(e){
+    if(e.key === 'Enter'){
+      doSearch(this.value);
+    }
+    if(e.key === 'Escape'){
+      this.value = '';
+      showAll();
+    }
+  });
+  document.getElementById('ellySearchBtn').addEventListener('click', ()=> doSearch(input.value));
+
+  const clearBtn = document.getElementById('ellySearchClear');
+  function updateClearBtn(){
+    if(input.value.trim().length>0) clearBtn.classList.add('is-show');
+    else clearBtn.classList.remove('is-show');
+  }
+  if(clearBtn){
+    clearBtn.addEventListener('click', function(){
+      input.value='';
+      updateClearBtn();
+      if(typeof doSearch === 'function') doSearch('');
+      else {
+        // fallback
+        const event = new Event('input');
+        input.dispatchEvent(event);
+      }
+      input.focus();
+      const rb = document.getElementById('ellySearchResults');
+      if(rb) { rb.hidden=true; rb.style.display='none'; }
+    });
+  }
+  input.addEventListener('input', updateClearBtn);
+  input.addEventListener('focus', updateClearBtn);
+  // ESC để thoát
+  document.addEventListener('keydown', function(e){
+    if(e.key==='Escape' && document.activeElement===input){
+      if(clearBtn) clearBtn.click();
+    }
+  });
+
+  updateClearBtn();
+
+  // Focus lại thì hiện lại gợi ý nếu có chữ
+  input.addEventListener('focus', function(){
+    if(this.value.trim().length >= 2){
+      resultsBox.hidden = false;
+      resultsBox.style.display = 'grid';
+    }
+  });
+
+  // Click ra ngoài thì đóng gợi ý nhưng vẫn giữ lọc list? - đóng gợi ý thôi
+  document.addEventListener('click', function(e){
+    if(!e.target.closest('.knowledge-search')){
+      resultsBox.hidden = true;
+    }
+  });
+
+  // Khởi tạo
+  showAll();
+
+  // Ghi đè hàm renderPage để lưu currentPage cho việc khôi phục
+  const origBtns = document.querySelectorAll('#ellyPagination button');
+  // Theo dõi page hiện tại qua click
+  if(pagination){
+    pagination.addEventListener('click', function(e){
+      if(e.target.tagName === 'BUTTON'){
+        const txt = e.target.textContent.trim();
+        if(!isNaN(parseInt(txt))){
+          currentPage = parseInt(txt);
+        }
+      }
+    });
+  }
+});
+</script>
+
+</body>
 </html>
