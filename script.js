@@ -1761,4 +1761,27 @@ BookingButtonTracker();
 if (window.location.hash === "#booking") {
   window.setTimeout(() => openBooking("Dịch vụ bạn đang quan tâm"), 250);
 }
+// CHI THOAT RA KHI BAM NGOAI - KHONG DOI GIAO DIEN
+document.addEventListener('DOMContentLoaded', ()=>{
+  const nav = document.querySelector('.main-nav');
+  const toggle = document.querySelector('.menu-toggle');
+  if(!nav || !toggle) return;
 
+  // bam ra ngoai menu va nut 3 gach thi dong
+  document.addEventListener('click', (e)=>{
+    if(nav.classList.contains('is-open') && !nav.contains(e.target) && !toggle.contains(e.target)){
+      nav.classList.remove('is-open');
+      document.body.classList.remove('menu-open');
+      toggle.classList.remove('is-open');
+    }
+  });
+
+  // bam ESC cung thoat
+  document.addEventListener('keydown', (e)=>{
+    if(e.key === 'Escape' && nav.classList.contains('is-open')){
+      nav.classList.remove('is-open');
+      document.body.classList.remove('menu-open');
+      toggle.classList.remove('is-open');
+    }
+  });
+});

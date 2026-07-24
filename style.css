@@ -288,10 +288,25 @@ p {
   position: sticky;
   top: 0;
   z-index: 50;
-  background: rgba(255, 250, 243, 0.88);
-  border-bottom: 1px solid rgba(38, 23, 17, 0.08);
-  backdrop-filter: blur(18px);
+  background: #543729;
+  background: rgba(84, 55, 41, 0.96);
+  border-bottom: 1px solid rgba(255,255,255,0.08);
+  backdrop-filter: none;
   transition: box-shadow 180ms ease, background 180ms ease;
+  }
+.site-header.is-scrolled{
+  background: #543729 !important;
+}
+.site-header .brand, .site-header .menu-toggle{color:#fff !important;}
+.site-header .brand,
+.site-header .main-nav a,
+.site-header .menu-toggle{
+  color: #fff !important;
+}
+.site-header.is-scrolled{
+  background: #3a1e25 !important;
+  box-shadow: 0 14px 35px rgba(0,0,0,0.2);
+  
 }
 
 .site-header.is-scrolled {
@@ -330,26 +345,7 @@ p {
   object-fit: contain;
 }
 
-.site-header .brand::after {
-  content: "Quyền năng phái đẹp";
-  display: inline-block;
-  max-width: 118px;
-  color: transparent;
-  font-family: var(--font-body);
-  font-size: 0.68rem;
-  font-weight: 900;
-  line-height: 1.08;
-  letter-spacing: 0.02em;
-  text-transform: uppercase;
-  white-space: normal;
-  background: linear-gradient(105deg, #815217 0%, #c18b24 30%, #fff2b8 48%, #d8a339 62%, #8d5a18 100%);
-  background-size: 240% auto;
-  background-clip: text;
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  filter: drop-shadow(0 6px 13px rgba(196, 147, 74, 0.24));
-  animation: brandTaglineShine 3.8s ease-in-out infinite;
-}
+
 
 @keyframes brandTaglineShine {
   0%,
@@ -4641,10 +4637,12 @@ body.booking-popover-open {
     max-width: 108px;
   }
 
-  .site-header .brand .brand-logo-img {
-    height: 36px;
-    max-width: 82px;
-  }
+  .site-header .brand .brand-logo-img{
+  height: 58px !important;
+  max-width: 140px !important; 
+  width: auto !important;
+  object-fit: contain !important;
+}
 
   .brand-logo-inline {
     height: clamp(48px, 18vw, 72px);
@@ -5192,12 +5190,12 @@ body.booking-popover-open {
 
 /* Mobile header: menu left, logo centered, booking button hidden. */
 @media (max-width: 760px) {
-  .site-header .header-inner {
-    display: grid;
-    grid-template-columns: 46px minmax(0, 1fr) 46px;
-    align-items: center;
-    gap: 8px;
-  }
+  .site-header .header-inner{
+  display: grid !important;
+  grid-template-columns: 42px 1fr 42px !important; /* trai - giua - phai */
+  align-items: center !important;
+  min-height: 82px;
+}
 
   .site-header .brand {
     grid-column: 2;
@@ -5621,3 +5619,127 @@ body.booking-popover-open {
 .article-content h1, .article-content h2 {
   font-family: "Be Vietnam Pro", "Playfair Display", serif !important;
 }
+/* ===== MENU MOBILE COPY LAYOUT HINH - NHUNG GIU MAU + NOI DUNG CUA BAN ===== */
+/* Dan doan nay vao CUOI file style.css (de len tat ca CSS cu) */
+
+@media (max-width: 900px) {
+  /* Bien thanh drawer trai full chieu cao giong hinh */
+  .main-nav {
+    position: fixed !important;
+    inset: 0 auto 0 0 !important;
+    width: 88vw !important;
+    height: 100dvh !important;
+    max-height: 100dvh !important;
+    display: flex !important;
+    flex-direction: column !important;
+    gap: 0 !important;
+    padding: 0 !important;
+    margin: 0 !important;
+    background: linear-gradient(rgba(84, 52, 36, 0.94))   !important; /* mau hien tai cua ban - giong sidebar */
+    border: 0 !important;
+    border-right: 1px solid rgba(255,255,255,0.08) !important;
+    border-radius: 0 !important;
+    box-shadow: 18px 0 40px rgba(59,28,34,0.32) !important;
+    overflow-y: auto !important;
+    opacity: 0 !important;
+    pointer-events: none !important;
+    transform: translateX(-100%) !important;
+    transition: transform 0.32s cubic-bezier(0.4,0,0.2,1), opacity 0.32s ease !important;
+    z-index: 100 !important;
+  }
+
+  .main-nav.is-open {
+    opacity: 1 !important;
+    pointer-events: auto !important;
+    transform: translateX(0) !important;
+  }
+
+  /* Tung muc menu - giong hinh: co vien ngang + chu hoa + mui ten > */
+  .main-nav a {
+    position: relative !important;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: space-between !important;
+    min-height: 56px !important;
+    padding: 16px 20px !important;
+    color: #fff !important;
+    background: transparent !important;
+    border-radius: 0 !important;
+    border-bottom: 1px solid rgba(255,255,255,0.08) !important;
+    font-size: 0.92rem !important;
+    font-weight: 700 !important;
+    letter-spacing: 0.04em !important;
+    text-transform: uppercase !important;
+    line-height: 1.2 !important;
+    opacity: 1 !important;
+    transform: none !important;
+    animation: none !important;
+  }
+
+  .main-nav a:hover,
+  .main-nav a:active {
+    background: rgba(255,255,255,0.06) !important;
+    color: #f8e8c8 !important;
+  }
+
+  /* Mui ten > ben phai giong hinh */
+  .main-nav a::after {
+    content: "›" !important;
+    display: inline-flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    font-size: 22px !important;
+    font-weight: 300 !important;
+    line-height: 1 !important;
+    opacity: 0.7 !important;
+    transform: translateX(0) !important;
+    transition: transform 0.2s ease, opacity 0.2s ease !important;
+  }
+
+  .main-nav a:hover::after {
+    opacity: 1 !important;
+    transform: translateX(3px) !important;
+  }
+
+  /* Overlay toi khi mo menu (giong hinh ben phai bi mo) */
+  .site-header::after {
+    content: "" !important;
+    position: fixed !important;
+    inset: 0 !important;
+    background: rgba(15, 10, 12, 0.48) !important;
+    backdrop-filter: blur(2px) !important;
+    opacity: 0 !important;
+    pointer-events: none !important;
+    transition: opacity 0.3s ease !important;
+    z-index: 99 !important;
+  }
+
+  .site-header.menu-open::after {
+    opacity: 1 !important;
+    pointer-events: auto !important;
+  }
+}
+
+/* Nut X dong menu - giu nguyen vi tri goc phai tren giong hinh */
+@media (max-width: 900px) {
+  .menu-toggle.is-open {
+    position: fixed !important;
+    top: 16px !important;
+    right: 16px !important;
+    z-index: 101 !important;
+    background: rgba(255,255,255,0.12) !important;
+    border: 1px solid rgba(255,255,255,0.18) !important;
+    color: #fff !important;
+  }
+}
+.site-header .brand .brand-logo-img{
+  height: 62px !important;
+  max-width: 200px !important;
+  width: auto !important;
+}
+.site-header .header-inner{
+  display:grid !important;
+  grid-template-columns: 42px 1fr 42px !important;
+  align-items:center !important;
+}
+.site-header .brand{justify-self:center !important;}
