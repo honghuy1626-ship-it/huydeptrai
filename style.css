@@ -5743,3 +5743,10 @@ body.booking-popover-open {
   align-items:center !important;
 }
 .site-header .brand{justify-self:center !important;}
+.site-header .brand .brand-logo-img{
+  height: 75px !important;
+  width: auto !important;
+  max-width: 400px !important;
+  transform: scaleX(1.25) !important; /* 1.25 = ngang ra 25%, muốn hơn nữa để 1.35 */
+  transform-origin: center !important;
+}
