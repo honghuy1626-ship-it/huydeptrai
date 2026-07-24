@@ -5491,3 +5491,133 @@ body.booking-popover-open {
     height: 70px;
   }
 }
+/* ===== BẢN NÂNG CẤP - COPY ĐOẠN NÀY VÀO style.css ===== */
+  .article-smart-cta{
+    margin:28px 0;
+    position:relative;
+    border-radius:14px;
+    background: linear-gradient(180deg, #fffafb 0%, #fff 100%);
+    border:1px solid rgba(143,64,80,.14);
+    box-shadow: 0 8px 28px rgba(67,37,41,.08);
+    overflow:hidden;
+    /* SEO-friendly: là aside, không chiếm h1, không chèn từ khóa nhồi nhét */
+  }
+  .article-smart-cta::before{
+    content:"";
+    position:absolute;
+    left:0; top:0; bottom:0;
+    width:5px;
+    background: linear-gradient(180deg, #b85b6b, #8f4050);
+  }
+  .article-smart-cta-inner{
+    padding:20px 20px 18px 26px;
+    display:grid;
+    gap:10px;
+  }
+  .article-smart-cta-badge{
+    display:inline-flex;
+    align-items:center;
+    gap:6px;
+    width:fit-content;
+    padding:6px 10px;
+    border-radius:999px;
+    background:#8f4050;
+    color:#fff;
+    font-size:.72rem;
+    font-weight:800;
+    letter-spacing:.06em;
+    text-transform:uppercase;
+  }
+  .article-smart-cta-badge::before{
+    content:"•";
+    animation: pulseDot 1.6s infinite;
+  }
+  @keyframes pulseDot{
+    0%,100%{opacity:1}
+    50%{opacity:.35}
+  }
+  .article-smart-cta h2{
+    margin:0;
+    font-family:"Playfair Display", serif;
+    font-size:1.35rem;
+    line-height:1.2;
+    color:#331e23;
+  }
+  .article-smart-cta p{
+    margin:0;
+    color:#665057;
+    line-height:1.6;
+    font-size:.95rem;
+  }
+  .article-smart-price{
+    display:flex;
+    align-items:baseline;
+    gap:10px;
+    margin:4px 0;
+    flex-wrap:wrap;
+  }
+  .article-smart-price-old{
+    color:#9a8a8e;
+    text-decoration:line-through;
+    font-weight:600;
+    font-size:.92rem;
+  }
+  .article-smart-price strong{
+    color:#8f4050;
+    font-size:1.55rem;
+    font-weight:800;
+    letter-spacing:-.02em;
+  }
+  .article-smart-home{
+    font-size:.86rem !important;
+    color:#7a656b !important;
+    background:#fdf2f3;
+    border-radius:8px;
+    padding:8px 10px;
+  }
+  .article-smart-button{
+    margin-top:4px;
+    width:100%;
+    justify-content:center;
+    text-align:center;
+    border-radius:10px !important;
+    background: linear-gradient(180deg, #e8c48a 0%, #d4a86a 100%) !important;
+    color:#3a2311 !important;
+    font-weight:800 !important;
+    letter-spacing:.01em;
+    box-shadow: 0 6px 16px rgba(212,168,106,.35);
+    transition: transform .15s ease, box-shadow .15s ease;
+  }
+  .article-smart-button:hover{
+    transform: translateY(-1px);
+    box-shadow: 0 10px 22px rgba(212,168,106,.45);
+  }
+  /* Mobile gọn hơn */
+  @media(max-width:680px){
+    .article-smart-cta-inner{padding:16px 16px 16px 20px}
+    .article-smart-cta h2{font-size:1.18rem}
+  }
+</style>
+</head>
+<body>
+
+<!-- COPY KHỐI NÀY VÀO BÀI VIẾT Ở VỊ TRÍ BẠN MUỐN -->
+<aside class="article-smart-cta" aria-label="Ưu đãi ELLY PMU">
+  <div class="article-smart-cta-inner">
+    <span class="article-smart-cta-badge">Ưu đãi trong tháng</span>
+    <h2>Phun môi / Khử thâm môi</h2>
+    <p>Đôi môi thâm khiến bạn thiếu tự tin khi để mặt mộc? ELLY PMU đang có ưu đãi cải thiện môi thâm, giúp môi tươi tắn và tự nhiên hơn.</p>
+    <div class="article-smart-price">
+      <span class="article-smart-price-old">Giá gốc 1.710K</span>
+      <strong>Giảm còn 599K</strong>
+    </div>
+    <p class="article-smart-home">🏠 Có hỗ trợ làm tận nhà theo lịch hẹn. Giá ưu đãi không đổi khi làm tại nhà.</p>
+    <a class="btn btn-primary article-smart-button" href="#booking" data-booking-open>Đặt lịch nhận ưu đãi →</a>
+  </div>
+</aside>
+
+</body>
+</html>
+.article-content h1, .article-content h2 {
+  font-family: "Be Vietnam Pro", "Playfair Display", serif !important;
+}

@@ -1753,7 +1753,7 @@ setupCountdown();
 setupMobileBottomNav();
 setupMobileHeaderSearchButton();
 setupKnowledgeSearchBox();
-ArticleSmartCTA();
+// ArticleSmartCTA(); // TẮT TỰ ĐỘNG - ĐẶT THỦ CÔNG
 flushPendingBookingClick();
 GlobalVisitTracker();
 BookingButtonTracker();
