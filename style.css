@@ -5750,3 +5750,12 @@ body.booking-popover-open {
   transform: scaleX(1.25) !important; /* 1.25 = ngang ra 25%, muốn hơn nữa để 1.35 */
   transform-origin: center !important;
 }
+.brand-logo-img,
+.brand-logo-popover,
+.booking-media-logo img{
+  content: url('assets/elly-logo.png') !important;
+  height: 62px !important;
+  width: auto !important;
+  max-width: 320px !important;
+  object-fit: contain !important;
+}
