@@ -34,7 +34,7 @@
       .knowledge-search-form,.knowledge-search-status,.knowledge-search-results{width:var(--container);margin-left:auto;margin-right:auto}
       .knowledge-search-form input{width:100%;min-height:40px;border:1px solid rgba(99,53,57,.28);border-radius:6px;padding:0 12px;color:#2b2023;font:inherit;font-size:.96rem;background:#fff;transition:min-height .2s ease,font-size .2s ease}
       .knowledge-search-form input:focus{outline:2px solid rgba(143,64,80,.2);border-color:#8f4050}
-      .knowledge-search-form button{min-height:40px;border:0;border-radius:6px;padding:0 14px;background:#8f4050;color:#fff;font-weight:800;cursor:pointer;transition:min-height .2s ease,font-size .2s ease}
+      .knowledge-search-form button{min-height:40px;border:0;border-radius:6px;padding:0 14px;background:var(--elly-brown);color:#fff;font-weight:800;cursor:pointer;transition:min-height .2s ease,font-size .2s ease}
       .knowledge-search.is-compact .knowledge-search-form input,.knowledge-search.is-compact .knowledge-search-form button{min-height:34px;font-size:.9rem}
       .knowledge-search-status{margin-top:8px;color:#745d63;font-size:.92rem}
       .knowledge-search.is-compact .knowledge-search-status{display:none}
@@ -158,28 +158,30 @@
     
       .knowledge-search-form{position:relative;}
       .elly-search-clear{
-        position:absolute;
-        right:126px;
-        top:50%;
-        transform:translateY(-50%);
-        width:28px; height:28px;
-        border-radius:50%;
-        border:1px solid rgba(84,55,41,.25);
-        background:#fff;
-        color:#543729;
-        font-weight:800;
-        font-size:14px;
-        line-height:1;
-        display:none;
-        place-items:center;
-        cursor:pointer;
-        z-index:2;
-      }
-      .elly-search-clear.is-show{ display:grid; }
-      .elly-search-clear:hover{ background:var(--elly-brown); color:#fff; border-color:var(--elly-brown); }
-      @media(max-width:680px){
-        .elly-search-clear{ right:94px; }
-      }
+  background: transparent !important;
+  border: 0 !important;
+  color: #8a7a71 !important;
+  width: 28px;
+  height: 28px;
+  font-size: 18px;
+  font-weight: 400;
+  position: absolute;
+  right: 122px;
+  top: 50%;
+  transform: translateY(-50%);
+  display: none;
+  place-items: center;
+  cursor: pointer;
+  z-index: 2;
+}
+.elly-search-clear.is-show{
+  display: grid !important;
+}
+.elly-search-clear:hover{
+  background: transparent !important;
+  color: #543729 !important;
+  border: 0 !important;
+}
 
 </style>
   </head>
@@ -205,14 +207,15 @@
     </header>
     <main class="knowledge-news">
       
-      <div class="knowledge-search" data-search-box>
-        <form class="knowledge-search-form" id="ellySearchForm" onsubmit="return false;">
-          <input type="text" id="ellySearchInput" placeholder="Tìm kiếm: khử thâm, phun môi, phun mày..." autocomplete="off"><button type="button" class="elly-search-clear" id="ellySearchClear" aria-label="Thoát tìm kiếm">✕</button>
-          <button type="button" id="ellySearchBtn">Tìm</button>
-        </form>
-        <div class="knowledge-search-status" id="ellySearchStatus" style="display:none" style="display:none">Tìm trong 66 bài kiến thức - gõ từ khóa và xem kết quả ngay</div>
-        <div class="knowledge-search-results" id="ellySearchResults" hidden></div>
-      </div>
+      <div class="knowledge-search" id="ellySearchWrap">
+  <form class="knowledge-search-form" id="ellySearchForm" onsubmit="return false;">
+    <input type="text" id="ellySearchInput" placeholder="Tìm kiếm: khử thâm, phun môi, phun mày..." autocomplete="off">
+    <button type="button" class="elly-search-clear" id="ellySearchClear" aria-label="Thoát tìm kiếm">✕</button>
+    <button type="button" id="ellySearchBtn">Tìm</button>
+  </form>
+  <div class="knowledge-search-status" id="ellySearchStatus" style="display:none"></div>
+  <div class="knowledge-search-results" id="ellySearchResults" hidden></div>
+</div>
 
       <div class="news-topline"><div class="container"><strong>Kiến thức</strong><a href="kien-thuc/khu-tham-moi-la-gi.html">Khử thâm môi là gì</a>
 <a href="kien-thuc/khu-tham-moi-co-an-hai-san-duoc-khong.html">Khử thâm môi có ăn hải sản được không</a>
@@ -964,63 +967,7 @@
 
   
 <script>
-document.addEventListener('DOMContentLoaded', function(){
-  const list = document.getElementById('ellyKnowledgeList');
-  const pagination = document.getElementById('ellyPagination');
-  const items = Array.from(list.querySelectorAll('.elly-knowledge-item'));
-  const perPage = 10;
-  const totalPages = Math.ceil(items.length / perPage);
-  let current = 1;
-  function renderPage(page){
-    current = page;
-    const start = (page-1)*perPage;
-    const end = start + perPage;
-    items.forEach((el, idx)=>{ el.classList.toggle('is-hidden', idx < start || idx >= end); });
-    renderControls();
-    window.scrollTo({top: list.offsetTop - 120, behavior:'smooth'});
-  }
-  function renderControls(){
-    pagination.innerHTML = '';
-    function btn(label, page, disabled, active){
-      const b = document.createElement('button');
-      b.textContent = label;
-      if(active) b.classList.add('is-active');
-      if(disabled) b.disabled = true;
-      if(!disabled) b.addEventListener('click', ()=>renderPage(page));
-      return b;
-    }
-    let pages = [];
-    if(totalPages <= 7){ for(let i=1;i<=totalPages;i++) pages.push(i); }
-    else{ if(current <= 4) pages = [1,2,3,4,5,'...', totalPages]; else if(current >= totalPages-3) pages = [1,'...', totalPages-3, totalPages-2, totalPages-1, totalPages]; else pages = [1,'...', current-1, current, current+1,'...', totalPages]; }
-    pages.forEach(p=>{ if(p==='...'){ const d=document.createElement('div'); d.className='dots'; d.textContent='...'; pagination.appendChild(d); } else { pagination.appendChild(btn(String(p), p, false, p===current)); } });
-    const next = btn('›', Math.min(totalPages, current+1), current===totalPages, false); next.style.fontSize='1.5rem'; pagination.appendChild(next);
-  }
-  renderPage(1);
-
-  // Trending
-  const trendingData = [["kien-thuc/moi-bi-den-co-phun-duoc-khong.html", "Môi bị đen có phun được không? Cách xử lý để lên màu đẹp"], ["kien-thuc/nen-lam-moi-hay-lam-may-truoc.html", "Nên làm môi hay làm mày trước nếu chưa biết bắt đầu từ đâu?"], ["kien-thuc/chuan-bi-gi-truoc-khi-phun-xam.html", "Cần chuẩn bị gì trước khi phun xăm mày môi tại nhà?"], ["kien-thuc/khach-trung-nien-chon-mau-moi-dang-may.html", "Khách trung niên nên chọn màu môi và dáng mày thế nào?"], ["kien-thuc/lam-may-moi-co-bi-gia-khong.html", "Làm mày môi có bị già không?"], ["kien-thuc/lam-sao-de-mau-moi-ben-lau.html", "Làm sao để màu môi bền lâu và không bị khô xỉn?"], ["kien-thuc/khi-nao-can-dam-lai-moi-may.html", "Khi nào cần dặm lại môi hoặc chân mày?"], ["kien-thuc/mau-moi-sau-phun-bao-lau-on-dinh.html", "Màu môi sau phun bao lâu thì ổn định?"], ["kien-thuc/quy-trinh-tu-van-truoc-khi-phun-xam.html", "Tư vấn trước khi phun xăm cần hỏi những gì?"], ["kien-thuc/phun-xam-tai-nha-co-an-toan-khong.html", "Phun xăm tại nhà có an toàn và tiện không?"]];
-  const content = document.getElementById('ellyTrendingContent');
-  const note = document.getElementById('ellyTrendingNote');
-  const wrap = document.getElementById('ellyTrendingWrap');
-  const header = document.getElementById('ellyTrendingHeader');
-  function getTodaySeed(){ const now = new Date(); return now.getFullYear()*10000 + (now.getMonth()+1)*100 + now.getDate(); }
-  function shuffleByDate(arr, seed){ let a=[...arr]; for(let i=a.length-1;i>0;i--){ const j=(seed+i*7)%(i+1); [a[i],a[j]]=[a[j],a[i]]; } return a; }
-  function renderTrending(){
-    const shuffled = shuffleByDate(trendingData, getTodaySeed());
-    content.innerHTML='';
-    shuffled.forEach(([href,title])=>{ const a=document.createElement('a'); a.className='elly-trending-item'; a.href=href; a.textContent=title; content.appendChild(a); });
-    note.textContent = `Top tìm kiếm nhiều trên Google tại Việt Nam - cập nhật ngày ${new Date().toLocaleDateString('vi-VN')}`;
-  }
-  renderTrending();
-  header.addEventListener('click', ()=>{ wrap.classList.toggle('is-collapsed'); });
-});
-</script>
-
-
-
-
-<script>
-// FIX Ô TÌM KIẾM - GỢI Ý HIỂN THỊ BÀI NHƯ TRƯỚC - KHÔNG DẤU VẪN RA
+// v9 CHUẨN - TÌM KIẾM GỢI Ý CÓ ẢNH - KHÔNG DẤU VẪN RA
 document.addEventListener('DOMContentLoaded', function(){
   const input = document.getElementById('ellySearchInput');
   const resultsBox = document.getElementById('ellySearchResults');
@@ -1033,42 +980,36 @@ document.addEventListener('DOMContentLoaded', function(){
   function normalize(str){
     return str.toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g,'').replace(/đ/g,'d').replace(/Đ/g,'d');
   }
-
   const allData = items.map(el => {
     const a = el.querySelector('.elly-knowledge-title a');
     const img = el.querySelector('img');
     const kicker = el.querySelector('.elly-kicker');
-    const title = a ? a.textContent.trim() : '';
     return {
       el: el,
       href: a ? a.getAttribute('href') : '#',
-      title: title,
+      title: a ? a.textContent.trim() : '',
       img: img ? img.getAttribute('src') : '',
       kicker: kicker ? kicker.textContent.trim() : 'KIẾN THỨC LÀM ĐẸP',
-      norm: normalize(title + ' ' + (kicker ? kicker.textContent : ''))
+      norm: normalize((a ? a.textContent.trim() : '') + ' ' + (kicker ? kicker.textContent : ''))
     };
   });
 
-  // Lưu hàm renderPage gốc để khôi phục
   let currentPage = 1;
   const perPage = 10;
   function restoreList(){
     if(pagination) pagination.style.display = 'flex';
-    // hiện lại theo phân trang
-    const totalPages = Math.ceil(allData.length / perPage);
     allData.forEach((d, idx)=>{
       const inPage = idx >= (currentPage-1)*perPage && idx < currentPage*perPage;
       d.el.classList.toggle('is-hidden', !inPage);
     });
   }
-
   function showAll(){
     restoreList();
     resultsBox.hidden = true;
     resultsBox.innerHTML = '';
-    statusBox.style.display='none';
+    statusBox.textContent = '';
+    statusBox.style.display = 'none';
   }
-
   function doSearch(rawQuery){
     const q = rawQuery.trim();
     const nq = normalize(q);
@@ -1076,125 +1017,56 @@ document.addEventListener('DOMContentLoaded', function(){
       showAll();
       return;
     }
-    const matched = allData.filter(d => d.norm.includes(nq) || normalize(d.title).includes(nq));
-    statusBox.style.display='block'; statusBox.textContent=`Tìm thấy ${matched.length} bài cho "${q}"`;
-    
-    // Đổ gợi ý ra dropdown - CÓ ẢNH + TIÊU ĐỀ
+    const matched = allData.filter(d => d.norm.includes(nq));
+    statusBox.textContent = `Tìm thấy ${matched.length} bài cho "${q}"`;
+    statusBox.style.display = 'block';
     resultsBox.innerHTML = '';
     if(matched.length === 0){
-      resultsBox.innerHTML = '<div style="padding:14px; color:#745d63; line-height:1.5;">Không thấy bài nào với "' + q + '".<br>Thử: <b>phun moi</b>, <b>khu tham</b>, <b>phun may</b>, <b>collagen</b></div>';
+      resultsBox.innerHTML = '<div style="padding:14px;color:#745d63;">Không thấy. Thử: <b>phun moi</b>, <b>khu tham</b>, <b>phun may</b></div>';
     }else{
       matched.slice(0,10).forEach(d => {
         const row = document.createElement('a');
         row.className = 'knowledge-search-result';
         row.href = d.href;
-        row.innerHTML = `
-          <img src="${d.img}" alt="" onerror="this.style.background='#f6ece3'">
-          <div>
-            <span>${d.kicker}</span>
-            <strong>${d.title}</strong>
-            <small>${d.title}</small>
-          </div>
-        `;
+        row.innerHTML = `<img src="${d.img}" alt=""><div><span>${d.kicker}</span><strong>${d.title}</strong></div>`;
         resultsBox.appendChild(row);
       });
-      if(matched.length > 10){
-        const more = document.createElement('div');
-        more.style.cssText = 'padding:8px 10px; text-align:center; color:#8a7a71; font-size:.85rem;';
-        more.textContent = `+ ${matched.length - 10} bài khác nữa...`;
-        resultsBox.appendChild(more);
-      }
     }
     resultsBox.hidden = false;
     resultsBox.style.display = 'grid';
-
-    // Lọc luôn list chính bên dưới để thấy ngay
     allData.forEach(d => {
-      const isMatch = d.norm.includes(nq);
-      d.el.classList.toggle('is-hidden', !isMatch);
+      d.el.classList.toggle('is-hidden', !d.norm.includes(nq));
     });
     if(pagination) pagination.style.display = 'none';
   }
 
-  // Gõ là ra ngay - không cần bấm nút
   input.addEventListener('input', function(){
     doSearch(this.value);
-  });
-  input.addEventListener('keyup', function(e){
-    if(e.key === 'Enter'){
-      doSearch(this.value);
-    }
-    if(e.key === 'Escape'){
-      this.value = '';
-      showAll();
+    const clearBtn = document.getElementById('ellySearchClear');
+    if(clearBtn){
+      if(this.value.trim().length>0) clearBtn.classList.add('is-show');
+      else clearBtn.classList.remove('is-show');
     }
   });
   document.getElementById('ellySearchBtn').addEventListener('click', ()=> doSearch(input.value));
-
+  input.addEventListener('keyup', function(e){
+    if(e.key === 'Enter') doSearch(this.value);
+    if(e.key === 'Escape'){ this.value=''; doSearch(''); }
+  });
   const clearBtn = document.getElementById('ellySearchClear');
-  function updateClearBtn(){
-    if(input.value.trim().length>0) clearBtn.classList.add('is-show');
-    else clearBtn.classList.remove('is-show');
-  }
   if(clearBtn){
     clearBtn.addEventListener('click', function(){
-      input.value='';
-      updateClearBtn();
-      if(typeof doSearch === 'function') doSearch('');
-      else {
-        // fallback
-        const event = new Event('input');
-        input.dispatchEvent(event);
-      }
-      input.focus();
-      const rb = document.getElementById('ellySearchResults');
-      if(rb) { rb.hidden=true; rb.style.display='none'; }
+      input.value=''; this.classList.remove('is-show'); doSearch(''); input.focus();
     });
   }
-  input.addEventListener('input', updateClearBtn);
-  input.addEventListener('focus', updateClearBtn);
-  // ESC để thoát
-  document.addEventListener('keydown', function(e){
-    if(e.key==='Escape' && document.activeElement===input){
-      if(clearBtn) clearBtn.click();
-    }
-  });
-
-  updateClearBtn();
-
-  // Focus lại thì hiện lại gợi ý nếu có chữ
-  input.addEventListener('focus', function(){
-    if(this.value.trim().length >= 2){
-      resultsBox.hidden = false;
-      resultsBox.style.display = 'grid';
-    }
-  });
-
-  // Click ra ngoài thì đóng gợi ý nhưng vẫn giữ lọc list? - đóng gợi ý thôi
   document.addEventListener('click', function(e){
-    if(!e.target.closest('.knowledge-search')){
-      resultsBox.hidden = true;
-    }
+    if(!e.target.closest('#ellySearchWrap')){ resultsBox.hidden = true; }
   });
-
-  // Khởi tạo
+  input.addEventListener('focus', function(){
+    if(this.value.trim().length >= 2){ resultsBox.hidden = false; resultsBox.style.display='grid'; }
+  });
   showAll();
-
-  // Ghi đè hàm renderPage để lưu currentPage cho việc khôi phục
-  const origBtns = document.querySelectorAll('#ellyPagination button');
-  // Theo dõi page hiện tại qua click
-  if(pagination){
-    pagination.addEventListener('click', function(e){
-      if(e.target.tagName === 'BUTTON'){
-        const txt = e.target.textContent.trim();
-        if(!isNaN(parseInt(txt))){
-          currentPage = parseInt(txt);
-        }
-      }
-    });
-  }
 });
 </script>
-
 </body>
 </html>
