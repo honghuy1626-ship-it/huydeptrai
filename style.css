@@ -5759,3 +5759,16 @@ body.booking-popover-open {
   max-width: 320px !important;
   object-fit: contain !important;
 }
+.elly-trending-wrap{margin:28px 0 20px;border:1px solid rgba(84,55,41,.14);border-radius:14px;background:#fffaf6;overflow:hidden}
+.elly-trending-header{display:flex;justify-content:space-between;align-items:center;padding:14px 16px;cursor:pointer;background:#fff}
+.elly-trending-header h2{margin:0;font-size:1.05rem;color:#211611;display:flex;align-items:center;gap:8px}
+.elly-trending-header h2 i{font-style:normal;background:#543729;color:#fff;font-size:.7rem;padding:3px 7px;border-radius:999px}
+.elly-trending-toggle{width:32px;height:32px;border-radius:50%;border:1.5px solid #2b211e;background:#fff;display:grid;place-items:center;font-weight:800;cursor:pointer}
+.elly-trending-wrap.is-collapsed.elly-trending-content{display:none}
+.elly-trending-wrap.is-collapsed.elly-trending-note{display:none}
+.elly-trending-content{padding:0 16px 14px;display:grid;gap:0}
+.elly-trending-item{display:flex;gap:10px;padding:10px 0;border-top:1px solid rgba(84,55,41,.1);text-decoration:none;color:#3b2a20;font-weight:600;font-size:.92rem}
+.elly-trending-item:first-child{border-top:0}
+.elly-trending-item:hover{color:#543729}
+.elly-trending-item::before{content:'🔥'}
+.elly-trending-note{font-size:.78rem;color:#8a7a71;padding:10px 16px 12px;background:#fdf2e8;border-top:1px dashed rgba(84,55,41,.15)}
