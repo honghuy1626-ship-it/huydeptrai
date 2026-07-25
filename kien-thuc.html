@@ -182,6 +182,47 @@
   color: #543729 !important;
   border: 0 !important;
 }
+/* EYEBROW CÓ HIỆU ỨNG */
+p.eyebrow{
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  font-weight: 800;
+  font-size: .85rem;
+  letter-spacing: 1.8px;
+  text-transform: uppercase;
+  position: relative;
+  background: linear-gradient(90deg, #543729 0%, #c48a5a 25%, #543729 50%, #c48a5a 75%, #543729 100%);
+  background-size: 200% auto;
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  animation: eyebrowShine 3s linear infinite;
+  margin-bottom: 8px;
+}
+
+/* Chấm tròn nhấp nháy trước chữ */
+p.eyebrow::before{
+  content: '';
+  width: 8px;
+  height: 8px;
+  background: #c48a5a;
+  border-radius: 50%;
+  display: inline-block;
+  box-shadow: 0 0 0 0 rgba(196,138,90,0.7);
+  animation: eyebrowDot 1.5s infinite;
+}
+
+@keyframes eyebrowShine{
+  0%{ background-position: 0% center; }
+  100%{ background-position: 200% center; }
+}
+
+@keyframes eyebrowDot{
+  0%{ box-shadow: 0 0 0 0 rgba(196,138,90,0.7); }
+  70%{ box-shadow: 0 0 0 8px rgba(196,138,90,0); }
+  100%{ box-shadow: 0 0 rgba(196,138,90,0); }
+}
 
 </style>
   </head>
@@ -209,70 +250,14 @@
       
       <div class="knowledge-search" id="ellySearchWrap">
   <form class="knowledge-search-form" id="ellySearchForm" onsubmit="return false;">
-    <input type="text" id="ellySearchInput" placeholder="Tìm kiếm: khử thâm, phun môi, phun mày..." autocomplete="off">
-    <button type="button" class="elly-search-clear" id="ellySearchClear" aria-label="Thoát tìm kiếm">✕</button>
+    <input id="ellySearchInput" type="search" enterkeyhint="search" inputmode="search" placeholder="Tìm kiến thức làm đẹp..." autocomplete="off">
     <button type="button" id="ellySearchBtn">Tìm</button>
   </form>
   <div class="knowledge-search-status" id="ellySearchStatus" style="display:none"></div>
   <div class="knowledge-search-results" id="ellySearchResults" hidden></div>
 </div>
 
-      <div class="news-topline"><div class="container"><strong>Kiến thức</strong><a href="kien-thuc/khu-tham-moi-la-gi.html">Khử thâm môi là gì</a>
-<a href="kien-thuc/khu-tham-moi-co-an-hai-san-duoc-khong.html">Khử thâm môi có ăn hải sản được không</a>
-<a href="kien-thuc/khu-tham-moi-uong-ca-phe-duoc-khong.html">Khử thâm môi uống cà phê được không</a>
-<a href="kien-thuc/khu-tham-moi-kieng-gi.html">Khử thâm môi kiêng gì</a>
-<a href="kien-thuc/khu-tham-moi-co-an-toan-khong.html">Khử thâm môi có an toàn không</a>
-<a href="kien-thuc/khu-tham-moi-tham-bam-sinh.html">Khử thâm môi thâm bẩm sinh</a>
-<a href="kien-thuc/khu-tham-moi-cho-nam.html">Khử thâm môi cho nam</a>
-<a href="kien-thuc/khu-tham-moi-co-bi-tham-lai-khong.html">Khử thâm môi có bị thâm lại không</a>
-<a href="kien-thuc/khu-tham-moi-bao-lau-thi-len-mau.html">Khử thâm môi bao lâu thì lên màu</a>
-<a href="kien-thuc/phun-moi-mau-nude.html">Phun môi màu nude</a>
-<a href="kien-thuc/phun-moi-mau-nao-dep.html">Phun môi màu nào đẹp</a>
-<a href="kien-thuc/phun-moi-mau-do-cam.html">Phun môi màu đỏ cam</a>
-<a href="kien-thuc/phun-moi-mau-hong-dat.html">Phun môi màu hồng đất</a>
-<a href="kien-thuc/phun-moi-mau-do-nau.html">Phun môi màu đỏ nâu</a>
-<a href="kien-thuc/phun-moi-mau-cam-dao.html">Phun môi màu cam đào</a>
-<a href="kien-thuc/phun-moi-mau-hong-dao.html">Phun môi màu hồng đào</a>
-<a href="kien-thuc/moi-tham-co-nen-phun-moi-khong.html">Môi thâm có nên phun môi không</a>
-<a href="kien-thuc/phun-moi-tai-nha.html">Phun môi tại nhà</a>
-<a href="kien-thuc/phun-moi-collagen-la-gi.html">Phun môi Collagen là gì</a>
-<a href="kien-thuc/phun-moi-bao-lau-duoc-danh-son.html">Phun môi bao lâu được đánh son</a>
-<a href="kien-thuc/lo-hon-sau-khi-phun-moi-co-sao-khong.html">Lỡ hôn sau phun môi</a>
-<a href="kien-thuc/7-dieu-can-kieng-sau-phun-moi.html">7 điều cần kiêng sau phun môi</a>
-<a href="kien-thuc/bong-qua-som-sau-phun-moi.html">Bong quá sớm sau phun môi</a>
-<a href="kien-thuc/lich-cham-soc-moi-sau-phun.html">Lịch chăm sóc môi sau phun</a>
-<a href="kien-thuc/phun-moi-10-ngay-chua-bong.html">Phun môi 10 ngày chưa bong</a>
-<a href="kien-thuc/phun-moi-may-ngay-thi-bong.html">Phun môi mấy ngày thì bong</a>
-<a href="kien-thuc/sau-phun-moi-bao-lau-duoc-danh-son.html">Sau phun môi bao lâu được đánh son</a>
-<a href="kien-thuc/sau-phun-moi-kieng-an-gi.html">Sau phun môi kiêng ăn gì</a>
-<a href="kien-thuc/cach-chon-dang-may-theo-khuon-mat.html">Cách chọn dáng mày theo khuôn mặt</a>
-<a href="kien-thuc/bao-nhieu-tuoi-duoc-phun-may.html">Bao nhiêu tuổi được phun mày</a>
-<a href="kien-thuc/co-nen-phun-may-khi-dang-mang-thai.html">Có nên phun mày khi mang thai</a>
-<a href="kien-thuc/may-bi-xanh-sau-nhieu-nam-co-xu-ly-duoc-khong.html">Mày bị xanh sau nhiều năm</a>
-<a href="kien-thuc/may-tro-do-phai-lam-sao.html">Mày trổ đỏ phải làm sao</a>
-<a href="kien-thuc/nguoi-lon-tuoi-nen-chon-kieu-chan-may-nao.html">Người lớn tuổi nên chọn kiểu chân mày nào</a>
-<a href="kien-thuc/phun-may-cho-da-dau-co-ben-khong.html">Phun mày cho da dầu có bền không</a>
-<a href="kien-thuc/sau-phun-may-kieng-an-gi.html">Sau phun mày kiêng ăn gì</a>
-<a href="kien-thuc/phun-may-bao-lau-thi-bong.html">Phun mày bao lâu thì bong</a>
-<a href="kien-thuc/sau-phun-may-bao-lau-duoc-rua-mat.html">Sau phun mày bao lâu được rửa mặt</a>
-<a href="kien-thuc/phun-may-giu-duoc-bao-lau.html">Phun mày giữ được bao lâu</a>
-<a href="kien-thuc/phun-may-co-dau-khong.html">Phun mày có đau không</a>
-<a href="kien-thuc/phun-may-hay-dieu-khac-chan-may.html">Phun mày hay điêu khắc chân mày</a>
-<a href="kien-thuc/dieu-khac-hay-phun-may-dep-hon.html">Điêu khắc hay phun mày đẹp hơn</a>
-<a href="kien-thuc/phun-may-ombre-la-gi.html">Phun mày Ombre là gì</a>
-<a href="kien-thuc/phun-may-nano-co-tot-khong.html">Phun mày Nano có tốt không</a>
-<a href="kien-thuc/cac-loai-mau-moi-hop-cho-u30.html">Các loại màu môi hợp cho U30</a>
-<a href="kien-thuc/phun-moi-co-dau-khong.html">Phun môi có đau không</a>
-<a href="kien-thuc/moi-tham-nen-phun-mau-gi.html">Môi thâm nên phun màu gì để mặt tươi hơn</a>
-<a href="kien-thuc/so-phun-moi-qua-dam-nen-chon-mau-nao.html">Sợ phun môi quá đậm thì nên chọn màu nào</a>
-<a href="kien-thuc/phun-moi-collagen-co-dau-khong.html">Phun môi collagen có đau không và bao lâu thì bong</a>
-<a href="kien-thuc/cham-soc-moi-sau-phun-7-ngay-dau.html">Chăm sóc môi sau phun trong 7 ngày đầu sao cho lên màu đẹp</a>
-<a href="kien-thuc/sau-phun-moi-nen-an-gi-va-kieng-gi.html">Sau phun môi nên ăn gì và kiêng gì để môi nhanh ổn định</a>
-<a href="kien-thuc/chon-mau-moi-theo-mau-da.html">Chọn màu môi theo màu da để không bị xỉn mặt</a>
-<a href="kien-thuc/phun-may-tan-bot-hop-voi-ai.html">Chân mày thưa có nên phun mày tán bột không</a>
-<a href="kien-thuc/dieu-khac-chan-may-co-tu-nhien-khong.html">Điêu khắc chân mày có tự nhiên không</a>
-<a href="kien-thuc/chon-dang-may-theo-khuon-mat.html">Chọn dáng mày theo khuôn mặt để không bị già</a>
-<a href="kien-thuc/cham-soc-chan-may-sau-phun.html">Chăm sóc chân mày sau phun để màu không loang</a></div></div>
+      
       <section class="container news-heading">
         <p class="eyebrow">Kiến thức làm đẹp tại nhà ELLY</p>
       
@@ -1153,6 +1138,365 @@ document.addEventListener('DOMContentLoaded', function(){
       if(btn) btn.textContent = wrap.classList.contains('is-collapsed')? '+' : '-';
     });
   }
+});
+</script>
+<script>
+// GÕ THÌ HIỆN GỢI Ý - BẤM TÌM THÌ RA TRANG RIÊNG SẠCH
+document.addEventListener('DOMContentLoaded', function(){
+  const input = document.getElementById('ellySearchInput');
+  const btnTim = document.getElementById('ellySearchBtn');
+  const list = document.getElementById('ellyKnowledgeList');
+  const pagination = document.getElementById('ellyPagination');
+  const heading = document.querySelector('.news-heading');
+  const trending = document.getElementById('ellyTrendingWrap');
+  const statusBox = document.getElementById('ellySearchStatus');
+  const resultsBox = document.getElementById('ellySearchResults');
+  if(!input || !list) return;
+
+  const items = Array.from(list.querySelectorAll('.elly-knowledge-item'));
+  function boDau(s){ return s.toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g,'').replace(/đ/g,'d'); }
+  const allData = items.map(el=>{
+    const a = el.querySelector('.elly-knowledge-title a');
+    const kicker = el.querySelector('.elly-kicker');
+    const img = el.querySelector('img');
+    return { 
+      el:el, 
+      norm: boDau((a?a.textContent:'') + ' ' + (kicker?kicker.textContent:'')), 
+      title: a?a.textContent:'', 
+      href: a?a.href:'#', 
+      img: img?img.src:'', 
+      kicker: kicker?kicker.textContent:'' 
+    };
+  });
+
+  function taoNutQuayLai(){
+    let back = document.getElementById('ellyBackBtn');
+    if(!back){
+      back = document.createElement('button');
+      back.id='ellyBackBtn';
+      back.style.cssText='margin:0 0 14px;padding:8px 14px;border:1px solid #543729;border-radius:20px;background:#fff;color:#543729;font-weight:700;cursor:pointer;display:none';
+      back.innerHTML='← Quay lại Kiến thức';
+      back.onclick = thoatTrangTim;
+      list.parentNode.insertBefore(back, list);
+    }
+    back.style.display='inline-block';
+  }
+
+  function thoatTrangTim(){
+    if(heading) heading.style.display='';
+    if(trending) trending.style.display='';
+    if(pagination) pagination.style.display='flex';
+    if(statusBox) { statusBox.style.display='none'; }
+    if(resultsBox) { resultsBox.hidden=true; resultsBox.style.display='none'; }
+    const back = document.getElementById('ellyBackBtn');
+    if(back) back.style.display='none';
+    items.forEach((el, idx)=> el.classList.toggle('is-hidden', idx>=10));
+  }
+
+  function vaoTrangTim(keyword){
+    const nq = boDau(keyword.trim());
+    if(!nq || nq.length<2) { thoatTrangTim(); return; }
+
+    // BẤM TÌM - TẮT HẾT GỢI Ý + DÒNG CHỮ, CHỈ CÒN BÀI
+    if(heading) heading.style.display='none';
+    if(trending) trending.style.display='none';
+    if(pagination) pagination.style.display='none';
+    if(resultsBox) { resultsBox.hidden=true; resultsBox.style.display='none'; resultsBox.innerHTML=''; }
+    if(statusBox) { statusBox.style.display='none'; statusBox.textContent=''; }
+
+    allData.forEach(d=>{ d.el.classList.toggle('is-hidden', !d.norm.includes(nq)); });
+
+    taoNutQuayLai();
+    window.scrollTo({top:0, behavior:'smooth'});
+  }
+
+  // LÚC ĐẦU GÕ THÌ HIỆN GỢI Ý
+  input.addEventListener('input', function(){
+    const q = this.value.trim();
+    const nq = boDau(q);
+    if(!q){
+      thoatTrangTim();
+      return;
+    }
+    if(nq.length>=2 && resultsBox){
+      const matched = allData.filter(d=> d.norm.includes(nq));
+      resultsBox.innerHTML='';
+      matched.slice(0,6).forEach(d=>{
+        const row = document.createElement('a');
+        row.className='knowledge-search-result';
+        row.href = d.href;
+        row.innerHTML=`<img src="${d.img}"><div><span>${d.kicker}</span><strong>${d.title}</strong></div>`;
+        // Bấm vào gợi ý cũng vào trang riêng sạch
+        row.addEventListener('click', function(e){
+          // để link đi bình thường nếu muốn vào bài, nếu muốn lọc thì bỏ e.preventDefault
+        });
+        resultsBox.appendChild(row);
+      });
+      resultsBox.hidden=false;
+      resultsBox.style.display='grid';
+    }
+  });
+
+  // BẤM TÌM MỚI MẤT
+  if(btnTim){
+    btnTim.addEventListener('click', function(){ vaoTrangTim(input.value); });
+  }
+  input.addEventListener('keydown', function(e){
+    if(e.key==='Enter'){ e.preventDefault(); vaoTrangTim(this.value); }
+  });
+
+  const btnX = document.getElementById('ellySearchClear');
+  if(btnX){ btnX.addEventListener('click', function(){ input.value=''; thoatTrangTim(); }); }
+});
+</script>
+<script>
+// PC: ENTER + CLICK TÌM / ĐT: PHÍM TÌM TRÊN BÀN PHÍM
+document.addEventListener('DOMContentLoaded', function(){
+  const input = document.getElementById('ellySearchInput');
+  const btnTim = document.getElementById('ellySearchBtn');
+  const list = document.getElementById('ellyKnowledgeList');
+  const pagination = document.getElementById('ellyPagination');
+  const heading = document.querySelector('.news-heading');
+  const trending = document.getElementById('ellyTrendingWrap');
+  const statusBox = document.getElementById('ellySearchStatus');
+  const resultsBox = document.getElementById('ellySearchResults');
+  if(!input || !list) return;
+
+  // Cho mobile hiện nút Tìm
+  input.setAttribute('enterkeyhint','search');
+  input.setAttribute('inputmode','search');
+  input.setAttribute('type','search');
+
+  const items = Array.from(list.querySelectorAll('.elly-knowledge-item'));
+  function boDau(s){ return s.toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g,'').replace(/đ/g,'d'); }
+  const allData = items.map(el=>{
+    const a = el.querySelector('.elly-knowledge-title a');
+    const kicker = el.querySelector('.elly-kicker');
+    const img = el.querySelector('img');
+    return { el:el, norm: boDau((a?a.textContent:'')+' '+(kicker?kicker.textContent:'')), title:a?a.textContent:'', href:a?a.href:'#', img:img?img.src:'', kicker:kicker?kicker.textContent:'' };
+  });
+
+  function taoNutQuayLai(){
+    let back = document.getElementById('ellyBackBtn');
+    if(!back){
+      back = document.createElement('button');
+      back.id='ellyBackBtn';
+      back.style.cssText='margin:0 0 14px;padding:8px 14px;border:1px solid #543729;border-radius:20px;background:#fff;color:#543729;font-weight:700;cursor:pointer;display:none';
+      back.innerHTML='← Quay lại Kiến thức';
+      back.onclick = thoatTrangTim;
+      list.parentNode.insertBefore(back, list);
+    }
+    back.style.display='inline-block';
+  }
+  function thoatTrangTim(){
+    if(heading) heading.style.display='';
+    if(trending) trending.style.display='';
+    if(pagination) pagination.style.display='flex';
+    if(statusBox) statusBox.style.display='none';
+    if(resultsBox){ resultsBox.hidden=true; resultsBox.style.display='none'; }
+    const back=document.getElementById('ellyBackBtn'); if(back) back.style.display='none';
+    items.forEach((el,idx)=> el.classList.toggle('is-hidden', idx>=10));
+  }
+  function vaoTrangTim(keyword){
+    const nq=boDau(keyword.trim());
+    if(!nq || nq.length<2){ thoatTrangTim(); return; }
+    if(heading) heading.style.display='none';
+    if(trending) trending.style.display='none';
+    if(pagination) pagination.style.display='none';
+    if(resultsBox){ resultsBox.hidden=true; resultsBox.style.display='none'; resultsBox.innerHTML=''; }
+    if(statusBox){ statusBox.style.display='none'; }
+    allData.forEach(d=>{ d.el.classList.toggle('is-hidden', !d.norm.includes(nq)); });
+    taoNutQuayLai();
+    window.scrollTo({top:0, behavior:'smooth'});
+    input.blur(); // Đóng bàn phím ĐT
+  }
+
+  // GÕ HIỆN GỢI Ý
+  input.addEventListener('input', function(){
+    const nq=boDau(this.value.trim());
+    if(!nq){ thoatTrangTim(); return; }
+    if(nq.length>=2 && resultsBox){
+      const matched=allData.filter(d=>d.norm.includes(nq));
+      resultsBox.innerHTML='';
+      matched.slice(0,6).forEach(d=>{
+        const row=document.createElement('a');
+        row.className='knowledge-search-result';
+        row.href=d.href;
+        row.innerHTML=`<img src="${d.img}"><div><span>${d.kicker}</span><strong>${d.title}</strong></div>`;
+        resultsBox.appendChild(row);
+      });
+      resultsBox.hidden=false; resultsBox.style.display='grid';
+    }
+  });
+
+  // PC: CLICK NÚT TÌM
+  if(btnTim){
+    btnTim.addEventListener('click', function(){ vaoTrangTim(input.value); });
+    btnTim.addEventListener('touchend', function(e){ e.preventDefault(); vaoTrangTim(input.value); }); // Cho ĐT bấm mượt
+  }
+
+  // PC: ENTER + ĐT: PHÍM TÌM
+  input.addEventListener('keydown', function(e){
+    if(e.key==='Enter'){
+      e.preventDefault();
+      vaoTrangTim(this.value);
+    }
+  });
+
+  // ĐT: Sự kiện search (khi bấm Tìm trên bàn phím iOS/Android)
+  input.addEventListener('search', function(){
+    if(this.value.trim()) vaoTrangTim(this.value);
+    else thoatTrangTim();
+  });
+
+  const btnX=document.getElementById('ellySearchClear');
+  if(btnX){ btnX.addEventListener('click', function(){ input.value=''; thoatTrangTim(); }); }
+});
+</script>
+<script>
+// BẤM TÌM RA TRANG RIÊNG - VẪN GIỮ SỐ 1 2 3... VÀ HOT TREND
+document.addEventListener('DOMContentLoaded', function(){
+  const input = document.getElementById('ellySearchInput');
+  const btnTim = document.getElementById('ellySearchBtn');
+  const list = document.getElementById('ellyKnowledgeList');
+  const pagination = document.getElementById('ellyPagination');
+  const heading = document.querySelector('.news-heading');
+  const trending = document.getElementById('ellyTrendingWrap');
+  const statusBox = document.getElementById('ellySearchStatus');
+  const resultsBox = document.getElementById('ellySearchResults');
+  if(!input || !list || !pagination) return;
+
+  input.setAttribute('enterkeyhint','search');
+  input.setAttribute('type','search');
+
+  const items = Array.from(list.querySelectorAll('.elly-knowledge-item'));
+  function boDau(s){ return s.toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g,'').replace(/đ/g,'d'); }
+  const allData = items.map(el=>{
+    const a = el.querySelector('.elly-knowledge-title a');
+    const kicker = el.querySelector('.elly-kicker');
+    const img = el.querySelector('img');
+    return { el:el, norm: boDau((a?a.textContent:'')+' '+(kicker?kicker.textContent:'')), title:a?a.textContent:'', href:a?a.href:'#', img:img?img.src:'', kicker:kicker?kicker.textContent:'' };
+  });
+
+  let filteredData = [];
+  let currentPage = 1;
+  const perPage = 10;
+  let isSearchMode = false;
+
+  function renderPage(data, page){
+    currentPage = page;
+    const start = (page-1)*perPage;
+    const end = start + perPage;
+    allData.forEach(d=> d.el.classList.add('is-hidden'));
+    data.slice(start, end).forEach(d=> d.el.classList.remove('is-hidden'));
+    renderPagination(data);
+    window.scrollTo({top: list.offsetTop - 100, behavior:'smooth'});
+  }
+
+  function renderPagination(data){
+    const totalPages = Math.ceil(data.length / perPage);
+    pagination.innerHTML='';
+    pagination.style.display = totalPages > 1 ? 'flex' : 'none';
+    if(totalPages <= 1) return;
+    
+    function btn(label, page, disabled, active){
+      const b=document.createElement('button');
+      b.textContent=label;
+      if(active) b.classList.add('is-active');
+      if(disabled) b.disabled=true;
+      else b.addEventListener('click', ()=> renderPage(data, page));
+      return b;
+    }
+    let pages=[];
+    if(totalPages<=7){ for(let i=1;i<=totalPages;i++) pages.push(i); }
+    else{
+      if(currentPage<=4) pages=[1,2,3,4,5,'...',totalPages];
+      else if(currentPage>=totalPages-3) pages=[1,'...',totalPages-3,totalPages-2,totalPages-1,totalPages];
+      else pages=[1,'...',currentPage-1,currentPage,currentPage+1,'...',totalPages];
+    }
+    pages.forEach(p=>{
+      if(p==='...'){ const d=document.createElement('div'); d.className='dots'; d.textContent='...'; pagination.appendChild(d); }
+      else pagination.appendChild(btn(String(p), p, false, p===currentPage));
+    });
+    const next=btn('›', Math.min(totalPages, currentPage+1), currentPage===totalPages, false);
+    next.style.fontSize='1.5rem';
+    pagination.appendChild(next);
+  }
+
+  function taoNutQuayLai(){
+    let back=document.getElementById('ellyBackBtn');
+    if(!back){
+      back=document.createElement('button');
+      back.id='ellyBackBtn';
+      back.style.cssText='margin:0 0 14px;padding:8px 14px;border:1px solid #543729;border-radius:20px;background:#fff;color:#543729;font-weight:700;cursor:pointer;display:none';
+      back.innerHTML='← Quay lại Kiến thức';
+      back.onclick=thoatTrangTim;
+      list.parentNode.insertBefore(back, list);
+    }
+    back.style.display='inline-block';
+  }
+
+  function thoatTrangTim(){
+    isSearchMode=false;
+    filteredData=[];
+    if(heading) heading.style.display='';
+    if(trending) trending.style.display=''; // HIỆN LẠI HOT TREND
+    if(statusBox) statusBox.style.display='none';
+    if(resultsBox){ resultsBox.hidden=true; resultsBox.style.display='none'; }
+    const back=document.getElementById('ellyBackBtn'); if(back) back.style.display='none';
+    currentPage=1;
+    renderPage(allData, 1); // Về lại phân trang gốc
+  }
+
+  function vaoTrangTim(keyword){
+    const nq=boDau(keyword.trim());
+    if(!nq || nq.length<2){ thoatTrangTim(); return; }
+    
+    isSearchMode=true;
+    filteredData = allData.filter(d=> d.norm.includes(nq));
+    
+    // ẨN GỢI Ý + DÒNG CHỮ, NHƯNG GIỮ LẠI SỐ + HOT TREND
+    if(resultsBox){ resultsBox.hidden=true; resultsBox.style.display='none'; resultsBox.innerHTML=''; }
+    if(statusBox){ statusBox.style.display='none'; }
+    if(heading) heading.style.display='none';
+    if(trending) trending.style.display=''; // VẪN ĐỂ LẠI
+
+    taoNutQuayLai();
+    currentPage=1;
+    renderPage(filteredData, 1); // Phân trang cho kết quả tìm
+    input.blur();
+  }
+
+  // GÕ HIỆN GỢI Ý
+  input.addEventListener('input', function(){
+    const nq=boDau(this.value.trim());
+    if(!nq){ thoatTrangTim(); return; }
+    if(!isSearchMode && nq.length>=2 && resultsBox){
+      const matched=allData.filter(d=>d.norm.includes(nq));
+      resultsBox.innerHTML='';
+      matched.slice(0,6).forEach(d=>{
+        const row=document.createElement('a');
+        row.className='knowledge-search-result';
+        row.href=d.href;
+        row.innerHTML=`<img src="${d.img}"><div><span>${d.kicker}</span><strong>${d.title}</strong></div>`;
+        resultsBox.appendChild(row);
+      });
+      resultsBox.hidden=false; resultsBox.style.display='grid';
+    }
+  });
+
+  if(btnTim){
+    btnTim.addEventListener('click', ()=> vaoTrangTim(input.value));
+    btnTim.addEventListener('touchend', (e)=>{ e.preventDefault(); vaoTrangTim(input.value); });
+  }
+  input.addEventListener('keydown', function(e){ if(e.key==='Enter'){ e.preventDefault(); vaoTrangTim(this.value); } });
+  input.addEventListener('search', function(){ if(this.value.trim()) vaoTrangTim(this.value); else thoatTrangTim(); });
+
+  const btnX=document.getElementById('ellySearchClear');
+  if(btnX){ btnX.addEventListener('click', function(){ input.value=''; thoatTrangTim(); }); }
+
+  // Load lần đầu
+  renderPage(allData, 1);
 });
 </script>
 </body>
