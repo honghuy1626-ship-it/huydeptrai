@@ -5772,3 +5772,36 @@ body.booking-popover-open {
 .elly-trending-item:hover{color:#543729}
 .elly-trending-item::before{content:'🔥'}
 .elly-trending-note{font-size:.78rem;color:#8a7a71;padding:10px 16px 12px;background:#fdf2e8;border-top:1px dashed rgba(84,55,41,.15)}
+/* FOOTER MỚI KIỂU LINH ANH CHO ELLY */
+.elly-footer-new{ background:#211611; color:#f3e6d3; padding:38px 0 90px; }
+.elly-footer-new .footer-inner{ max-width:640px; margin:0 auto; text-align:left; padding:0 22px; }
+.elly-footer-new .footer-logo{ display:flex; justify-content:center; margin-bottom:22px; }
+.elly-footer-new .footer-logo img{ height:68px; width:auto }
+.elly-footer-new .footer-desc{ color:#c9b8a3; }
+.elly-footer-new .footer-title{ color:#E8C189; }
+.elly-footer-new .footer-contact{ list-style:none; padding:0; margin:0 0 20px; display:grid; gap:12px; }
+.elly-footer-new .footer-contact li{ color:#e8dccf; }
+.elly-footer-new .footer-contact li i{ font-style:normal; width:20px; flex:0 0 20px; text-align:center; }
+.elly-footer-new .footer-contact a{ color:#E8C189; }
+.elly-footer-new .footer-follow-label{ color:#bfae9a; }
+.elly-footer-new .footer-social{ display:flex; gap:10px; }
+.elly-footer-new .footer-social a{ background:#E8C189; color:#211611; }
+.elly-footer-new .footer-social a svg{ width:20px; height:20px; fill:currentColor; }
+.elly-footer-new .footer-copy{ border-top:1px solid rgba(232,193,137,.15); color:#8a7e73; }
+
+
+@media(max-width:480px){ .elly-footer-new .footer-inner{ padding:0 16px; } }
+.elly-footer-fix{ background:#211611; color:#e8ddd0; padding:32px 0 30px; }
+.elly-footer-fix .container{ max-width:600px; margin:0 auto; padding:0 20px; }
+.elly-footer-fix .ef-logo{ display:flex; justify-content:center; margin-bottom:18px; }
+.elly-footer-fix .ef-logo img{ height:75px; width:auto; }
+.elly-footer-fix .ef-desc{ font-size:14.5px; line-height:1.75; color:#c7b8a6; text-align:left; margin-bottom:26px; }
+.elly-footer-fix .ef-title{ color:#E8C189; font-size:20px; font-weight:800; letter-spacing:.3px; margin:0 0 14px; }
+.elly-footer-fix .ef-contact{ list-style:none; padding:0; margin:0 0 22px; display:grid; gap:11px; }
+.elly-footer-fix .ef-contact li{ display:flex; gap:10px; font-size:14.5px; line-height:1.5; }
+.elly-footer-fix .ef-contact .ic{ width:22px; flex:0 0 22px; text-align:center; color:#E8C189; }
+.elly-footer-fix .ef-contact a{ color:#E8C189; font-weight:700; text-decoration:none; }
+.elly-footer-fix .ef-follow{ font-style:italic; font-size:14px; color:#a99a8a; margin-bottom:12px; }
+.elly-footer-fix .ef-social{ display:flex; gap:10px; margin-bottom:22px; }
+.elly-footer-fix .ef-social a{ width:36px; height:36px; border-radius:50%; background:#fff; color:#211611; display:grid; place-items:center; font-weight:800; font-size:14px; text-decoration:none; }
+.elly-footer-fix .ef-copy{ border-top:1px solid rgba(232,193,137,.18); padding-top:14px; text-align:center; font-size:12.5px; color:#8c8278; line-height:1.6; }

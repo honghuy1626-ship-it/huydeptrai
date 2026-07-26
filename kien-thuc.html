@@ -269,7 +269,7 @@ p.eyebrow::before{
       <article class="elly-knowledge-item">
         <a class="elly-knowledge-thumb" href="kien-thuc/moi-bi-den-co-phun-duoc-khong.html"><img src="assets/hinh-nen-moi-tham.jpg" alt="Môi bị đen có phun được không? Cách xử lý để lên màu đẹp" loading="lazy"></a>
         <div class="elly-knowledge-content">
-          <span class="elly-kicker">BÀI NỔI BẬT</span>
+          <span class="elly-kicker">BÍ KÍP KHỬ THÂM / MÔI THÂM ĐEN</span>
           <h2 class="elly-knowledge-title"><a href="kien-thuc/moi-bi-den-co-phun-duoc-khong.html">Môi bị đen có phun được không? Cách xử lý để lên màu đẹp</a></h2>
           <div class="elly-knowledge-line"></div>
         </div>
@@ -864,510 +864,24 @@ p.eyebrow::before{
     <script src="script.js"></script>
   
     <script>
-    // PHÂN TRANG CHO TRANG KIẾN THỨC - 10 bài / trang
-    document.addEventListener('DOMContentLoaded', function(){
-      var list = document.querySelector('.news-list');
-      var pagination = document.getElementById('newsPagination');
-      if(!list || !pagination) return;
-      var items = Array.from(list.querySelectorAll('.news-row'));
-      var perPage = 10;
-      var totalPages = Math.ceil(items.length / perPage);
-      var current = 1;
-
-      function renderPage(page){
-        current = page;
-        var start = (page-1)*perPage;
-        var end = start + perPage;
-        items.forEach(function(el, idx){
-          el.classList.toggle('is-hidden', idx < start || idx >= end);
-        });
-        renderControls();
-        window.scrollTo({top: list.offsetTop - 120, behavior: 'smooth'});
-      }
-
-      function renderControls(){
-        pagination.innerHTML = '';
-        // Nút prev
-        // Helper tạo nút
-        function btn(label, page, disabled, active){
-          var b = document.createElement('button');
-          b.textContent = label;
-          if(active) b.classList.add('is-active');
-          if(disabled) b.disabled = true;
-          if(!disabled){
-            b.addEventListener('click', function(){ renderPage(page); });
-          }
-          return b;
-        }
-
-        // Trang 1..4 luôn hiện, ... , cuối
-        var pages = [];
-        if(totalPages <= 7){
-          for(var i=1;i<=totalPages;i++) pages.push(i);
-        } else {
-          pages = [1,2,3,4,'...', totalPages];
-          if(current > 4 && current < totalPages){
-            pages = [1, '...', current-1, current, current+1, '...', totalPages];
-          } else if(current <=4){
-            pages = [1,2,3,4,5,'...', totalPages];
-          } else {
-            pages = [1,'...', totalPages-3, totalPages-2, totalPages-1, totalPages];
-          }
-        }
-
-        pages.forEach(function(p){
-          if(p === '...'){
-            var d = document.createElement('div');
-            d.className = 'dots';
-            d.textContent = '...';
-            pagination.appendChild(d);
-          } else {
-            pagination.appendChild(btn(String(p), p, false, p===current));
-          }
-        });
-
-        // Nút next >
-        var next = btn('›', Math.min(totalPages, current+1), current===totalPages, false);
-        next.style.fontSize = '1.3rem';
-        pagination.appendChild(next);
-      }
-
-      // Thêm badge ngày mẫu như hình bạn gửi cho 10 bài đầu để giống demo
-      items.forEach(function(el, idx){
-        if(!el.querySelector('.news-date-badge')){
-          var thumb = el.querySelector('.news-thumb');
-          if(thumb){
-            var badge = document.createElement('div');
-            badge.className = 'news-date-badge';
-            // random ngày 13-15 cho giống hình
-            var day = 13 + (idx % 3);
-            badge.innerHTML = '<b>'+day+'</b><span>Th7</span>';
-            thumb.appendChild(badge);
-          }
-        }
-      });
-
-      renderPage(1);
-    });
-    </script>
-
-  
-<script>
-// v9 CHUẨN - TÌM KIẾM GỢI Ý CÓ ẢNH - KHÔNG DẤU VẪN RA
-document.addEventListener('DOMContentLoaded', function(){
-  const input = document.getElementById('ellySearchInput');
-  const resultsBox = document.getElementById('ellySearchResults');
-  const statusBox = document.getElementById('ellySearchStatus');
-  const list = document.getElementById('ellyKnowledgeList');
-  const pagination = document.getElementById('ellyPagination');
-  if(!input || !list || !resultsBox) return;
-
-  const items = Array.from(list.querySelectorAll('.elly-knowledge-item'));
-  function normalize(str){
-    return str.toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g,'').replace(/đ/g,'d').replace(/Đ/g,'d');
-  }
-  const allData = items.map(el => {
-    const a = el.querySelector('.elly-knowledge-title a');
-    const img = el.querySelector('img');
-    const kicker = el.querySelector('.elly-kicker');
-    return {
-      el: el,
-      href: a ? a.getAttribute('href') : '#',
-      title: a ? a.textContent.trim() : '',
-      img: img ? img.getAttribute('src') : '',
-      kicker: kicker ? kicker.textContent.trim() : 'KIẾN THỨC LÀM ĐẸP',
-      norm: normalize((a ? a.textContent.trim() : '') + ' ' + (kicker ? kicker.textContent : ''))
-    };
-  });
-
-  let currentPage = 1;
-  const perPage = 10;
-  function restoreList(){
-    if(pagination) pagination.style.display = 'flex';
-    allData.forEach((d, idx)=>{
-      const inPage = idx >= (currentPage-1)*perPage && idx < currentPage*perPage;
-      d.el.classList.toggle('is-hidden', !inPage);
-    });
-  }
-  function showAll(){
-    restoreList();
-    resultsBox.hidden = true;
-    resultsBox.innerHTML = '';
-    statusBox.textContent = '';
-    statusBox.style.display = 'none';
-  }
-  function doSearch(rawQuery){
-    const q = rawQuery.trim();
-    const nq = normalize(q);
-    if(!q || nq.length < 2){
-      showAll();
-      return;
-    }
-    const matched = allData.filter(d => d.norm.includes(nq));
-    statusBox.textContent = `Tìm thấy ${matched.length} bài cho "${q}"`;
-    statusBox.style.display = 'block';
-    resultsBox.innerHTML = '';
-    if(matched.length === 0){
-      resultsBox.innerHTML = '<div style="padding:14px;color:#745d63;">Không thấy. Thử: <b>phun moi</b>, <b>khu tham</b>, <b>phun may</b></div>';
-    }else{
-      matched.slice(0,10).forEach(d => {
-        const row = document.createElement('a');
-        row.className = 'knowledge-search-result';
-        row.href = d.href;
-        row.innerHTML = `<img src="${d.img}" alt=""><div><span>${d.kicker}</span><strong>${d.title}</strong></div>`;
-        resultsBox.appendChild(row);
-      });
-    }
-    resultsBox.hidden = false;
-    resultsBox.style.display = 'grid';
-    allData.forEach(d => {
-      d.el.classList.toggle('is-hidden', !d.norm.includes(nq));
-    });
-    if(pagination) pagination.style.display = 'none';
-  }
-
-  input.addEventListener('input', function(){
-    doSearch(this.value);
-    const clearBtn = document.getElementById('ellySearchClear');
-    if(clearBtn){
-      if(this.value.trim().length>0) clearBtn.classList.add('is-show');
-      else clearBtn.classList.remove('is-show');
-    }
-  });
-  document.getElementById('ellySearchBtn').addEventListener('click', ()=> doSearch(input.value));
-  input.addEventListener('keyup', function(e){
-    if(e.key === 'Enter') doSearch(this.value);
-    if(e.key === 'Escape'){ this.value=''; doSearch(''); }
-  });
-  const clearBtn = document.getElementById('ellySearchClear');
-  if(clearBtn){
-    clearBtn.addEventListener('click', function(){
-      input.value=''; this.classList.remove('is-show'); doSearch(''); input.focus();
-    });
-  }
-  document.addEventListener('click', function(e){
-    if(!e.target.closest('#ellySearchWrap')){ resultsBox.hidden = true; }
-  });
-  input.addEventListener('focus', function(){
-    if(this.value.trim().length >= 2){ resultsBox.hidden = false; resultsBox.style.display='grid'; }
-  });
-  showAll();
-});
-</script>
-<script>
-// PHÂN TRANG 10 BÀI/TRANG - DÃY SỐ CUỐI
-document.addEventListener('DOMContentLoaded', function(){
-  const list = document.getElementById('ellyKnowledgeList');
-  const pagination = document.getElementById('ellyPagination');
-  if(!list || !pagination) return;
-  const items = Array.from(list.querySelectorAll('.elly-knowledge-item'));
-  const perPage = 10;
-  const totalPages = Math.ceil(items.length / perPage);
-  let current = 1;
-  
-  function renderPage(page){
-    current = page;
-    const start = (page-1)*perPage;
-    const end = start + perPage;
-    items.forEach((el, idx)=>{ el.classList.toggle('is-hidden', idx < start || idx >= end); });
-    renderControls();
-    window.scrollTo({top: list.offsetTop - 120, behavior:'smooth'});
-  }
-  
-  function renderControls(){
-    pagination.innerHTML = '';
-    function btn(label, page, disabled, active){
-      const b = document.createElement('button');
-      b.textContent = label;
-      if(active) b.classList.add('is-active');
-      if(disabled) b.disabled = true;
-      if(!disabled) b.addEventListener('click', ()=>renderPage(page));
-      return b;
-    }
-    let pages = [];
-    if(totalPages <= 7){ for(let i=1;i<=totalPages;i++) pages.push(i); }
-    else{ 
-      if(current <= 4) pages = [1,2,3,4,5,'...', totalPages]; 
-      else if(current >= totalPages-3) pages = [1,'...', totalPages-3, totalPages-2, totalPages-1, totalPages]; 
-      else pages = [1,'...', current-1, current, current+1,'...', totalPages]; 
-    }
-    pages.forEach(p=>{ 
-      if(p==='...'){ const d=document.createElement('div'); d.className='dots'; d.textContent='...'; pagination.appendChild(d); } 
-      else { pagination.appendChild(btn(String(p), p, false, p===current)); } 
-    });
-    const next = btn('›', Math.min(totalPages, current+1), current===totalPages, false); 
-    next.style.fontSize='1.5rem'; 
-    pagination.appendChild(next);
-  }
-  renderPage(1);
-});
-</script>
-<script>
-// HOT TREND VN - HIỆN LẠI + ICON
-document.addEventListener('DOMContentLoaded', function(){
-  const trendingData = [
-    ["kien-thuc/moi-bi-den-co-phun-duoc-khong.html", "Môi bị đen có phun được không? Cách xử lý để lên màu đẹp"],
-    ["kien-thuc/nen-lam-moi-hay-lam-may-truoc.html", "Nên làm môi hay làm mày trước nếu chưa biết bắt đầu từ đâu?"],
-    ["kien-thuc/chuan-bi-gi-truoc-khi-phun-xam.html", "Cần chuẩn bị gì trước khi phun xăm mày môi tại nhà?"],
-    ["kien-thuc/khach-trung-nien-chon-mau-moi-dang-may.html", "Khách trung niên nên chọn màu môi và dáng mày thế nào?"],
-    ["kien-thuc/lam-may-moi-co-bi-gia-khong.html", "Làm mày môi có bị già không?"],
-    ["kien-thuc/lam-sao-de-mau-moi-ben-lau.html", "Làm sao để màu môi bền lâu và không bị khô xỉn?"],
-    ["kien-thuc/khi-nao-can-dam-lai-moi-may.html", "Khi nào cần dặm lại môi hoặc chân mày?"],
-    ["kien-thuc/mau-moi-sau-phun-bao-lau-on-dinh.html", "Màu môi sau phun bao lâu thì ổn định?"],
-    ["kien-thuc/quy-trinh-tu-van-truoc-khi-phun-xam.html", "Tư vấn trước khi phun xăm cần hỏi những gì?"],
-    ["kien-thuc/phun-xam-tai-nha-co-an-toan-khong.html", "Phun xăm tại nhà có an toàn và tiện không?"]
-  ];
-  const content = document.getElementById('ellyTrendingContent');
-  const note = document.getElementById('ellyTrendingNote');
-  const wrap = document.getElementById('ellyTrendingWrap');
-  const header = document.getElementById('ellyTrendingHeader');
-  if(!content ||!note ||!wrap) return;
-
-  function getTodaySeed(){ const now = new Date(); return now.getFullYear()*10000 + (now.getMonth()+1)*100 + now.getDate(); }
-  function shuffleByDate(arr, seed){ let a=[...arr]; for(let i=a.length-1;i>0;i--){ const j=(seed+i*7)%(i+1); [a[i],a[j]]=[a[j],a[i]]; } return a; }
-
-  const shuffled = shuffleByDate(trendingData, getTodaySeed());
-  content.innerHTML='';
-  shuffled.forEach(([href,title])=>{ const a=document.createElement('a'); a.className='elly-trending-item'; a.href=href; a.textContent=title; content.appendChild(a); });
-  note.textContent = `Top tìm kiếm nhiều trên Google tại Việt Nam - cập nhật ngày ${new Date().toLocaleDateString('vi-VN')}`;
-
-  if(header){
-    header.addEventListener('click', ()=>{
-      wrap.classList.toggle('is-collapsed');
-      const btn = header.querySelector('.elly-trending-toggle');
-      if(btn) btn.textContent = wrap.classList.contains('is-collapsed')? '+' : '-';
-    });
-  }
-});
-</script>
-<script>
-// GÕ THÌ HIỆN GỢI Ý - BẤM TÌM THÌ RA TRANG RIÊNG SẠCH
+// BẢN SẠCH DUY NHẤT - TÌM KIẾM + PHÂN TRANG + HOT TREND
 document.addEventListener('DOMContentLoaded', function(){
   const input = document.getElementById('ellySearchInput');
   const btnTim = document.getElementById('ellySearchBtn');
   const list = document.getElementById('ellyKnowledgeList');
   const pagination = document.getElementById('ellyPagination');
   const heading = document.querySelector('.news-heading');
-  const trending = document.getElementById('ellyTrendingWrap');
-  const statusBox = document.getElementById('ellySearchStatus');
+  const trendingWrap = document.getElementById('ellyTrendingWrap');
+  const trendingHeader = document.getElementById('ellyTrendingHeader');
+  const trendingContent = document.getElementById('ellyTrendingContent');
+  const trendingNote = document.getElementById('ellyTrendingNote');
   const resultsBox = document.getElementById('ellySearchResults');
-  if(!input || !list) return;
-
-  const items = Array.from(list.querySelectorAll('.elly-knowledge-item'));
-  function boDau(s){ return s.toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g,'').replace(/đ/g,'d'); }
-  const allData = items.map(el=>{
-    const a = el.querySelector('.elly-knowledge-title a');
-    const kicker = el.querySelector('.elly-kicker');
-    const img = el.querySelector('img');
-    return { 
-      el:el, 
-      norm: boDau((a?a.textContent:'') + ' ' + (kicker?kicker.textContent:'')), 
-      title: a?a.textContent:'', 
-      href: a?a.href:'#', 
-      img: img?img.src:'', 
-      kicker: kicker?kicker.textContent:'' 
-    };
-  });
-
-  function taoNutQuayLai(){
-    let back = document.getElementById('ellyBackBtn');
-    if(!back){
-      back = document.createElement('button');
-      back.id='ellyBackBtn';
-      back.style.cssText='margin:0 0 14px;padding:8px 14px;border:1px solid #543729;border-radius:20px;background:#fff;color:#543729;font-weight:700;cursor:pointer;display:none';
-      back.innerHTML='← Quay lại Kiến thức';
-      back.onclick = thoatTrangTim;
-      list.parentNode.insertBefore(back, list);
-    }
-    back.style.display='inline-block';
-  }
-
-  function thoatTrangTim(){
-    if(heading) heading.style.display='';
-    if(trending) trending.style.display='';
-    if(pagination) pagination.style.display='flex';
-    if(statusBox) { statusBox.style.display='none'; }
-    if(resultsBox) { resultsBox.hidden=true; resultsBox.style.display='none'; }
-    const back = document.getElementById('ellyBackBtn');
-    if(back) back.style.display='none';
-    items.forEach((el, idx)=> el.classList.toggle('is-hidden', idx>=10));
-  }
-
-  function vaoTrangTim(keyword){
-    const nq = boDau(keyword.trim());
-    if(!nq || nq.length<2) { thoatTrangTim(); return; }
-
-    // BẤM TÌM - TẮT HẾT GỢI Ý + DÒNG CHỮ, CHỈ CÒN BÀI
-    if(heading) heading.style.display='none';
-    if(trending) trending.style.display='none';
-    if(pagination) pagination.style.display='none';
-    if(resultsBox) { resultsBox.hidden=true; resultsBox.style.display='none'; resultsBox.innerHTML=''; }
-    if(statusBox) { statusBox.style.display='none'; statusBox.textContent=''; }
-
-    allData.forEach(d=>{ d.el.classList.toggle('is-hidden', !d.norm.includes(nq)); });
-
-    taoNutQuayLai();
-    window.scrollTo({top:0, behavior:'smooth'});
-  }
-
-  // LÚC ĐẦU GÕ THÌ HIỆN GỢI Ý
-  input.addEventListener('input', function(){
-    const q = this.value.trim();
-    const nq = boDau(q);
-    if(!q){
-      thoatTrangTim();
-      return;
-    }
-    if(nq.length>=2 && resultsBox){
-      const matched = allData.filter(d=> d.norm.includes(nq));
-      resultsBox.innerHTML='';
-      matched.slice(0,6).forEach(d=>{
-        const row = document.createElement('a');
-        row.className='knowledge-search-result';
-        row.href = d.href;
-        row.innerHTML=`<img src="${d.img}"><div><span>${d.kicker}</span><strong>${d.title}</strong></div>`;
-        // Bấm vào gợi ý cũng vào trang riêng sạch
-        row.addEventListener('click', function(e){
-          // để link đi bình thường nếu muốn vào bài, nếu muốn lọc thì bỏ e.preventDefault
-        });
-        resultsBox.appendChild(row);
-      });
-      resultsBox.hidden=false;
-      resultsBox.style.display='grid';
-    }
-  });
-
-  // BẤM TÌM MỚI MẤT
-  if(btnTim){
-    btnTim.addEventListener('click', function(){ vaoTrangTim(input.value); });
-  }
-  input.addEventListener('keydown', function(e){
-    if(e.key==='Enter'){ e.preventDefault(); vaoTrangTim(this.value); }
-  });
-
-  const btnX = document.getElementById('ellySearchClear');
-  if(btnX){ btnX.addEventListener('click', function(){ input.value=''; thoatTrangTim(); }); }
-});
-</script>
-<script>
-// PC: ENTER + CLICK TÌM / ĐT: PHÍM TÌM TRÊN BÀN PHÍM
-document.addEventListener('DOMContentLoaded', function(){
-  const input = document.getElementById('ellySearchInput');
-  const btnTim = document.getElementById('ellySearchBtn');
-  const list = document.getElementById('ellyKnowledgeList');
-  const pagination = document.getElementById('ellyPagination');
-  const heading = document.querySelector('.news-heading');
-  const trending = document.getElementById('ellyTrendingWrap');
   const statusBox = document.getElementById('ellySearchStatus');
-  const resultsBox = document.getElementById('ellySearchResults');
-  if(!input || !list) return;
-
-  // Cho mobile hiện nút Tìm
-  input.setAttribute('enterkeyhint','search');
-  input.setAttribute('inputmode','search');
-  input.setAttribute('type','search');
-
-  const items = Array.from(list.querySelectorAll('.elly-knowledge-item'));
-  function boDau(s){ return s.toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g,'').replace(/đ/g,'d'); }
-  const allData = items.map(el=>{
-    const a = el.querySelector('.elly-knowledge-title a');
-    const kicker = el.querySelector('.elly-kicker');
-    const img = el.querySelector('img');
-    return { el:el, norm: boDau((a?a.textContent:'')+' '+(kicker?kicker.textContent:'')), title:a?a.textContent:'', href:a?a.href:'#', img:img?img.src:'', kicker:kicker?kicker.textContent:'' };
-  });
-
-  function taoNutQuayLai(){
-    let back = document.getElementById('ellyBackBtn');
-    if(!back){
-      back = document.createElement('button');
-      back.id='ellyBackBtn';
-      back.style.cssText='margin:0 0 14px;padding:8px 14px;border:1px solid #543729;border-radius:20px;background:#fff;color:#543729;font-weight:700;cursor:pointer;display:none';
-      back.innerHTML='← Quay lại Kiến thức';
-      back.onclick = thoatTrangTim;
-      list.parentNode.insertBefore(back, list);
-    }
-    back.style.display='inline-block';
-  }
-  function thoatTrangTim(){
-    if(heading) heading.style.display='';
-    if(trending) trending.style.display='';
-    if(pagination) pagination.style.display='flex';
-    if(statusBox) statusBox.style.display='none';
-    if(resultsBox){ resultsBox.hidden=true; resultsBox.style.display='none'; }
-    const back=document.getElementById('ellyBackBtn'); if(back) back.style.display='none';
-    items.forEach((el,idx)=> el.classList.toggle('is-hidden', idx>=10));
-  }
-  function vaoTrangTim(keyword){
-    const nq=boDau(keyword.trim());
-    if(!nq || nq.length<2){ thoatTrangTim(); return; }
-    if(heading) heading.style.display='none';
-    if(trending) trending.style.display='none';
-    if(pagination) pagination.style.display='none';
-    if(resultsBox){ resultsBox.hidden=true; resultsBox.style.display='none'; resultsBox.innerHTML=''; }
-    if(statusBox){ statusBox.style.display='none'; }
-    allData.forEach(d=>{ d.el.classList.toggle('is-hidden', !d.norm.includes(nq)); });
-    taoNutQuayLai();
-    window.scrollTo({top:0, behavior:'smooth'});
-    input.blur(); // Đóng bàn phím ĐT
-  }
-
-  // GÕ HIỆN GỢI Ý
-  input.addEventListener('input', function(){
-    const nq=boDau(this.value.trim());
-    if(!nq){ thoatTrangTim(); return; }
-    if(nq.length>=2 && resultsBox){
-      const matched=allData.filter(d=>d.norm.includes(nq));
-      resultsBox.innerHTML='';
-      matched.slice(0,6).forEach(d=>{
-        const row=document.createElement('a');
-        row.className='knowledge-search-result';
-        row.href=d.href;
-        row.innerHTML=`<img src="${d.img}"><div><span>${d.kicker}</span><strong>${d.title}</strong></div>`;
-        resultsBox.appendChild(row);
-      });
-      resultsBox.hidden=false; resultsBox.style.display='grid';
-    }
-  });
-
-  // PC: CLICK NÚT TÌM
-  if(btnTim){
-    btnTim.addEventListener('click', function(){ vaoTrangTim(input.value); });
-    btnTim.addEventListener('touchend', function(e){ e.preventDefault(); vaoTrangTim(input.value); }); // Cho ĐT bấm mượt
-  }
-
-  // PC: ENTER + ĐT: PHÍM TÌM
-  input.addEventListener('keydown', function(e){
-    if(e.key==='Enter'){
-      e.preventDefault();
-      vaoTrangTim(this.value);
-    }
-  });
-
-  // ĐT: Sự kiện search (khi bấm Tìm trên bàn phím iOS/Android)
-  input.addEventListener('search', function(){
-    if(this.value.trim()) vaoTrangTim(this.value);
-    else thoatTrangTim();
-  });
-
-  const btnX=document.getElementById('ellySearchClear');
-  if(btnX){ btnX.addEventListener('click', function(){ input.value=''; thoatTrangTim(); }); }
-});
-</script>
-<script>
-// BẤM TÌM RA TRANG RIÊNG - VẪN GIỮ SỐ 1 2 3... VÀ HOT TREND
-document.addEventListener('DOMContentLoaded', function(){
-  const input = document.getElementById('ellySearchInput');
-  const btnTim = document.getElementById('ellySearchBtn');
-  const list = document.getElementById('ellyKnowledgeList');
-  const pagination = document.getElementById('ellyPagination');
-  const heading = document.querySelector('.news-heading');
-  const trending = document.getElementById('ellyTrendingWrap');
-  const statusBox = document.getElementById('ellySearchStatus');
-  const resultsBox = document.getElementById('ellySearchResults');
   if(!input || !list || !pagination) return;
 
   input.setAttribute('enterkeyhint','search');
   input.setAttribute('type','search');
+  input.setAttribute('inputmode','search');
 
   const items = Array.from(list.querySelectorAll('.elly-knowledge-item'));
   function boDau(s){ return s.toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g,'').replace(/đ/g,'d'); }
@@ -1375,127 +889,132 @@ document.addEventListener('DOMContentLoaded', function(){
     const a = el.querySelector('.elly-knowledge-title a');
     const kicker = el.querySelector('.elly-kicker');
     const img = el.querySelector('img');
-    return { el:el, norm: boDau((a?a.textContent:'')+' '+(kicker?kicker.textContent:'')), title:a?a.textContent:'', href:a?a.href:'#', img:img?img.src:'', kicker:kicker?kicker.textContent:'' };
+    return { el:el, norm:boDau((a?a.textContent:'')+' '+(kicker?kicker.textContent:'')), title:a?a.textContent:'', href:a?a.href:'#', img:img?img.src:'', kicker:kicker?kicker.textContent:'' };
   });
 
-  let filteredData = [];
+  let filteredData = allData;
   let currentPage = 1;
   const perPage = 10;
   let isSearchMode = false;
 
   function renderPage(data, page){
     currentPage = page;
-    const start = (page-1)*perPage;
-    const end = start + perPage;
+    const start=(page-1)*perPage, end=start+perPage;
     allData.forEach(d=> d.el.classList.add('is-hidden'));
-    data.slice(start, end).forEach(d=> d.el.classList.remove('is-hidden'));
+    data.slice(start,end).forEach(d=> d.el.classList.remove('is-hidden'));
     renderPagination(data);
-    window.scrollTo({top: list.offsetTop - 100, behavior:'smooth'});
   }
-
   function renderPagination(data){
     const totalPages = Math.ceil(data.length / perPage);
     pagination.innerHTML='';
-    pagination.style.display = totalPages > 1 ? 'flex' : 'none';
-    if(totalPages <= 1) return;
-    
-    function btn(label, page, disabled, active){
-      const b=document.createElement('button');
-      b.textContent=label;
-      if(active) b.classList.add('is-active');
-      if(disabled) b.disabled=true;
-      else b.addEventListener('click', ()=> renderPage(data, page));
-      return b;
-    }
+    pagination.style.display='flex'; // FIX MẤT SỐ - LUÔN HIỆN
+    pagination.style.visibility='visible';
+    if(totalPages<=1 && isSearchMode){ return; }
+    const total = isSearchMode ? totalPages : Math.ceil(allData.length/perPage);
+    const useData = isSearchMode ? data : allData;
     let pages=[];
-    if(totalPages<=7){ for(let i=1;i<=totalPages;i++) pages.push(i); }
+    if(total<=7){ for(let i=1;i<=total;i++) pages.push(i); }
     else{
-      if(currentPage<=4) pages=[1,2,3,4,5,'...',totalPages];
-      else if(currentPage>=totalPages-3) pages=[1,'...',totalPages-3,totalPages-2,totalPages-1,totalPages];
-      else pages=[1,'...',currentPage-1,currentPage,currentPage+1,'...',totalPages];
+      if(currentPage<=4) pages=[1,2,3,4,5,'...',total];
+      else if(currentPage>=total-3) pages=[1,'...',total-3,total-2,total-1,total];
+      else pages=[1,'...',currentPage-1,currentPage,currentPage+1,'...',total];
     }
     pages.forEach(p=>{
       if(p==='...'){ const d=document.createElement('div'); d.className='dots'; d.textContent='...'; pagination.appendChild(d); }
-      else pagination.appendChild(btn(String(p), p, false, p===currentPage));
+      else{ const b=document.createElement('button'); b.textContent=p; if(p===currentPage) b.classList.add('is-active'); b.addEventListener('click', ()=> renderPage(useData, p)); pagination.appendChild(b); }
     });
-    const next=btn('›', Math.min(totalPages, currentPage+1), currentPage===totalPages, false);
-    next.style.fontSize='1.5rem';
-    pagination.appendChild(next);
+    if(total>1){ const next=document.createElement('button'); next.textContent='›'; next.style.fontSize='1.5rem'; next.addEventListener('click', ()=> renderPage(useData, Math.min(total, currentPage+1))); pagination.appendChild(next); }
   }
 
   function taoNutQuayLai(){
     let back=document.getElementById('ellyBackBtn');
     if(!back){
-      back=document.createElement('button');
-      back.id='ellyBackBtn';
+      back=document.createElement('button'); back.id='ellyBackBtn';
       back.style.cssText='margin:0 0 14px;padding:8px 14px;border:1px solid #543729;border-radius:20px;background:#fff;color:#543729;font-weight:700;cursor:pointer;display:none';
-      back.innerHTML='← Quay lại Kiến thức';
-      back.onclick=thoatTrangTim;
+      back.innerHTML='← Quay lại Kiến thức'; back.onclick=thoatTrangTim;
       list.parentNode.insertBefore(back, list);
     }
     back.style.display='inline-block';
   }
-
   function thoatTrangTim(){
-    isSearchMode=false;
-    filteredData=[];
+    isSearchMode=false; filteredData=allData;
+    input.value = ''; // <-- THÊM DÒNG NÀY ĐỂ MẤT CHỮ CHÂN MÀY KHI QUAY LẠI
+    const clearBtn = document.getElementById('ellySearchClear');
+    if(clearBtn) clearBtn.classList.remove('is-show');
     if(heading) heading.style.display='';
-    if(trending) trending.style.display=''; // HIỆN LẠI HOT TREND
+    if(trendingWrap) trendingWrap.style.display='';
     if(statusBox) statusBox.style.display='none';
-    if(resultsBox){ resultsBox.hidden=true; resultsBox.style.display='none'; }
+    if(resultsBox){ resultsBox.hidden=true; resultsBox.style.display='none'; resultsBox.innerHTML=''; }
     const back=document.getElementById('ellyBackBtn'); if(back) back.style.display='none';
-    currentPage=1;
-    renderPage(allData, 1); // Về lại phân trang gốc
+    currentPage=1; renderPage(allData, 1);
   }
-
+  // THAY HÀM vaoTrangTim CŨ BẰNG HÀM NÀY
   function vaoTrangTim(keyword){
     const nq=boDau(keyword.trim());
     if(!nq || nq.length<2){ thoatTrangTim(); return; }
-    
     isSearchMode=true;
-    filteredData = allData.filter(d=> d.norm.includes(nq));
+
+    // LOGIC MỚI: MÔI - MÀY - MÍ RA HẾT LOẠT
+    let result = [];
+    if(nq.includes("moi")){
+      // Gõ môi / phun môi / khu tham moi -> ra hết bài về môi
+      result = allData.filter(d=> d.norm.includes("moi"));
+    } else if(nq.includes("may") || nq.includes("chan may") || nq.includes("dieu khac") || nq.includes("tan bot") || nq.includes("ombre")){
+      // Gõ mày / chân mày / phun mày / điêu khắc -> ra hết bài về mày
+      result = allData.filter(d=> d.norm.includes("may") || d.norm.includes("dieu khac") || d.norm.includes("tan bot") || d.norm.includes("ombre") || d.norm.includes("nano"));
+    } else if(nq.includes("mi") || nq.includes("mo trong") || nq.includes("phun mi")){
+      // Gõ mí / phun mí / mở tròng -> ra hết bài về mí
+      result = allData.filter(d=> d.norm.includes("mi") || d.norm.includes("mo trong"));
+    } else {
+      // Các từ khác thì tìm như bình thường
+      result = allData.filter(d=> d.norm.includes(nq));
+    }
+
+    filteredData = result;
     
-    // ẨN GỢI Ý + DÒNG CHỮ, NHƯNG GIỮ LẠI SỐ + HOT TREND
     if(resultsBox){ resultsBox.hidden=true; resultsBox.style.display='none'; resultsBox.innerHTML=''; }
     if(statusBox){ statusBox.style.display='none'; }
     if(heading) heading.style.display='none';
-    if(trending) trending.style.display=''; // VẪN ĐỂ LẠI
+    if(trendingWrap) trendingWrap.style.display='';
 
-    taoNutQuayLai();
-    currentPage=1;
-    renderPage(filteredData, 1); // Phân trang cho kết quả tìm
-    input.blur();
+    taoNutQuayLai(); currentPage=1; renderPage(filteredData, 1); input.blur();
   }
-
-  // GÕ HIỆN GỢI Ý
+  // THAY ĐOẠN input.addEventListener('input'...) CŨ BẰNG ĐOẠN NÀY
   input.addEventListener('input', function(){
     const nq=boDau(this.value.trim());
     if(!nq){ thoatTrangTim(); return; }
     if(!isSearchMode && nq.length>=2 && resultsBox){
-      const matched=allData.filter(d=>d.norm.includes(nq));
+      let matched = [];
+      if(nq.includes("moi")) matched = allData.filter(d=> d.norm.includes("moi"));
+      else if(nq.includes("may")) matched = allData.filter(d=> d.norm.includes("may"));
+      else if(nq.includes("mi")) matched = allData.filter(d=> d.norm.includes("mi"));
+      else matched = allData.filter(d=> d.norm.includes(nq));
+
       resultsBox.innerHTML='';
       matched.slice(0,6).forEach(d=>{
-        const row=document.createElement('a');
-        row.className='knowledge-search-result';
-        row.href=d.href;
+        const row=document.createElement('a'); row.className='knowledge-search-result'; row.href=d.href;
         row.innerHTML=`<img src="${d.img}"><div><span>${d.kicker}</span><strong>${d.title}</strong></div>`;
         resultsBox.appendChild(row);
       });
       resultsBox.hidden=false; resultsBox.style.display='grid';
     }
   });
-
   if(btnTim){
     btnTim.addEventListener('click', ()=> vaoTrangTim(input.value));
-    btnTim.addEventListener('touchend', (e)=>{ e.preventDefault(); vaoTrangTim(input.value); });
+    btnTim.addEventListener('touchend', e=>{ e.preventDefault(); vaoTrangTim(input.value); });
   }
-  input.addEventListener('keydown', function(e){ if(e.key==='Enter'){ e.preventDefault(); vaoTrangTim(this.value); } });
+  input.addEventListener('keydown', e=>{ if(e.key==='Enter'){ e.preventDefault(); vaoTrangTim(input.value); } });
   input.addEventListener('search', function(){ if(this.value.trim()) vaoTrangTim(this.value); else thoatTrangTim(); });
 
-  const btnX=document.getElementById('ellySearchClear');
-  if(btnX){ btnX.addEventListener('click', function(){ input.value=''; thoatTrangTim(); }); }
+  // HOT TREND
+  const trendingData=[["kien-thuc/moi-bi-den-co-phun-duoc-khong.html","Môi bị đen có phun được không?"],["kien-thuc/nen-lam-moi-hay-lam-may-truoc.html","Nên làm môi hay làm mày trước?"],["kien-thuc/chuan-bi-gi-truoc-khi-phun-xam.html","Cần chuẩn bị gì trước khi phun xăm?"],["kien-thuc/khach-trung-nien-chon-mau-moi-dang-may.html","Khách trung niên nên chọn màu môi?"],["kien-thuc/lam-may-moi-co-bi-gia-khong.html","Làm mày môi có bị già không?"]];
+  if(trendingContent && trendingNote){
+    const seed=new Date().getDate(); let a=[...trendingData]; for(let i=a.length-1;i>0;i--){ const j=(seed+i*7)%(i+1); [a[i],a[j]]=[a[j],a[i]]; }
+    trendingContent.innerHTML=''; a.forEach(([h,t])=>{ const el=document.createElement('a'); el.className='elly-trending-item'; el.href=h; el.textContent=t; trendingContent.appendChild(el); });
+    trendingNote.textContent=`Top tìm kiếm nhiều trên Google tại Việt Nam - cập nhật ngày ${new Date().toLocaleDateString('vi-VN')}`;
+    if(trendingHeader){ trendingHeader.addEventListener('click', ()=>{ trendingWrap.classList.toggle('is-collapsed'); const b=trendingHeader.querySelector('.elly-trending-toggle'); if(b) b.textContent=trendingWrap.classList.contains('is-collapsed')?'+':'-'; }); }
+  }
 
-  // Load lần đầu
   renderPage(allData, 1);
 });
 </script>
