@@ -1797,16 +1797,19 @@ document.addEventListener("DOMContentLoaded", () => {
     serviceButton.setAttribute("aria-expanded", String(open));
   };
 
+  const isMobileMenu = () => window.matchMedia("(max-width: 900px)").matches;
+
   serviceButton.addEventListener("click", (event) => {
+    if (!isMobileMenu()) return;
     event.preventDefault();
     setServiceMenu(!serviceItem.classList.contains("is-open"));
   });
 
   document.addEventListener("click", (event) => {
-    if (!serviceItem.contains(event.target)) setServiceMenu(false);
+    if (isMobileMenu() && !serviceItem.contains(event.target)) setServiceMenu(false);
   });
 
   document.addEventListener("keydown", (event) => {
-    if (event.key === "Escape") setServiceMenu(false);
+    if (isMobileMenu() && event.key === "Escape") setServiceMenu(false);
   });
 });
