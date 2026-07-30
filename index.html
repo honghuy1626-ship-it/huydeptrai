@@ -82,26 +82,47 @@
   </head>
   <body>
     <!-- Đầu trang -->
-    <header class="site-header" data-header>
+    <header class="site-header site-header-premium" data-header>
       <div class="container header-inner">
-        <a class="brand" href="#home" aria-label="ELLY SPA trang chủ">
-          <img class="brand-logo-img" src="d:\huydeptraivai\assets\elly_spa_vertical_black_large.png" alt="ELLY SPA" decoding="async" />
+        <a class="brand brand-premium" href="/" aria-label="ELLY Beauty & Spa - Trang chủ">
+          <img class="brand-logo-icon" src="assets/elly-logo.png" alt="" />
+          <span class="brand-copy">
+            <span class="brand-mark">ELLY <i></i></span>
+            <span class="brand-sub">BEAUTY &amp; SPA</span>
+          </span>
         </a>
 
         <nav class="main-nav" id="mainNav" aria-label="Điều hướng chính">
           <a href="#home">Trang chủ</a>
-          <a href="dich-vu.html">Phun xăm tại nhà</a>
-          <a href="tu-van.html#lip-color">Chọn màu môi</a>
-          <a href="tu-van.html#brow-style">Chọn dáng mày</a>
+          <div class="nav-service-item">
+            <button class="nav-service-link" type="button" aria-expanded="false" aria-controls="serviceMenu">Dịch vụ <span class="nav-service-arrow" aria-hidden="true">⌄</span></button>
+            <div class="nav-service-list" id="serviceMenu" aria-label="Dịch vụ nổi bật">
+              <div class="nav-service-column">
+                <strong>Phun xăm chân mày</strong>
+                <a href="chon-dang-may.html">Chọn dáng mày</a>
+                <a href="dich-vu.html">Phun mày tán bột</a>
+                <a href="dich-vu.html">Điêu khắc chân mày</a>
+              </div>
+              <div class="nav-service-column">
+                <strong>Phun và cấy môi</strong>
+                <a href="chon-mau-moi.html">Chọn màu môi</a>
+                <a href="dich-vu.html">Phun môi Collagen</a>
+                <a href="dich-vu.html">Khử thâm môi</a>
+              </div>
+              <div class="nav-service-column">
+                <strong>Tư vấn tại nhà</strong>
+                <a href="dich-vu.html">Xem tất cả dịch vụ</a>
+                <a href="#booking" data-booking-open>Đặt lịch tư vấn</a>
+                <a href="bang-gia.html">Xem bảng giá</a>
+              </div>
+            </div>
+          </div>
           <a href="#pricing">Bảng giá</a>
-          <a href="#process">Quy trình</a>
-          <a href="#booking" data-booking-open>Đặt lịch</a>
-          <a href="kien-thuc.html">Kiến Thức Thẩm Mỹ</a>
-          
+          <a href="kien-thuc.html">Kiến thức</a>
         </nav>
 
         <div class="header-actions">
-          <a class="btn btn-small btn-primary" href="#booking" data-booking-open>Đặt lịch phun xăm</a>
+          <a class="btn btn-small btn-primary" href="#booking" data-booking-open>Đặt lịch</a>
           <button
             class="menu-toggle"
             type="button"
@@ -120,53 +141,42 @@
 
     <main>
       <!-- Khu vực hero -->
-      <section class="hero section-dark" id="home">
-        <div class="hero-shade"></div>
-        <div class="container hero-inner">
-          <div class="hero-content reveal">
-            <p class="eyebrow">Phun Xăm Thẩm Mỹ Tại Nhà ELLY </p>
-            <h1 class="hero-title">
-              <span>PHUN XĂM THẨM MỸ</span>
-                <span>
-                  Tại Nhà
-                  
-            </h1>
-            <p class="hero-copy">
-              Mang đến giải pháp phun xăm thẩm mỹ cao cấp với các dịch vụ phun môi Collagen, phun mày tán bột, điêu khắc chân mày và phun mí. Thực hiện bởi kỹ thuật viên giàu kinh nghiệm, tư vấn dáng mày, màu môi và đường mí phù hợp với từng khuôn mặt.
-
-            </p>
-            <div class="hero-actions">
-              <a class="btn btn-primary" href="#booking" data-booking-open>Đặt lịch phun xăm</a>
-              <a class="btn btn-ghost" href="dich-vu.html">Xem dịch vụ</a>
+      <section class="hero hero-premium section-dark" id="home">
+        <div class="hp-bg" aria-hidden="true">
+          <img src="assets/hero-beauty-team.png" alt="" fetchpriority="high" />
+        </div>
+        <div class="container hp-inner">
+          <div class="hp-content reveal">
+            <p class="hp-eyebrow">✨ PHUN XĂM TẠI NHÀ - ĐẾN TẬN NƠI</p>
+            <p class="hp-kicker">PHUN XĂM THẨM MỸ</p>
+            <h1 class="hp-big">Tại Nhà</h1>
+            <p class="hp-desc">Giải pháp phun xăm cao cấp: <strong>phun môi Collagen, phun mày tán bột, điêu khắc chân mày &amp; phun mí.</strong> Kỹ thuật viên giàu kinh nghiệm tư vấn theo từng khuôn mặt.</p>
+            <div class="hp-actions">
+              <a class="hp-btn-gold" href="#booking" data-booking-open>Đặt lịch phun xăm <span aria-hidden="true">→</span></a>
+              <a class="hp-btn-ghost" href="dich-vu.html">Xem dịch vụ &amp; bảng giá</a>
             </div>
-            <div class="hero-badges" aria-label="Điểm nổi bật của dịch vụ tại nhà">
-              <span>Hỗ trợ đến tận nơi</span>
-              <span>Tư vấn dáng mày/màu môi trước khi làm</span>
-              <span>Chuyên mày & môi tại nhà</span>
+            <div class="hp-pills" aria-label="Cam kết dịch vụ">
+              <span>✓ Đến tận nơi</span><span>✓ Tư vấn miễn phí</span><span>✓ Dụng cụ vô khuẩn 100%</span>
             </div>
           </div>
 
-          <aside class="hero-card reveal" aria-label="Thông tin đặt lịch nhanh">
-            <div class="hero-card-top">
-              <span class="card-kicker">Đặt lịch nhanh</span>
-              <span class="card-time">9:00 - 21:00</span>
+          <aside class="hp-card reveal" aria-label="Thông tin đặt lịch nhanh">
+            <div class="hp-card-top"><span>🔥 Đặt lịch nhanh</span><span class="hp-time">9:00-21:00</span></div>
+            <a class="hp-phone" href="tel:0786266268">0786.266.268 <i aria-hidden="true"></i></a>
+            <p class="hp-sub">Phản hồi trong 5 phút · Tư vấn miễn phí</p>
+            <div class="hp-offer">
+              <span>LÀM ĐẸP TẠI NHÀ</span>
+              <strong>Chỉ Từ 399K</strong>
+              <small>Giảm 65% · Giữ giá 24h</small>
             </div>
-            <a class="hero-phone" href="tel:0786266268">0786.266.268</a>
-            <div class="booking-offer booking-offer-hero">
-              <span>Làm đẹp tại nhà</span>
-              <strong>Chỉ Từ 399K </strong>
-              <small>Giảm 65%</small>
+            <p class="hp-note">* Giá đã gồm dụng cụ vô khuẩn dùng 1 lần. Không phát sinh.</p>
+            <div class="hp-points" aria-label="Cam kết ELLY">
+              <div><b>✓ Bảo hành</b><span>màu 3 tháng</span></div><div><b>✓ KTV</b><span>7+ năm KN</span></div><div><b>✓ Tận nơi</b><span>tại khu vực</span></div>
             </div>
-            <p>ELLY SPA xác nhận dịch vụ, địa chỉ và khung giờ trước khi đến.</p>
-            <div class="hero-card-points" aria-label="Điểm hỗ trợ nhanh">
-              <span>Tư vấn trước</span>
-              <span>Chốt lịch rõ</span>
-              <span>Đảm bảo chất lượng</span>
-              <span>Đảm bảo an toàn vệ sinh</span>
-            </div>
-            <a class="btn btn-secondary" href="tel:0786266268">Gọi tư vấn ngay</a>
+            <a class="hp-btn-dark" href="tel:0786266268">Gọi tư vấn ngay</a>
           </aside>
         </div>
+        <div class="hp-bottom"><span>● Vô khuẩn 100% · Mực hữu cơ Châu Âu</span><span>ELLY BEAUTY · SINCE 2017</span></div>
       </section>
 
       <!-- Thanh chỉ số tin cậy -->

@@ -1785,3 +1785,28 @@ document.addEventListener('DOMContentLoaded', ()=>{
     }
   });
 });
+
+document.addEventListener("DOMContentLoaded", () => {
+  const serviceItem = document.querySelector(".nav-service-item");
+  const serviceButton = document.querySelector(".nav-service-link");
+
+  if (!serviceItem || !serviceButton) return;
+
+  const setServiceMenu = (open) => {
+    serviceItem.classList.toggle("is-open", open);
+    serviceButton.setAttribute("aria-expanded", String(open));
+  };
+
+  serviceButton.addEventListener("click", (event) => {
+    event.preventDefault();
+    setServiceMenu(!serviceItem.classList.contains("is-open"));
+  });
+
+  document.addEventListener("click", (event) => {
+    if (!serviceItem.contains(event.target)) setServiceMenu(false);
+  });
+
+  document.addEventListener("keydown", (event) => {
+    if (event.key === "Escape") setServiceMenu(false);
+  });
+});
