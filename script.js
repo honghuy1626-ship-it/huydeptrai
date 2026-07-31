@@ -1787,57 +1787,31 @@ document.addEventListener('DOMContentLoaded', ()=>{
 });
 
 document.addEventListener("DOMContentLoaded", () => {
-  const serviceItem = document.querySelector(".nav-service-item");
-  const serviceButton = document.querySelector(".nav-service-link");
-
-  if (!serviceItem || !serviceButton) return;
-
-  const setServiceMenu = (open) => {
-    serviceItem.classList.toggle("is-open", open);
-    serviceButton.setAttribute("aria-expanded", String(open));
-  };
-
   const isMobileMenu = () => window.matchMedia("(max-width: 900px)").matches;
 
-  serviceButton.addEventListener("click", (event) => {
-    if (!isMobileMenu()) return;
-    event.preventDefault();
-    setServiceMenu(!serviceItem.classList.contains("is-open"));
-  });
+  [
+    { item: document.querySelector(".nav-service-item"), button: document.querySelector(".nav-service-item .nav-service-link") },
+    { item: document.querySelector(".nav-knowledge-item"), button: document.querySelector(".nav-knowledge-link") }
+  ].forEach(({ item, button }) => {
+    if (!item || !button) return;
 
-  document.addEventListener("click", (event) => {
-    if (isMobileMenu() && !serviceItem.contains(event.target)) setServiceMenu(false);
-  });
+    const setOpen = (open) => {
+      item.classList.toggle("is-open", open);
+      button.setAttribute("aria-expanded", String(open));
+    };
 
-  document.addEventListener("keydown", (event) => {
-    if (isMobileMenu() && event.key === "Escape") setServiceMenu(false);
-  });
-});
+    button.addEventListener("click", (event) => {
+      if (!isMobileMenu()) return;
+      event.preventDefault();
+      setOpen(!item.classList.contains("is-open"));
+    });
 
-document.addEventListener("DOMContentLoaded", () => {
-  const knowledgeItem = document.querySelector(".nav-knowledge-item");
-  const knowledgeButton = document.querySelector(".nav-knowledge-link");
+    document.addEventListener("click", (event) => {
+      if (isMobileMenu() && !item.contains(event.target)) setOpen(false);
+    });
 
-  if (!knowledgeItem || !knowledgeButton) return;
-
-  const setKnowledgeMenu = (open) => {
-    knowledgeItem.classList.toggle("is-open", open);
-    knowledgeButton.setAttribute("aria-expanded", String(open));
-  };
-
-  const isMobileMenu = () => window.matchMedia("(max-width: 900px)").matches;
-
-  knowledgeButton.addEventListener("click", (event) => {
-    if (!isMobileMenu()) return;
-    event.preventDefault();
-    setKnowledgeMenu(!knowledgeItem.classList.contains("is-open"));
-  });
-
-  document.addEventListener("click", (event) => {
-    if (isMobileMenu() && !knowledgeItem.contains(event.target)) setKnowledgeMenu(false);
-  });
-
-  document.addEventListener("keydown", (event) => {
-    if (isMobileMenu() && event.key === "Escape") setKnowledgeMenu(false);
+    document.addEventListener("keydown", (event) => {
+      if (isMobileMenu() && event.key === "Escape") setOpen(false);
+    });
   });
 });

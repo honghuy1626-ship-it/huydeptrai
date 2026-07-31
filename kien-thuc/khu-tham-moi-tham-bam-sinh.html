@@ -1,4 +1,4 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="vi">
   <head>
     <meta charset="UTF-8" />
@@ -70,40 +70,77 @@
       .related-list a:hover{background:#fff8f9;transform:translateY(-1px);box-shadow:0 6px 14px rgba(67,37,41,.08)}
       .related-list a:hover::after{transform:translateX(2px);background:#8f4050;color:#fff}
       @media(max-width:980px){.article-shell{grid-template-columns:1fr}.article-side{position:static}}
-    
+
     </style>
   </head>
   <body>
-    <header class="site-header" data-header>
-      <div class="container header-inner">
-        <a class="brand" href="../" aria-label="ELLY trang chủ"><img class="brand-logo-img" src="../assets/elly-logo.png" alt="ELLY" decoding="async" /></a>
-        <nav class="main-nav" id="mainNav" aria-label="Điều hướng chính">
-          <a href="../">Trang chủ</a>
-          <a href="../dich-vu.html">Phun xăm tại nhà</a>
-          <a href="../chon-mau-moi.html">Chọn màu môi</a>
-          <a href="../chon-dang-may.html">Chọn dáng mày</a>
-          <a href="../bang-gia.html">Bảng giá</a>
-          <a href="../quy-trinh.html">Quy trình</a>
-          <a href="#booking" data-booking-open>Đặt lịch</a>
-          <a href="../kien-thuc.html">Kiến Thức</a>
-        </nav>
-        <div class="header-actions">
-          <a class="btn btn-small btn-primary" href="#booking" data-booking-open>Đặt lịch phun xăm</a>
-          <button class="menu-toggle" type="button" aria-label="Mở menu" aria-expanded="false" aria-controls="mainNav" data-menu-toggle><span></span><span></span><span></span></button>
+    <header class="site-header site-header-premium" data-header>
+  <div class="container header-inner">
+    <a class="brand brand-premium" href="../index.html" aria-label="ELLY Beauty and Spa - Trang chu">
+      <img class="brand-logo-icon" src="../assets/elly-logo.png" alt="" />
+      <span class="brand-copy">
+        <span class="brand-mark">ELLY <i></i></span>
+        <span class="brand-sub">BEAUTY &amp; SPA</span>
+      </span>
+    </a>
+
+    <nav class="main-nav" id="mainNav" aria-label="Dieu huong chinh">
+      <a class="nav-service-link" href="../index.html">Trang ch&#7911;</a>
+      <div class="nav-service-item">
+        <a class="nav-service-link" href="../dich-vu.html">D&#7883;ch v&#7909;</a>
+        <div class="nav-service-list" id="serviceMenu" aria-label="Dich vu noi bat">
+          <div class="nav-service-column">
+            <strong>Phun x&#259;m ch&#226;n m&#224;y</strong>
+            <a href="../chon-dang-may.html">Ch&#7885;n d&#225;ng m&#224;y</a>
+            <a href="../dich-vu.html">Phun m&#224;y t&#225;n b&#7897;t</a>
+            <a href="../dich-vu.html">&#272;i&#234;u kh&#7855;c ch&#226;n m&#224;y</a>
+          </div>
+          <div class="nav-service-column">
+            <strong>Phun v&#224; c&#7845;y m&#244;i</strong>
+            <a href="../chon-mau-moi.html">Ch&#7885;n m&#224;u m&#244;i</a>
+            <a href="../dich-vu.html">Phun m&#244;i Collagen</a>
+            <a href="../dich-vu.html">Kh&#7917; th&#226;m m&#244;i</a>
+          </div>
+          <div class="nav-service-column">
+            <strong>T&#432; v&#7845;n t&#7841;i nh&#224;</strong>
+            <a href="../dich-vu.html">Xem t&#7845;t c&#7843; d&#7883;ch v&#7909;</a>
+            <a href="#booking" data-booking-open>&#272;&#7863;t l&#7883;ch t&#432; v&#7845;n</a>
+            <a href="../bang-gia.html">Xem b&#7843;ng gi&#225;</a>
+          </div>
         </div>
       </div>
-    </header>
+      <a class="nav-service-link" href="../bang-gia.html">B&#7843;ng gi&#225;</a>
+      <div class="nav-service-item nav-knowledge-item">
+        <a class="nav-service-link nav-knowledge-link" href="../kien-thuc.html">Ki&#7871;n th&#7913;c</a>
+        <div class="nav-service-list nav-knowledge-list" id="knowledgeMenu" aria-label="Danh muc kien thuc">
+          <div class="nav-service-column"><a class="nav-knowledge-category" href="../kien-thuc.html?category=phun-xam">Ki&#7871;n th&#7913;c phun x&#259;m</a></div>
+          <div class="nav-service-column"><a class="nav-knowledge-category" href="../kien-thuc.html?category=phun-may">Ki&#7871;n th&#7913;c phun m&#224;y</a></div>
+          <div class="nav-service-column"><a class="nav-knowledge-category" href="../kien-thuc.html?category=phun-mi">Ki&#7871;n th&#7913;c phun m&#237;</a></div>
+          <div class="nav-service-column"><a class="nav-knowledge-category" href="../kien-thuc.html?category=lam-dep-tai-nha">Ki&#7871;n th&#7913;c l&#224;m &#273;&#7865;p t&#7841;i nh&#224;</a></div>
+        </div>
+      </div>
+    </nav>
 
-    <main class="section">
+    <div class="header-actions">
+      <a class="btn btn-small btn-primary" href="#booking" data-booking-open>&#272;&#7863;t l&#7883;ch</a>
+      <button class="menu-toggle" type="button" aria-label="Mo menu" aria-expanded="false" aria-controls="mainNav" data-menu-toggle>
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </div>
+</header>
+
+    <main class="article-section">
       <div class="container article-shell">
         <article class="article-main">
-          <img src="../assets/khu-tham-moi-tham-bam-sinh-1.jpg" alt="Khách hàng có môi thâm bẩm sinh trước khi tư vấn khử thâm môi" loading="eager" decoding="async" />
+
           <div class="article-content">
             <nav class="article-breadcrumb" aria-label="Breadcrumb">
               <a href="../">Trang chủ</a><span>/</span><a href="../kien-thuc.html">Kiến thức</a><span>/</span><span>Khử thâm môi thâm bẩm sinh</span>
             </nav>
             <span class="knowledge-tag">Khử thâm môi</span>
             <h1>Môi Thâm Bẩm Sinh Có Khử Được Không? Điều Bạn Nên Biết Trước Khi Thực Hiện</h1>
+            <img src="../assets/khu-tham-moi-tham-bam-sinh-1.jpg" alt="Khách hàng có môi thâm bẩm sinh trước khi tư vấn khử thâm môi" loading="eager" decoding="async" />
 
             <p>Nhiều người sở hữu đôi môi thâm ngay từ nhỏ dù không hút thuốc, không dùng son thường xuyên hay không có thói quen sinh hoạt ảnh hưởng đến màu môi. Đây là tình trạng <strong>môi thâm bẩm sinh</strong>, chủ yếu liên quan đến yếu tố cơ địa và sắc tố da.</p>
             <p>Điều này khiến không ít người cảm thấy thiếu tự tin khi để mặt mộc hoặc phải sử dụng son môi mỗi ngày để cải thiện diện mạo.</p>
@@ -227,25 +264,33 @@
               <li><a href="phun-moi-collagen-la-gi.html">Phun môi Collagen là gì?</a></li>
             </ul>
           </div>
-        </article>
+
+          <section class="article-trending is-collapsed" data-article-trending>
+            <div class="article-trending-header" data-article-trending-header role="button" tabindex="0" aria-expanded="false">
+              <h2>Ch&#7911; &#273;&#7873; &#273;&#432;&#7907;c quan t&#226;m <i>HOT TREND VN</i></h2>
+              <button class="article-trending-toggle" type="button" aria-label="M&#7903; ch&#7911; &#273;&#7873; &#273;&#432;&#7907;c quan t&#226;m">+</button>
+            </div>
+            <div class="article-trending-content" data-article-trending-content></div>
+            <div class="article-trending-note" data-article-trending-note>Top t&#236;m ki&#7871;m nhi&#7873;u tr&#234;n Google t&#7841;i Vi&#7879;t Nam.</div>
+          </section></article>
 
         <aside class="article-side">
           <div class="article-side-content">
-            <h2>ELLY PMU tư vấn miễn phí</h2>
-            <p>Gửi ảnh môi mộc để kỹ thuật viên kiểm tra cấp độ thâm đen và tư vấn có cần khử thâm trước không.</p>
+            <h2>T&#432; v&#7845;n phun m&#244;i &amp; kh&#7917; th&#226;m</h2>
+            <p>G&#7917;i &#7843;nh m&#244;i m&#7897;c &#273;&#7875; chuy&#234;n vi&#234;n t&#432; v&#7845;n m&#224;u m&#244;i, t&#236;nh tr&#7841;ng th&#226;m v&#224; ph&#432;&#417;ng ph&#225;p phun m&#244;i ph&#249; h&#7907;p.</p>
             <a class="btn btn-primary" href="#booking" data-booking-open>Đặt lịch nhận tư vấn</a>
           </div>
           <div class="related-list">
-            <a href="khu-tham-moi-la-gi.html">Khử thâm môi là gì?</a>
-            <a href="moi-tham-nen-phun-mau-gi.html">Môi thâm nên phun màu gì?</a>
-            <a href="khu-tham-moi-kieng-gi.html">Khử thâm môi kiêng gì?</a>
-            <a href="cham-soc-moi-sau-phun-7-ngay-dau.html">Chăm sóc môi sau phun</a>
+            <a href="khu-tham-moi-la-gi.html"><img src="../assets/khu-tham-moi-la-gi-1.jpg" alt="Khử th&#226;m m&#244;i l&#224; g&#236;?" loading="lazy" decoding="async"><span>Khử thâm môi là gì?</span></a>
+            <a href="moi-tham-nen-phun-mau-gi.html"><img src="../assets/pricing-moi-collagen-source.png" alt="M&#244;i th&#226;m n&#234;n phun m&#224;u g&#236;?" loading="lazy" decoding="async"><span>Môi thâm nên phun màu gì?</span></a>
+            <a href="khu-tham-moi-kieng-gi.html"><img src="../assets/khu-tham-moi-kieng-gi-1.png" alt="Khử th&#226;m m&#244;i ki&#234;ng g&#236;?" loading="lazy" decoding="async"><span>Khử thâm môi kiêng gì?</span></a>
+            <a href="cham-soc-moi-sau-phun-7-ngay-dau.html"><img src="../assets/cham-soc-moi.jpg" alt="Chăm s&#243;c m&#244;i sau phun" loading="lazy" decoding="async"><span>Chăm sóc môi sau phun</span></a>
           </div>
         </aside>
       </div>
     </main>
 
-    <div class="booking-popover" id="bookingPopover" aria-hidden="true">
+    <div class="booking-popover" id="bookingPopover" data-booking-popover aria-hidden="true">
       <div class="booking-popover-backdrop" data-booking-close></div>
       <section class="booking-popover-panel" role="dialog" aria-modal="true" aria-labelledby="bookingPopoverTitle">
         <button class="booking-popover-close" type="button" aria-label="Đóng form đặt lịch" data-booking-close>×</button>
@@ -268,17 +313,17 @@
       </section>
     </div>
 
-    
 
 
 
 
 
-  
 
-  
 
-  
+
+
+
+
 
   <script type="application/ld+json">
       {
@@ -294,7 +339,7 @@
       }
     </script>
     <script src="../script.js" defer></script>
-  
+
     <script>
       // Chỉ chỉnh riêng đoạn FAQ - bấm vào mới hiện
       document.querySelectorAll('.faq-question').forEach(function(btn){
@@ -307,7 +352,68 @@
       });
     </script>
 
-  </body>
+  <footer class="elly-footer-fix">
+  <div class="container">
+    <a href="../index.html" class="ef-logo"><img src="../assets/elly-logo.png" alt="ELLY"></a>
+    <p class="ef-desc">ELLY SPA ho&#7841;t &#273;&#7897;ng t&#7915; n&#259;m 2018, chuy&#234;n phun x&#259;m th&#7849;m m&#7929; t&#7841;i nh&#224; theo l&#7883;ch h&#7865;n: phun m&#244;i collagen, phun m&#224;y t&#225;n b&#7897;t, &#273;i&#234;u kh&#7855;c ch&#226;n m&#224;y v&#224; phun m&#237;. &#272;&#7897;i ng&#361; chuy&#234;n vi&#234;n c&#243; h&#417;n 7 n&#259;m kinh nghi&#7879;m, t&#432; v&#7845;n k&#7929; d&#225;ng m&#224;y, m&#224;u m&#244;i v&#224; quy tr&#236;nh ph&#249; h&#7907;p tr&#432;&#7899;c khi th&#7921;c hi&#7879;n.</p>
+    <h3 class="ef-title">TH&#212;NG TIN LI&#202;N H&#7878;</h3>
+    <ul class="ef-contact">
+      <li><span class="ic">&#128205;</span> &#272;&#7883;a ch&#7881;: 17H/1B B&#236;nh H&#242;a 24, P. B&#236;nh H&#242;a, TP. H&#7891; Ch&#237; Minh</li>
+      <li><span class="ic">&#128222;</span> Hotline: <a href="tel:0786266268">0786266268</a></li>
+      <li><span class="ic">&#128140;</span> Email: phunxamphongthuytainha@gmail.com</li>
+      <li><span class="ic">&#128343;</span> Gi&#7901; h&#7895; tr&#7907;: 9:00 - 21:00 h&#7857;ng ng&#224;y</li>
+    </ul>
+    <p class="ef-follow">Theo d&#245;i ch&#250;ng t&#244;i t&#7841;i:</p>
+    <div class="ef-social">
+      <a href="https://www.facebook.com/profile.php?id=61555486805617" target="_blank">f</a>
+      <a href="https://zalo.me/0786266268" target="_blank">Zalo</a>
+      <a href="#" target="_blank">Tiktok</a>
+    </div>
+    <div class="ef-copy">&#169; 2018 - 2026 ELLY BEAUTY &amp; SPA - Phun x&#259;m t&#7841;i nh&#224;</div>
+  </div>
+</footer>
+<script>
+(function () {
+  const trendBox = document.querySelector('[data-article-trending]');
+  if (!trendBox) return;
+  const trendHeader = trendBox.querySelector('[data-article-trending-header]');
+  const trendButton = trendBox.querySelector('.article-trending-toggle');
+  const trendContent = trendBox.querySelector('[data-article-trending-content]');
+  const trendNote = trendBox.querySelector('[data-article-trending-note]');
+  const trendItems = [
+    ['moi-bi-den-co-phun-duoc-khong.html', 'M\u00f4i b\u1ecb \u0111en c\u00f3 phun \u0111\u01b0\u1ee3c kh\u00f4ng?'],
+    ['nen-lam-moi-hay-lam-may-truoc.html', 'N\u00ean l\u00e0m m\u00f4i hay l\u00e0m m\u00e0y tr\u01b0\u1edbc?'],
+    ['chuan-bi-gi-truoc-khi-phun-xam.html', 'C\u1ea7n chu\u1ea9n b\u1ecb g\u00ec tr\u01b0\u1edbc khi phun x\u0103m?'],
+    ['khach-trung-nien-chon-mau-moi-dang-may.html', 'Kh\u00e1ch trung ni\u00ean n\u00ean ch\u1ecdn m\u00e0u m\u00f4i n\u00e0o?'],
+    ['lam-may-moi-co-bi-gia-khong.html', 'L\u00e0m m\u00e0y, m\u00f4i c\u00f3 b\u1ecb gi\u00e0 kh\u00f4ng?']
+  ];
+  const seed = new Date().getDate();
+  const ordered = [...trendItems];
+  for (let i = ordered.length - 1; i > 0; i--) {
+    const j = (seed + i * 7) % (i + 1);
+    [ordered[i], ordered[j]] = [ordered[j], ordered[i]];
+  }
+  ordered.forEach(([href, title]) => {
+    const link = document.createElement('a');
+    link.className = 'article-trending-item';
+    link.href = href;
+    link.textContent = title;
+    trendContent.appendChild(link);
+  });
+  trendNote.textContent = `Top t\u00ecm ki\u1ebfm nhi\u1ec1u tr\u00ean Google t\u1ea1i Vi\u1ec7t Nam - c\u1eadp nh\u1eadt ng\u00e0y ${new Date().toLocaleDateString('vi-VN')}`;
+  function toggleTrending() {
+    const collapsed = trendBox.classList.toggle('is-collapsed');
+    trendButton.textContent = collapsed ? '+' : '\u2212';
+    trendHeader.setAttribute('aria-expanded', String(!collapsed));
+  }
+  trendHeader.addEventListener('click', toggleTrending);
+  trendHeader.addEventListener('keydown', (event) => {
+    if (event.key === 'Enter' || event.key === ' ') { event.preventDefault(); toggleTrending(); }
+  });
+  trendButton.addEventListener('click', (event) => { event.stopPropagation(); toggleTrending(); });
+}());
+</script>
+</body>
 </html>
 
 

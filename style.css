@@ -5301,6 +5301,251 @@ body.booking-popover-open {
 .article-content h1, .article-content h2 {
   font-family: "Be Vietnam Pro", "Playfair Display", serif !important;
 }
+
+/* Ảnh đại diện của bài SEO đặt ngay sau tiêu đề, không tạo khoảng trống đầu bài. */
+.article-content > h1 + img {
+  display: block;
+  width: 100%;
+  height: auto;
+  margin: 16px 0 24px;
+  border-radius: 14px;
+  object-fit: cover;
+}
+
+/* Danh sach bai lien quan trong khung tu van cua bai SEO. */
+.related-list a {
+  justify-content: flex-start !important;
+  gap: 12px !important;
+  padding: 8px !important;
+  color: #4a2e35 !important;
+  background: #fffaf6 !important;
+}
+
+.related-list a > img {
+  display: block;
+  width: 78px;
+  height: 58px;
+  flex: 0 0 78px;
+  object-fit: cover;
+  border-radius: 8px;
+  background: #ead8c5;
+}
+
+.related-list a > span {
+  flex: 1 1 auto;
+  min-width: 0;
+}
+
+.related-list a::after {
+  margin-left: auto;
+}
+
+@media (max-width: 560px) {
+  .related-list a > img {
+    width: 72px;
+    height: 54px;
+    flex-basis: 72px;
+  }
+}
+
+/* Bài SEO trên điện thoại: nền trắng gần tràn hết chiều ngang màn hình. */
+@media (max-width: 680px) {
+  .article-section .article-shell.container {
+    width: calc(100% - 12px) !important;
+  }
+}
+
+/* Khung tu van SEO dong bo voi tong nau - kem cua website. */
+.article-side {
+  background: linear-gradient(155deg, #4a3022 0%, #2a1a12 100%) !important;
+  border-color: rgba(217, 183, 127, 0.22) !important;
+  box-shadow: 0 18px 40px rgba(38, 23, 17, 0.28) !important;
+}
+
+.article-side h2 {
+  color: #fff8ed !important;
+}
+
+.article-side p {
+  color: rgba(255, 248, 237, 0.86) !important;
+}
+
+/* Chu de duoc quan tam trong bai SEO. */
+.article-trending {
+  margin: 30px 0 4px;
+  overflow: hidden;
+  border: 1px solid rgba(84, 55, 41, 0.16);
+  border-radius: 14px;
+  background: #fffaf6;
+}
+
+.article-trending-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  padding: 14px 16px;
+  background: #fff;
+  cursor: pointer;
+}
+
+.article-trending-header h2 {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin: 0;
+  color: #211611;
+  font-size: 1.05rem;
+}
+
+.article-trending-header h2 i {
+  padding: 3px 7px;
+  border-radius: 999px;
+  background: var(--brown);
+  color: #fff;
+  font-family: var(--font-body);
+  font-size: .68rem;
+  font-style: normal;
+  white-space: nowrap;
+}
+
+.article-trending-toggle {
+  width: 32px;
+  height: 32px;
+  flex: 0 0 32px;
+  border: 1.5px solid #2b211e;
+  border-radius: 50%;
+  background: #fff;
+  color: #2b211e;
+  font-weight: 800;
+}
+
+.article-trending-content { padding: 0 16px 14px; }
+.article-trending.is-collapsed .article-trending-content { display: none; }
+.article-trending-item {
+  display: flex;
+  gap: 10px;
+  padding: 10px 0;
+  border-top: 1px solid rgba(84, 55, 41, .1);
+  color: #3b2a20;
+  font-size: .92rem;
+  font-weight: 600;
+}
+.article-trending-item::before { content: "🔥"; }
+.article-trending-item:hover { color: var(--brown); }
+.article-trending-note {
+  padding: 8px 16px 12px;
+  border-top: 1px dashed rgba(84, 55, 41, .15);
+  background: #fdf2e8;
+  color: #8a7a71;
+  font-size: .78rem;
+}
+
+/* Ba nut CTA trong bai SEO: ro rang, dong bo mau va co phan hoi nhe. */
+.article-section .hero-actions .btn,
+.article-section .article-side .btn.btn-primary {
+  position: relative;
+  min-height: 52px;
+  border: 1px solid transparent !important;
+  border-radius: 12px !important;
+  font-weight: 800 !important;
+  letter-spacing: .01em;
+  overflow: hidden;
+  transition: transform .18s ease, box-shadow .18s ease, filter .18s ease !important;
+}
+
+.article-section .hero-actions .btn-primary,
+.article-section .article-side .btn.btn-primary {
+  color: #2f1c11 !important;
+  background: linear-gradient(135deg, #f4d99f 0%, #d49a45 100%) !important;
+  border-color: rgba(255, 244, 213, .55) !important;
+  box-shadow: 0 8px 18px rgba(111, 70, 28, .24) !important;
+}
+
+.article-section .hero-actions .btn-secondary {
+  color: #fff8ed !important;
+  background: linear-gradient(135deg, #805238 0%, #4b2d1d 100%) !important;
+  border-color: rgba(232, 196, 138, .25) !important;
+  box-shadow: 0 8px 18px rgba(38, 23, 17, .18) !important;
+}
+
+.article-section .hero-actions .btn::after,
+.article-section .article-side .btn.btn-primary::after {
+  content: "";
+  position: absolute;
+  inset: 0 auto 0 -48%;
+  z-index: 0;
+  width: 35%;
+  background: linear-gradient(90deg, transparent, rgba(255,255,255,.28), transparent);
+  pointer-events: none;
+  transform: skewX(-22deg);
+  transition: left .42s ease;
+}
+
+.article-section .hero-actions .btn:hover,
+.article-section .article-side .btn.btn-primary:hover {
+  filter: brightness(1.04);
+  transform: translateY(-2px);
+  box-shadow: 0 12px 24px rgba(38, 23, 17, .25) !important;
+}
+
+.article-section .hero-actions .btn:hover::after,
+.article-section .article-side .btn.btn-primary:hover::after { left: 116%; }
+
+.article-section .hero-actions .btn:active,
+.article-section .article-side .btn.btn-primary:active {
+  transform: translateY(0) scale(.98);
+}
+
+/* Logo header: bieu tuong va chu ELLY tu hai hinh mau. */
+body .site-header.site-header-premium .brand-logo-icon {
+  display: none;
+}
+
+body .site-header.site-header-premium .brand-premium::before {
+  content: "";
+  display: block;
+  width: 42px;
+  height: 42px;
+  flex: 0 0 42px;
+  background: url("assets/elly-emblem-header.png") center / contain no-repeat;
+}
+
+body .site-header.site-header-premium .brand-copy {
+  gap: 0;
+}
+
+body .site-header.site-header-premium .brand-mark {
+  display: block;
+  width: 96px;
+  height: 32px;
+  overflow: hidden;
+  color: transparent !important;
+  font-size: 0 !important;
+  background: url("assets/elly-wordmark-header.png") center / contain no-repeat;
+}
+
+body .site-header.site-header-premium .brand-mark i {
+  display: none;
+}
+
+body .site-header.site-header-premium .brand-sub {
+  display: none;
+}
+
+@media (max-width: 900px) {
+  body .site-header.site-header-premium .brand-premium::before {
+    width: 38px;
+    height: 38px;
+    flex-basis: 38px;
+    background-size: 38px auto;
+  }
+
+  body .site-header.site-header-premium .brand-mark {
+    width: 88px;
+    height: 29px;
+  }
+}
 /* ===== MENU MOBILE COPY LAYOUT HINH - NHUNG GIU MAU + NOI DUNG CUA BAN ===== */
 /* Dan doan nay vao CUOI file style.css (de len tat ca CSS cu) */
 
@@ -6211,6 +6456,12 @@ body .site-header.site-header-premium .main-nav > .nav-list {
   body .site-header.site-header-premium .main-nav .nav-service-item.is-open .nav-service-list {
     display: grid !important;
   }
+
+  body .site-header.site-header-premium .main-nav > a:active,
+  body .site-header.site-header-premium .main-nav .nav-service-link:active {
+    color: #f8e8c8 !important;
+    transform: scale(0.98);
+  }
 /* ===== Dịch vụ dùng cùng icon với các menu khác ===== */
 .main-nav .nav-service-link{
     ...
@@ -6272,6 +6523,160 @@ body .site-header.site-header-premium .main-nav > .nav-list {
   }
 }
 
+/* Dong bo logo moi o header, footer va cua so dat lich. */
+body .site-header.site-header-premium .brand-premium {
+  gap: 3px !important;
+}
+
+body .site-header.site-header-premium .brand-premium::before {
+  display: none;
+}
+
+body .site-header.site-header-premium .brand-copy {
+  display: grid !important;
+  gap: 1px !important;
+}
+
+body .site-header.site-header-premium .brand-mark {
+  width: 96px;
+  height: 32px;
+}
+
+body .site-header.site-header-premium .brand-sub {
+  display: block;
+  color: #fff2d4;
+  font-size: .52rem;
+  font-weight: 900;
+  letter-spacing: .2em;
+  line-height: 1;
+  text-shadow: 0 1px 7px rgba(232, 193, 137, .45);
+  animation: ellyLogoTaglineGlow 2.8s ease-in-out infinite;
+}
+
+.elly-footer-fix .ef-logo {
+  position: relative;
+  display: block;
+  width: 158px;
+  height: 68px;
+  margin: 0 auto 18px;
+  background: url("assets/elly-wordmark-header.png") center 5px / 104px auto no-repeat;
+}
+
+.elly-footer-fix .ef-logo img {
+  display: none;
+}
+
+.elly-footer-fix .ef-logo::before {
+  display: none;
+}
+
+.elly-footer-fix .ef-logo::after {
+  content: "BEAUTY & SPA";
+  position: absolute;
+  top: 46px;
+  left: 0;
+  width: 100%;
+  color: #fff2d4;
+  font-family: var(--font-display);
+  font-size: .56rem;
+  font-weight: 900;
+  letter-spacing: .22em;
+  text-align: center;
+  text-shadow: 0 1px 7px rgba(232, 193, 137, .45);
+  white-space: nowrap;
+  animation: ellyLogoTaglineGlow 2.8s ease-in-out infinite;
+}
+
+.booking-popover-media .booking-media-logo {
+  width: 178px !important;
+  height: 76px !important;
+  min-height: 76px !important;
+  padding: 0 !important;
+  background: url("assets/elly-wordmark-header.png") center 8px / 112px auto no-repeat;
+}
+
+.booking-popover-media .booking-media-logo img {
+  display: none !important;
+}
+
+.booking-popover-media .booking-media-logo::before {
+  display: none;
+}
+
+.booking-popover-media .booking-media-logo::after {
+  content: "BEAUTY & SPA";
+  position: absolute;
+  top: 56px;
+  left: 0;
+  width: 100%;
+  color: #fff2d4;
+  font-family: var(--font-display);
+  font-size: .58rem;
+  font-weight: 900;
+  letter-spacing: .22em;
+  text-align: center;
+  text-shadow: 0 1px 7px rgba(232, 193, 137, .45);
+  white-space: nowrap;
+  animation: ellyLogoTaglineGlow 2.8s ease-in-out infinite;
+}
+
+@keyframes ellyLogoTaglineGlow {
+  0%, 100% { opacity: .78; filter: brightness(1); }
+  50% { opacity: 1; filter: brightness(1.16); }
+}
+
+@media (max-width: 900px) {
+  body .site-header.site-header-premium .brand-premium::before {
+    width: 40px;
+    height: 40px;
+    flex-basis: 40px;
+  }
+}
+
+/* Header dien thoai: chi giu wordmark ELLY o giua va dong phu ben duoi. */
+@keyframes ellyMobileTaglineGlow {
+  0%, 100% { opacity: .62; transform: translateY(0); }
+  50% { opacity: 1; transform: translateY(-1px); }
+}
+
+@media (max-width: 900px) {
+  body .site-header.site-header-premium .header-inner {
+    position: relative;
+  }
+
+  body .site-header.site-header-premium .brand-premium {
+    position: absolute;
+    z-index: 2;
+    top: 50%;
+    left: 50%;
+    gap: 0 !important;
+    justify-self: auto !important;
+    transform: translate(-50%, -50%);
+  }
+
+  body .site-header.site-header-premium .brand-premium::before {
+    display: none;
+  }
+
+  body .site-header.site-header-premium .brand-copy {
+    justify-items: center;
+    gap: 2px !important;
+  }
+
+  body .site-header.site-header-premium .brand-mark {
+    width: 104px;
+    height: 34px;
+  }
+
+  body .site-header.site-header-premium .brand-sub {
+    display: block;
+    color: rgba(255, 248, 237, .8);
+    font-size: .48rem;
+    letter-spacing: .24em;
+    animation: ellyMobileTaglineGlow 2.8s ease-in-out infinite;
+  }
+}
+
 body .site-header.site-header-premium .brand-logo-icon {
   width: 48px;
   height: 48px;
@@ -6285,8 +6690,9 @@ body .site-header.site-header-premium .brand-mark {
 /* Menu Kiến thức: cùng giao diện Dịch vụ, bốn nhóm trên màn hình lớn. */
 @media (min-width: 901px) {
   .site-header-premium .nav-knowledge-list {
-    grid-template-columns: repeat(4, minmax(170px, 1fr));
-    width: min(1040px, calc(100vw - 48px));
+    grid-template-columns: minmax(240px, 1fr);
+    width: min(320px, calc(100vw - 32px));
+    gap: 4px;
   }
 }
 
@@ -6394,10 +6800,139 @@ body .site-header.site-header-premium .brand-mark {
   .site-header-premium .nav-service-item.is-open > .nav-service-link {
     color: #e8c189 !important;
   }
+
+  /* Main navigation feedback: a subtle response on hover and press. */
+  .site-header-premium .main-nav > a,
+  .site-header-premium .main-nav .nav-service-link {
+    transition: color 180ms ease, transform 180ms ease, text-shadow 180ms ease, background-color 180ms ease;
+  }
+
+  @media (hover: hover) and (min-width: 901px) {
+    .site-header-premium .main-nav > a:hover,
+    .site-header-premium .main-nav > a:focus-visible,
+    .site-header-premium .main-nav .nav-service-link:hover,
+    .site-header-premium .main-nav .nav-service-link:focus-visible {
+      color: #e8c189 !important;
+      text-shadow: 0 3px 12px rgba(232, 193, 137, 0.26);
+      transform: translateY(-1px);
+    }
+  }
+
+  .site-header-premium .main-nav > a:active,
+  .site-header-premium .main-nav .nav-service-link:active {
+    color: #f8e8c8 !important;
+    transform: scale(0.98);
+  }
 }
 
 /* Chỉ áp dụng trên PC */
+.service-directory {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 18px;
+  margin: 30px 0;
+}
+
+.service-directory-card {
+  display: grid;
+  overflow: hidden;
+  border: 1px solid rgba(196, 147, 74, 0.28);
+  border-radius: 14px;
+  background: #fffaf3;
+  color: #3f281d;
+  box-shadow: 0 10px 24px rgba(38, 23, 17, 0.1);
+  text-decoration: none;
+  transition: transform 180ms ease, box-shadow 180ms ease;
+}
+
+.service-directory-card img {
+  width: 100%;
+  aspect-ratio: 4 / 3;
+  object-fit: cover;
+}
+
+.service-directory-card span {
+  padding: 13px 15px;
+  font-weight: 800;
+}
+
+.service-directory-card:hover,
+.service-directory-card:focus-visible {
+  transform: translateY(-3px);
+  box-shadow: 0 16px 30px rgba(38, 23, 17, 0.17);
+}
+
+@media (max-width: 700px) {
+  .service-directory { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 12px; }
+  .service-directory-card span { padding: 10px 11px; font-size: 0.86rem; }
+}
+
 @media (min-width: 901px) {
+    .site-header-premium .nav-service-item::before {
+        position: absolute;
+        top: 100%;
+        left: 50%;
+        z-index: 109;
+        width: min(380px, calc(100vw - 32px));
+        height: 18px;
+        content: "";
+        transform: translateX(-50%);
+    }
+
+    .site-header-premium .nav-knowledge-list {
+        width: min(360px, calc(100vw - 32px));
+        gap: 7px;
+        padding: 12px;
+        border-radius: 12px;
+    }
+
+    .site-header-premium .nav-knowledge-list .nav-service-column {
+        padding: 11px 14px;
+        border: 1px solid rgba(232, 193, 137, 0.18);
+        border-radius: 8px;
+        background: rgba(255, 255, 255, 0.035);
+    }
+
+    .site-header-premium .nav-knowledge-list .nav-service-column strong {
+        display: block;
+        margin: 0;
+        color: #e8c189;
+        font-size: 0.8rem;
+        letter-spacing: 0.04em;
+        text-transform: uppercase;
+    }
+
+    .site-header-premium .nav-knowledge-list .nav-knowledge-category {
+        display: block;
+        padding: 0 !important;
+        color: #e8c189 !important;
+        font-size: 0.8rem !important;
+        font-weight: 700 !important;
+        letter-spacing: 0.04em;
+        text-transform: uppercase;
+    }
+
+    .site-header-premium .nav-knowledge-list .nav-knowledge-category:hover,
+    .site-header-premium .nav-knowledge-list .nav-knowledge-category:focus-visible {
+        color: #f8e8c8 !important;
+        background: transparent !important;
+    }
+
+    .site-header-premium .nav-service-item:not(.nav-knowledge-item) .nav-service-list {
+        grid-template-columns: minmax(280px, 1fr);
+        width: min(360px, calc(100vw - 32px));
+        gap: 7px;
+        padding: 12px;
+        border-radius: 12px;
+    }
+
+    .site-header-premium .nav-service-item:not(.nav-knowledge-item) .nav-service-column {
+        padding: 11px 14px;
+        border: 1px solid rgba(232, 193, 137, 0.18);
+        border-radius: 8px;
+        background: rgba(255, 255, 255, 0.035);
+    }
+
     .site-header-premium .nav-service-link {
         color: #ffffff !important; /* đổi thành màu bạn muốn */
     }

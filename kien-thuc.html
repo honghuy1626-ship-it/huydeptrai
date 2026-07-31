@@ -1,4 +1,4 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="vi">
   <head>
     <meta charset="UTF-8" />
@@ -224,65 +224,93 @@ p.eyebrow::before{
   100%{ box-shadow: 0 0 rgba(196,138,90,0); }
 }
 
+      /* Trang kiến thức: bố cục lưới bài viết. */
+      .news-heading > h1 { display: block; margin: 0; font-family: Georgia, serif; font-size: 1.5rem; color: #543729; }
+      .knowledge-breadcrumb { display: flex; gap: 7px; align-items: center; margin: 12px 0 20px; color: #433431; font-size: .9rem; }
+      .knowledge-breadcrumb a { color: #543729; text-decoration: none; }
+      .knowledge-tabs { display: flex; gap: 0; overflow-x: auto; padding-bottom: 2px; }
+      .knowledge-tabs a { flex: 0 0 auto; padding: 7px 16px; border-right: 1px solid rgba(84, 55, 41, .2); color: #543729; font-weight: 800; text-decoration: none; }
+      .knowledge-tabs a:last-child { border-right: 0; }
+      @media (min-width: 901px) {
+        .knowledge-news { background: #fcfaf7; }
+        .news-heading { padding: 36px 0 18px; border-bottom: 0; }
+        .news-heading .eyebrow { margin: 0 0 8px; }
+        .news-heading > h1 { display: block; margin: 0; font-family: Georgia, serif; font-size: clamp(2rem, 3.6vw, 3.1rem); color: #543729; }
+        .knowledge-breadcrumb { display: flex; gap: 8px; align-items: center; margin: 10px 0 25px; color: #6e5b52; }
+        .knowledge-breadcrumb a { color: #543729; text-decoration: none; }
+        .knowledge-tabs { display: flex; justify-content: center; gap: 0; overflow-x: auto; }
+        .knowledge-tabs a { flex: 0 0 auto; padding: 7px 22px; border-right: 1px solid rgba(84, 55, 41, .2); color: #543729; font-weight: 800; text-decoration: none; }
+        .knowledge-tabs a:last-child { border-right: 0; }
+        .knowledge-tabs a:hover, .knowledge-tabs a:focus-visible { color: #b85c42; }
+        .news-body { padding-top: 18px !important; }
+        .elly-kien-thuc-wrap { max-width: 1140px; }
+        .elly-knowledge-list { grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 34px 26px; }
+        .elly-knowledge-item { display: block; padding: 0; border: 0; }
+        .elly-knowledge-thumb { border-radius: 14px; }
+        .elly-knowledge-thumb img { width: 100%; height: auto; aspect-ratio: 16 / 9; border-radius: 14px; }
+        .elly-knowledge-content { padding-top: 12px; }
+        .elly-kicker, .elly-knowledge-line { display: none; }
+        .elly-knowledge-title { font-size: 1rem; line-height: 1.38; -webkit-line-clamp: 2; }
+        .elly-knowledge-title::after { content: "Xem chi tiết"; display: block; margin-top: 10px; color: #8f4050; font-size: .82rem; font-weight: 800; }
+      }
 </style>
   </head>
   <body>
     <header class="site-header site-header-premium" data-header>
-      <div class="container header-inner">
-        <a class="brand brand-premium" href="/" aria-label="ELLY Beauty & Spa - Trang chủ">
-          <img class="brand-logo-icon" src="assets/elly-logo.png" alt="" />
-          <span class="brand-copy">
-            <span class="brand-mark">ELLY <i></i></span>
-            <span class="brand-sub">BEAUTY &amp; SPA</span>
-          </span>
-        </a>
+  <div class="container header-inner">
+    <a class="brand brand-premium" href="index.html" aria-label="ELLY Beauty and Spa - Trang chu">
+      <img class="brand-logo-icon" src="assets/elly-logo.png" alt="" />
+      <span class="brand-copy">
+        <span class="brand-mark">ELLY <i></i></span>
+        <span class="brand-sub">BEAUTY &amp; SPA</span>
+      </span>
+    </a>
 
-        <nav class="main-nav" id="mainNav" aria-label="Điều hướng chính">
-          <a href="#home">Trang chủ</a>
-          <div class="nav-service-item">
-            <button class="nav-service-link" type="button" aria-expanded="false" aria-controls="serviceMenu">Dịch vụ <span class="nav-service-arrow" aria-hidden="true">⌄</span></button>
-            <div class="nav-service-list" id="serviceMenu" aria-label="Dịch vụ nổi bật">
-              <div class="nav-service-column">
-                <strong>Phun xăm chân mày</strong>
-                <a href="chon-dang-may.html">Chọn dáng mày</a>
-                <a href="dich-vu.html">Phun mày tán bột</a>
-                <a href="dich-vu.html">Điêu khắc chân mày</a>
-              </div>
-              <div class="nav-service-column">
-                <strong>Phun và cấy môi</strong>
-                <a href="chon-mau-moi.html">Chọn màu môi</a>
-                <a href="dich-vu.html">Phun môi Collagen</a>
-                <a href="dich-vu.html">Khử thâm môi</a>
-              </div>
-              <div class="nav-service-column">
-                <strong>Tư vấn tại nhà</strong>
-                <a href="dich-vu.html">Xem tất cả dịch vụ</a>
-                <a href="#booking" data-booking-open>Đặt lịch tư vấn</a>
-                <a href="bang-gia.html">Xem bảng giá</a>
-              </div>
-            </div>
+    <nav class="main-nav" id="mainNav" aria-label="Dieu huong chinh">
+      <a class="nav-service-link" href="index.html">Trang ch&#7911;</a>
+      <div class="nav-service-item">
+        <a class="nav-service-link" href="dich-vu.html">D&#7883;ch v&#7909;</a>
+        <div class="nav-service-list" id="serviceMenu" aria-label="Dich vu noi bat">
+          <div class="nav-service-column">
+            <strong>Phun x&#259;m ch&#226;n m&#224;y</strong>
+            <a href="chon-dang-may.html">Ch&#7885;n d&#225;ng m&#224;y</a>
+            <a href="dich-vu.html">Phun m&#224;y t&#225;n b&#7897;t</a>
+            <a href="dich-vu.html">&#272;i&#234;u kh&#7855;c ch&#226;n m&#224;y</a>
           </div>
-          <a href="bang-gia.html">Bảng giá</a>
-          <a href="kien-thuc.html">Kiến thức</a>
-        </nav>
-
-        <div class="header-actions">
-          <a class="btn btn-small btn-primary" href="#booking" data-booking-open>Đặt lịch</a>
-          <button
-            class="menu-toggle"
-            type="button"
-            aria-label="Mở menu"
-            aria-expanded="false"
-            aria-controls="mainNav"
-            data-menu-toggle
-          >
-            <span></span>
-            <span></span>
-            <span></span>
-          </button>
+          <div class="nav-service-column">
+            <strong>Phun v&#224; c&#7845;y m&#244;i</strong>
+            <a href="chon-mau-moi.html">Ch&#7885;n m&#224;u m&#244;i</a>
+            <a href="dich-vu.html">Phun m&#244;i Collagen</a>
+            <a href="dich-vu.html">Kh&#7917; th&#226;m m&#244;i</a>
+          </div>
+          <div class="nav-service-column">
+            <strong>T&#432; v&#7845;n t&#7841;i nh&#224;</strong>
+            <a href="dich-vu.html">Xem t&#7845;t c&#7843; d&#7883;ch v&#7909;</a>
+            <a href="#booking" data-booking-open>&#272;&#7863;t l&#7883;ch t&#432; v&#7845;n</a>
+            <a href="bang-gia.html">Xem b&#7843;ng gi&#225;</a>
+          </div>
         </div>
       </div>
-    </header>
+      <a class="nav-service-link" href="bang-gia.html">B&#7843;ng gi&#225;</a>
+      <div class="nav-service-item nav-knowledge-item">
+        <a class="nav-service-link nav-knowledge-link" href="kien-thuc.html">Ki&#7871;n th&#7913;c</a>
+        <div class="nav-service-list nav-knowledge-list" id="knowledgeMenu" aria-label="Danh muc kien thuc">
+          <div class="nav-service-column"><a class="nav-knowledge-category" href="kien-thuc.html?category=phun-xam">Ki&#7871;n th&#7913;c phun x&#259;m</a></div>
+          <div class="nav-service-column"><a class="nav-knowledge-category" href="kien-thuc.html?category=phun-may">Ki&#7871;n th&#7913;c phun m&#224;y</a></div>
+          <div class="nav-service-column"><a class="nav-knowledge-category" href="kien-thuc.html?category=phun-mi">Ki&#7871;n th&#7913;c phun m&#237;</a></div>
+          <div class="nav-service-column"><a class="nav-knowledge-category" href="kien-thuc.html?category=lam-dep-tai-nha">Ki&#7871;n th&#7913;c l&#224;m &#273;&#7865;p t&#7841;i nh&#224;</a></div>
+        </div>
+      </div>
+    </nav>
+
+    <div class="header-actions">
+      <a class="btn btn-small btn-primary" href="#booking" data-booking-open>&#272;&#7863;t l&#7883;ch</a>
+      <button class="menu-toggle" type="button" aria-label="Mo menu" aria-expanded="false" aria-controls="mainNav" data-menu-toggle>
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </div>
+</header>
     <main class="knowledge-news">
       
       <div class="knowledge-search" id="ellySearchWrap">
@@ -296,6 +324,14 @@ p.eyebrow::before{
 
       
       <section class="container news-heading">
+        <h1>Ki&#7871;n th&#7913;c phun x&#259;m</h1>
+        <p class="knowledge-breadcrumb"><a href="index.html">Trang ch&#7911;</a><span>/</span>Ki&#7871;n th&#7913;c phun x&#259;m</p>
+        <nav class="knowledge-tabs" aria-label="Danh mục kiến thức">
+          <a href="kien-thuc.html?category=phun-moi">Phun m&#244;i</a>
+          <a href="kien-thuc.html?category=phun-may">Phun ch&#226;n m&#224;y</a>
+          <a href="kien-thuc.html?category=phun-mi">Phun m&#237; m&#7855;t</a>
+          <a href="kien-thuc.html?category=lam-dep-tai-nha">L&#224;m &#273;&#7865;p t&#7841;i nh&#224;</a>
+        </nav>
         <p class="eyebrow">Kiến thức làm đẹp tại nhà ELLY</p>
       
 
@@ -986,7 +1022,7 @@ document.addEventListener('DOMContentLoaded', function(){
     currentPage=1; renderPage(allData, 1);
   }
   // THAY HÀM vaoTrangTim CŨ BẰNG HÀM NÀY
-  function vaoTrangTim(keyword){
+  function vaoTrangTim(keyword, keepHeading){
     const nq=boDau(keyword.trim());
     if(!nq || nq.length<2){ thoatTrangTim(); return; }
     isSearchMode=true;
@@ -1002,6 +1038,8 @@ document.addEventListener('DOMContentLoaded', function(){
     } else if(nq.includes("mi") || nq.includes("mo trong") || nq.includes("phun mi")){
       // Gõ mí / phun mí / mở tròng -> ra hết bài về mí
       result = allData.filter(d=> d.norm.includes("mi") || d.norm.includes("mo trong"));
+    } else if(nq.includes("lam dep tai nha")) {
+      result = allData.filter(d=> d.norm.includes("tai nha") || d.norm.includes("tu van") || d.norm.includes("phun xam"));
     } else {
       // Các từ khác thì tìm như bình thường
       result = allData.filter(d=> d.norm.includes(nq));
@@ -1011,10 +1049,30 @@ document.addEventListener('DOMContentLoaded', function(){
     
     if(resultsBox){ resultsBox.hidden=true; resultsBox.style.display='none'; resultsBox.innerHTML=''; }
     if(statusBox){ statusBox.style.display='none'; }
-    if(heading) heading.style.display='none';
+    if(heading && !keepHeading) heading.style.display='none';
     if(trendingWrap) trendingWrap.style.display='';
 
     taoNutQuayLai(); currentPage=1; renderPage(filteredData, 1); input.blur();
+  }
+  const selectedCategory = new URLSearchParams(window.location.search).get('category');
+  if(selectedCategory){
+    const categoryMap = {
+      'phun-xam': ['Phun Xăm Thẩm Mỹ', 'phun xam'],
+      'phun-moi': ['Phun Môi', 'moi'],
+      'phun-may': ['Phun Chân Mày', 'may'],
+      'phun-mi': ['Phun Mí Mắt', 'mi'],
+      'lam-dep-tai-nha': ['Làm Đẹp Tại Nhà', 'lam dep tai nha']
+    };
+    const selected = categoryMap[selectedCategory];
+    if(selected){
+      const pageTitle = document.querySelector('.news-heading h1');
+      const breadcrumbText = document.querySelector('.knowledge-breadcrumb');
+      if(pageTitle) pageTitle.textContent = selected[0];
+      if(breadcrumbText) breadcrumbText.lastChild.textContent = selected[0];
+      vaoTrangTim(selected[1], true);
+      const backButton = document.getElementById('ellyBackBtn');
+      if(backButton) backButton.style.display = 'none';
+    }
   }
   // THAY ĐOẠN input.addEventListener('input'...) CŨ BẰNG ĐOẠN NÀY
   input.addEventListener('input', function(){
