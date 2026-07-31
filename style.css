@@ -446,7 +446,8 @@ p {
   transform: translateY(0);
 }
 
-.main-nav a {
+.main-nav a,
+.main-nav .nav-service-link {
   position: relative;
   display: flex;
   align-items: center;
@@ -506,7 +507,8 @@ p {
   transition: opacity 180ms ease, transform 180ms ease;
 }
 
-.main-nav a::after {
+.main-nav a::after,
+.main-nav .nav-service-link::after {
   content: "›";
   position: absolute;
   right: 18px;
@@ -3530,7 +3532,8 @@ body.booking-popover-open {
     transform: none;
   }
 
-  .main-nav a {
+  .main-nav a,
+.main-nav .nav-service-link {
     min-height: auto;
     padding: 10px 12px;
     font-size: 0.92rem;
@@ -3540,7 +3543,8 @@ body.booking-popover-open {
     animation: none;
   }
 
-  .main-nav a::after {
+  .main-nav a::after,
+.main-nav .nav-service-link::after {
     display: none;
   }
 
@@ -5333,7 +5337,8 @@ body.booking-popover-open {
   }
 
   /* Tung muc menu - giong hinh: co vien ngang + chu hoa + mui ten > */
-  .main-nav a {
+  .main-nav a,
+.main-nav .nav-service-link {
     position: relative !important;
     display: flex !important;
     align-items: center !important;
@@ -5361,7 +5366,8 @@ body.booking-popover-open {
   }
 
   /* Mui ten > ben phai giong hinh */
-  .main-nav a::after {
+  .main-nav a::after,
+.main-nav .nav-service-link::after {
     content: "›" !important;
     display: inline-flex !important;
     align-items: center !important;
@@ -5998,7 +6004,7 @@ body .site-header.site-header-premium .main-nav {
 }
 
 .site-header-premium .nav-service-item { position: relative; }
-.site-header-premium .nav-service-link { display: inline-flex; align-items: center; gap: 5px; }
+.site-header-premium .nav-service-link { display: inline-flex; align-items: center; gap: 0; }
 .site-header-premium .nav-service-arrow { font-size: 0.9em; transition: transform 160ms ease; }
 .site-header-premium .nav-service-list {
   position: absolute;
@@ -6073,18 +6079,29 @@ body .site-header.site-header-premium .main-nav {
 }
 
 /* Mega menu dịch vụ */
-.site-header-premium .nav-service-link {
-  appearance: none;
-  padding: 8px 0;
-  color: rgba(255, 255, 255, 0.82);
-  background: transparent;
-  border: 0;
-  font: inherit;
-  font-size: 0.86rem;
-  font-weight: 600;
-  cursor: pointer;
-}
+.site-header-premium .nav-service-link{
+    appearance: none;
+    -webkit-appearance: none;
 
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+
+    padding: 0 !important;
+    margin: 0 !important;
+    border: none;
+    background: transparent;
+
+    font-family: inherit !important;
+    font-size: inherit !important;
+    font-weight: inherit !important;
+    letter-spacing: inherit !important;
+    line-height: inherit !important;
+    text-transform: inherit !important;
+
+    color: inherit !important;
+    cursor: pointer;
+}
 
 .site-header-premium .nav-service-item::after {
   position: absolute;
@@ -6093,7 +6110,7 @@ body .site-header.site-header-premium .main-nav {
   width: 14px;
   height: 14px;
   content: "";
-  background: #fff;
+  background: #fff; 
   opacity: 0;
   pointer-events: none;
   transform: translate(-50%, 8px) rotate(45deg);
@@ -6194,4 +6211,194 @@ body .site-header.site-header-premium .main-nav > .nav-list {
   body .site-header.site-header-premium .main-nav .nav-service-item.is-open .nav-service-list {
     display: grid !important;
   }
+/* ===== Dịch vụ dùng cùng icon với các menu khác ===== */
+.main-nav .nav-service-link{
+    ...
+    font-family: inherit !important;
+    font-size: inherit !important;
+    font-weight: inherit !important;
+    letter-spacing: inherit !important;
+    line-height: inherit !important;
+    text-transform: inherit !important;
+
+    font-size:.92rem !important;
+    font-weight:700 !important;
+    letter-spacing:.04em !important;
+}}
+
+
+/* icon giống hệt <a> */
+.main-nav .nav-service-link::after{
+    content:"›" !important;
+    display:inline-flex !important;
+    align-items:center !important;
+    justify-content:center !important;
+
+    color:var(--gold) !important;
+    font-size:22px !important;
+    font-weight:300 !important;
+    line-height:1 !important;
+    opacity:.7 !important;
+
+    transition:transform .2s ease,opacity .2s ease !important;
+}
+@media (min-width: 992px) {
+    .main-nav .nav-service-link::after {
+        display: none !important;
+    }
+}
+/* Mobile */
+.main-nav .nav-service-link{
+    text-transform: uppercase !important;
+}
+
+/* PC */
+@media (min-width:992px){
+    .main-nav .nav-service-link{
+        text-transform: none !important;
+    }
+}
+
+@media (min-width: 901px) {
+  body .site-header.site-header-premium .main-nav > .nav-list > li > a,
+  body .site-header.site-header-premium .main-nav .nav-service-link {
+    color: rgba(255, 255, 255, 0.82) !important;
+    font-family: var(--font-body) !important;
+    font-size: 0.86rem !important;
+    font-weight: 600 !important;
+    line-height: 1.2 !important;
+    letter-spacing: normal !important;
+    text-transform: none !important;
+  }
+}
+
+body .site-header.site-header-premium .brand-logo-icon {
+  width: 48px;
+  height: 48px;
+  mix-blend-mode: screen;
+}
+
+body .site-header.site-header-premium .brand-mark {
+  font-size: 1.28rem;
+}
+
+/* Menu Kiến thức: cùng giao diện Dịch vụ, bốn nhóm trên màn hình lớn. */
+@media (min-width: 901px) {
+  .site-header-premium .nav-knowledge-list {
+    grid-template-columns: repeat(4, minmax(170px, 1fr));
+    width: min(1040px, calc(100vw - 48px));
+  }
+}
+
+/* Bảng dịch vụ: palette kem/nâu ELLY, sáng để nội dung dễ đọc. */
+.site-header-premium .nav-service-list {
+  background: linear-gradient(135deg, #fffdf9 0%, #f8eddf 100%);
+  border: 1px solid rgba(196, 147, 74, 0.42);
+  box-shadow: 0 18px 42px rgba(38, 23, 17, 0.22);
+}
+
+.site-header-premium .nav-service-item::after {
+  background: #fffaf3;
+}
+
+.site-header-premium .nav-service-column strong {
+  color: #744b32;
+}
+
+.site-header-premium .nav-service-list a {
+  color: #4c3629 !important;
+}
+
+.site-header-premium .nav-service-list a:first-of-type {
+  color: #b85c42 !important;
+}
+
+.site-header-premium .nav-service-list a:hover,
+.site-header-premium .nav-service-list a:focus-visible {
+  color: #261711 !important;
+  background: rgba(217, 183, 127, 0.26) !important;
+}
+
+@media (max-width: 900px) {
+  body .site-header.site-header-premium .main-nav .nav-service-item.is-open .nav-service-list {
+    grid-template-columns: 1fr !important;
+    gap: 0 !important;
+    padding: 8px 0 12px !important;
+    background: rgba(255, 255, 255, 0.055) !important;
+    border-top: 1px solid rgba(232, 193, 137, 0.24) !important;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.08) !important;
+    box-shadow: none !important;
+  }
+
+  body .site-header.site-header-premium .main-nav .nav-service-column {
+    display: block !important;
+    padding: 10px 20px 7px 42px;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.07);
+  }
+
+  body .site-header.site-header-premium .main-nav .nav-service-column:last-child { border-bottom: 0; }
+
+  body .site-header.site-header-premium .main-nav .nav-service-column strong {
+    display: block;
+    padding: 0 0 6px !important;
+    color: #e8c189 !important;
+    font-size: 0.72rem !important;
+  }
+
+  body .site-header.site-header-premium .main-nav .nav-service-column > ul {
+    display: grid !important;
+    grid-template-columns: 1fr !important;
+  }
+
+  body .site-header.site-header-premium .main-nav .nav-service-list a {
+    min-height: 34px !important;
+    padding: 7px 0 !important;
+    color: rgba(255, 255, 255, 0.86) !important;
+    font-size: 0.82rem !important;
+  }
+
+  body .site-header.site-header-premium .main-nav .nav-service-list a:first-of-type {
+    color: #f8e8c8 !important;
+  }
+}
+
+/* PC: bảng Dịch vụ dùng cùng tông nâu đậm và màu chữ như menu điện thoại. */
+@media (min-width: 901px) {
+  .site-header-premium .nav-service-list {
+    background: linear-gradient(145deg, #2b1a14 0%, #211611 100%);
+    border-color: rgba(232, 193, 137, 0.35);
+    box-shadow: 0 20px 44px rgba(21, 17, 15, 0.36);
+  }
+
+  .site-header-premium .nav-service-item::after {
+    background: #2b1a14;
+  }
+
+  .site-header-premium .nav-service-column strong {
+    color: #e8c189;
+  }
+
+  .site-header-premium .nav-service-list a,
+  .site-header-premium .nav-service-list a:first-of-type {
+    color: rgba(255, 255, 255, 0.86) !important;
+  }
+
+  .site-header-premium .nav-service-list a:hover,
+  .site-header-premium .nav-service-list a:focus-visible {
+    color: #f8e8c8 !important;
+    background: rgba(232, 193, 137, 0.15) !important;
+  }
+
+  .site-header-premium .nav-service-item:hover > .nav-service-link,
+  .site-header-premium .nav-service-item:focus-within > .nav-service-link,
+  .site-header-premium .nav-service-item.is-open > .nav-service-link {
+    color: #e8c189 !important;
+  }
+}
+
+/* Chỉ áp dụng trên PC */
+@media (min-width: 901px) {
+    .site-header-premium .nav-service-link {
+        color: #ffffff !important; /* đổi thành màu bạn muốn */
+    }
 }

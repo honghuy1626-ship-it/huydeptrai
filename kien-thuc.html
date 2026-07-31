@@ -1052,7 +1052,41 @@ document.addEventListener('DOMContentLoaded', function(){
     if(trendingHeader){ trendingHeader.addEventListener('click', ()=>{ trendingWrap.classList.toggle('is-collapsed'); const b=trendingHeader.querySelector('.elly-trending-toggle'); if(b) b.textContent=trendingWrap.classList.contains('is-collapsed')?'+':'-'; }); }
   }
 
-  renderPage(allData, 1);
+  const categoryConfig = {
+    "phun-moi": {
+      title: "Kiến thức phun môi",
+      matches: (item) => item.norm.includes("moi") && !item.norm.includes("nen lam moi hay lam may") && !item.norm.includes("lam may moi")
+    },
+    "phun-may": {
+      title: "Kiến thức phun mày",
+      matches: (item) => (item.norm.includes("may") || item.norm.includes("dieu khac") || item.norm.includes("tan bot") || item.norm.includes("ombre") || item.norm.includes("nano")) && !item.norm.includes("phun moi may ngay") && !item.norm.includes("nen lam moi hay lam may") && !item.norm.includes("lam may moi")
+    },
+    "phun-mi": {
+      title: "Kiến thức phun mí",
+      matches: (item) => item.norm.includes("phun mi") || item.norm.includes("mo trong")
+    },
+    "lam-dep-tai-nha": {
+      title: "Kiến thức làm đẹp tại nhà",
+      matches: (item) => item.norm.includes("tai nha") || item.norm.includes("chuan bi") || item.norm.includes("tu van") || item.norm.includes("nen lam moi hay lam may") || item.norm.includes("lam may moi")
+    }
+  };
+
+  const category = new URLSearchParams(window.location.search).get("category");
+  const activeCategory = categoryConfig[category];
+
+  if (activeCategory) {
+    filteredData = allData.filter(activeCategory.matches);
+    isSearchMode = true;
+    if (heading) {
+      const headingLabel = heading.querySelector(".eyebrow");
+      if (headingLabel) headingLabel.textContent = activeCategory.title;
+    }
+    if (trendingWrap) trendingWrap.style.display = "none";
+    document.title = `${activeCategory.title} | ELLY`;
+    renderPage(filteredData, 1);
+  } else {
+    renderPage(allData, 1);
+  }
 });
 </script>
  <footer class="elly-footer-fix">

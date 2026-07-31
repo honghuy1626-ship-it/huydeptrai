@@ -1813,3 +1813,31 @@ document.addEventListener("DOMContentLoaded", () => {
     if (isMobileMenu() && event.key === "Escape") setServiceMenu(false);
   });
 });
+
+document.addEventListener("DOMContentLoaded", () => {
+  const knowledgeItem = document.querySelector(".nav-knowledge-item");
+  const knowledgeButton = document.querySelector(".nav-knowledge-link");
+
+  if (!knowledgeItem || !knowledgeButton) return;
+
+  const setKnowledgeMenu = (open) => {
+    knowledgeItem.classList.toggle("is-open", open);
+    knowledgeButton.setAttribute("aria-expanded", String(open));
+  };
+
+  const isMobileMenu = () => window.matchMedia("(max-width: 900px)").matches;
+
+  knowledgeButton.addEventListener("click", (event) => {
+    if (!isMobileMenu()) return;
+    event.preventDefault();
+    setKnowledgeMenu(!knowledgeItem.classList.contains("is-open"));
+  });
+
+  document.addEventListener("click", (event) => {
+    if (isMobileMenu() && !knowledgeItem.contains(event.target)) setKnowledgeMenu(false);
+  });
+
+  document.addEventListener("keydown", (event) => {
+    if (isMobileMenu() && event.key === "Escape") setKnowledgeMenu(false);
+  });
+});
