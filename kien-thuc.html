@@ -79,7 +79,7 @@
       .news-cta p{color:rgba(255,255,255,.86);line-height:1.65}
       @media(max-width:980px){.news-layout,.news-body{grid-template-columns:1fr}.side-grid{grid-template-columns:1fr 1fr}.news-sidebar{position:static;border-left:0;padding-left:0}}
       @media(max-width:680px){.side-grid,.news-row{grid-template-columns:1fr}.knowledge-news{padding-top:10px}.knowledge-search{top:66px;padding:5px 0}.knowledge-search-form{grid-template-columns:minmax(0,1fr) 92px;gap:6px}.knowledge-search-form input{min-height:36px;font-size:16px}.knowledge-search-form button{min-height:36px;font-size:.9rem}.knowledge-search.is-compact .knowledge-search-form input{min-height:32px;font-size:16px}.knowledge-search.is-compact .knowledge-search-form button{min-height:32px;font-size:.86rem}.knowledge-search-status{font-size:.86rem;margin-top:5px}.knowledge-search-results{max-height:300px}.knowledge-search-result{grid-template-columns:54px minmax(0,1fr);padding:7px 9px}.knowledge-search-result img{width:54px;height:46px}.knowledge-search-result small{display:none}}
-    
+
       /* ===== PHÂN TRANG KIỂU HÌNH 2 - 1 2 3 4 ... 21 > ===== */
       .news-pagination{display:flex;justify-content:center;align-items:center;gap:10px;margin:36px 0 20px;flex-wrap:wrap}
       .news-pagination button{width:40px;height:40px;border-radius:50%;border:1.5px solid #222;background:#fff;color:#222;font-weight:700;font-size:.95rem;cursor:pointer;transition:all .18s ease;display:grid;place-items:center}
@@ -96,7 +96,7 @@
       .news-date-badge span{display:block;font-size:.75rem;color:#666;margin-top:2px}
       .news-thumb{position:relative;overflow:hidden;border-radius:12px}
 
-    
+
       :root{ --elly-brown:#543729; }
       .elly-kien-thuc-wrap{ width:100%; max-width:1140px; margin:0 auto; }
       .elly-knowledge-list{ display:grid; gap:0; }
@@ -155,7 +155,7 @@
         .elly-pagination button,.elly-pagination .dots{ width:38px; height:38px; }
       }
 
-    
+
       .knowledge-search-form{position:relative;}
       .elly-search-clear{
   background: transparent !important;
@@ -225,7 +225,7 @@ p.eyebrow::before{
 }
 
       /* Trang kiến thức: bố cục lưới bài viết. */
-      .news-heading > h1 { display: block; margin: 0; font-family: Georgia, serif; font-size: 1.5rem; color: #543729; }
+      .news-heading > h1 { display: block; margin: 0; font-family: "Be Vietnam Pro", Arial, sans-serif; font-size: 1.5rem; font-weight: 800; letter-spacing: 0; word-spacing: normal; font-kerning: normal; color: #543729; }
       .knowledge-breadcrumb { display: flex; gap: 7px; align-items: center; margin: 12px 0 20px; color: #433431; font-size: .9rem; }
       .knowledge-breadcrumb a { color: #543729; text-decoration: none; }
       .knowledge-tabs { display: flex; gap: 0; overflow-x: auto; padding-bottom: 2px; }
@@ -235,7 +235,7 @@ p.eyebrow::before{
         .knowledge-news { background: #fcfaf7; }
         .news-heading { padding: 36px 0 18px; border-bottom: 0; }
         .news-heading .eyebrow { margin: 0 0 8px; }
-        .news-heading > h1 { display: block; margin: 0; font-family: Georgia, serif; font-size: clamp(2rem, 3.6vw, 3.1rem); color: #543729; }
+        .news-heading > h1 { display: block; margin: 0; font-family: "Be Vietnam Pro", Arial, sans-serif; font-size: clamp(2rem, 3.6vw, 3.1rem); font-weight: 800; letter-spacing: 0; word-spacing: normal; font-kerning: normal; color: #543729; }
         .knowledge-breadcrumb { display: flex; gap: 8px; align-items: center; margin: 10px 0 25px; color: #6e5b52; }
         .knowledge-breadcrumb a { color: #543729; text-decoration: none; }
         .knowledge-tabs { display: flex; justify-content: center; gap: 0; overflow-x: auto; }
@@ -312,7 +312,7 @@ p.eyebrow::before{
   </div>
 </header>
     <main class="knowledge-news">
-      
+
       <div class="knowledge-search" id="ellySearchWrap">
   <form class="knowledge-search-form" id="ellySearchForm" onsubmit="return false;">
     <input id="ellySearchInput" type="search" enterkeyhint="search" inputmode="search" placeholder="Tìm kiến thức làm đẹp..." autocomplete="off">
@@ -322,7 +322,7 @@ p.eyebrow::before{
   <div class="knowledge-search-results" id="ellySearchResults" hidden></div>
 </div>
 
-      
+
       <section class="container news-heading">
         <h1>Ki&#7871;n th&#7913;c phun x&#259;m</h1>
         <p class="knowledge-breadcrumb"><a href="index.html">Trang ch&#7911;</a><span>/</span>Ki&#7871;n th&#7913;c phun x&#259;m</p>
@@ -333,7 +333,7 @@ p.eyebrow::before{
           <a href="kien-thuc.html?category=lam-dep-tai-nha">L&#224;m &#273;&#7865;p t&#7841;i nh&#224;</a>
         </nav>
         <p class="eyebrow">Kiến thức làm đẹp tại nhà ELLY</p>
-      
+
 
       </section>
 <section class="container news-body" style="display:block; padding-top:12px;">
@@ -873,7 +873,7 @@ p.eyebrow::before{
       <div class="elly-trending-header" id="ellyTrendingHeader">
         <h2>Chủ đề được quan tâm <i>HOT TREND VN</i></h2>
         <button class="elly-trending-toggle">+</button>
-        
+
       </div>
       <div class="elly-trending-content" id="ellyTrendingContent"></div>
       <div class="elly-trending-note" id="ellyTrendingNote">Đang tải top tìm kiếm hôm nay tại Việt Nam...</div>
@@ -882,41 +882,7 @@ p.eyebrow::before{
 </section>
 
 </main>
-    <div class="booking-popover" data-booking-popover aria-hidden="true">
-      <div class="booking-popover-backdrop" data-booking-close></div>
-      <section class="booking-popover-card" role="dialog" aria-modal="true" aria-labelledby="bookingPopupTitle">
-        <button class="booking-popover-close" type="button" data-booking-close aria-label="Đóng cửa sổ đặt lịch">×</button>
-        <div class="booking-popover-media">
-          <span class="booking-media-logo" aria-label="ELLY"><img class="brand-logo-img brand-logo-popover" src="assets/elly-logo.png" alt="ELLY" decoding="async" loading="lazy" /></span>
-        </div>
-        <div class="booking-popover-content">
-          <p class="eyebrow booking-deal-badge" id="bookingPopupTitle">Ưu đãi đặt lịch hôm nay</p>
-          <p>Để lại thông tin, ELLY sẽ gọi xác nhận dịch vụ, địa chỉ và thời gian đến tận nơi.</p>
-          <p class="booking-selected-service" data-booking-selected>Dịch vụ bạn đang quan tâm</p>
-          <div class="booking-countdown" aria-label="Thời gian ưu đãi hôm nay">
-            <div><strong data-countdown-hours>00</strong><span>Giờ</span></div>
-            <div><strong data-countdown-minutes>00</strong><span>Phút</span></div>
-            <div><strong data-countdown-seconds>00</strong><span>Giây</span></div>
-          </div>
-          <div class="booking-offer booking-offer-popup" aria-label="Giá ưu đãi sau thời gian đếm ngược">
-            <span>Làm đẹp tại nhà</span><strong>Chỉ Từ 399K</strong><small>Giảm 65%</small>
-          </div>
-          <form class="popup-booking-form" id="popupBookingForm">
-            <div class="popup-form-grid">
-              <label><span>Họ tên</span><input type="text" name="fullName" placeholder="Nhập họ tên" autocomplete="name" maxlength="60" required /></label>
-              <label><span>Số điện thoại</span><input type="tel" name="phone" placeholder="0786266268" inputmode="tel" autocomplete="tel" pattern="[0-9]{9,11}" maxlength="16" required /></label>
-              <label><span>Dịch vụ quan tâm</span><select name="service" data-popup-service required><option value="">Chọn dịch vụ</option><option value="Phun môi collagen">Phun môi collagen</option><option value="Phun mày tán bột">Phun mày tán bột</option><option value="Điêu khắc chân mày">Điêu khắc chân mày</option><option value="Phun mí">Phun mí</option></select></label>
-              <label><span>Tỉnh/thành phố / khu vực</span><select name="province" required><option value="">Chọn khu vực</option><option>Long Thành</option><option>Đồng Nai</option><option>Biên Hòa</option><option>Thủ Đức</option><option>TP.HCM</option><option>Bình Hòa</option></select></label>
-              <label class="popup-form-full"><span>Địa chỉ cần phục vụ</span><input type="text" name="address" placeholder="Nhập số nhà, đường, phường/xã" autocomplete="street-address" maxlength="180" /></label>
-              <label class="popup-form-full"><span>Ghi chú</span><textarea name="note" rows="2" placeholder="Bạn muốn đặt khung giờ nào hoặc cần tư vấn thêm gì?" maxlength="260"></textarea></label>
-            </div>
-            <button class="btn btn-primary popup-submit" type="submit">Gửi thông tin tư vấn</button>
-            <p class="popup-form-message" data-popup-message role="status" aria-live="polite"></p>
-          </form>
-          <div class="booking-popover-actions"><a class="btn btn-secondary" href="tel:0786266268">Gọi Tư Vấn 1-1</a></div>
-        </div>
-      </section>
-    </div>
+
 
     <div class="floating-actions" aria-label="Nut lien he nhanh">
       <a class="float-btn zalo" href="https://zalo.me/0786266268" target="_blank" rel="noopener noreferrer" aria-label="Chat Zalo">
@@ -934,8 +900,91 @@ p.eyebrow::before{
       </a>
     </div>
 
-    <script src="script.js"></script>
-  
+    <div class="booking-popover" data-booking-popover aria-hidden="true">
+      <div class="booking-popover-backdrop" data-booking-close></div>
+      <section class="booking-popover-card" role="dialog" aria-modal="true" aria-labelledby="bookingPopupTitle">
+        <button class="booking-popover-close" type="button" data-booking-close aria-label="Đóng cửa sổ đặt lịch">×</button>
+        <div class="booking-popover-media">
+          <span class="booking-media-logo" aria-label="ELLY SPA"><img class="brand-logo-img brand-logo-popover" src="assets/elly-logo.png" alt="ELLY SPA" decoding="async" loading="lazy" /></span>
+
+        </div>
+        <div class="booking-popover-content">
+          <p class="eyebrow booking-deal-badge" id="bookingPopupTitle">Ưu đãi đặt lịch hôm nay</p>
+          <p>
+            Để lại thông tin, ELLY SPA sẽ gọi xác nhận dịch vụ, địa chỉ và thời gian đến tận nơi.
+          </p>
+
+          <div class="booking-countdown" aria-label="Thời gian ưu đãi hôm nay">
+            <div><strong data-countdown-hours>00</strong><span>Giờ</span></div>
+            <div><strong data-countdown-minutes>00</strong><span>Phút</span></div>
+            <div><strong data-countdown-seconds>00</strong><span>Giây</span></div>
+          </div>
+          <div class="booking-offer booking-offer-popup" aria-label="Giá ưu đãi sau thời gian đếm ngược">
+            <span>Làm đẹp tại nhà</span>
+            <strong>Chỉ Từ 399K</strong>
+            <small>Giảm 65%</small>
+          </div>
+          <form class="popup-booking-form" id="popupBookingForm">
+            <div class="popup-form-grid">
+              <label>
+                <span>Họ tên</span>
+                <input type="text" name="fullName" placeholder="Nhập họ tên" autocomplete="name" maxlength="60" required />
+              </label>
+              <label>
+                <span>Số điện thoại</span>
+                <input
+                  type="tel"
+                  name="phone"
+                  placeholder="0786266268"
+                  inputmode="tel"
+                  autocomplete="tel"
+                  pattern="[0-9]{9,11}"
+                  maxlength="16"
+                  required
+                />
+              </label>
+              <label>
+                <span>Dịch vụ quan tâm</span>
+                <select name="service" data-popup-service required>
+                  <option value="">Chọn dịch vụ</option>
+                  <option value="Phun môi collagen">Phun môi collagen</option>
+                  <option value="Phun mày tán bột">Phun mày tán bột</option>
+                  <option value="Điêu khắc chân mày">Điêu khắc chân mày</option>
+                  <option value="Phun mí">Phun mí</option>
+                </select>
+              </label>
+              <label>
+                <span>Tỉnh/thành phố / khu vực</span>
+                <select name="province" required>
+                  <option value="">Chọn khu vực</option>
+                  <option>Long Thành</option>
+                  <option>Đồng Nai</option>
+                  <option>Biên Hòa</option>
+                  <option>Thủ Đức</option>
+                  <option>TP.HCM</option>
+                  <option>Bình Dương</option>
+                </select>
+              </label>
+              <label class="popup-form-full">
+                <span>Địa chỉ cần phục vụ</span>
+                <input type="text" name="address" placeholder="Nhập số nhà, đường, phường/xã" autocomplete="street-address" maxlength="180" />
+              </label>
+              <label class="popup-form-full">
+                <span>Ghi chú</span>
+                <textarea name="note" rows="2" placeholder="Bạn muốn đặt khung giờ nào hoặc cần tư vấn thêm gì?" maxlength="260"></textarea>
+              </label>
+            </div>
+            <button class="btn btn-primary popup-submit" type="submit">Gửi thông tin tư vấn</button>
+            <p class="popup-form-message" data-popup-message role="status" aria-live="polite"></p>
+          </form>
+          <div class="booking-popover-actions">
+            <a class="btn btn-secondary" href="tel:0786266268">Gọi Tư Vấn 1-1</a>
+          </div>
+        </div>
+      </section>
+    </div>
+<script src="script.js"></script>
+
     <script>
 // BẢN SẠCH DUY NHẤT - TÌM KIẾM + PHÂN TRANG + HOT TREND
 document.addEventListener('DOMContentLoaded', function(){
@@ -1046,7 +1095,7 @@ document.addEventListener('DOMContentLoaded', function(){
     }
 
     filteredData = result;
-    
+
     if(resultsBox){ resultsBox.hidden=true; resultsBox.style.display='none'; resultsBox.innerHTML=''; }
     if(statusBox){ statusBox.style.display='none'; }
     if(heading && !keepHeading) heading.style.display='none';
@@ -1151,7 +1200,7 @@ document.addEventListener('DOMContentLoaded', function(){
   <div class="container">
     <a href="/" class="ef-logo"><img src="assets/elly-logo.png" alt="ELLY"></a>
     <p class="ef-desc">ELLY SPA hoạt động từ năm 2018, chuyên phun xăm thẩm mỹ tại nhà theo lịch hẹn: phun môi collagen, phun mày tán bột, điêu khắc chân mày và phun mí. Đội ngũ chuyên viên có hơn 7 năm kinh nghiệm, tư vấn kỹ dáng mày, màu môi và quy trình phù hợp trước khi thực hiện.</p>
-    
+
     <h3 class="ef-title">THÔNG TIN LIÊN HỆ</h3>
     <ul class="ef-contact">
       <li><span class="ic">📍</span> Địa chỉ: 17H/1B Bình Hòa 24, P. Bình Hòa, TP. Hồ Chí Minh</li>
@@ -1168,6 +1217,7 @@ document.addEventListener('DOMContentLoaded', function(){
     </div>
     <div class="ef-copy">© 2018 - 2026 ELLY BEAUTY & SPA - Phun xăm tại nhà</div>
   </div>
-</footer> 
+</footer>
+
 </body>
 </html>

@@ -6533,7 +6533,9 @@ body .site-header.site-header-premium .brand-premium::before {
 }
 
 body .site-header.site-header-premium .brand-copy {
-  display: grid !important;
+  display: flex !important;
+  flex-direction: column !important;
+  align-items: center !important;
   gap: 1px !important;
 }
 
@@ -6544,6 +6546,7 @@ body .site-header.site-header-premium .brand-mark {
 
 body .site-header.site-header-premium .brand-sub {
   display: block;
+  align-self: center;
   color: #fff2d4;
   font-size: .52rem;
   font-weight: 900;

@@ -245,28 +245,7 @@
       </section>
     </main>
 
-    <div class="booking-popover" id="bookingPopover" data-booking-popover aria-hidden="true">
-      <div class="booking-popover-backdrop" data-booking-close></div>
-      <section class="booking-popover-panel booking-popover-card" role="dialog" aria-modal="true" aria-labelledby="bookingPopoverTitle">
-        <button class="booking-popover-close" type="button" aria-label="Đóng form đặt lịch" data-booking-close>×</button>
-        <div class="booking-popover-grid">
-          <div class="booking-popover-copy">
-            <p class="eyebrow">Đặt lịch tư vấn ELLY</p>
-            <h2 id="bookingPopoverTitle">Giữ lịch tư vấn phun xăm tại nhà</h2>
-            <p>ELLY SPA xác nhận dịch vụ, địa chỉ và khung giờ trước khi đến.</p>
-          </div>
-          <form class="booking-form" id="bookingForm" data-booking-form data-send-sheet="true">
-            <label><span>Họ và tên</span><input type="text" name="name" autocomplete="name" required /></label>
-            <label><span>Số điện thoại</span><input type="tel" name="phone" inputmode="tel" autocomplete="tel" required /></label>
-            <label><span>Dịch vụ quan tâm</span><select name="service" required><option value="">Chọn dịch vụ</option><option>Phun môi</option><option>Khử thâm môi</option><option>Phun mày</option><option>Phun mí</option></select></label>
-            <label><span>Tỉnh/Thành</span><select name="city" required><option value="">Chọn khu vực</option><option>TP.HCM</option><option>Bình Dương</option><option>Khu vực khác</option></select></label>
-            <label class="full"><span>Ghi chú</span><textarea name="note" rows="3" placeholder="Tình trạng môi hiện tại hoặc khung giờ thuận tiện"></textarea></label>
-            <button class="btn btn-primary full" type="submit">Gửi thông tin tư vấn</button>
-            <p class="form-status" data-form-status></p>
-          </form>
-        </div>
-      </section>
-    </div>
+
 
     <div class="floating-actions" aria-label="Nút liên hệ nhanh">
       <a class="float-btn zalo" href="https://zalo.me/0786266268" target="_blank" rel="noopener noreferrer" aria-label="Chat Zalo"><span>Zalo</span></a>
@@ -299,7 +278,90 @@
         "dateModified": "2026-07-23"
       }
     </script>
-    <script src="../script.js" defer></script>
+    <div class="booking-popover" data-booking-popover aria-hidden="true">
+      <div class="booking-popover-backdrop" data-booking-close></div>
+      <section class="booking-popover-card" role="dialog" aria-modal="true" aria-labelledby="bookingPopupTitle">
+        <button class="booking-popover-close" type="button" data-booking-close aria-label="Đóng cửa sổ đặt lịch">×</button>
+        <div class="booking-popover-media">
+          <span class="booking-media-logo" aria-label="ELLY SPA"><img class="brand-logo-img brand-logo-popover" src="../assets/elly-logo.png" alt="ELLY SPA" decoding="async" loading="lazy" /></span>
+
+        </div>
+        <div class="booking-popover-content">
+          <p class="eyebrow booking-deal-badge" id="bookingPopupTitle">Ưu đãi đặt lịch hôm nay</p>
+          <p>
+            Để lại thông tin, ELLY SPA sẽ gọi xác nhận dịch vụ, địa chỉ và thời gian đến tận nơi.
+          </p>
+
+          <div class="booking-countdown" aria-label="Thời gian ưu đãi hôm nay">
+            <div><strong data-countdown-hours>00</strong><span>Giờ</span></div>
+            <div><strong data-countdown-minutes>00</strong><span>Phút</span></div>
+            <div><strong data-countdown-seconds>00</strong><span>Giây</span></div>
+          </div>
+          <div class="booking-offer booking-offer-popup" aria-label="Giá ưu đãi sau thời gian đếm ngược">
+            <span>Làm đẹp tại nhà</span>
+            <strong>Chỉ Từ 399K</strong>
+            <small>Giảm 65%</small>
+          </div>
+          <form class="popup-booking-form" id="popupBookingForm">
+            <div class="popup-form-grid">
+              <label>
+                <span>Họ tên</span>
+                <input type="text" name="fullName" placeholder="Nhập họ tên" autocomplete="name" maxlength="60" required />
+              </label>
+              <label>
+                <span>Số điện thoại</span>
+                <input
+                  type="tel"
+                  name="phone"
+                  placeholder="0786266268"
+                  inputmode="tel"
+                  autocomplete="tel"
+                  pattern="[0-9]{9,11}"
+                  maxlength="16"
+                  required
+                />
+              </label>
+              <label>
+                <span>Dịch vụ quan tâm</span>
+                <select name="service" data-popup-service required>
+                  <option value="">Chọn dịch vụ</option>
+                  <option value="Phun môi collagen">Phun môi collagen</option>
+                  <option value="Phun mày tán bột">Phun mày tán bột</option>
+                  <option value="Điêu khắc chân mày">Điêu khắc chân mày</option>
+                  <option value="Phun mí">Phun mí</option>
+                </select>
+              </label>
+              <label>
+                <span>Tỉnh/thành phố / khu vực</span>
+                <select name="province" required>
+                  <option value="">Chọn khu vực</option>
+                  <option>Long Thành</option>
+                  <option>Đồng Nai</option>
+                  <option>Biên Hòa</option>
+                  <option>Thủ Đức</option>
+                  <option>TP.HCM</option>
+                  <option>Bình Dương</option>
+                </select>
+              </label>
+              <label class="popup-form-full">
+                <span>Địa chỉ cần phục vụ</span>
+                <input type="text" name="address" placeholder="Nhập số nhà, đường, phường/xã" autocomplete="street-address" maxlength="180" />
+              </label>
+              <label class="popup-form-full">
+                <span>Ghi chú</span>
+                <textarea name="note" rows="2" placeholder="Bạn muốn đặt khung giờ nào hoặc cần tư vấn thêm gì?" maxlength="260"></textarea>
+              </label>
+            </div>
+            <button class="btn btn-primary popup-submit" type="submit">Gửi thông tin tư vấn</button>
+            <p class="popup-form-message" data-popup-message role="status" aria-live="polite"></p>
+          </form>
+          <div class="booking-popover-actions">
+            <a class="btn btn-secondary" href="tel:0786266268">Gọi Tư Vấn 1-1</a>
+          </div>
+        </div>
+      </section>
+    </div>
+<script src="../script.js" defer></script>
 
     <script>
       // Chỉ chỉnh riêng đoạn FAQ - bấm vào mới hiện
@@ -374,6 +436,7 @@
   trendButton.addEventListener('click', (event) => { event.stopPropagation(); toggleTrending(); });
 }());
 </script>
+
 </body>
 </html>
 
