@@ -1368,6 +1368,8 @@ function setupPricingCarousels() {
   document.querySelectorAll("[data-pricing-carousel]").forEach((carousel) => {
     const track = carousel.querySelector(".pricing-track");
     const dots = Array.from(carousel.querySelectorAll(".pricing-dots button"));
+    const prevButton = carousel.querySelector(".pricing-prev");
+    const nextButton = carousel.querySelector(".pricing-next");
     if (!track || !dots.length) return;
 
     const updateDots = () => {
@@ -1380,6 +1382,20 @@ function setupPricingCarousels() {
         track.scrollTo({ left: index * track.clientWidth, behavior: "smooth" });
       });
     });
+
+    const moveToSlide = (offset) => {
+      const active = Math.round(track.scrollLeft / Math.max(track.clientWidth, 1));
+      const target = (active + offset + dots.length) % dots.length;
+      track.scrollTo({ left: target * track.clientWidth, behavior: "smooth" });
+    };
+
+    if (nextButton) {
+      nextButton.addEventListener("click", () => moveToSlide(1));
+    }
+
+    if (prevButton) {
+      prevButton.addEventListener("click", () => moveToSlide(-1));
+    }
 
     track.addEventListener("scroll", () => window.requestAnimationFrame(updateDots), { passive: true });
     updateDots();
@@ -1805,6 +1821,22 @@ document.addEventListener("DOMContentLoaded", () => {
       event.preventDefault();
       setOpen(!item.classList.contains("is-open"));
     });
+
+    if (nextButton) {
+      nextButton.addEventListener("click", () => {
+        const active = Math.round(track.scrollLeft / Math.max(track.clientWidth, 1));
+        const next = (active + 1) % dots.length;
+        track.scrollTo({ left: next * track.clientWidth, behavior: "smooth" });
+      });
+    }
+
+    if (prevButton) {
+      prevButton.addEventListener("click", () => {
+        const active = Math.round(track.scrollLeft / Math.max(track.clientWidth, 1));
+        const previous = (active - 1 + dots.length) % dots.length;
+        track.scrollTo({ left: previous * track.clientWidth, behavior: "smooth" });
+      });
+    }
 
     document.addEventListener("click", (event) => {
       if (isMobileMenu() && !item.contains(event.target)) setOpen(false);
