@@ -69,9 +69,11 @@ const FIELD_LIMITS = {
   service: 80,
   province: 60,
   address: 180,
-  note: 260
+  note: 260,
+  appointmentDate: 12,
+  appointmentTime: 5
 };
-const SAFE_FORM_KEYS = new Set(["fullName", "phone", "service", "province", "address", "note"]);
+const SAFE_FORM_KEYS = new Set(["fullName", "phone", "service", "province", "address", "note", "appointmentDate", "appointmentTime"]);
 
 const body = document.body;
 const menuToggle = document.querySelector("[data-menu-toggle]");

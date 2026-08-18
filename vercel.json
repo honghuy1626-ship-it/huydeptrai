@@ -1,4 +1,11 @@
 {
+  "rewrites": [
+    {
+      "source": "/",
+      "has": [{ "type": "host", "value": "datlichgoidau.ellyphunxamtainha.com" }],
+      "destination": "/goi-dau-duong-sinh.html"
+    }
+  ],
   "headers": [
     {
       "source": "/(.*)",
