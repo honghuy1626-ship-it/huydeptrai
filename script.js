@@ -950,7 +950,11 @@ function validateBooking(form) {
     return { ok: false, field: "service" };
   }
 
-  if (!isAllowedSelectValue(provinceField, payload.province)) {
+  const hasValidProvince = provinceField instanceof HTMLSelectElement
+    ? isAllowedSelectValue(provinceField, payload.province)
+    : Boolean(payload.province);
+
+  if (!hasValidProvince) {
     return { ok: false, field: "province" };
   }
 
@@ -978,6 +982,7 @@ function closeMenu() {
   if (!mainNav || !menuToggle) return;
   mainNav.classList.remove("is-open");
   body.classList.remove("menu-open");
+  menuToggle.classList.remove("is-open", "is-active");
   menuToggle.setAttribute("aria-expanded", "false");
 }
 
@@ -997,17 +1002,10 @@ function openBooking(service = "") {
   popover.classList.add("is-open");
   popover.setAttribute("aria-hidden", "false");
   body.classList.add("booking-popover-open");
-  window.setTimeout(() => {
-    const card = popover.querySelector(".booking-popover-card");
-    const countdown = popover.querySelector(".booking-countdown");
-    if (card && countdown) {
-      card.scrollTo({ top: Math.max(0, countdown.offsetTop - 12), behavior: "auto" });
-    }
-  }, 40);
-  window.setTimeout(() => {
+  window.requestAnimationFrame(() => {
     const firstInput = popover.querySelector(".popup-booking-form input, .popup-booking-form select, .popup-booking-form textarea") || popover.querySelector("button");
     if (firstInput) firstInput.focus({ preventScroll: true });
-  }, 120);
+  });
 }
 
 function closeBooking() {
@@ -1084,12 +1082,8 @@ function scheduleBookingClickLog(clickData) {
     });
   };
 
-  if ("requestIdleCallback" in window) {
-    window.requestIdleCallback(runLog, { timeout: 1800 });
-    return;
-  }
-
-  window.setTimeout(runLog, 800);
+  // Chờ popup ổn định trước khi chạy tác vụ thống kê ở nền.
+  window.setTimeout(runLog, 2500);
 }
 
 function rememberPendingBookingClick(clickData) {
@@ -1268,6 +1262,8 @@ if (menuToggle && mainNav) {
     const willOpen = !mainNav.classList.contains("is-open");
     mainNav.classList.toggle("is-open", willOpen);
     body.classList.toggle("menu-open", willOpen);
+    menuToggle.classList.toggle("is-open", willOpen);
+    menuToggle.classList.toggle("is-active", willOpen);
     menuToggle.setAttribute("aria-expanded", String(willOpen));
   });
 }
@@ -1703,11 +1699,22 @@ async function submitBooking(form) {
     return { ok: false, rateLimited: true };
   }
 
-  const location = await getVisitorLocation();
+  // Không chờ các dịch vụ định vị IP bên thứ ba trước khi gửi lịch.
+  // Nếu đã có dữ liệu trong phiên thì dùng lại; nếu chưa có, lịch vẫn gửi ngay.
+  let location = {};
+  try {
+    location = JSON.parse(sessionStorage.getItem(SEARCH_LOCATION_KEY) || "{}");
+  } catch (error) {
+    location = {};
+  }
+  getVisitorLocation().catch(() => {
+    // Chỉ làm ấm bộ nhớ đệm cho lần sau, không ảnh hưởng khách đang đặt lịch.
+  });
   const gps = await getGpsLocationForTracking({ askIfPrompt: false });
   const params = new URLSearchParams();
-  params.set("sheetName", "ELLY - Đặt lịch");
-  params.set("source", "Website ELLY");
+  const isShampooBooking = Boolean(form.querySelector('[name="appointmentDate"]'));
+  params.set("sheetName", isShampooBooking ? "ELLY - Gội đầu" : "ELLY - Đặt lịch");
+  params.set("source", isShampooBooking ? "Website ELLY - Gội đầu" : "Website ELLY");
   params.set("createdAt", new Date().toLocaleString("vi-VN"));
   params.set("visitorId", protectSheetValue(getOrCreateVisitorId()));
   params.set("sessionId", protectSheetValue(getOrCreateSessionId()));
@@ -1735,6 +1742,7 @@ if (popupForm) {
   popupForm.addEventListener("submit", async (event) => {
     event.preventDefault();
     const submit = popupForm.querySelector("button[type='submit']");
+    const submitInitialText = submit ? submit.textContent : "";
     if (popupMessage) popupMessage.textContent = "ELLY đang nhận thông tin của bạn...";
     if (submit) {
       submit.disabled = true;
@@ -1755,11 +1763,11 @@ if (popupForm) {
       if (popupMessage) popupMessage.textContent = "Đã gửi thông tin. ELLY sẽ liên hệ xác nhận lịch sớm.";
       popupForm.reset();
     } catch (error) {
-      if (popupMessage) popupMessage.textContent = "Mạng chưa ổn định. Bạn vui lòng gửi lại hoặc bấm gọi trực tiếp để được hỗ trợ.";
+      if (popupMessage) popupMessage.textContent = "Chưa kết nối được Google Sheets. Hãy kiểm tra Web App đã cho phép ‘Bất kỳ ai’ và đang dùng đúng URL /exec.";
     } finally {
       if (submit) {
         submit.disabled = false;
-        submit.textContent = "Gửi thông tin tư vấn";
+        submit.textContent = submitInitialText || "Gửi thông tin tư vấn";
       }
     }
   });
@@ -1790,7 +1798,7 @@ document.addEventListener('DOMContentLoaded', ()=>{
     if(nav.classList.contains('is-open') && !nav.contains(e.target) && !toggle.contains(e.target)){
       nav.classList.remove('is-open');
       document.body.classList.remove('menu-open');
-      toggle.classList.remove('is-open');
+      toggle.classList.remove('is-open', 'is-active');
     }
   });
 
@@ -1799,7 +1807,7 @@ document.addEventListener('DOMContentLoaded', ()=>{
     if(e.key === 'Escape' && nav.classList.contains('is-open')){
       nav.classList.remove('is-open');
       document.body.classList.remove('menu-open');
-      toggle.classList.remove('is-open');
+      toggle.classList.remove('is-open', 'is-active');
     }
   });
 });
@@ -1824,22 +1832,6 @@ document.addEventListener("DOMContentLoaded", () => {
       setOpen(!item.classList.contains("is-open"));
     });
 
-    if (nextButton) {
-      nextButton.addEventListener("click", () => {
-        const active = Math.round(track.scrollLeft / Math.max(track.clientWidth, 1));
-        const next = (active + 1) % dots.length;
-        track.scrollTo({ left: next * track.clientWidth, behavior: "smooth" });
-      });
-    }
-
-    if (prevButton) {
-      prevButton.addEventListener("click", () => {
-        const active = Math.round(track.scrollLeft / Math.max(track.clientWidth, 1));
-        const previous = (active - 1 + dots.length) % dots.length;
-        track.scrollTo({ left: previous * track.clientWidth, behavior: "smooth" });
-      });
-    }
-
     document.addEventListener("click", (event) => {
       if (isMobileMenu() && !item.contains(event.target)) setOpen(false);
     });
@@ -1847,5 +1839,96 @@ document.addEventListener("DOMContentLoaded", () => {
     document.addEventListener("keydown", (event) => {
       if (isMobileMenu() && event.key === "Escape") setOpen(false);
     });
+  });
+});
+
+// Trên điện thoại, Kiến thức luôn mở danh sách con trước thay vì chuyển trang.
+document.addEventListener("DOMContentLoaded", () => {
+  const item = document.querySelector(".nav-knowledge-item");
+  const trigger = item?.querySelector(":scope > .nav-knowledge-link");
+  if (!item || !trigger) return;
+
+  trigger.addEventListener("click", (event) => {
+    if (!window.matchMedia("(max-width: 900px)").matches) return;
+    event.preventDefault();
+    event.stopImmediatePropagation();
+    const willOpen = !item.classList.contains("is-open");
+    item.classList.toggle("is-open", willOpen);
+    trigger.setAttribute("aria-expanded", String(willOpen));
+  }, true);
+});
+
+// Menu Dịch vụ và Kiến thức trên PC: mở bằng rê chuột hoặc bấm, giữ nguyên khi di chuyển vào bảng.
+document.addEventListener("DOMContentLoaded", () => {
+  // Đồng bộ cột Gội đầu trong menu Dịch vụ của mọi trang bài viết cũ.
+  // Các trang đã có sẵn liên kết Gội đầu sẽ được giữ nguyên.
+  document.querySelectorAll(".site-header-premium #serviceMenu").forEach((serviceMenu) => {
+    if (serviceMenu.querySelector('a[href*="goi-dau-duong-sinh.html"]')) return;
+
+    const columns = serviceMenu.querySelectorAll(":scope > .nav-service-column");
+    const shampooColumn = columns[columns.length - 1];
+    if (!shampooColumn) return;
+
+    shampooColumn.innerHTML = [
+      '<a class="nav-service-heading" href="../goi-dau-duong-sinh.html">Gội đầu dưỡng sinh</a>',
+      '<a href="../goi-dau-duong-sinh.html#bang-gia">Xem bảng giá gội đầu</a>',
+      '<a href="../goi-dau-duong-sinh.html#dat-lich">Đặt lịch gội đầu</a>'
+    ].join("");
+  });
+
+  const desktopQuery = window.matchMedia("(min-width: 901px)");
+
+  document.querySelectorAll(".nav-service-item").forEach((item) => {
+    const trigger = item.querySelector(":scope > .nav-service-link");
+    if (!trigger) return;
+
+    let closeTimer = null;
+    const cancelClose = () => {
+      if (closeTimer) window.clearTimeout(closeTimer);
+      closeTimer = null;
+    };
+    const open = () => {
+      cancelClose();
+      if (desktopQuery.matches) {
+        item.classList.add("is-open");
+        trigger.setAttribute("aria-expanded", "true");
+      }
+    };
+    const close = () => {
+      cancelClose();
+      item.classList.remove("is-open");
+      trigger.setAttribute("aria-expanded", "false");
+    };
+    const scheduleClose = () => {
+      cancelClose();
+      if (desktopQuery.matches) closeTimer = window.setTimeout(close, 180);
+    };
+
+    item.addEventListener("pointerenter", open);
+    item.addEventListener("pointerleave", scheduleClose);
+    trigger.addEventListener("click", (event) => {
+      if (!desktopQuery.matches) return;
+      event.preventDefault();
+      item.classList.contains("is-open") ? close() : open();
+    });
+    document.addEventListener("click", (event) => {
+      if (desktopQuery.matches && !item.contains(event.target)) close();
+    });
+    document.addEventListener("keydown", (event) => {
+      if (desktopQuery.matches && event.key === "Escape") close();
+    });
+  });
+
+  const normalizePath = (value) => {
+    const url = new URL(value, window.location.href);
+    if (url.origin !== window.location.origin) return "";
+    const path = url.pathname.replace(/\/index\.html$/, "/").replace(/\/$/, "/index.html");
+    return path || "/index.html";
+  };
+  const currentPath = normalizePath(window.location.href);
+  document.querySelectorAll(".site-header-premium .main-nav a[href]").forEach((link) => {
+    const href = link.getAttribute("href");
+    if (!href || href.startsWith("#")) return;
+    if (normalizePath(href) === currentPath) link.classList.add("is-current");
   });
 });

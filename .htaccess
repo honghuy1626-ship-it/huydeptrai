@@ -2,7 +2,7 @@ Options -Indexes
 
 <IfModule mod_rewrite.c>
   RewriteEngine On
-  RewriteCond %{HTTP_HOST} ^datlichgoidau\.ellyphunxamtainha\.com$ [NC]
+  RewriteCond %{HTTP_HOST} ^(goidau|datlichgoidau)\.ellyphunxamtainha\.com$ [NC]
   RewriteRule ^$ /goi-dau-duong-sinh.html [L]
 </IfModule>
 

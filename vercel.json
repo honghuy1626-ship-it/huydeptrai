@@ -2,7 +2,22 @@
   "rewrites": [
     {
       "source": "/",
-      "has": [{ "type": "host", "value": "datlichgoidau.ellyphunxamtainha.com" }],
+      "has": [
+        {
+          "type": "host",
+          "value": "datlichgoidau.ellyphunxamtainha.com"
+        }
+      ],
+      "destination": "/goi-dau-duong-sinh.html"
+    },
+    {
+      "source": "/",
+      "has": [
+        {
+          "type": "host",
+          "value": "goidau.ellyphunxamtainha.com"
+        }
+      ],
       "destination": "/goi-dau-duong-sinh.html"
     }
   ],

@@ -1,6 +1,7 @@
 const SEARCH_LOG_SHEET_NAME = "Search Logs";
 const BOOKING_SHEET_NAME = "ELLY - Đặt lịch";
 const DEFAULT_BOOKING_SHEET_NAME = "ELLY - Dat lich";
+const SHAMPOO_BOOKING_SHEET_NAME = "ELLY - Gội đầu";
 const SPREADSHEET_ID = "";
 const CRM_NEW_STATUS = "NEW";
 const CRM_READ_STATUS = "READ";
@@ -76,6 +77,8 @@ const BOOKING_HEADERS = [
   "Họ tên",
   "Số điện thoại",
   "Dịch vụ",
+  "Ngày hẹn",
+  "Giờ hẹn",
   "Khu vực",
   "Địa chỉ",
   "Ghi chú",
@@ -92,10 +95,51 @@ const BOOKING_HEADERS = [
 ];
 
 const BOOKING_COLUMNS = {
-  visitorId: 12,
-  customerType: 17,
-  status: 18
+  visitorId: 14,
+  customerType: 19,
+  status: 20
 };
+
+const SHAMPOO_BOOKING_HEADERS = [
+  "Thời gian",
+  "Nguồn",
+  "Họ tên",
+  "Số điện thoại",
+  "Gói gội đầu",
+  "Ngày hẹn",
+  "Giờ hẹn",
+  "Khu vực",
+  "Địa chỉ",
+  "Ghi chú",
+  "Địa chỉ IP",
+  "Quốc gia",
+  "Thành phố",
+  "Visitor ID",
+  "GPS City",
+  "GPS District",
+  "Latitude",
+  "Longitude",
+  "Customer Type",
+  "Status"
+];
+
+const SHAMPOO_BOOKING_COLUMNS = {
+  visitorId: 14,
+  customerType: 19,
+  status: 20
+};
+
+function setupShampooBookingSheet() {
+  return getSheetWithHeaders(SHAMPOO_BOOKING_SHEET_NAME, SHAMPOO_BOOKING_HEADERS).getName();
+}
+
+// Chạy thủ công một lần nếu muốn tạo lại/khôi phục tab Gội đầu riêng.
+// Không chỉnh sửa hay xóa dữ liệu trong tab đặt lịch Phun xăm.
+function taoBangGoiDauRieng() {
+  const sheet = getSheetWithHeaders(SHAMPOO_BOOKING_SHEET_NAME, SHAMPOO_BOOKING_HEADERS);
+  sheet.setFrozenRows(1);
+  return 'Đã sẵn sàng nhận lịch trong tab: ' + sheet.getName();
+}
 
 function doPost(e) {
   const params = e && e.parameter ? e.parameter : {};
@@ -165,16 +209,24 @@ function appendSearchLog(params) {
 }
 
 function appendBooking(params, sheetName) {
-  const sheet = getSheetWithHeaders(sheetName, BOOKING_HEADERS);
+  const isShampooBooking = sheetName === SHAMPOO_BOOKING_SHEET_NAME;
+  const headers = isShampooBooking ? SHAMPOO_BOOKING_HEADERS : BOOKING_HEADERS;
+  const columns = isShampooBooking ? SHAMPOO_BOOKING_COLUMNS : BOOKING_COLUMNS;
+  const sheet = getSheetWithHeaders(sheetName, headers);
   const bookingTracking = getBookingTrackingFromSearchLogs(params);
-  const customerType = getCustomerTypeForVisitor(sheet, BOOKING_COLUMNS.visitorId, bookingTracking.visitorId);
+  const customerType = getCustomerTypeForVisitor(sheet, columns.visitorId, bookingTracking.visitorId);
 
-  sheet.appendRow([
+  const bookingRow = [
     formatLogTime(params.createdAt),
     params.source || "",
     params.fullName || "",
     params.phone || "",
     params.service || "",
+    params.appointmentDate || "",
+    params.appointmentTime || ""
+  ];
+
+  bookingRow.push(
     params.province || "",
     params.address || "",
     params.note || "",
@@ -188,9 +240,10 @@ function appendBooking(params, sheetName) {
     bookingTracking.longitude,
     customerType,
     CRM_NEW_STATUS
-  ]);
+  );
+  sheet.appendRow(bookingRow);
 
-  markNewCrmRow(sheet, sheet.getLastRow(), BOOKING_HEADERS.length, customerType);
+  markNewCrmRow(sheet, sheet.getLastRow(), headers.length, customerType);
 }
 
 function getSheetWithHeaders(sheetName, headers) {
@@ -199,6 +252,12 @@ function getSheetWithHeaders(sheetName, headers) {
 
   if (!sheet) {
     sheet = spreadsheet.insertSheet(sheetName);
+  }
+
+  // Chỉ chạy một lần cho sheet đặt lịch cũ: chèn cột vào giữa thay vì
+  // ghi đè tiêu đề, nhờ đó toàn bộ dữ liệu cũ vẫn nằm đúng cột.
+  if (headers === BOOKING_HEADERS) {
+    ensureBookingAppointmentColumns(sheet);
   }
 
   if (sheet.getMaxColumns() < headers.length) {
@@ -213,6 +272,36 @@ function getSheetWithHeaders(sheetName, headers) {
   }
 
   return sheet;
+}
+
+function ensureBookingAppointmentColumns(sheet) {
+  if (sheet.getLastRow() === 0) return;
+
+  const firstRow = sheet.getRange(1, 1, 1, Math.max(sheet.getLastColumn(), 7)).getDisplayValues()[0];
+  const hasAppointmentColumns = firstRow[5] === "Ngày hẹn" && firstRow[6] === "Giờ hẹn";
+  if (!hasAppointmentColumns) {
+    sheet.insertColumnsAfter(5, 2);
+  }
+}
+
+// Chạy thủ công hàm này một lần trong Apps Script để thêm ngay hai cột
+// "Ngày hẹn" và "Giờ hẹn" vào tab đặt lịch chung, kể cả khi chưa có đơn mới.
+function addAppointmentColumnsToBookingSheet() {
+  const spreadsheet = getSpreadsheet();
+  const sheet = spreadsheet.getSheetByName(BOOKING_SHEET_NAME)
+    || spreadsheet.getSheetByName(DEFAULT_BOOKING_SHEET_NAME);
+
+  if (!sheet) {
+    throw new Error('Không tìm thấy tab "' + BOOKING_SHEET_NAME + '". Hãy kiểm tra đúng tên tab đặt lịch.');
+  }
+
+  ensureBookingAppointmentColumns(sheet);
+  if (sheet.getMaxColumns() < BOOKING_HEADERS.length) {
+    sheet.insertColumnsAfter(sheet.getMaxColumns(), BOOKING_HEADERS.length - sheet.getMaxColumns());
+  }
+  sheet.getRange(1, 1, 1, BOOKING_HEADERS.length).setValues([BOOKING_HEADERS]);
+  sheet.setFrozenRows(1);
+  return 'Đã thêm cột Ngày hẹn và Giờ hẹn vào tab: ' + sheet.getName();
 }
 
 function onOpen() {
@@ -252,6 +341,13 @@ function getCrmConfigForSheet(sheet) {
     return {
       headersLength: BOOKING_HEADERS.length,
       statusColumn: BOOKING_COLUMNS.status
+    };
+  }
+
+  if (sheetName === SHAMPOO_BOOKING_SHEET_NAME) {
+    return {
+      headersLength: SHAMPOO_BOOKING_HEADERS.length,
+      statusColumn: SHAMPOO_BOOKING_COLUMNS.status
     };
   }
 
