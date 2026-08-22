@@ -1869,14 +1869,55 @@ document.addEventListener("DOMContentLoaded", () => {
     const shampooColumn = columns[columns.length - 1];
     if (!shampooColumn) return;
 
+    const shampooPage = window.location.pathname.includes("/kien-thuc/") ? "../goi-dau-duong-sinh.html" : "goi-dau-duong-sinh.html";
+
     shampooColumn.innerHTML = [
-      '<a class="nav-service-heading" href="../goi-dau-duong-sinh.html">Gội đầu dưỡng sinh</a>',
-      '<a href="../goi-dau-duong-sinh.html#bang-gia">Xem bảng giá gội đầu</a>',
-      '<a href="../goi-dau-duong-sinh.html#dat-lich">Đặt lịch gội đầu</a>'
+      `<a class="nav-service-heading" href="${shampooPage}">Gội đầu dưỡng sinh</a>`,
+      `<a href="${shampooPage}#bang-gia">Xem bảng giá gội đầu</a>`,
+      `<a href="${shampooPage}#dat-lich">Đặt lịch gội đầu</a>`
     ].join("");
   });
 
   const desktopQuery = window.matchMedia("(min-width: 901px)");
+
+  // Chuẩn hóa liên kết trong header để mọi trang đều dẫn về đúng website tương ứng.
+  const mainWebsite = "https://ellyphunxamtainha.com";
+  const mainPages = new Set(["index.html", "dich-vu.html", "bang-gia.html", "kien-thuc.html", "dat-lich.html", "chon-dang-may.html", "chon-mau-moi.html", "tu-van.html", "quy-trinh.html"]);
+  document.querySelectorAll(".site-header-premium a[href]").forEach((link) => {
+    const rawHref = link.getAttribute("href");
+    if (!rawHref || rawHref.startsWith("#") || /^(tel:|mailto:|javascript:)/i.test(rawHref)) return;
+
+    const destination = new URL(rawHref, window.location.href);
+    const pageName = destination.pathname.split("/").pop().toLowerCase();
+    const suffix = `${destination.search}${destination.hash}`;
+    if (mainPages.has(pageName)) {
+      link.href = `${mainWebsite}/${pageName}${suffix}`;
+    }
+  });
+
+  // Trên PC, mỗi nhóm trong bảng Dịch vụ tự mở danh sách con.
+  document.querySelectorAll(".site-header-premium .nav-service-item:not(.nav-knowledge-item) .nav-service-list .nav-service-column").forEach((column) => {
+    const heading = column.querySelector(":scope > strong, :scope > .nav-service-heading");
+    if (!heading) return;
+
+    let childrenPanel = column.querySelector(":scope > .nav-service-children");
+    if (!childrenPanel) {
+      const childLinks = [...column.querySelectorAll(":scope > a:not(.nav-service-heading)")];
+      if (childLinks.length) {
+        childrenPanel = document.createElement("div");
+        childrenPanel.className = "nav-service-children";
+        childLinks.forEach((link) => childrenPanel.append(link));
+        column.append(childrenPanel);
+      }
+    }
+
+    if (heading.tagName === "STRONG") {
+      heading.setAttribute("role", "button");
+      heading.setAttribute("tabindex", "0");
+    }
+    heading.setAttribute("aria-expanded", "false");
+
+  });
 
   document.querySelectorAll(".nav-service-item").forEach((item) => {
     const trigger = item.querySelector(":scope > .nav-service-link");

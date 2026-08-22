@@ -5529,6 +5529,86 @@ body .site-header.site-header-premium .brand-mark i {
   display: none;
 }
 
+/* Mega menu Dịch vụ: hiển thị toàn bộ dịch vụ trong khung trắng. */
+@media (min-width: 901px) {
+  .site-header.site-header-premium .nav-service-item:not(.nav-knowledge-item) > .nav-service-list { display:grid!important; grid-template-columns:repeat(3,minmax(180px,1fr)); gap:22px 28px; width:min(820px,calc(100vw - 48px))!important; padding:28px 34px!important; overflow:visible!important; background:#fffdf8!important; border:1px solid rgba(189,123,53,.42)!important; border-radius:15px!important; box-shadow:0 16px 34px rgba(0,0,0,.25)!important; }
+  .site-header.site-header-premium .nav-service-item:not(.nav-knowledge-item) > .nav-service-list::before { background:#fffdf8!important; border-color:rgba(189,123,53,.42)!important; opacity:1!important; }
+  .site-header.site-header-premium .nav-service-item:not(.nav-knowledge-item) .nav-service-column { display:block!important; width:auto!important; padding:0!important; }
+  .site-header.site-header-premium .nav-service-item:not(.nav-knowledge-item) .nav-service-column strong,.site-header.site-header-premium .nav-service-item:not(.nav-knowledge-item) .nav-service-column .nav-service-heading { display:block!important; min-height:0!important; margin:0 0 9px!important; padding:0!important; color:#4a2b13!important; font-family:"Be Vietnam Pro",Arial,sans-serif!important; font-size:.96rem!important; font-weight:800!important; }
+  .site-header.site-header-premium .nav-service-item:not(.nav-knowledge-item) .nav-service-column strong::after,.site-header.site-header-premium .nav-service-item:not(.nav-knowledge-item) .nav-service-column .nav-service-heading::after { content:none!important; }
+  .site-header.site-header-premium .nav-service-item:not(.nav-knowledge-item) .nav-service-children { position:static!important; display:flex!important; flex-direction:column; align-items:flex-start; gap:2px; width:auto!important; max-width:none!important; min-height:0!important; padding:0!important; overflow:visible!important; background:transparent!important; border:0!important; border-radius:0!important; box-shadow:none!important; white-space:normal!important; }
+  .site-header.site-header-premium .nav-service-item:not(.nav-knowledge-item) .nav-service-children > a { display:block!important; width:100%; padding:5px 0!important; color:#68452d!important; font-size:.86rem!important; font-weight:600; line-height:1.4; }
+  .site-header.site-header-premium .nav-service-item:not(.nav-knowledge-item) .nav-service-children > a:hover { padding-left:7px!important; color:#4a2b13!important; background:transparent!important; }
+}
+
+/* Bảng Dịch vụ: trở lại màu và kiểu chữ cũ, nhóm dọc - mục con ngang. */
+@media (min-width: 901px) {
+  .site-header.site-header-premium .nav-service-item:not(.nav-knowledge-item) > .nav-service-list {
+    display: block !important;
+    width: min(760px, calc(100vw - 48px)) !important;
+    padding: 18px 22px !important;
+    background: #2b1a14 !important;
+    border: 1px solid rgba(232,193,137,.5) !important;
+    border-radius: 16px !important;
+    box-shadow: 0 16px 34px rgba(0,0,0,.32) !important;
+  }
+  .site-header.site-header-premium .nav-service-item:not(.nav-knowledge-item) > .nav-service-list::before {
+    top: -8px !important;
+    width: 15px !important;
+    height: 15px !important;
+    background: #2b1a14 !important;
+    border-color: rgba(232,193,137,.5) !important;
+    opacity: 0;
+    transition: opacity .16s ease;
+  }
+  .site-header.site-header-premium .nav-service-item:not(.nav-knowledge-item):hover > .nav-service-list::before,
+  .site-header.site-header-premium .nav-service-item:not(.nav-knowledge-item):focus-within > .nav-service-list::before,
+  .site-header.site-header-premium .nav-service-item:not(.nav-knowledge-item).is-open > .nav-service-list::before { opacity: 1; }
+  .site-header.site-header-premium .nav-service-item:not(.nav-knowledge-item) .nav-service-column {
+    display: flex !important;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 5px 8px;
+    width: 100%;
+    padding: 7px 8px !important;
+  }
+  .site-header.site-header-premium .nav-service-item:not(.nav-knowledge-item) .nav-service-column strong,
+  .site-header.site-header-premium .nav-service-item:not(.nav-knowledge-item) .nav-service-column .nav-service-heading {
+    flex: 0 0 100%;
+    min-height: 34px !important;
+    padding: 0 !important;
+    color: #e8c189 !important;
+    background: transparent !important;
+    border-radius: 0 !important;
+    font-family: "Be Vietnam Pro", Arial, sans-serif !important;
+    font-size: .9rem !important;
+    font-weight: 700 !important;
+  }
+  .site-header.site-header-premium .nav-service-item:not(.nav-knowledge-item) .nav-service-column strong::after,
+  .site-header.site-header-premium .nav-service-item:not(.nav-knowledge-item) .nav-service-column .nav-service-heading::after { color: #e8c189 !important; }
+  .site-header.site-header-premium .nav-service-item:not(.nav-knowledge-item) .nav-service-column:hover strong,
+  .site-header.site-header-premium .nav-service-item:not(.nav-knowledge-item) .nav-service-column:focus-within strong,
+  .site-header.site-header-premium .nav-service-item:not(.nav-knowledge-item) .nav-service-column.is-open strong,
+  .site-header.site-header-premium .nav-service-item:not(.nav-knowledge-item) .nav-service-column:hover .nav-service-heading,
+  .site-header.site-header-premium .nav-service-item:not(.nav-knowledge-item) .nav-service-column:focus-within .nav-service-heading,
+  .site-header.site-header-premium .nav-service-item:not(.nav-knowledge-item) .nav-service-column.is-open .nav-service-heading { color: #e8c189 !important; background: transparent !important; }
+  .site-header.site-header-premium .nav-service-item:not(.nav-knowledge-item) .nav-service-column > a:not(.nav-service-heading) {
+    display: none !important;
+    width: auto !important;
+    margin: 0 !important;
+    padding: 6px 9px !important;
+    color: rgba(255,255,255,.78) !important;
+    background: transparent !important;
+    border-radius: 7px;
+    font-size: .82rem !important;
+    font-weight: 600;
+  }
+  .site-header.site-header-premium .nav-service-item:not(.nav-knowledge-item) .nav-service-column:hover > a:not(.nav-service-heading),
+  .site-header.site-header-premium .nav-service-item:not(.nav-knowledge-item) .nav-service-column:focus-within > a:not(.nav-service-heading),
+  .site-header.site-header-premium .nav-service-item:not(.nav-knowledge-item) .nav-service-column.is-open > a:not(.nav-service-heading) { display: inline-flex !important; }
+  .site-header.site-header-premium .nav-service-item:not(.nav-knowledge-item) .nav-service-column > a:not(.nav-service-heading):hover { color: #211611 !important; background: #f7ecdd !important; }
+}
+
 /* Nút chuyển ảnh chỉ áp dụng trên màn hình máy tính. */
 .pricing-prev,
 .pricing-next {
@@ -5568,6 +5648,52 @@ body .site-header.site-header-premium .brand-mark i {
   .pricing-media.pricing-carousel { overflow: visible; }
   .pricing-next { right: -19px; }
   .pricing-prev { left: -19px; }
+}
+
+/* Tinh chỉnh cuối: header Phun xăm khớp header Gội đầu và không có mũi tên. */
+@media (min-width: 901px) {
+  body:not(.goidau-page) .site-header.site-header-premium .header-inner {
+    height: 78px !important;
+    gap: 24px !important;
+  }
+
+  body:not(.goidau-page) .site-header.site-header-premium .main-nav {
+    justify-self: center !important;
+    gap: 28px !important;
+  }
+
+  body:not(.goidau-page) .site-header.site-header-premium .main-nav > a,
+  body:not(.goidau-page) .site-header.site-header-premium .nav-service-item > .nav-service-link {
+    display: inline-flex !important;
+    align-items: center !important;
+    min-height: auto !important;
+    padding: 8px 9px !important;
+    font-family: "Be Vietnam Pro", Arial, sans-serif !important;
+    font-size: .9rem !important;
+    font-weight: 700 !important;
+    line-height: 1.2 !important;
+    letter-spacing: normal !important;
+  }
+
+  body:not(.goidau-page) .site-header.site-header-premium .nav-service-item > .nav-service-link::after,
+  body:not(.goidau-page) .site-header.site-header-premium .nav-service-item:hover > .nav-service-link::after,
+  body:not(.goidau-page) .site-header.site-header-premium .nav-service-item:focus-within > .nav-service-link::after,
+  body:not(.goidau-page) .site-header.site-header-premium .nav-service-item.is-open > .nav-service-link::after {
+    content: none !important;
+    display: none !important;
+    width: 0 !important;
+    margin: 0 !important;
+    padding: 0 !important;
+  }
+
+  body:not(.goidau-page) .site-header.site-header-premium .header-actions .btn-primary {
+    min-width: 106px !important;
+    min-height: 42px !important;
+    padding: 0 24px !important;
+    font-family: "Be Vietnam Pro", Arial, sans-serif !important;
+    font-size: .9rem !important;
+    font-weight: 800 !important;
+  }
 }
 
 /* Đồng bộ menu điện thoại toàn web theo giao diện trang Gội đầu. */
@@ -5664,6 +5790,72 @@ body .site-header.site-header-premium .brand-mark i {
     background: #e8c189 !important;
     border-radius: 7px !important;
     padding: 8px 10px !important;
+  }
+}
+
+/* Header PC Phun xăm: khớp đúng tỉ lệ của header Gội đầu. */
+@media (min-width: 901px) {
+  body:not(.goidau-page) .site-header.site-header-premium {
+    min-height: 78px !important;
+  }
+
+  body:not(.goidau-page) .site-header.site-header-premium .header-inner {
+    grid-template-columns: auto minmax(0, 1fr) auto !important;
+    width: min(1280px, calc(100% - 48px)) !important;
+    height: 78px !important;
+    gap: 28px !important;
+  }
+
+  body:not(.goidau-page) .site-header.site-header-premium .brand-premium {
+    gap: 3px !important;
+  }
+
+  body:not(.goidau-page) .site-header.site-header-premium .brand-premium::before {
+    display: none !important;
+  }
+
+  body:not(.goidau-page) .site-header.site-header-premium .brand-copy {
+    display: flex !important;
+    flex-direction: column !important;
+    align-items: center !important;
+    gap: 1px !important;
+  }
+
+  body:not(.goidau-page) .site-header.site-header-premium .brand-mark {
+    width: 96px !important;
+    height: 32px !important;
+  }
+
+  body:not(.goidau-page) .site-header.site-header-premium .brand-sub {
+    display: block !important;
+    align-self: center;
+    color: #fff2d4 !important;
+    font-size: .52rem !important;
+    font-weight: 900 !important;
+    letter-spacing: .2em !important;
+    line-height: 1 !important;
+    text-shadow: 0 1px 7px rgba(232, 193, 137, .45);
+  }
+
+  body:not(.goidau-page) .site-header.site-header-premium .main-nav {
+    gap: 28px !important;
+  }
+
+  body:not(.goidau-page) .site-header.site-header-premium .main-nav > a,
+  body:not(.goidau-page) .site-header.site-header-premium .main-nav .nav-service-link {
+    font-size: .9rem !important;
+    font-weight: 700 !important;
+  }
+
+  body:not(.goidau-page) .site-header.site-header-premium .header-actions .btn-primary {
+    min-height: 42px !important;
+    padding: 0 24px !important;
+    color: #211611 !important;
+    background: linear-gradient(90deg, #f0d6a8, #c9a86a) !important;
+    border: 0 !important;
+    border-radius: 999px !important;
+    font-size: .9rem !important;
+    font-weight: 800 !important;
   }
 }
 
@@ -8055,3 +8247,85 @@ body .site-header.site-header-premium .brand-mark {
   body:not(.goidau-page) .site-header.site-header-premium .nav-service-column .nav-service-heading { color: #e8c189 !important; font-size: .72rem !important; font-weight: 700 !important; letter-spacing: .04em !important; text-transform: uppercase !important; }
   body:not(.goidau-page) .site-header.site-header-premium .nav-service-list a.is-current { color: #211611 !important; background: #e8c189 !important; border-radius: 7px !important; padding: 8px 10px !important; }
 }
+
+/* Chuẩn cuối cùng cho header PC Phun xăm, giống tỉ lệ Gội đầu. */
+@media (min-width: 901px) {
+  body:not(.goidau-page) .site-header.site-header-premium { min-height: 78px !important; }
+  body:not(.goidau-page) .site-header.site-header-premium .header-inner { grid-template-columns: auto minmax(0, 1fr) auto !important; width: min(1280px, calc(100% - 48px)) !important; height: 78px !important; gap: 28px !important; }
+  body:not(.goidau-page) .site-header.site-header-premium .brand-premium { gap: 3px !important; }
+  body:not(.goidau-page) .site-header.site-header-premium .brand-premium::before { display: none !important; }
+  body:not(.goidau-page) .site-header.site-header-premium .brand-copy { display: flex !important; flex-direction: column !important; align-items: center !important; gap: 1px !important; }
+  body:not(.goidau-page) .site-header.site-header-premium .brand-mark { width: 96px !important; height: 32px !important; }
+  body:not(.goidau-page) .site-header.site-header-premium .brand-sub { display: block !important; align-self: center; color: #fff2d4 !important; font-size: .52rem !important; font-weight: 900 !important; letter-spacing: .2em !important; line-height: 1 !important; text-shadow: 0 1px 7px rgba(232, 193, 137, .45); }
+  body:not(.goidau-page) .site-header.site-header-premium .main-nav { gap: 28px !important; }
+  body:not(.goidau-page) .site-header.site-header-premium .main-nav > a, body:not(.goidau-page) .site-header.site-header-premium .main-nav .nav-service-link { font-size: .9rem !important; font-weight: 700 !important; }
+  body:not(.goidau-page) .site-header.site-header-premium .header-actions .btn-primary { min-height: 42px !important; padding: 0 24px !important; color: #211611 !important; background: linear-gradient(90deg, #f0d6a8, #c9a86a) !important; border: 0 !important; border-radius: 999px !important; font-size: .9rem !important; font-weight: 800 !important; }
+}
+
+/* Chuẩn header PC cuối cùng theo mẫu Gội đầu. */
+@media (min-width: 901px) {
+  body:not(.goidau-page) .site-header.site-header-premium .header-inner { height: 78px !important; gap: 24px !important; }
+  body:not(.goidau-page) .site-header.site-header-premium .main-nav { justify-self: center !important; gap: 28px !important; }
+  body:not(.goidau-page) .site-header.site-header-premium .main-nav > a,
+  body:not(.goidau-page) .site-header.site-header-premium .nav-service-item > .nav-service-link { display: inline-flex !important; align-items: center !important; min-height: auto !important; padding: 8px 9px !important; font-family: "Be Vietnam Pro", Arial, sans-serif !important; font-size: .9rem !important; font-weight: 700 !important; line-height: 1.2 !important; letter-spacing: normal !important; }
+  body:not(.goidau-page) .site-header.site-header-premium .nav-service-item > .nav-service-link::after,
+  body:not(.goidau-page) .site-header.site-header-premium .nav-service-item:hover > .nav-service-link::after,
+  body:not(.goidau-page) .site-header.site-header-premium .nav-service-item:focus-within > .nav-service-link::after,
+  body:not(.goidau-page) .site-header.site-header-premium .nav-service-item.is-open > .nav-service-link::after { content: none !important; display: none !important; width: 0 !important; margin: 0 !important; padding: 0 !important; }
+  body:not(.goidau-page) .site-header.site-header-premium .header-actions .btn-primary { min-width: 106px !important; min-height: 42px !important; padding: 0 24px !important; font-family: "Be Vietnam Pro", Arial, sans-serif !important; font-size: .9rem !important; font-weight: 800 !important; }
+}
+
+/* Header PC dùng một chuẩn duy nhất theo trang Gội đầu. */
+@media (min-width: 901px) {
+  .site-header.site-header-premium { min-height: 78px !important; background: #211611 !important; }
+  .site-header.site-header-premium .header-inner { grid-template-columns: auto minmax(0, 1fr) auto !important; width: min(1280px, calc(100% - 48px)) !important; height: 78px !important; gap: 24px !important; }
+  .site-header.site-header-premium .brand-premium { gap: 3px !important; }
+  .site-header.site-header-premium .brand-premium::before { display: none !important; }
+  .site-header.site-header-premium .brand-copy { display: flex !important; flex-direction: column !important; align-items: center !important; gap: 1px !important; }
+  .site-header.site-header-premium .brand-mark { width: 96px !important; height: 32px !important; }
+  .site-header.site-header-premium .brand-sub { display: block !important; align-self: center; color: #fff2d4 !important; font-size: .52rem !important; font-weight: 900 !important; letter-spacing: .2em !important; line-height: 1 !important; text-shadow: 0 1px 7px rgba(232,193,137,.45); }
+  .site-header.site-header-premium .main-nav { justify-self: center !important; gap: 28px !important; }
+  .site-header.site-header-premium .main-nav > a, .site-header.site-header-premium .nav-service-item > .nav-service-link { display: inline-flex !important; align-items: center !important; min-height: auto !important; padding: 8px 9px !important; font-family: "Be Vietnam Pro", Arial, sans-serif !important; font-size: .9rem !important; font-weight: 700 !important; line-height: 1.2 !important; letter-spacing: normal !important; }
+  .site-header.site-header-premium .nav-service-item > .nav-service-link::after { content: none !important; display: none !important; }
+  .site-header.site-header-premium .header-actions .btn-primary { min-width: 106px !important; min-height: 42px !important; padding: 0 24px !important; color: #211611 !important; background: linear-gradient(90deg, #f0d6a8, #c9a86a) !important; border: 0 !important; border-radius: 999px !important; font-family: "Be Vietnam Pro", Arial, sans-serif !important; font-size: .9rem !important; font-weight: 800 !important; }
+  .site-header.site-header-premium .nav-service-item:not(.nav-knowledge-item) > .nav-service-list { display: block !important; width: 330px !important; padding: 8px 0 !important; background: #fffaf1 !important; border: 1px solid rgba(189,123,53,.45) !important; border-radius: 0 0 10px 10px !important; box-shadow: 0 16px 30px rgba(33,22,17,.22) !important; }
+  .site-header.site-header-premium .nav-service-item:not(.nav-knowledge-item) > .nav-service-list::before { content: ""; position: absolute; top: -9px; left: 50%; width: 16px; height: 16px; background: #fffaf1; border-top: 1px solid rgba(189,123,53,.45); border-left: 1px solid rgba(189,123,53,.45); transform: translateX(-50%) rotate(45deg); }
+  .site-header.site-header-premium .nav-service-item:not(.nav-knowledge-item) .nav-service-column { position: relative; z-index: 1; display: block !important; width: 100%; padding: 0 8px; }
+  .site-header.site-header-premium .nav-service-item:not(.nav-knowledge-item) .nav-service-column strong, .site-header.site-header-premium .nav-service-item:not(.nav-knowledge-item) .nav-service-column .nav-service-heading { display: flex !important; align-items: center; justify-content: space-between; min-height: 44px !important; margin: 0 !important; padding: 11px 13px !important; color: #4a2b13 !important; background: transparent !important; border: 0; border-radius: 7px; font-size: 1rem !important; font-weight: 600 !important; cursor: pointer; }
+  .site-header.site-header-premium .nav-service-item:not(.nav-knowledge-item) .nav-service-column strong::after, .site-header.site-header-premium .nav-service-item:not(.nav-knowledge-item) .nav-service-column .nav-service-heading::after { content: "+"; color: #9a5a22; }
+  .site-header.site-header-premium .nav-service-item:not(.nav-knowledge-item) .nav-service-column:hover strong, .site-header.site-header-premium .nav-service-item:not(.nav-knowledge-item) .nav-service-column:focus-within strong, .site-header.site-header-premium .nav-service-item:not(.nav-knowledge-item) .nav-service-column.is-open strong, .site-header.site-header-premium .nav-service-item:not(.nav-knowledge-item) .nav-service-column:hover .nav-service-heading, .site-header.site-header-premium .nav-service-item:not(.nav-knowledge-item) .nav-service-column:focus-within .nav-service-heading, .site-header.site-header-premium .nav-service-item:not(.nav-knowledge-item) .nav-service-column.is-open .nav-service-heading { color: #7d4518 !important; background: #f3d29b !important; }
+  .site-header.site-header-premium .nav-service-item:not(.nav-knowledge-item) .nav-service-column:hover strong::after, .site-header.site-header-premium .nav-service-item:not(.nav-knowledge-item) .nav-service-column:focus-within strong::after, .site-header.site-header-premium .nav-service-item:not(.nav-knowledge-item) .nav-service-column.is-open strong::after, .site-header.site-header-premium .nav-service-item:not(.nav-knowledge-item) .nav-service-column:hover .nav-service-heading::after, .site-header.site-header-premium .nav-service-item:not(.nav-knowledge-item) .nav-service-column:focus-within .nav-service-heading::after, .site-header.site-header-premium .nav-service-item:not(.nav-knowledge-item) .nav-service-column.is-open .nav-service-heading::after { content: "−"; }
+  .site-header.site-header-premium .nav-service-item:not(.nav-knowledge-item) .nav-service-column > a:not(.nav-service-heading) { display: none !important; margin: 0 0 4px 12px !important; padding: 7px 12px !important; color: #6d4d38 !important; border-radius: 7px; font-size: .84rem !important; font-weight: 600; }
+  .site-header.site-header-premium .nav-service-item:not(.nav-knowledge-item) .nav-service-column:hover > a:not(.nav-service-heading), .site-header.site-header-premium .nav-service-item:not(.nav-knowledge-item) .nav-service-column:focus-within > a:not(.nav-service-heading), .site-header.site-header-premium .nav-service-item:not(.nav-knowledge-item) .nav-service-column.is-open > a:not(.nav-service-heading) { display: block !important; }
+  .site-header.site-header-premium .nav-service-item:not(.nav-knowledge-item) .nav-service-column > a:not(.nav-service-heading):hover { color: #211611 !important; background: #f3e2c7 !important; }
+}
+
+/* Dịch vụ PC: chuẩn màu cũ, ba mục mẹ dọc và mục con nằm ngang. */
+@media (min-width: 901px) {
+  .site-header.site-header-premium .nav-service-item:not(.nav-knowledge-item) > .nav-service-list { display:block!important; width:min(760px,calc(100vw - 48px))!important; padding:18px 22px!important; background:#2b1a14!important; border:1px solid rgba(232,193,137,.5)!important; border-radius:16px!important; box-shadow:0 16px 34px rgba(0,0,0,.32)!important; }
+  .site-header.site-header-premium .nav-service-item:not(.nav-knowledge-item) > .nav-service-list::before { top:-8px!important; width:15px!important; height:15px!important; background:#2b1a14!important; border-color:rgba(232,193,137,.5)!important; opacity:0; transition:opacity .16s ease; }
+  .site-header.site-header-premium .nav-service-item:not(.nav-knowledge-item):hover > .nav-service-list::before,.site-header.site-header-premium .nav-service-item:not(.nav-knowledge-item):focus-within > .nav-service-list::before,.site-header.site-header-premium .nav-service-item:not(.nav-knowledge-item).is-open > .nav-service-list::before { opacity:1; }
+  .site-header.site-header-premium .nav-service-item:not(.nav-knowledge-item) .nav-service-column { display:flex!important; flex-wrap:wrap; align-items:center; gap:5px 8px; width:100%; padding:7px 8px!important; }
+  .site-header.site-header-premium .nav-service-item:not(.nav-knowledge-item) .nav-service-column strong,.site-header.site-header-premium .nav-service-item:not(.nav-knowledge-item) .nav-service-column .nav-service-heading { flex:0 0 100%; min-height:34px!important; padding:0!important; color:#e8c189!important; background:transparent!important; border-radius:0!important; font-family:"Be Vietnam Pro",Arial,sans-serif!important; font-size:.9rem!important; font-weight:700!important; }
+  .site-header.site-header-premium .nav-service-item:not(.nav-knowledge-item) .nav-service-column strong::after,.site-header.site-header-premium .nav-service-item:not(.nav-knowledge-item) .nav-service-column .nav-service-heading::after { color:#e8c189!important; }
+  .site-header.site-header-premium .nav-service-item:not(.nav-knowledge-item) .nav-service-column:hover strong,.site-header.site-header-premium .nav-service-item:not(.nav-knowledge-item) .nav-service-column:focus-within strong,.site-header.site-header-premium .nav-service-item:not(.nav-knowledge-item) .nav-service-column.is-open strong,.site-header.site-header-premium .nav-service-item:not(.nav-knowledge-item) .nav-service-column:hover .nav-service-heading,.site-header.site-header-premium .nav-service-item:not(.nav-knowledge-item) .nav-service-column:focus-within .nav-service-heading,.site-header.site-header-premium .nav-service-item:not(.nav-knowledge-item) .nav-service-column.is-open .nav-service-heading { color:#e8c189!important; background:transparent!important; }
+  .site-header.site-header-premium .nav-service-item:not(.nav-knowledge-item) .nav-service-column > a:not(.nav-service-heading) { display:none!important; width:auto!important; margin:0!important; padding:6px 9px!important; color:rgba(255,255,255,.78)!important; background:transparent!important; border-radius:7px; font-size:.82rem!important; font-weight:600; }
+  .site-header.site-header-premium .nav-service-item:not(.nav-knowledge-item) .nav-service-column:hover > a:not(.nav-service-heading),.site-header.site-header-premium .nav-service-item:not(.nav-knowledge-item) .nav-service-column:focus-within > a:not(.nav-service-heading),.site-header.site-header-premium .nav-service-item:not(.nav-knowledge-item) .nav-service-column.is-open > a:not(.nav-service-heading) { display:inline-flex!important; }
+  .site-header.site-header-premium .nav-service-item:not(.nav-knowledge-item) .nav-service-column > a:not(.nav-service-heading):hover { color:#211611!important; background:#f7ecdd!important; }
+}
+
+/* Mục con Dịch vụ mở thành thanh ngang nằm ngoài khung nhóm chính. */
+@media (min-width: 901px) {
+  .site-header.site-header-premium .nav-service-item:not(.nav-knowledge-item) > .nav-service-list { width:310px!important; overflow:visible!important; }
+  .site-header.site-header-premium .nav-service-item:not(.nav-knowledge-item) .nav-service-column { position:relative!important; }
+  .site-header.site-header-premium .nav-service-item:not(.nav-knowledge-item) .nav-service-children { position:absolute; top:0; left:calc(100% + 14px); z-index:3; display:none; align-items:center; gap:6px; width:max-content; max-width:min(580px,calc(100vw - 390px)); min-height:50px; padding:8px 10px; overflow:auto; background:#2b1a14; border:1px solid rgba(232,193,137,.5); border-radius:12px; box-shadow:0 16px 34px rgba(0,0,0,.32); white-space:nowrap; }
+  .site-header.site-header-premium .nav-service-item:not(.nav-knowledge-item) .nav-service-column:hover > .nav-service-children,.site-header.site-header-premium .nav-service-item:not(.nav-knowledge-item) .nav-service-column:focus-within > .nav-service-children,.site-header.site-header-premium .nav-service-item:not(.nav-knowledge-item) .nav-service-column.is-open > .nav-service-children { display:flex!important; }
+  .site-header.site-header-premium .nav-service-item:not(.nav-knowledge-item) .nav-service-children > a { display:inline-flex!important; flex:0 0 auto; margin:0!important; padding:7px 10px!important; color:rgba(255,255,255,.8)!important; background:transparent!important; border-radius:7px; font-size:.82rem!important; font-weight:600; }
+  .site-header.site-header-premium .nav-service-item:not(.nav-knowledge-item) .nav-service-children > a:hover { color:#211611!important; background:#f7ecdd!important; }
+}
+
+/* Mega menu cuối cùng: toàn bộ dịch vụ trong khung trắng nhiều cột. */
+@media(min-width:901px){.site-header.site-header-premium .nav-service-item:not(.nav-knowledge-item)>.nav-service-list{display:grid!important;grid-template-columns:repeat(3,minmax(180px,1fr));gap:22px 28px;width:min(820px,calc(100vw - 48px))!important;padding:28px 34px!important;overflow:visible!important;background:#fffdf8!important;border:1px solid rgba(189,123,53,.42)!important;border-radius:15px!important;box-shadow:0 16px 34px rgba(0,0,0,.25)!important}.site-header.site-header-premium .nav-service-item:not(.nav-knowledge-item)>.nav-service-list::before{background:#fffdf8!important;border-color:rgba(189,123,53,.42)!important;opacity:1!important}.site-header.site-header-premium .nav-service-item:not(.nav-knowledge-item) .nav-service-column{display:block!important;width:auto!important;padding:0!important}.site-header.site-header-premium .nav-service-item:not(.nav-knowledge-item) .nav-service-column strong,.site-header.site-header-premium .nav-service-item:not(.nav-knowledge-item) .nav-service-column .nav-service-heading{display:block!important;min-height:0!important;margin:0 0 9px!important;padding:0!important;color:#4a2b13!important;background:transparent!important;font-family:"Be Vietnam Pro",Arial,sans-serif!important;font-size:.96rem!important;font-weight:800!important}.site-header.site-header-premium .nav-service-item:not(.nav-knowledge-item) .nav-service-column strong::after,.site-header.site-header-premium .nav-service-item:not(.nav-knowledge-item) .nav-service-column .nav-service-heading::after{content:none!important}.site-header.site-header-premium .nav-service-item:not(.nav-knowledge-item) .nav-service-children{position:static!important;display:flex!important;flex-direction:column;align-items:flex-start;gap:2px;width:auto!important;max-width:none!important;min-height:0!important;padding:0!important;overflow:visible!important;background:transparent!important;border:0!important;border-radius:0!important;box-shadow:none!important;white-space:normal!important}.site-header.site-header-premium .nav-service-item:not(.nav-knowledge-item) .nav-service-children>a{display:block!important;width:100%;margin:0!important;padding:5px 0!important;color:#68452d!important;background:transparent!important;font-size:.86rem!important;font-weight:600;line-height:1.4}.site-header.site-header-premium .nav-service-item:not(.nav-knowledge-item) .nav-service-children>a:hover{padding-left:7px!important;color:#4a2b13!important;background:transparent!important}}
+
+/* Mega menu Kiến thức dùng cùng cấu trúc với Dịch vụ, nhưng giữ đúng các chuyên mục hiện có. */
+@media(min-width:901px){.site-header.site-header-premium .nav-knowledge-item>.nav-knowledge-list{display:grid!important;grid-template-columns:repeat(3,minmax(180px,1fr));gap:18px 28px;width:min(760px,calc(100vw - 48px))!important;padding:26px 32px!important;background:#fffdf8!important;border:1px solid rgba(189,123,53,.42)!important;border-radius:15px!important;box-shadow:0 16px 34px rgba(0,0,0,.25)!important}.site-header.site-header-premium .nav-knowledge-item>.nav-knowledge-list::before{background:#fffdf8!important;border-color:rgba(189,123,53,.42)!important;opacity:1!important}.site-header.site-header-premium .nav-knowledge-item .nav-service-column{display:block!important;width:auto!important;margin:0!important;padding:0!important}.site-header.site-header-premium .nav-knowledge-item .nav-service-column>a{display:block!important;margin:0!important;padding:8px 0!important;color:#4a2b13!important;background:transparent!important;border:0!important;border-radius:0!important;font-family:"Be Vietnam Pro",Arial,sans-serif!important;font-size:.92rem!important;font-weight:800!important;line-height:1.4!important}.site-header.site-header-premium .nav-knowledge-item .nav-service-column>a:hover,.site-header.site-header-premium .nav-knowledge-item .nav-service-column>a:focus-visible{padding-left:7px!important;color:#7d4518!important;background:transparent!important}}
