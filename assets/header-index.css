@@ -1,0 +1,208 @@
+/* Chuẩn giao diện header theo index.html, dùng thêm cho nhóm trang Gội đầu. */
+.goidau-page .site-header.site-header-premium .brand-logo-icon{display:none!important}.goidau-page .site-header.site-header-premium .brand-premium::before{content:""!important;display:block!important;width:42px!important;height:42px!important;flex:0 0 42px!important;background:url("elly-emblem-header.png") center/contain no-repeat!important}.goidau-page .site-header.site-header-premium .brand-mark{display:block!important;overflow:hidden!important;color:transparent!important;font-size:0!important;background:url("elly-wordmark-header.png") center/contain no-repeat!important}.goidau-page .site-header.site-header-premium .brand-mark i{display:none!important}
+
+@media (min-width: 901px) {
+  .goidau-page .site-header.site-header-premium .brand-logo-icon { display: none !important; }
+  .goidau-page .site-header.site-header-premium .brand-premium::before { content: "" !important; display: block !important; width: 42px !important; height: 42px !important; flex: 0 0 42px !important; background: url("elly-emblem-header.png") center / contain no-repeat !important; }
+  .goidau-page .site-header.site-header-premium .brand-mark { display: block !important; overflow: hidden !important; color: transparent !important; font-size: 0 !important; background: url("elly-wordmark-header.png") center / contain no-repeat !important; }
+  .goidau-page .site-header.site-header-premium .brand-mark i { display: none !important; }
+
+  .goidau-page .site-header.site-header-premium {
+    position: sticky !important;
+    top: 0 !important;
+    z-index: 100 !important;
+    width: 100% !important;
+    min-height: 78px !important;
+    background: #211611 !important;
+    border-bottom: 1px solid rgba(255,255,255,.08) !important;
+  }
+
+  .goidau-page .site-header.site-header-premium .header-inner {
+    grid-template-columns: auto minmax(0, 1fr) auto !important;
+    width: min(1280px, calc(100% - 48px)) !important;
+    height: 78px !important;
+    gap: 24px !important;
+  }
+
+  .goidau-page .site-header.site-header-premium .brand-premium { gap: 3px !important; }
+  .goidau-page .site-header.site-header-premium .brand-premium::before { display: none !important; }
+  .goidau-page .site-header.site-header-premium .brand-copy { display: flex !important; flex-direction: column !important; align-items: center !important; gap: 1px !important; }
+  .goidau-page .site-header.site-header-premium .brand-mark { width: 96px !important; height: 32px !important; }
+  .goidau-page .site-header.site-header-premium .brand-sub { display: block !important; color: #fff2d4 !important; font-size: .52rem !important; font-weight: 900 !important; letter-spacing: .2em !important; line-height: 1 !important; }
+  .goidau-page .site-header.site-header-premium .main-nav { justify-self: center !important; gap: 28px !important; }
+  .goidau-page .site-header.site-header-premium .main-nav { position: static !important; display: flex !important; align-items: center !important; opacity: 1 !important; pointer-events: auto !important; transform: none !important; background: transparent !important; }
+  .goidau-page .site-header.site-header-premium .main-nav > a,
+  .goidau-page .site-header.site-header-premium .nav-service-item > .nav-service-link { display: inline-flex !important; align-items: center !important; min-height: auto !important; padding: 8px 9px !important; font-family: "Be Vietnam Pro", Arial, sans-serif !important; font-size: .9rem !important; font-weight: 700 !important; line-height: 1.2 !important; }
+  .goidau-page .site-header.site-header-premium .main-nav > a,
+  .goidau-page .site-header.site-header-premium .nav-service-item > .nav-service-link { position: relative; isolation: isolate; color: rgba(255,255,255,.84) !important; background: transparent !important; border-radius: 8px; text-decoration: none !important; transition: color .18s ease, transform .18s ease, text-shadow .18s ease; }
+  .goidau-page .site-header.site-header-premium .main-nav > a::before,
+  .goidau-page .site-header.site-header-premium .nav-service-item > .nav-service-link::before { content: ""; position: absolute; inset: 3px 5px; z-index: -1; background: rgba(232,193,137,.16); border: 1px solid rgba(232,193,137,.20); border-radius: 6px; opacity: 0; transform: scale(.86); transition: opacity .18s ease, transform .18s ease; }
+  .goidau-page .site-header.site-header-premium .main-nav > a:hover,
+  .goidau-page .site-header.site-header-premium .main-nav > a:focus-visible,
+  .goidau-page .site-header.site-header-premium .main-nav > a.is-active,
+  .goidau-page .site-header.site-header-premium .main-nav > a.is-current,
+  .goidau-page .site-header.site-header-premium .nav-service-item > .nav-service-link:hover,
+  .goidau-page .site-header.site-header-premium .nav-service-item > .nav-service-link:focus-visible,
+  .goidau-page .site-header.site-header-premium .nav-service-item > .nav-service-link.is-active,
+  .goidau-page .site-header.site-header-premium .nav-service-item > .nav-service-link.is-current,
+  .goidau-page .site-header.site-header-premium .nav-service-item.is-open > .nav-service-link {
+    color: #fff7e6 !important;
+    text-shadow: none;
+    transform: none;
+  }
+  .goidau-page .site-header.site-header-premium .main-nav > a:hover::before,
+  .goidau-page .site-header.site-header-premium .main-nav > a:focus-visible::before,
+  .goidau-page .site-header.site-header-premium .main-nav > a.is-active::before,
+  .goidau-page .site-header.site-header-premium .main-nav > a.is-current::before,
+  .goidau-page .site-header.site-header-premium .nav-service-item > .nav-service-link:hover::before,
+  .goidau-page .site-header.site-header-premium .nav-service-item > .nav-service-link:focus-visible::before,
+  .goidau-page .site-header.site-header-premium .nav-service-item > .nav-service-link.is-active::before,
+  .goidau-page .site-header.site-header-premium .nav-service-item > .nav-service-link.is-current::before,
+  .goidau-page .site-header.site-header-premium .nav-service-item.is-open > .nav-service-link::before {
+    opacity: 1;
+    background: #5d4731;
+    border-color: rgba(232,193,137,.32);
+    transform: scale(1);
+  }
+  .goidau-page .site-header.site-header-premium .nav-service-item > .nav-service-link::after { content: none !important; display: none !important; }
+  .goidau-page .site-header.site-header-premium .nav-service-item { position: relative !important; }
+  .goidau-page .site-header.site-header-premium .nav-service-list { position: absolute !important; top: calc(100% + 12px) !important; left: 50% !important; z-index: 110 !important; opacity: 0; pointer-events: none; transform: translate(-50%, 10px); transition: opacity .16s ease, transform .16s ease; }
+  .goidau-page .site-header.site-header-premium .nav-service-item:hover > .nav-service-list,
+  .goidau-page .site-header.site-header-premium .nav-service-item:focus-within > .nav-service-list,
+  .goidau-page .site-header.site-header-premium .nav-service-item.is-open > .nav-service-list { opacity: 1 !important; pointer-events: auto !important; transform: translate(-50%, 0) !important; }
+  .goidau-page .site-header.site-header-premium .header-actions .btn-primary { display: inline-flex !important; align-items: center; justify-content: center; min-width: 106px !important; min-height: 42px !important; padding: 0 24px !important; color: #211611 !important; background: linear-gradient(90deg, #f0d6a8, #c9a86a) !important; border: 0 !important; border-radius: 999px !important; font-family: "Be Vietnam Pro", Arial, sans-serif !important; font-size: .9rem !important; font-weight: 800 !important; text-decoration: none !important; }
+
+  .goidau-page .site-header.site-header-premium .nav-service-item:not(.nav-knowledge-item) > .nav-service-list {
+    display: grid !important;
+    grid-template-columns: repeat(3, minmax(180px, 1fr));
+    gap: 22px 28px;
+    width: min(820px, calc(100vw - 48px)) !important;
+    padding: 28px 34px !important;
+    background: #fffdf8 !important;
+    border: 1px solid rgba(189,123,53,.42) !important;
+    border-radius: 15px !important;
+    box-shadow: 0 16px 34px rgba(0,0,0,.25) !important;
+  }
+
+  .goidau-page .site-header.site-header-premium .nav-knowledge-item > .nav-knowledge-list {
+    display: grid !important;
+    grid-template-columns: repeat(3, minmax(180px, 1fr));
+    gap: 18px 28px;
+    width: min(760px, calc(100vw - 48px)) !important;
+    padding: 26px 32px !important;
+    background: #fffdf8 !important;
+    border: 1px solid rgba(189,123,53,.42) !important;
+    border-radius: 15px !important;
+    box-shadow: 0 16px 34px rgba(0,0,0,.25) !important;
+  }
+
+  .goidau-page .site-header.site-header-premium .nav-service-list::before {
+    top: -8px !important;
+    width: 15px !important;
+    height: 15px !important;
+    background: #fffdf8 !important;
+    border-color: rgba(189,123,53,.42) !important;
+    opacity: 1 !important;
+  }
+
+  .goidau-page .site-header.site-header-premium .nav-service-item .nav-service-column {
+    display: block !important;
+    width: auto !important;
+    margin: 0 !important;
+    padding: 0 !important;
+  }
+
+  .goidau-page .site-header.site-header-premium .nav-service-item:not(.nav-knowledge-item) .nav-service-column strong,
+  .goidau-page .site-header.site-header-premium .nav-service-item:not(.nav-knowledge-item) .nav-service-column .nav-service-heading {
+    display: block !important;
+    min-height: 0 !important;
+    margin: 0 0 10px !important;
+    padding: 0 !important;
+    color: #4a2b13 !important;
+    background: transparent !important;
+    border: 0 !important;
+    font-size: .88rem !important;
+    font-weight: 800 !important;
+    letter-spacing: .055em !important;
+    text-transform: uppercase !important;
+  }
+
+  .goidau-page .site-header.site-header-premium .nav-service-item:not(.nav-knowledge-item) .nav-service-column strong::after,
+  .goidau-page .site-header.site-header-premium .nav-service-item:not(.nav-knowledge-item) .nav-service-column .nav-service-heading::after { content: none !important; }
+
+  .goidau-page .site-header.site-header-premium .nav-service-children {
+    position: static !important;
+    display: grid !important;
+    grid-template-columns: 1fr;
+    align-items: flex-start;
+    gap: 0;
+    width: auto !important;
+    min-height: 0 !important;
+    max-width: none !important;
+    padding: 0 !important;
+    overflow: visible !important;
+    background: #fffdf9 !important;
+    border: 1px solid rgba(189,123,53,.16) !important;
+    border-radius: 8px !important;
+    box-shadow: none !important;
+    overflow: hidden !important;
+  }
+
+  .goidau-page .site-header.site-header-premium .nav-service-item:not(.nav-knowledge-item) .nav-service-children > a {
+    display: block !important;
+    width: 100%;
+    margin: 0 !important;
+    padding: 10px 0 !important;
+    color: #68452d !important;
+    background: #fffdf9 !important;
+    border-bottom: 1px solid rgba(189,123,53,.16) !important;
+    font-size: .86rem !important;
+    font-weight: 600;
+    line-height: 1.4;
+  }
+
+  .goidau-page .site-header.site-header-premium .nav-service-item:not(.nav-knowledge-item) .nav-service-children > a:last-child { border-bottom: 0 !important; }
+
+  .goidau-page .site-header.site-header-premium .nav-knowledge-item .nav-service-column > a {
+    display: block !important;
+    margin: 0 !important;
+    padding: 10px 12px !important;
+    color: #4a2b13 !important;
+    background: #fffdf9 !important;
+    border: 1px solid rgba(189,123,53,.16) !important;
+    border-radius: 8px !important;
+    font-size: .92rem !important;
+    font-weight: 800 !important;
+    line-height: 1.4 !important;
+  }
+
+  .goidau-page .site-header.site-header-premium .nav-service-children > a:hover,
+  .goidau-page .site-header.site-header-premium .nav-knowledge-item .nav-service-column > a:hover { padding-left: 12px !important; color: #7d4518 !important; background: #fbf1df !important; }
+}
+
+/* Cùng menu điện thoại và hiệu ứng mở/đóng như trang Kiến thức. */
+@media (max-width: 900px) {
+  .goidau-page .site-header.site-header-premium { min-height: 60px !important; background: #211611 !important; }
+  .goidau-page .site-header.site-header-premium .header-inner { position: relative !important; grid-template-columns: 1fr auto !important; width: min(100% - 28px, 1280px) !important; height: 60px !important; min-height: 60px !important; }
+  .goidau-page .site-header.site-header-premium .brand-premium { position: absolute !important; top: 50%; left: 50%; z-index: 102; gap: 3px !important; transform: translate(-50%, -50%) !important; }
+  .goidau-page .site-header.site-header-premium .brand-premium::before { width: 36px !important; height: 36px !important; flex-basis: 36px !important; }
+  .goidau-page .site-header.site-header-premium .brand-mark { width: 84px !important; height: 28px !important; }
+  .goidau-page .site-header.site-header-premium .header-actions { justify-self: end; }
+  .goidau-page .site-header.site-header-premium .header-actions .btn-primary { display: none !important; }
+  .goidau-page .site-header.site-header-premium .menu-toggle { display: grid !important; width: 40px !important; height: 38px !important; place-items: center; padding: 8px !important; background: transparent !important; border: 1px solid rgba(232,193,137,.45) !important; border-radius: 9px !important; }
+  .goidau-page .site-header.site-header-premium .menu-toggle span { display: block; width: 20px; height: 2px; margin: 3px; background: #e8c189; }
+  .goidau-page .site-header.site-header-premium .main-nav { position: fixed !important; top: 60px !important; right: auto !important; bottom: 0 !important; left: 0 !important; z-index: 103; display: none !important; align-content: start !important; width: min(88vw, 350px) !important; padding: 18px !important; overflow: auto; background: #211611 !important; border: 0 !important; border-radius: 0 !important; box-shadow: 18px 0 44px rgba(0,0,0,.28) !important; opacity: 1 !important; pointer-events: auto !important; transform: none !important; }
+  .goidau-page .site-header.site-header-premium .main-nav.is-open { display: grid !important; }
+  .goidau-page .site-header.site-header-premium .main-nav > a,
+  .goidau-page .site-header.site-header-premium .main-nav .nav-service-link { display: flex !important; align-items: center !important; justify-content: space-between !important; width: 100% !important; min-height: 0 !important; padding: 13px 10px !important; color: #fff !important; background: transparent !important; border-bottom: 1px solid rgba(255,255,255,.10) !important; font-size: .92rem !important; font-weight: 600 !important; }
+  .goidau-page .site-header.site-header-premium .nav-service-list { position: static !important; display: none !important; width: 100% !important; margin: 0 !important; padding: 4px 0 !important; background: transparent !important; border: 0 !important; border-radius: 0 !important; box-shadow: none !important; opacity: 1 !important; transform: none !important; }
+  .goidau-page .site-header.site-header-premium .nav-service-item.is-open .nav-service-list { display: grid !important; }
+  .goidau-page .site-header.site-header-premium .nav-service-column { display: block !important; width: 100% !important; padding: 9px 16px 9px 24px !important; }
+  .goidau-page .site-header.site-header-premium .nav-service-column strong,
+  .goidau-page .site-header.site-header-premium .nav-service-column .nav-service-heading,
+  .goidau-page .site-header.site-header-premium .nav-service-list a { display: block !important; min-height: 0 !important; padding: 8px 0 !important; color: rgba(255,255,255,.84) !important; background: transparent !important; border: 0 !important; font-size: .82rem !important; line-height: 1.35 !important; text-transform: none !important; }
+  .goidau-page .site-header.site-header-premium .nav-service-column strong,
+  .goidau-page .site-header.site-header-premium .nav-service-column .nav-service-heading { color: #e8c189 !important; font-size: .72rem !important; font-weight: 700 !important; letter-spacing: .04em !important; text-transform: uppercase !important; }
+  .goidau-page .site-header.site-header-premium .nav-service-item > .nav-service-link::after { content: "›" !important; display: inline-flex !important; margin-left: auto !important; color: rgba(255,255,255,.7) !important; font-size: 22px !important; font-weight: 300 !important; transform: none !important; }
+  .goidau-page .site-header.site-header-premium .nav-service-item.is-open > .nav-service-link::after { transform: rotate(90deg) !important; color: #f8e8c8 !important; }
+}
