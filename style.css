@@ -5868,6 +5868,49 @@ body .site-header.site-header-premium .brand-sub {
   display: none;
 }
 
+/* Hiệu ứng header PC đồng bộ với trang Gội đầu. */
+@media (min-width: 901px) {
+  body:not(.goidau-page) .site-header.site-header-premium .main-nav > a,
+  body:not(.goidau-page) .site-header.site-header-premium .nav-service-item > .nav-service-link {
+    position: relative;
+    border: 1px solid transparent;
+    border-radius: 8px;
+    transition: color .18s ease, background .18s ease, border-color .18s ease, transform .18s ease;
+  }
+
+  body:not(.goidau-page) .site-header.site-header-premium .main-nav > a:hover,
+  body:not(.goidau-page) .site-header.site-header-premium .main-nav > a:focus-visible,
+  body:not(.goidau-page) .site-header.site-header-premium .main-nav > a.is-active,
+  body:not(.goidau-page) .site-header.site-header-premium .main-nav > a.is-current,
+  body:not(.goidau-page) .site-header.site-header-premium .nav-service-item > .nav-service-link:hover,
+  body:not(.goidau-page) .site-header.site-header-premium .nav-service-item > .nav-service-link:focus-visible,
+  body:not(.goidau-page) .site-header.site-header-premium .nav-service-item > .nav-service-link.is-active,
+  body:not(.goidau-page) .site-header.site-header-premium .nav-service-item > .nav-service-link.is-current,
+  body:not(.goidau-page) .site-header.site-header-premium .nav-service-item.is-open > .nav-service-link {
+    color: #fff7e6 !important;
+    background: #5d4731 !important;
+    border-color: rgba(232,193,137,.32) !important;
+    transform: none !important;
+  }
+
+  body:not(.goidau-page) .site-header.site-header-premium .nav-service-children > a,
+  body:not(.goidau-page) .site-header.site-header-premium .nav-knowledge-item .nav-service-column > a {
+    transition: color .18s ease, background .18s ease, padding .18s ease, box-shadow .18s ease, transform .18s ease;
+  }
+
+  body:not(.goidau-page) .site-header.site-header-premium .nav-service-children > a:hover,
+  body:not(.goidau-page) .site-header.site-header-premium .nav-service-children > a:focus-visible,
+  body:not(.goidau-page) .site-header.site-header-premium .nav-knowledge-item .nav-service-column > a:hover,
+  body:not(.goidau-page) .site-header.site-header-premium .nav-knowledge-item .nav-service-column > a:focus-visible {
+    padding-left: 12px !important;
+    color: #7d4518 !important;
+    background: #fbf1df !important;
+    box-shadow: inset 3px 0 0 #c7954d;
+    transform: translateX(2px);
+    outline: none;
+  }
+}
+
 @media (max-width: 900px) {
   body .site-header.site-header-premium .brand-premium::before {
     width: 38px;
@@ -8329,3 +8372,45 @@ body .site-header.site-header-premium .brand-mark {
 
 /* Mega menu Kiến thức dùng cùng cấu trúc với Dịch vụ, nhưng giữ đúng các chuyên mục hiện có. */
 @media(min-width:901px){.site-header.site-header-premium .nav-knowledge-item>.nav-knowledge-list{display:grid!important;grid-template-columns:repeat(3,minmax(180px,1fr));gap:18px 28px;width:min(760px,calc(100vw - 48px))!important;padding:26px 32px!important;background:#fffdf8!important;border:1px solid rgba(189,123,53,.42)!important;border-radius:15px!important;box-shadow:0 16px 34px rgba(0,0,0,.25)!important}.site-header.site-header-premium .nav-knowledge-item>.nav-knowledge-list::before{background:#fffdf8!important;border-color:rgba(189,123,53,.42)!important;opacity:1!important}.site-header.site-header-premium .nav-knowledge-item .nav-service-column{display:block!important;width:auto!important;margin:0!important;padding:0!important}.site-header.site-header-premium .nav-knowledge-item .nav-service-column>a{display:block!important;margin:0!important;padding:8px 0!important;color:#4a2b13!important;background:transparent!important;border:0!important;border-radius:0!important;font-family:"Be Vietnam Pro",Arial,sans-serif!important;font-size:.92rem!important;font-weight:800!important;line-height:1.4!important}.site-header.site-header-premium .nav-knowledge-item .nav-service-column>a:hover,.site-header.site-header-premium .nav-knowledge-item .nav-service-column>a:focus-visible{padding-left:7px!important;color:#7d4518!important;background:transparent!important}}
+
+/* Hiệu ứng hover chuẩn của header PC, đặt cuối để không bị CSS cũ ghi đè. */
+@media (min-width: 901px) {
+  body:not(.goidau-page) .site-header.site-header-premium .main-nav > a,
+  body:not(.goidau-page) .site-header.site-header-premium .nav-service-item > .nav-service-link {
+    border: 1px solid transparent !important;
+    border-radius: 8px !important;
+    transition: color .18s ease, background .18s ease, border-color .18s ease, transform .18s ease !important;
+  }
+
+  body:not(.goidau-page) .site-header.site-header-premium .main-nav > a:hover,
+  body:not(.goidau-page) .site-header.site-header-premium .main-nav > a:focus-visible,
+  body:not(.goidau-page) .site-header.site-header-premium .main-nav > a.is-active,
+  body:not(.goidau-page) .site-header.site-header-premium .main-nav > a.is-current,
+  body:not(.goidau-page) .site-header.site-header-premium .nav-service-item > .nav-service-link:hover,
+  body:not(.goidau-page) .site-header.site-header-premium .nav-service-item > .nav-service-link:focus-visible,
+  body:not(.goidau-page) .site-header.site-header-premium .nav-service-item > .nav-service-link.is-active,
+  body:not(.goidau-page) .site-header.site-header-premium .nav-service-item > .nav-service-link.is-current,
+  body:not(.goidau-page) .site-header.site-header-premium .nav-service-item.is-open > .nav-service-link {
+    color: #fff7e6 !important;
+    background: #5d4731 !important;
+    border-color: rgba(232,193,137,.32) !important;
+    transform: none !important;
+  }
+
+  body:not(.goidau-page) .site-header.site-header-premium .nav-service-children > a,
+  body:not(.goidau-page) .site-header.site-header-premium .nav-knowledge-item .nav-service-column > a {
+    transition: color .18s ease, background .18s ease, padding .18s ease, box-shadow .18s ease, transform .18s ease !important;
+  }
+
+  body:not(.goidau-page) .site-header.site-header-premium .nav-service-children > a:hover,
+  body:not(.goidau-page) .site-header.site-header-premium .nav-service-children > a:focus-visible,
+  body:not(.goidau-page) .site-header.site-header-premium .nav-knowledge-item .nav-service-column > a:hover,
+  body:not(.goidau-page) .site-header.site-header-premium .nav-knowledge-item .nav-service-column > a:focus-visible {
+    padding-left: 12px !important;
+    color: #7d4518 !important;
+    background: #fbf1df !important;
+    box-shadow: inset 3px 0 0 #c7954d !important;
+    transform: translateX(2px) !important;
+    outline: none;
+  }
+}

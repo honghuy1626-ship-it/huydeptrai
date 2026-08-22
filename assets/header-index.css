@@ -47,8 +47,23 @@
   .goidau-page .site-header.site-header-premium .nav-service-item > .nav-service-link.is-current,
   .goidau-page .site-header.site-header-premium .nav-service-item.is-open > .nav-service-link {
     color: #fff7e6 !important;
+    background: #5d4731 !important;
+    border: 1px solid rgba(232,193,137,.32) !important;
     text-shadow: none;
     transform: none;
+  }
+
+  .goidau-page .site-header.site-header-premium .main-nav > a:hover,
+  .goidau-page .site-header.site-header-premium .main-nav > a:focus-visible,
+  .goidau-page .site-header.site-header-premium .main-nav > a.is-active,
+  .goidau-page .site-header.site-header-premium .main-nav > a.is-current,
+  .goidau-page .site-header.site-header-premium .nav-service-item > .nav-service-link:hover,
+  .goidau-page .site-header.site-header-premium .nav-service-item > .nav-service-link:focus-visible,
+  .goidau-page .site-header.site-header-premium .nav-service-item > .nav-service-link.is-active,
+  .goidau-page .site-header.site-header-premium .nav-service-item > .nav-service-link.is-current {
+    color: #fff7e6 !important;
+    background: #5d4731 !important;
+    border: 1px solid rgba(232,193,137,.32) !important;
   }
   .goidau-page .site-header.site-header-premium .main-nav > a:hover::before,
   .goidau-page .site-header.site-header-premium .main-nav > a:focus-visible::before,
@@ -159,6 +174,7 @@
     font-size: .86rem !important;
     font-weight: 600;
     line-height: 1.4;
+    transition: color .18s ease, background .18s ease, padding .18s ease, box-shadow .18s ease, transform .18s ease;
   }
 
   .goidau-page .site-header.site-header-premium .nav-service-item:not(.nav-knowledge-item) .nav-service-children > a:last-child { border-bottom: 0 !important; }
@@ -177,7 +193,16 @@
   }
 
   .goidau-page .site-header.site-header-premium .nav-service-children > a:hover,
-  .goidau-page .site-header.site-header-premium .nav-knowledge-item .nav-service-column > a:hover { padding-left: 12px !important; color: #7d4518 !important; background: #fbf1df !important; }
+  .goidau-page .site-header.site-header-premium .nav-service-children > a:focus-visible,
+  .goidau-page .site-header.site-header-premium .nav-knowledge-item .nav-service-column > a:hover,
+  .goidau-page .site-header.site-header-premium .nav-knowledge-item .nav-service-column > a:focus-visible {
+    padding-left: 12px !important;
+    color: #7d4518 !important;
+    background: #fbf1df !important;
+    box-shadow: inset 3px 0 0 #c7954d;
+    transform: translateX(2px);
+    outline: none;
+  }
 }
 
 /* Cùng menu điện thoại và hiệu ứng mở/đóng như trang Kiến thức. */
