@@ -1,4 +1,5 @@
 /* Chuẩn giao diện header theo index.html, dùng thêm cho nhóm trang Gội đầu. */
+.goidau-page .site-header.site-header-premium .brand-premium{text-decoration:none!important}
 .goidau-page .site-header.site-header-premium .brand-logo-icon{display:none!important}.goidau-page .site-header.site-header-premium .brand-premium::before{content:""!important;display:block!important;width:42px!important;height:42px!important;flex:0 0 42px!important;background:url("elly-emblem-header.png") center/contain no-repeat!important}.goidau-page .site-header.site-header-premium .brand-mark{display:block!important;overflow:hidden!important;color:transparent!important;font-size:0!important;background:url("elly-wordmark-header.png") center/contain no-repeat!important}.goidau-page .site-header.site-header-premium .brand-mark i{display:none!important}
 
 @media (min-width: 901px) {
@@ -207,16 +208,19 @@
 
 /* Cùng menu điện thoại và hiệu ứng mở/đóng như trang Kiến thức. */
 @media (max-width: 900px) {
-  .goidau-page .site-header.site-header-premium { min-height: 60px !important; background: #211611 !important; }
-  .goidau-page .site-header.site-header-premium .header-inner { position: relative !important; grid-template-columns: 1fr auto !important; width: min(100% - 28px, 1280px) !important; height: 60px !important; min-height: 60px !important; }
-  .goidau-page .site-header.site-header-premium .brand-premium { position: absolute !important; top: 50%; left: 50%; z-index: 102; gap: 3px !important; transform: translate(-50%, -50%) !important; }
-  .goidau-page .site-header.site-header-premium .brand-premium::before { width: 36px !important; height: 36px !important; flex-basis: 36px !important; }
-  .goidau-page .site-header.site-header-premium .brand-mark { width: 84px !important; height: 28px !important; }
-  .goidau-page .site-header.site-header-premium .header-actions { justify-self: end; }
+  .goidau-page .site-header.site-header-premium { min-height: 64px !important; background: #211611 !important; }
+  .goidau-page .site-header.site-header-premium .header-inner { position: relative !important; grid-template-columns: auto 1fr !important; width: 100% !important; height: 64px !important; min-height: 64px !important; padding: 0 14px !important; }
+  /* Dùng đúng logo wordmark và bố cục trên trang chủ. */
+  .goidau-page .site-header.site-header-premium .brand-premium { position: absolute !important; top: 50%; left: 50%; z-index: 102; grid-column: 1 / -1 !important; grid-row: 1 !important; gap: 0 !important; transform: translate(-50%, -50%) !important; }
+  .goidau-page .site-header.site-header-premium .brand-premium::before { display: none !important; }
+  .goidau-page .site-header.site-header-premium .brand-copy { display: flex !important; flex-direction: column !important; align-items: center !important; gap: 2px !important; }
+  .goidau-page .site-header.site-header-premium .brand-mark { width: 104px !important; height: 34px !important; }
+  .goidau-page .site-header.site-header-premium .brand-sub { display: block !important; color: #fff2d4 !important; font-size: .48rem !important; font-weight: 900 !important; letter-spacing: .24em !important; line-height: 1 !important; text-shadow: 0 1px 7px rgba(232,193,137,.45) !important; }
+  .goidau-page .site-header.site-header-premium .header-actions { justify-self: start; }
   .goidau-page .site-header.site-header-premium .header-actions .btn-primary { display: none !important; }
-  .goidau-page .site-header.site-header-premium .menu-toggle { display: grid !important; width: 40px !important; height: 38px !important; place-items: center; padding: 8px !important; background: transparent !important; border: 1px solid rgba(232,193,137,.45) !important; border-radius: 9px !important; }
-  .goidau-page .site-header.site-header-premium .menu-toggle span { display: block; width: 20px; height: 2px; margin: 3px; background: #e8c189; }
-  .goidau-page .site-header.site-header-premium .main-nav { position: fixed !important; top: 60px !important; right: auto !important; bottom: 0 !important; left: 0 !important; z-index: 103; display: none !important; align-content: start !important; width: min(88vw, 350px) !important; padding: 18px !important; overflow: auto; background: #211611 !important; border: 0 !important; border-radius: 0 !important; box-shadow: 18px 0 44px rgba(0,0,0,.28) !important; opacity: 1 !important; pointer-events: auto !important; transform: none !important; }
+  .goidau-page .site-header.site-header-premium .menu-toggle { display: flex !important; flex-direction: column; align-items: center; justify-content: center; gap: 5px; width: 40px !important; height: 38px !important; padding: 8px !important; background: transparent !important; border: 1px solid rgba(232,193,137,.45) !important; border-radius: 9px !important; }
+  .goidau-page .site-header.site-header-premium .menu-toggle span { display: block; flex: 0 0 2px; width: 20px; height: 2px; margin: 0 !important; background: #e8c189; }
+  .goidau-page .site-header.site-header-premium .main-nav { position: fixed !important; top: 64px !important; right: auto !important; bottom: 0 !important; left: 0 !important; z-index: 103; display: none !important; align-content: start !important; width: min(88vw, 350px) !important; padding: 18px !important; overflow: auto; background: #211611 !important; border: 0 !important; border-radius: 0 !important; box-shadow: 18px 0 44px rgba(0,0,0,.28) !important; opacity: 1 !important; pointer-events: auto !important; transform: none !important; }
   .goidau-page .site-header.site-header-premium .main-nav.is-open { display: grid !important; }
   .goidau-page .site-header.site-header-premium .main-nav > a,
   .goidau-page .site-header.site-header-premium .main-nav .nav-service-link { display: flex !important; align-items: center !important; justify-content: space-between !important; width: 100% !important; min-height: 0 !important; padding: 13px 10px !important; color: #fff !important; background: transparent !important; border-bottom: 1px solid rgba(255,255,255,.10) !important; font-size: .92rem !important; font-weight: 600 !important; }
