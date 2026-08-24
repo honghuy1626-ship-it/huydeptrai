@@ -5652,18 +5652,18 @@ body .site-header.site-header-premium .brand-mark i {
 
 /* Tinh chỉnh cuối: header Phun xăm khớp header Gội đầu và không có mũi tên. */
 @media (min-width: 901px) {
-  body:not(.goidau-page) .site-header.site-header-premium .header-inner {
+  body .site-header.site-header-premium .header-inner {
     height: 78px !important;
     gap: 24px !important;
   }
 
-  body:not(.goidau-page) .site-header.site-header-premium .main-nav {
+  body .site-header.site-header-premium .main-nav {
     justify-self: center !important;
     gap: 28px !important;
   }
 
-  body:not(.goidau-page) .site-header.site-header-premium .main-nav > a,
-  body:not(.goidau-page) .site-header.site-header-premium .nav-service-item > .nav-service-link {
+  body .site-header.site-header-premium .main-nav > a,
+  body .site-header.site-header-premium .nav-service-item > .nav-service-link {
     display: inline-flex !important;
     align-items: center !important;
     min-height: auto !important;
@@ -5675,10 +5675,10 @@ body .site-header.site-header-premium .brand-mark i {
     letter-spacing: normal !important;
   }
 
-  body:not(.goidau-page) .site-header.site-header-premium .nav-service-item > .nav-service-link::after,
-  body:not(.goidau-page) .site-header.site-header-premium .nav-service-item:hover > .nav-service-link::after,
-  body:not(.goidau-page) .site-header.site-header-premium .nav-service-item:focus-within > .nav-service-link::after,
-  body:not(.goidau-page) .site-header.site-header-premium .nav-service-item.is-open > .nav-service-link::after {
+  body .site-header.site-header-premium .nav-service-item > .nav-service-link::after,
+  body .site-header.site-header-premium .nav-service-item:hover > .nav-service-link::after,
+  body .site-header.site-header-premium .nav-service-item:focus-within > .nav-service-link::after,
+  body .site-header.site-header-premium .nav-service-item.is-open > .nav-service-link::after {
     content: none !important;
     display: none !important;
     width: 0 !important;
@@ -5686,7 +5686,7 @@ body .site-header.site-header-premium .brand-mark i {
     padding: 0 !important;
   }
 
-  body:not(.goidau-page) .site-header.site-header-premium .header-actions .btn-primary {
+  body .site-header.site-header-premium .header-actions .btn-primary {
     min-width: 106px !important;
     min-height: 42px !important;
     padding: 0 24px !important;
@@ -5698,7 +5698,7 @@ body .site-header.site-header-premium .brand-mark i {
 
 /* Đồng bộ menu điện thoại toàn web theo giao diện trang Gội đầu. */
 @media (max-width: 900px) {
-  body:not(.goidau-page) .site-header.site-header-premium .main-nav {
+  body .site-header.site-header-premium .main-nav {
     position: fixed !important;
     top: 60px !important;
     right: auto !important;
@@ -5717,12 +5717,12 @@ body .site-header.site-header-premium .brand-mark i {
     transform: none !important;
   }
 
-  body:not(.goidau-page) .site-header.site-header-premium .main-nav.is-open {
+  body .site-header.site-header-premium .main-nav.is-open {
     display: grid !important;
   }
 
-  body:not(.goidau-page) .site-header.site-header-premium .main-nav > a,
-  body:not(.goidau-page) .site-header.site-header-premium .main-nav .nav-service-link {
+  body .site-header.site-header-premium .main-nav > a,
+  body .site-header.site-header-premium .main-nav .nav-service-link {
     display: flex !important;
     align-items: center !important;
     justify-content: space-between !important;
@@ -5738,7 +5738,7 @@ body .site-header.site-header-premium .brand-mark i {
     text-transform: none !important;
   }
 
-  body:not(.goidau-page) .site-header.site-header-premium .nav-service-list {
+  body .site-header.site-header-premium .nav-service-list {
     position: static !important;
     display: none !important;
     width: 100% !important;
@@ -5752,19 +5752,19 @@ body .site-header.site-header-premium .brand-mark i {
     transform: none !important;
   }
 
-  body:not(.goidau-page) .site-header.site-header-premium .nav-service-item.is-open .nav-service-list {
+  body .site-header.site-header-premium .nav-service-item.is-open .nav-service-list {
     display: grid !important;
   }
 
-  body:not(.goidau-page) .site-header.site-header-premium .nav-service-column {
+  body .site-header.site-header-premium .nav-service-column {
     display: block !important;
     width: 100% !important;
     padding: 9px 16px 9px 24px !important;
   }
 
-  body:not(.goidau-page) .site-header.site-header-premium .nav-service-column strong,
-  body:not(.goidau-page) .site-header.site-header-premium .nav-service-column .nav-service-heading,
-  body:not(.goidau-page) .site-header.site-header-premium .nav-service-list a {
+  body .site-header.site-header-premium .nav-service-column strong,
+  body .site-header.site-header-premium .nav-service-column .nav-service-heading,
+  body .site-header.site-header-premium .nav-service-list a {
     display: block !important;
     min-height: 0 !important;
     padding: 8px 0 !important;
@@ -5776,8 +5776,8 @@ body .site-header.site-header-premium .brand-mark i {
     text-transform: none !important;
   }
 
-  body:not(.goidau-page) .site-header.site-header-premium .nav-service-column strong,
-  body:not(.goidau-page) .site-header.site-header-premium .nav-service-column .nav-service-heading {
+  body .site-header.site-header-premium .nav-service-column strong,
+  body .site-header.site-header-premium .nav-service-column .nav-service-heading {
     color: #e8c189 !important;
     font-size: .72rem !important;
     font-weight: 700 !important;
@@ -5785,7 +5785,7 @@ body .site-header.site-header-premium .brand-mark i {
     text-transform: uppercase !important;
   }
 
-  body:not(.goidau-page) .site-header.site-header-premium .nav-service-list a.is-current {
+  body .site-header.site-header-premium .nav-service-list a.is-current {
     color: #211611 !important;
     background: #e8c189 !important;
     border-radius: 7px !important;
@@ -5795,38 +5795,43 @@ body .site-header.site-header-premium .brand-mark i {
 
 /* Header PC Phun xăm: khớp đúng tỉ lệ của header Gội đầu. */
 @media (min-width: 901px) {
-  body:not(.goidau-page) .site-header.site-header-premium {
+  body .site-header.site-header-premium {
     min-height: 78px !important;
   }
 
-  body:not(.goidau-page) .site-header.site-header-premium .header-inner {
+  body .site-header.site-header-premium .header-inner {
     grid-template-columns: auto minmax(0, 1fr) auto !important;
     width: min(1280px, calc(100% - 48px)) !important;
     height: 78px !important;
     gap: 28px !important;
   }
 
-  body:not(.goidau-page) .site-header.site-header-premium .brand-premium {
+  body .site-header.site-header-premium .brand-premium {
     gap: 3px !important;
   }
 
-  body:not(.goidau-page) .site-header.site-header-premium .brand-premium::before {
-    display: none !important;
+  body .site-header.site-header-premium .brand-premium::before {
+    content: "" !important;
+    display: block !important;
+    width: 42px !important;
+    height: 42px !important;
+    flex: 0 0 42px !important;
+    background: url("assets/elly-emblem-header.png") center / contain no-repeat !important;
   }
 
-  body:not(.goidau-page) .site-header.site-header-premium .brand-copy {
+  body .site-header.site-header-premium .brand-copy {
     display: flex !important;
     flex-direction: column !important;
     align-items: center !important;
     gap: 1px !important;
   }
 
-  body:not(.goidau-page) .site-header.site-header-premium .brand-mark {
+  body .site-header.site-header-premium .brand-mark {
     width: 96px !important;
     height: 32px !important;
   }
 
-  body:not(.goidau-page) .site-header.site-header-premium .brand-sub {
+  body .site-header.site-header-premium .brand-sub {
     display: block !important;
     align-self: center;
     color: #fff2d4 !important;
@@ -5837,17 +5842,17 @@ body .site-header.site-header-premium .brand-mark i {
     text-shadow: 0 1px 7px rgba(232, 193, 137, .45);
   }
 
-  body:not(.goidau-page) .site-header.site-header-premium .main-nav {
+  body .site-header.site-header-premium .main-nav {
     gap: 28px !important;
   }
 
-  body:not(.goidau-page) .site-header.site-header-premium .main-nav > a,
-  body:not(.goidau-page) .site-header.site-header-premium .main-nav .nav-service-link {
+  body .site-header.site-header-premium .main-nav > a,
+  body .site-header.site-header-premium .main-nav .nav-service-link {
     font-size: .9rem !important;
     font-weight: 700 !important;
   }
 
-  body:not(.goidau-page) .site-header.site-header-premium .header-actions .btn-primary {
+  body .site-header.site-header-premium .header-actions .btn-primary {
     min-height: 42px !important;
     padding: 0 24px !important;
     color: #211611 !important;
@@ -5870,38 +5875,38 @@ body .site-header.site-header-premium .brand-sub {
 
 /* Hiệu ứng header PC đồng bộ với trang Gội đầu. */
 @media (min-width: 901px) {
-  body:not(.goidau-page) .site-header.site-header-premium .main-nav > a,
-  body:not(.goidau-page) .site-header.site-header-premium .nav-service-item > .nav-service-link {
+  body .site-header.site-header-premium .main-nav > a,
+  body .site-header.site-header-premium .nav-service-item > .nav-service-link {
     position: relative;
     border: 1px solid transparent;
     border-radius: 8px;
     transition: color .18s ease, background .18s ease, border-color .18s ease, transform .18s ease;
   }
 
-  body:not(.goidau-page) .site-header.site-header-premium .main-nav > a:hover,
-  body:not(.goidau-page) .site-header.site-header-premium .main-nav > a:focus-visible,
-  body:not(.goidau-page) .site-header.site-header-premium .main-nav > a.is-active,
-  body:not(.goidau-page) .site-header.site-header-premium .main-nav > a.is-current,
-  body:not(.goidau-page) .site-header.site-header-premium .nav-service-item > .nav-service-link:hover,
-  body:not(.goidau-page) .site-header.site-header-premium .nav-service-item > .nav-service-link:focus-visible,
-  body:not(.goidau-page) .site-header.site-header-premium .nav-service-item > .nav-service-link.is-active,
-  body:not(.goidau-page) .site-header.site-header-premium .nav-service-item > .nav-service-link.is-current,
-  body:not(.goidau-page) .site-header.site-header-premium .nav-service-item.is-open > .nav-service-link {
+  body .site-header.site-header-premium .main-nav > a:hover,
+  body .site-header.site-header-premium .main-nav > a:focus-visible,
+  body .site-header.site-header-premium .main-nav > a.is-active,
+  body .site-header.site-header-premium .main-nav > a.is-current,
+  body .site-header.site-header-premium .nav-service-item > .nav-service-link:hover,
+  body .site-header.site-header-premium .nav-service-item > .nav-service-link:focus-visible,
+  body .site-header.site-header-premium .nav-service-item > .nav-service-link.is-active,
+  body .site-header.site-header-premium .nav-service-item > .nav-service-link.is-current,
+  body .site-header.site-header-premium .nav-service-item.is-open > .nav-service-link {
     color: #fff7e6 !important;
     background: #5d4731 !important;
     border-color: rgba(232,193,137,.32) !important;
     transform: none !important;
   }
 
-  body:not(.goidau-page) .site-header.site-header-premium .nav-service-children > a,
-  body:not(.goidau-page) .site-header.site-header-premium .nav-knowledge-item .nav-service-column > a {
+  body .site-header.site-header-premium .nav-service-children > a,
+  body .site-header.site-header-premium .nav-knowledge-item .nav-service-column > a {
     transition: color .18s ease, background .18s ease, padding .18s ease, box-shadow .18s ease, transform .18s ease;
   }
 
-  body:not(.goidau-page) .site-header.site-header-premium .nav-service-children > a:hover,
-  body:not(.goidau-page) .site-header.site-header-premium .nav-service-children > a:focus-visible,
-  body:not(.goidau-page) .site-header.site-header-premium .nav-knowledge-item .nav-service-column > a:hover,
-  body:not(.goidau-page) .site-header.site-header-premium .nav-knowledge-item .nav-service-column > a:focus-visible {
+  body .site-header.site-header-premium .nav-service-children > a:hover,
+  body .site-header.site-header-premium .nav-service-children > a:focus-visible,
+  body .site-header.site-header-premium .nav-knowledge-item .nav-service-column > a:hover,
+  body .site-header.site-header-premium .nav-knowledge-item .nav-service-column > a:focus-visible {
     padding-left: 12px !important;
     color: #7d4518 !important;
     background: #fbf1df !important;
@@ -8090,45 +8095,53 @@ body .site-header.site-header-premium .brand-mark {
   }
 }
 
-/* Không hiển thị biểu tượng cạnh Dịch vụ và Kiến thức. */
-.site-header-premium .nav-service-item > .nav-service-link::after,
-.site-header-premium .nav-service-item:hover > .nav-service-link::after,
-.site-header-premium .nav-service-item:focus-within > .nav-service-link::after,
-.site-header-premium .nav-service-item.is-open > .nav-service-link::after {
-  content: none !important;
-  display: none !important;
+/* Không hiển thị biểu tượng cạnh Dịch vụ và Kiến thức - CHỈ áp dụng cho desktop.
+   (Trước đây không có @media nên vô tình xoá luôn mũi tên trên mobile). */
+@media (min-width: 901px) {
+  .site-header-premium .nav-service-item > .nav-service-link::after,
+  .site-header-premium .nav-service-item:hover > .nav-service-link::after,
+  .site-header-premium .nav-service-item:focus-within > .nav-service-link::after,
+  .site-header-premium .nav-service-item.is-open > .nav-service-link::after {
+    content: none !important;
+    display: none !important;
+  }
 }
 
 /* Dùng giao diện header Gội đầu làm chuẩn chung cho toàn bộ website. */
 @media (min-width: 901px) {
-  body:not(.goidau-page) .site-header.site-header-premium .header-inner {
+  body .site-header.site-header-premium .header-inner {
     grid-template-columns: auto minmax(0, 1fr) auto !important;
     width: min(1280px, calc(100% - 48px)) !important;
     height: 82px !important;
     gap: 28px !important;
   }
 
-  body:not(.goidau-page) .site-header.site-header-premium .brand-premium {
+  body .site-header.site-header-premium .brand-premium {
     gap: 3px !important;
   }
 
-  body:not(.goidau-page) .site-header.site-header-premium .brand-premium::before {
-    display: none !important;
+  body .site-header.site-header-premium .brand-premium::before {
+    content: "" !important;
+    display: block !important;
+    width: 42px !important;
+    height: 42px !important;
+    flex: 0 0 42px !important;
+    background: url("assets/elly-emblem-header.png") center / contain no-repeat !important;
   }
 
-  body:not(.goidau-page) .site-header.site-header-premium .brand-copy {
+  body .site-header.site-header-premium .brand-copy {
     display: flex !important;
     flex-direction: column !important;
     align-items: center !important;
     gap: 1px !important;
   }
 
-  body:not(.goidau-page) .site-header.site-header-premium .brand-mark {
+  body .site-header.site-header-premium .brand-mark {
     width: 96px !important;
     height: 32px !important;
   }
 
-  body:not(.goidau-page) .site-header.site-header-premium .brand-sub {
+  body .site-header.site-header-premium .brand-sub {
     display: block !important;
     align-self: center;
     color: #fff2d4 !important;
@@ -8139,17 +8152,17 @@ body .site-header.site-header-premium .brand-mark {
     text-shadow: 0 1px 7px rgba(232, 193, 137, .45);
   }
 
-  body:not(.goidau-page) .site-header.site-header-premium .main-nav {
+  body .site-header.site-header-premium .main-nav {
     gap: 28px !important;
   }
 
-  body:not(.goidau-page) .site-header.site-header-premium .main-nav > a,
-  body:not(.goidau-page) .site-header.site-header-premium .main-nav .nav-service-link {
+  body .site-header.site-header-premium .main-nav > a,
+  body .site-header.site-header-premium .main-nav .nav-service-link {
     font-size: .9rem !important;
     font-weight: 700 !important;
   }
 
-  body:not(.goidau-page) .site-header.site-header-premium .header-actions .btn-primary {
+  body .site-header.site-header-premium .header-actions .btn-primary {
     min-height: 42px;
     padding: 0 24px;
     color: #211611 !important;
@@ -8229,7 +8242,7 @@ body .site-header.site-header-premium .brand-mark {
 
 /* Áp dụng sau cùng để menu mobile tất cả trang luôn theo chuẩn Gội đầu. */
 @media (max-width: 900px) {
-  body:not(.goidau-page) .site-header.site-header-premium .main-nav {
+  body .site-header.site-header-premium .main-nav {
     position: fixed !important;
     top: 60px !important;
     right: auto !important;
@@ -8248,10 +8261,10 @@ body .site-header.site-header-premium .brand-mark {
     transform: none !important;
   }
 
-  body:not(.goidau-page) .site-header.site-header-premium .main-nav.is-open { display: grid !important; }
+  body .site-header.site-header-premium .main-nav.is-open { display: grid !important; }
 
-  body:not(.goidau-page) .site-header.site-header-premium .main-nav > a,
-  body:not(.goidau-page) .site-header.site-header-premium .main-nav .nav-service-link {
+  body .site-header.site-header-premium .main-nav > a,
+  body .site-header.site-header-premium .main-nav .nav-service-link {
     display: flex !important;
     align-items: center !important;
     justify-content: space-between !important;
@@ -8267,7 +8280,7 @@ body .site-header.site-header-premium .brand-mark {
     text-transform: none !important;
   }
 
-  body:not(.goidau-page) .site-header.site-header-premium .nav-service-list {
+  body .site-header.site-header-premium .nav-service-list {
     position: static !important;
     display: none !important;
     width: 100% !important;
@@ -8281,41 +8294,41 @@ body .site-header.site-header-premium .brand-mark {
     transform: none !important;
   }
 
-  body:not(.goidau-page) .site-header.site-header-premium .nav-service-item.is-open .nav-service-list { display: grid !important; }
-  body:not(.goidau-page) .site-header.site-header-premium .nav-service-column { display: block !important; width: 100% !important; padding: 9px 16px 9px 24px !important; }
-  body:not(.goidau-page) .site-header.site-header-premium .nav-service-column strong,
-  body:not(.goidau-page) .site-header.site-header-premium .nav-service-column .nav-service-heading,
-  body:not(.goidau-page) .site-header.site-header-premium .nav-service-list a { display: block !important; min-height: 0 !important; padding: 8px 0 !important; color: rgba(255,255,255,.84) !important; background: transparent !important; border: 0 !important; font-size: .82rem !important; line-height: 1.35 !important; text-transform: none !important; }
-  body:not(.goidau-page) .site-header.site-header-premium .nav-service-column strong,
-  body:not(.goidau-page) .site-header.site-header-premium .nav-service-column .nav-service-heading { color: #e8c189 !important; font-size: .72rem !important; font-weight: 700 !important; letter-spacing: .04em !important; text-transform: uppercase !important; }
-  body:not(.goidau-page) .site-header.site-header-premium .nav-service-list a.is-current { color: #211611 !important; background: #e8c189 !important; border-radius: 7px !important; padding: 8px 10px !important; }
+  body .site-header.site-header-premium .nav-service-item.is-open .nav-service-list { display: grid !important; }
+  body .site-header.site-header-premium .nav-service-column { display: block !important; width: 100% !important; padding: 9px 16px 9px 24px !important; }
+  body .site-header.site-header-premium .nav-service-column strong,
+  body .site-header.site-header-premium .nav-service-column .nav-service-heading,
+  body .site-header.site-header-premium .nav-service-list a { display: block !important; min-height: 0 !important; padding: 8px 0 !important; color: rgba(255,255,255,.84) !important; background: transparent !important; border: 0 !important; font-size: .82rem !important; line-height: 1.35 !important; text-transform: none !important; }
+  body .site-header.site-header-premium .nav-service-column strong,
+  body .site-header.site-header-premium .nav-service-column .nav-service-heading { color: #e8c189 !important; font-size: .72rem !important; font-weight: 700 !important; letter-spacing: .04em !important; text-transform: uppercase !important; }
+  body .site-header.site-header-premium .nav-service-list a.is-current { color: #211611 !important; background: #e8c189 !important; border-radius: 7px !important; padding: 8px 10px !important; }
 }
 
 /* Chuẩn cuối cùng cho header PC Phun xăm, giống tỉ lệ Gội đầu. */
 @media (min-width: 901px) {
-  body:not(.goidau-page) .site-header.site-header-premium { min-height: 78px !important; }
-  body:not(.goidau-page) .site-header.site-header-premium .header-inner { grid-template-columns: auto minmax(0, 1fr) auto !important; width: min(1280px, calc(100% - 48px)) !important; height: 78px !important; gap: 28px !important; }
-  body:not(.goidau-page) .site-header.site-header-premium .brand-premium { gap: 3px !important; }
-  body:not(.goidau-page) .site-header.site-header-premium .brand-premium::before { display: none !important; }
-  body:not(.goidau-page) .site-header.site-header-premium .brand-copy { display: flex !important; flex-direction: column !important; align-items: center !important; gap: 1px !important; }
-  body:not(.goidau-page) .site-header.site-header-premium .brand-mark { width: 96px !important; height: 32px !important; }
-  body:not(.goidau-page) .site-header.site-header-premium .brand-sub { display: block !important; align-self: center; color: #fff2d4 !important; font-size: .52rem !important; font-weight: 900 !important; letter-spacing: .2em !important; line-height: 1 !important; text-shadow: 0 1px 7px rgba(232, 193, 137, .45); }
-  body:not(.goidau-page) .site-header.site-header-premium .main-nav { gap: 28px !important; }
-  body:not(.goidau-page) .site-header.site-header-premium .main-nav > a, body:not(.goidau-page) .site-header.site-header-premium .main-nav .nav-service-link { font-size: .9rem !important; font-weight: 700 !important; }
-  body:not(.goidau-page) .site-header.site-header-premium .header-actions .btn-primary { min-height: 42px !important; padding: 0 24px !important; color: #211611 !important; background: linear-gradient(90deg, #f0d6a8, #c9a86a) !important; border: 0 !important; border-radius: 999px !important; font-size: .9rem !important; font-weight: 800 !important; }
+  body .site-header.site-header-premium { min-height: 78px !important; }
+  body .site-header.site-header-premium .header-inner { grid-template-columns: auto minmax(0, 1fr) auto !important; width: min(1280px, calc(100% - 48px)) !important; height: 78px !important; gap: 28px !important; }
+  body .site-header.site-header-premium .brand-premium { gap: 3px !important; }
+  body .site-header.site-header-premium .brand-premium::before { content: "" !important; display: block !important; width: 42px !important; height: 42px !important; flex: 0 0 42px !important; background: url("assets/elly-emblem-header.png") center / contain no-repeat !important; }
+  body .site-header.site-header-premium .brand-copy { display: flex !important; flex-direction: column !important; align-items: center !important; gap: 1px !important; }
+  body .site-header.site-header-premium .brand-mark { width: 96px !important; height: 32px !important; }
+  body .site-header.site-header-premium .brand-sub { display: block !important; align-self: center; color: #fff2d4 !important; font-size: .52rem !important; font-weight: 900 !important; letter-spacing: .2em !important; line-height: 1 !important; text-shadow: 0 1px 7px rgba(232, 193, 137, .45); }
+  body .site-header.site-header-premium .main-nav { gap: 28px !important; }
+  body .site-header.site-header-premium .main-nav > a, body .site-header.site-header-premium .main-nav .nav-service-link { font-size: .9rem !important; font-weight: 700 !important; }
+  body .site-header.site-header-premium .header-actions .btn-primary { min-height: 42px !important; padding: 0 24px !important; color: #211611 !important; background: linear-gradient(90deg, #f0d6a8, #c9a86a) !important; border: 0 !important; border-radius: 999px !important; font-size: .9rem !important; font-weight: 800 !important; }
 }
 
 /* Chuẩn header PC cuối cùng theo mẫu Gội đầu. */
 @media (min-width: 901px) {
-  body:not(.goidau-page) .site-header.site-header-premium .header-inner { height: 78px !important; gap: 24px !important; }
-  body:not(.goidau-page) .site-header.site-header-premium .main-nav { justify-self: center !important; gap: 28px !important; }
-  body:not(.goidau-page) .site-header.site-header-premium .main-nav > a,
-  body:not(.goidau-page) .site-header.site-header-premium .nav-service-item > .nav-service-link { display: inline-flex !important; align-items: center !important; min-height: auto !important; padding: 8px 9px !important; font-family: "Be Vietnam Pro", Arial, sans-serif !important; font-size: .9rem !important; font-weight: 700 !important; line-height: 1.2 !important; letter-spacing: normal !important; }
-  body:not(.goidau-page) .site-header.site-header-premium .nav-service-item > .nav-service-link::after,
-  body:not(.goidau-page) .site-header.site-header-premium .nav-service-item:hover > .nav-service-link::after,
-  body:not(.goidau-page) .site-header.site-header-premium .nav-service-item:focus-within > .nav-service-link::after,
-  body:not(.goidau-page) .site-header.site-header-premium .nav-service-item.is-open > .nav-service-link::after { content: none !important; display: none !important; width: 0 !important; margin: 0 !important; padding: 0 !important; }
-  body:not(.goidau-page) .site-header.site-header-premium .header-actions .btn-primary { min-width: 106px !important; min-height: 42px !important; padding: 0 24px !important; font-family: "Be Vietnam Pro", Arial, sans-serif !important; font-size: .9rem !important; font-weight: 800 !important; }
+  body .site-header.site-header-premium .header-inner { height: 78px !important; gap: 24px !important; }
+  body .site-header.site-header-premium .main-nav { justify-self: center !important; gap: 28px !important; }
+  body .site-header.site-header-premium .main-nav > a,
+  body .site-header.site-header-premium .nav-service-item > .nav-service-link { display: inline-flex !important; align-items: center !important; min-height: auto !important; padding: 8px 9px !important; font-family: "Be Vietnam Pro", Arial, sans-serif !important; font-size: .9rem !important; font-weight: 700 !important; line-height: 1.2 !important; letter-spacing: normal !important; }
+  body .site-header.site-header-premium .nav-service-item > .nav-service-link::after,
+  body .site-header.site-header-premium .nav-service-item:hover > .nav-service-link::after,
+  body .site-header.site-header-premium .nav-service-item:focus-within > .nav-service-link::after,
+  body .site-header.site-header-premium .nav-service-item.is-open > .nav-service-link::after { content: none !important; display: none !important; width: 0 !important; margin: 0 !important; padding: 0 !important; }
+  body .site-header.site-header-premium .header-actions .btn-primary { min-width: 106px !important; min-height: 42px !important; padding: 0 24px !important; font-family: "Be Vietnam Pro", Arial, sans-serif !important; font-size: .9rem !important; font-weight: 800 !important; }
 }
 
 /* Header PC dùng một chuẩn duy nhất theo trang Gội đầu. */
@@ -8323,7 +8336,7 @@ body .site-header.site-header-premium .brand-mark {
   .site-header.site-header-premium { min-height: 78px !important; background: #211611 !important; }
   .site-header.site-header-premium .header-inner { grid-template-columns: auto minmax(0, 1fr) auto !important; width: min(1280px, calc(100% - 48px)) !important; height: 78px !important; gap: 24px !important; }
   .site-header.site-header-premium .brand-premium { gap: 3px !important; }
-  .site-header.site-header-premium .brand-premium::before { display: none !important; }
+  .site-header.site-header-premium .brand-premium::before { content: "" !important; display: block !important; width: 42px !important; height: 42px !important; flex: 0 0 42px !important; background: url("assets/elly-emblem-header.png") center / contain no-repeat !important; }
   .site-header.site-header-premium .brand-copy { display: flex !important; flex-direction: column !important; align-items: center !important; gap: 1px !important; }
   .site-header.site-header-premium .brand-mark { width: 96px !important; height: 32px !important; }
   .site-header.site-header-premium .brand-sub { display: block !important; align-self: center; color: #fff2d4 !important; font-size: .52rem !important; font-weight: 900 !important; letter-spacing: .2em !important; line-height: 1 !important; text-shadow: 0 1px 7px rgba(232,193,137,.45); }
@@ -8375,37 +8388,37 @@ body .site-header.site-header-premium .brand-mark {
 
 /* Hiệu ứng hover chuẩn của header PC, đặt cuối để không bị CSS cũ ghi đè. */
 @media (min-width: 901px) {
-  body:not(.goidau-page) .site-header.site-header-premium .main-nav > a,
-  body:not(.goidau-page) .site-header.site-header-premium .nav-service-item > .nav-service-link {
+  body .site-header.site-header-premium .main-nav > a,
+  body .site-header.site-header-premium .nav-service-item > .nav-service-link {
     border: 1px solid transparent !important;
     border-radius: 8px !important;
     transition: color .18s ease, background .18s ease, border-color .18s ease, transform .18s ease !important;
   }
 
-  body:not(.goidau-page) .site-header.site-header-premium .main-nav > a:hover,
-  body:not(.goidau-page) .site-header.site-header-premium .main-nav > a:focus-visible,
-  body:not(.goidau-page) .site-header.site-header-premium .main-nav > a.is-active,
-  body:not(.goidau-page) .site-header.site-header-premium .main-nav > a.is-current,
-  body:not(.goidau-page) .site-header.site-header-premium .nav-service-item > .nav-service-link:hover,
-  body:not(.goidau-page) .site-header.site-header-premium .nav-service-item > .nav-service-link:focus-visible,
-  body:not(.goidau-page) .site-header.site-header-premium .nav-service-item > .nav-service-link.is-active,
-  body:not(.goidau-page) .site-header.site-header-premium .nav-service-item > .nav-service-link.is-current,
-  body:not(.goidau-page) .site-header.site-header-premium .nav-service-item.is-open > .nav-service-link {
+  body .site-header.site-header-premium .main-nav > a:hover,
+  body .site-header.site-header-premium .main-nav > a:focus-visible,
+  body .site-header.site-header-premium .main-nav > a.is-active,
+  body .site-header.site-header-premium .main-nav > a.is-current,
+  body .site-header.site-header-premium .nav-service-item > .nav-service-link:hover,
+  body .site-header.site-header-premium .nav-service-item > .nav-service-link:focus-visible,
+  body .site-header.site-header-premium .nav-service-item > .nav-service-link.is-active,
+  body .site-header.site-header-premium .nav-service-item > .nav-service-link.is-current,
+  body .site-header.site-header-premium .nav-service-item.is-open > .nav-service-link {
     color: #fff7e6 !important;
     background: #5d4731 !important;
     border-color: rgba(232,193,137,.32) !important;
     transform: none !important;
   }
 
-  body:not(.goidau-page) .site-header.site-header-premium .nav-service-children > a,
-  body:not(.goidau-page) .site-header.site-header-premium .nav-knowledge-item .nav-service-column > a {
+  body .site-header.site-header-premium .nav-service-children > a,
+  body .site-header.site-header-premium .nav-knowledge-item .nav-service-column > a {
     transition: color .18s ease, background .18s ease, padding .18s ease, box-shadow .18s ease, transform .18s ease !important;
   }
 
-  body:not(.goidau-page) .site-header.site-header-premium .nav-service-children > a:hover,
-  body:not(.goidau-page) .site-header.site-header-premium .nav-service-children > a:focus-visible,
-  body:not(.goidau-page) .site-header.site-header-premium .nav-knowledge-item .nav-service-column > a:hover,
-  body:not(.goidau-page) .site-header.site-header-premium .nav-knowledge-item .nav-service-column > a:focus-visible {
+  body .site-header.site-header-premium .nav-service-children > a:hover,
+  body .site-header.site-header-premium .nav-service-children > a:focus-visible,
+  body .site-header.site-header-premium .nav-knowledge-item .nav-service-column > a:hover,
+  body .site-header.site-header-premium .nav-knowledge-item .nav-service-column > a:focus-visible {
     padding-left: 12px !important;
     color: #7d4518 !important;
     background: #fbf1df !important;
@@ -8417,12 +8430,16 @@ body .site-header.site-header-premium .brand-mark {
 
 /* Header điện thoại đồng bộ theo trang Gội đầu: menu bên trái, logo chính giữa. */
 @media (max-width: 900px) {
-  body:not(.goidau-page) .site-header.site-header-premium {
+  body.home-page .site-header.site-header-premium .brand-sub {
+    display: block !important;
+  }
+
+  body .site-header.site-header-premium {
     min-height: 64px !important;
     background: #211611 !important;
   }
 
-  body:not(.goidau-page) .site-header.site-header-premium .header-inner {
+  body .site-header.site-header-premium .header-inner {
     position: relative !important;
     grid-template-columns: auto 1fr !important;
     width: 100% !important;
@@ -8431,13 +8448,13 @@ body .site-header.site-header-premium .brand-mark {
     padding: 0 14px !important;
   }
 
-  body:not(.goidau-page) .site-header.site-header-premium .header-actions {
+  body .site-header.site-header-premium .header-actions {
     grid-column: 1;
     grid-row: 1;
     justify-self: start !important;
   }
 
-  body:not(.goidau-page) .site-header.site-header-premium .brand-premium {
+  body .site-header.site-header-premium .brand-premium {
     position: absolute !important;
     top: 50%;
     left: 50%;
@@ -8448,23 +8465,23 @@ body .site-header.site-header-premium .brand-mark {
     transform: translate(-50%, -50%) !important;
   }
 
-  body:not(.goidau-page) .site-header.site-header-premium .brand-premium::before {
+  body .site-header.site-header-premium .brand-premium::before {
     display: none !important;
   }
 
-  body:not(.goidau-page) .site-header.site-header-premium .brand-copy {
+  body .site-header.site-header-premium .brand-copy {
     display: flex !important;
     flex-direction: column !important;
     align-items: center !important;
     gap: 2px !important;
   }
 
-  body:not(.goidau-page) .site-header.site-header-premium .brand-mark {
+  body .site-header.site-header-premium .brand-mark {
     width: 104px !important;
     height: 34px !important;
   }
 
-  body:not(.goidau-page) .site-header.site-header-premium .brand-sub {
+  body .site-header.site-header-premium .brand-sub {
     display: block !important;
     color: #fff2d4 !important;
     font-size: .48rem !important;
@@ -8474,11 +8491,11 @@ body .site-header.site-header-premium .brand-mark {
     text-shadow: 0 1px 7px rgba(232,193,137,.45) !important;
   }
 
-  body:not(.goidau-page) .site-header.site-header-premium .header-actions .btn-primary {
+  body .site-header.site-header-premium .header-actions .btn-primary {
     display: none !important;
   }
 
-  body:not(.goidau-page) .site-header.site-header-premium .menu-toggle {
+  body .site-header.site-header-premium .menu-toggle {
     display: flex !important;
     flex-direction: column;
     align-items: center;
@@ -8492,7 +8509,7 @@ body .site-header.site-header-premium .brand-mark {
     border-radius: 9px !important;
   }
 
-  body:not(.goidau-page) .site-header.site-header-premium .menu-toggle span {
+  body .site-header.site-header-premium .menu-toggle span {
     display: block;
     flex: 0 0 2px;
     width: 20px;
@@ -8501,12 +8518,303 @@ body .site-header.site-header-premium .brand-mark {
     background: #e8c189;
   }
 
-  body:not(.goidau-page) .mobile-header-search,
-  body:not(.goidau-page) .mobile-site-search {
+  body .mobile-header-search,
+  body .mobile-site-search {
     display: none !important;
   }
 
-  body:not(.goidau-page) .site-header.site-header-premium .main-nav {
+  body .site-header.site-header-premium .main-nav {
     top: 64px !important;
+  }
+}
+
+
+/* ===================================================================== */
+/* Gội đầu dưỡng sinh — nội dung riêng của trang, gộp từ inline <style>.  */
+/* Toàn bộ scope trong body.goidau-page để không đụng CSS các trang khác.*/
+/* Header/menu dùng chung bộ .site-header-premium phía trên — không lặp lại ở đây. */
+/* ===================================================================== */
+body.goidau-page {
+  --ink: #432710;
+  --brown: #63360f;
+  --gold: #bd7b35;
+  --cream: #fff6e7;
+  --line: #dfb67d;
+  --paper: #fffaf1;
+  color: var(--ink);
+  background: var(--cream);
+}
+body.goidau-page .wrap {
+  width:min(1120px,calc(100% - 32px));margin:auto;
+}
+body.goidau-page .mobile-bottom-nav {
+  display:none!important;
+}
+body.goidau-page .hero {
+  padding:48px 0 34px;text-align:center;background:radial-gradient(circle at 18% 0,rgba(225,175,106,.28),transparent 27%),radial-gradient(circle at 88% 18%,rgba(225,175,106,.22),transparent 26%),var(--paper);
+}
+body.goidau-page .eyebrow {
+  margin:0 0 8px;color:#a8652c;font-size:.75rem;font-weight:900;letter-spacing:.15em;
+}
+body.goidau-page .hero h1 {
+  margin:0;font-family:"Playfair Display",serif;font-size:clamp(2.35rem,6vw,4.6rem);line-height:1;color:#4a2b13;
+}
+body.goidau-page .hero h1 em {
+  display:block;color:#8f521b;font-style:italic;font-weight:600;
+}
+body.goidau-page .hero p {
+  max-width:570px;margin:16px auto 0;color:#806657;line-height:1.7;
+}
+body.goidau-page .hero-note {
+  display:inline-flex;gap:8px;align-items:center;margin-top:19px;padding:8px 14px;border:1px solid var(--line);border-radius:999px;background:#fff9ee;font-size:.8rem;font-weight:700;
+}
+body.goidau-page .plans {
+  padding:24px 0 34px;background:var(--paper);
+}
+body.goidau-page .plan-grid {
+  display:grid;grid-template-columns:repeat(4,1fr);gap:13px;
+}
+body.goidau-page .plan {
+  position:relative;display:flex;flex-direction:column;padding:18px 16px 17px;background:linear-gradient(145deg,#fffdf8,#fff2dc);border:1px solid var(--line);border-radius:18px;box-shadow:0 10px 22px rgba(85,47,15,.08);transition:transform .2s ease,box-shadow .2s ease,opacity .2s ease;
+}
+body.goidau-page .plan:hover {
+  z-index:1;transform:translateY(-7px);box-shadow:0 20px 32px rgba(85,47,15,.18);
+}
+body.goidau-page .plan.is-selected {
+  border:2px solid #9a5a22;background:#fff7e8;box-shadow:0 0 0 4px rgba(189,123,53,.16),0 20px 32px rgba(85,47,15,.18);
+}
+body.goidau-page .plan-grid:has(.plan:hover) .plan:not(:hover) {
+  opacity:.72;transform:scale(.98);
+}
+body.goidau-page .plan-tag {
+  display:block;padding:8px 6px;color:#fff7e9;background:linear-gradient(100deg,#48240d,#7e471a);border-radius:10px;text-align:center;font-family:"Playfair Display",serif;font-size:1rem;font-weight:700;
+}
+body.goidau-page .plan-price {
+  margin:13px 0 3px;font-family:"Be Vietnam Pro",Arial,sans-serif;font-size:2.65rem;font-weight:800;font-variant-numeric:lining-nums tabular-nums;font-feature-settings:"lnum" 1,"tnum" 1;letter-spacing:-.04em;line-height:1;text-align:center;
+}
+body.goidau-page .plan-time {
+  text-align:center;font-size:.76rem;font-weight:800;color:#95602c;
+}
+body.goidau-page .process-label {
+  margin:15px 0 7px;padding-bottom:7px;border-bottom:1px solid rgba(189,123,53,.34);font-size:.7rem;font-weight:900;letter-spacing:.04em;text-align:center;
+}
+body.goidau-page .plan-process {
+  max-height:277px;overflow:auto;margin:0 0 17px;padding:0 5px 0 0;scrollbar-color:#bf813f transparent;scrollbar-width:thin;
+}
+body.goidau-page .plan ol {
+  display:grid;gap:7px;margin:0;padding:0;list-style:none;counter-reset:step;
+}
+body.goidau-page .plan li {
+  padding-left:25px;position:relative;font-size:.78rem;line-height:1.35;
+}
+body.goidau-page .plan li:before {
+  content:counter(step);counter-increment:step;position:absolute;left:0;top:0;min-width:17px;padding:1px 3px;color:#fff;background:#5e3211;border-radius:3px;font-size:.62rem;font-weight:800;text-align:center;
+}
+body.goidau-page .pick {
+  width:100%;margin-top:auto;padding:11px 10px;color:#fff;background:#60330f;border:0;border-radius:10px;cursor:pointer;font:800 .85rem "Be Vietnam Pro",sans-serif;transition:transform .16s,background .16s;
+}
+body.goidau-page .pick:hover {
+  background:#8b5320;transform:translateY(-2px);
+}
+body.goidau-page .booking {
+  padding:45px 0 58px;background:linear-gradient(135deg,#f2d7ab,#fff6e6 56%,#eac989);
+}
+body.goidau-page .booking-box {
+  display:grid;grid-template-columns:.74fr 1fr;gap:28px;padding:28px;background:rgba(255,253,248,.8);border:1px solid rgba(132,76,28,.25);border-radius:22px;box-shadow:0 18px 42px rgba(87,46,15,.13);
+}
+body.goidau-page .booking-copy h2 {
+  margin:0;font-family:"Playfair Display",serif;font-size:2.25rem;line-height:1.08;
+}
+body.goidau-page .booking-copy p {
+  color:#765e4e;line-height:1.7;
+}
+body.goidau-page .booking-copy ul {
+  display:grid;gap:9px;padding:0;list-style:none;font-size:.86rem;
+}
+body.goidau-page .booking-copy li:before {
+  content:"✓";display:inline-block;width:20px;color:#a16027;font-weight:900;
+}
+body.goidau-page .booking-form {
+  display:grid;grid-template-columns:1fr 1fr;gap:12px;
+}
+body.goidau-page .booking-form label {
+  display:grid;gap:6px;font-size:.78rem;font-weight:800;
+}
+body.goidau-page .booking-form .wide {
+  grid-column:1/-1;
+}
+body.goidau-page .booking-form input,
+body.goidau-page .booking-form select,
+body.goidau-page .booking-form textarea {
+  width:100%;padding:12px 13px;color:var(--ink);border:1px solid rgba(99,54,15,.24);border-radius:10px;background:#fffdf9;font:500 .9rem "Be Vietnam Pro",sans-serif;
+}
+body.goidau-page .booking-form textarea {
+  min-height:76px;resize:vertical;
+}
+body.goidau-page .addon-picker {
+  display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin:0;padding:0;border:0;
+}
+body.goidau-page .addon-picker legend {
+  grid-column:1/-1;margin:0 0 1px;font-size:.78rem;font-weight:800;
+}
+body.goidau-page .addon-option {
+  position:relative;display:flex!important;align-items:center;gap:8px;min-height:52px;padding:9px 10px!important;border:1px solid rgba(99,54,15,.2);border-radius:10px;background:#fffdf9;cursor:pointer;line-height:1.25;
+}
+body.goidau-page .addon-option input {
+  position:absolute!important;inline-size:1px!important;block-size:1px!important;opacity:0!important;
+}
+body.goidau-page .addon-option b {
+  display:block;font-size:.75rem;
+}
+body.goidau-page .addon-option small {
+  display:block;margin-top:3px;color:#9a5b22;font-size:.76rem;font-weight:900;
+}
+body.goidau-page .addon-option:has(input:checked) {
+  border-color:#8a4c19;background:#fff0d5;box-shadow:0 0 0 2px rgba(161,96,39,.15);
+}
+body.goidau-page .addon-option:has(input:checked)::after {
+  content:"✓";display:grid;place-items:center;width:18px;height:18px;margin-left:auto;color:#fff;background:#6c3b13;border-radius:50%;font-size:.68rem;font-weight:900;
+}
+body.goidau-page .date-options {
+  display:grid;grid-template-columns:repeat(7,1fr);gap:7px;
+}
+body.goidau-page .date-option {
+  min-height:58px;padding:6px 3px;color:#694221;background:#fffdf9;border:1px solid rgba(99,54,15,.2);border-radius:9px;cursor:pointer;font:700 .7rem "Be Vietnam Pro",sans-serif;
+}
+body.goidau-page .date-option span {
+  display:block;margin-top:3px;font-size:.9rem;
+}
+body.goidau-page .date-option.is-selected {
+  color:#fff;background:#60330f;border-color:#60330f;box-shadow:0 5px 12px rgba(91,49,15,.2);
+}
+body.goidau-page .booking-summary-sticky {
+  grid-column:1/-1;display:grid;gap:10px;
+}
+body.goidau-page .booking-summary {
+  padding:4px 0 0;border-top:1px solid rgba(99,54,15,.14);font-size:.88rem;
+}
+body.goidau-page .summary-row {
+  display:flex;justify-content:space-between;gap:18px;padding:7px 0;color:#715d50;
+}
+body.goidau-page .summary-row strong {
+  color:#4e2d15;font-weight:800;font-variant-numeric:tabular-nums;
+}
+body.goidau-page .summary-total {
+  margin-top:4px;padding-top:11px;border-top:1px solid rgba(99,54,15,.16);color:#4a2b13;font-size:1rem;
+}
+body.goidau-page .summary-total strong {
+  font-size:1.1rem;
+}
+body.goidau-page .submit {
+  padding:13px 16px;color:#fff;background:#5c310f;border:0;border-radius:11px;cursor:pointer;font:800 .95rem "Be Vietnam Pro",sans-serif;
+}
+body.goidau-page .submit:hover {
+  background:#814719;
+}
+body.goidau-page .form-message {
+  min-height:18px;margin:0;color:#795335;font-size:.78rem;text-align:center;
+}
+body.goidau-page .extras {
+  padding:47px 0;background:var(--paper);
+}
+body.goidau-page .section-title {
+  text-align:center;
+}
+body.goidau-page .section-title h2 {
+  margin:0;font-family:"Playfair Display",serif;font-size:2.15rem;
+}
+body.goidau-page .section-title p {
+  margin:9px 0 22px;color:#806758;
+}
+body.goidau-page .extra-grid {
+  display:grid;grid-template-columns:repeat(3,1fr);gap:12px;
+}
+body.goidau-page .extra {
+  padding:17px;background:#fffaf1;border:1px solid rgba(189,123,53,.4);border-radius:14px;
+}
+body.goidau-page .extra b {
+  display:block;font-size:.94rem;
+}
+body.goidau-page .extra span {
+  display:block;margin-top:5px;color:#91602f;font-family:"Be Vietnam Pro",Arial,sans-serif;font-size:1.45rem;font-weight:800;font-variant-numeric:lining-nums tabular-nums;font-feature-settings:"lnum" 1,"tnum" 1;letter-spacing:-.04em;
+}
+body.goidau-page .knowledge {
+  padding:48px 0 58px;background:#fff7e9;
+}
+body.goidau-page .knowledge-grid {
+  display:grid;grid-template-columns:repeat(3,1fr);gap:13px;
+}
+body.goidau-page .seo-card {
+  overflow:hidden;text-decoration:none;color:var(--ink);border:1px solid rgba(155,93,37,.45);border-radius:14px;background:#fffcf6;box-shadow:0 8px 18px rgba(85,47,15,.06);transition:transform .2s ease,box-shadow .2s ease;
+}
+body.goidau-page .seo-card:hover {
+  transform:translateY(-5px);box-shadow:0 17px 28px rgba(85,47,15,.16);
+}
+body.goidau-page .seo-card img {
+  display:block;width:100%;aspect-ratio:16/8;object-fit:cover;background:#f4dfbb;
+}
+body.goidau-page .seo-card .seo-card-body {
+  display:block;padding:18px 20px 20px;color:var(--ink);font-size:initial;font-weight:initial;letter-spacing:normal;
+}
+body.goidau-page .seo-card span {
+  font-size:.7rem;font-weight:900;letter-spacing:.08em;color:#aa6b32;
+}
+body.goidau-page .seo-card h3 {
+  margin:11px 0 8px;font-size:1rem;line-height:1.4;
+}
+body.goidau-page .seo-card p {
+  margin:0;color:#806757;font-size:.82rem;line-height:1.6;
+}
+@media (max-width:850px) {
+  body.goidau-page .plan-grid {
+    grid-template-columns:repeat(2,1fr);
+  }
+  body.goidau-page .booking {
+    padding-bottom:250px;
+  }
+  body.goidau-page .booking-box {
+    grid-template-columns:1fr;
+  }
+  body.goidau-page .booking-summary-sticky {
+    position:fixed;z-index:20;right:12px;bottom:max(12px,env(safe-area-inset-bottom));left:12px;padding:12px 16px;background:#fffaf1;border:1px solid var(--line);border-radius:15px;box-shadow:0 12px 30px rgba(67,39,16,.24);transform:translateY(calc(100% + 24px));transition:transform .22s ease;
+  }
+  body.goidau-page .booking-summary-sticky.is-visible {
+    transform:translateY(0);
+  }
+  body.goidau-page .extra-grid,
+  body.goidau-page .knowledge-grid {
+    grid-template-columns:1fr;
+  }
+}
+@media (max-width:520px) {
+  body.goidau-page .wrap {
+    width:min(100% - 24px,1120px);
+  }
+  body.goidau-page .hero {
+    padding-top:36px;
+  }
+  body.goidau-page .hero h1 {
+    font-size:2.55rem;
+  }
+  body.goidau-page .plan-grid {
+    grid-template-columns:1fr;
+  }
+  body.goidau-page .booking {
+    padding:31px 0 250px;
+  }
+  body.goidau-page .booking-box {
+    padding:19px;
+  }
+  body.goidau-page .booking-form {
+    grid-template-columns:1fr;
+  }
+  body.goidau-page .booking-form .wide {
+    grid-column:auto;
+  }
+  body.goidau-page .date-options {
+    grid-template-columns:repeat(4,1fr);
+  }
+  body.goidau-page .booking-copy h2 {
+    font-size:2rem;
   }
 }
