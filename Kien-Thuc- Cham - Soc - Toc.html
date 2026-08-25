@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Sơ đồ trang - ELLY</title>
+  <link rel="stylesheet" href="style.css" />
+  <link href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@400;700&family=Playfair+Display:wght@600&display=swap" rel="stylesheet" />
+  <style>
+    body { margin:0; background:#fff6e7; font-family:"Be Vietnam Pro", sans-serif; }
+    .sodo-wrap { width:min(1100px, calc(100% - 32px)); margin: 30px auto 60px; }
+    .sodo-box {
+      border: 2px dashed #bd7b35;
+      border-radius: 12px;
+      padding: 24px;
+      margin: 18px 0;
+      background: #fffdf8;
+      color: #432710;
+    }
+    .sodo-box h2 { margin:0 0 8px; font-family:"Playfair Display", serif; font-size:1.4rem; color:#63360f; }
+    .sodo-box p { margin:0; color:#8a6a4a; font-size:.9rem; }
+    .sodo-grid { display:grid; grid-template-columns: repeat(3, 1fr); gap:16px; }
+    .sodo-mini { border:1px dashed rgba(99,53,57,.3); border-radius:8px; padding:16px; background:#fff; min-height:80px; }
+    .sodo-label { display:inline-block; padding:2px 8px; background:#211611; color:#e8c189; border-radius:4px; font-size:.7rem; margin-bottom:8px; }
+  </style>
+</head>
+<body class="goidau-page menu-open">
+<header class="site-header site-header-premium" data-header>
+  <div class="container header-inner">
+    <a class="brand brand-premium" href="index.html" aria-label="ELLY Beauty and Spa - Trang chu">
+      <img class="brand-logo-icon" src="assets/elly-logo.png" alt="" />
+      <span class="brand-copy">
+        <span class="brand-mark">ELLY <i></i></span>
+        <span class="brand-sub">BEAUTY &amp; SPA</span>
+      </span>
+      </span>
+    </a>
+
+    <nav class="main-nav" id="mainNav" aria-label="Dieu huong chinh">
+      <a class="nav-service-link" href="index.html">Trang ch&#7911;</a>
+      <div class="nav-service-item">
+        <a class="nav-service-link" href="dich-vu.html">D&#7883;ch v&#7909;</a>
+        <div class="nav-service-list" id="serviceMenu" aria-label="Dich vu noi bat">
+          <div class="nav-service-column">
+            <strong>Phun x&#259;m ch&#226;n m&#224;y</strong>
+            <a href="chon-dang-may.html">Ch&#7885;n d&#225;ng m&#224;y</a>
+            <a href="dich-vu.html">Phun m&#224;y t&#225;n b&#7897;t</a>
+            <a href="dich-vu.html">&#272;i&#234;u kh&#7855;c ch&#226;n m&#224;y</a>
+          </div>
+          <div class="nav-service-column">
+            <strong>Phun v&#224; c&#7845;y m&#244;i</strong>
+            <a href="chon-mau-moi.html">Ch&#7885;n m&#224;u m&#244;i</a>
+            <a href="dich-vu.html">Phun m&#244;i Collagen</a>
+            <a href="dich-vu.html">Kh&#7917; th&#226;m m&#244;i</a>
+          </div>
+          <div class="nav-service-column">
+            <a class="nav-service-heading" href="goi-dau-duong-sinh.html">G&#7897;i &#273;&#7847;u d&#432;&#7905;ng sinh</a>
+            <a href="goi-dau-duong-sinh.html#bang-gia">Xem b&#7843;ng gi&#225; g&#7897;i &#273;&#7847;u</a>
+            <a href="goi-dau-duong-sinh.html#dat-lich">&#272;&#7863;t l&#7883;ch g&#7897;i &#273;&#7847;u</a>
+          </div>
+        </div>
+      </div>
+      <a class="nav-service-link" href="bang-gia.html">B&#7843;ng gi&#225;</a>
+      <div class="nav-service-item nav-knowledge-item">
+        <a class="nav-service-link nav-knowledge-link" href="kien-thuc.html">Ki&#7871;n th&#7913;c</a>
+        <div class="nav-service-list nav-knowledge-list" id="knowledgeMenu" aria-label="Danh muc kien thuc">
+          <div class="nav-service-column"><a class="nav-knowledge-category" href="kien-thuc.html?category=phun-xam">Ki&#7871;n th&#7913;c phun x&#259;m</a></div>
+          <div class="nav-service-column"><a class="nav-knowledge-category" href="kien-thuc.html?category=phun-may">Ki&#7871;n th&#7913;c phun m&#224;y</a></div>
+          <div class="nav-service-column"><a class="nav-knowledge-category" href="kien-thuc.html?category=phun-mi">Ki&#7871;n th&#7913;c phun m&#237;</a></div>
+          <div class="nav-service-column"><a class="nav-knowledge-category" href="kien-thuc.html?category=lam-dep-tai-nha">Ki&#7871;n th&#7913;c l&#224;m &#273;&#7865;p t&#7841;i nh&#224;</a></div>
+        </div>
+      </div>
+    </nav>
+
+    <div class="header-actions">
+      <a class="btn btn-small btn-primary" href="#booking" data-booking-open>&#272;&#7863;t l&#7883;ch</a>
+      <button class="menu-toggle" type="button" aria-label="Mo menu" aria-expanded="false" aria-controls="mainNav" data-menu-toggle>
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </div>
+</header>
+
+<main class="sodo-wrap">
+  <div class="sodo-box">
+    <span class="sodo-label">HEADER</span>
+    <h2>Site Header (giữ nguyên)</h2>
+    <p>Logo + Menu Trang chủ / Dịch vụ / Bảng giá / Kiến thức - giống file gốc</p>
+  </div>
+
+  <div class="sodo-box">
+    <span class="sodo-label">MAIN - TRỐNG</span>
+    <h2>Khu vực nội dung chính - để trống</h2>
+    <p>Đây là sơ đồ trống, không có bài viết, không có tìm kiếm, không có gì hết</p>
+    
+    <div style="margin-top:20px;" class="sodo-grid">
+      <div class="sodo-mini">[ Search bar ]</div>
+      <div class="sodo-mini">[ Topline / Breadcrumb ]</div>
+      <div class="sodo-mini">[ Heading H1 ]</div>
+      <div class="sodo-mini">[ Lead card 16:9 ]</div>
+      <div class="sodo-mini">[ Side grid 2 cột ]</div>
+      <div class="sodo-mini">[ News list + Sidebar ]</div>
+    </div>
+  </div>
+
+  <div class="sodo-box">
+    <span class="sodo-label">FOOTER</span>
+    <h2>Footer (giữ nguyên)</h2>
+    <p>Thông tin liên hệ ELLY - giống file gốc</p>
+  </div>
+</main>
+
+<footer class="elly-footer-fix">
+  <div class="container">
+    <a href="/" class="ef-logo"><img src="assets/elly-logo.png" alt="ELLY"></a>
+    <p class="ef-desc">ELLY SPA hoạt động từ năm 2018, chuyên phun xăm thẩm mỹ tại nhà theo lịch hẹn: phun môi collagen, phun mày tán bột, điêu khắc chân mày và phun mí. Đội ngũ chuyên viên có hơn 7 năm kinh nghiệm, tư vấn kỹ dáng mày, màu môi và quy trình phù hợp trước khi thực hiện.</p>
+
+    <h3 class="ef-title">THÔNG TIN LIÊN HỆ</h3>
+    <ul class="ef-contact">
+      <li><span class="ic">📍</span> Địa chỉ: 17H/1B Bình Hòa 24, P. Bình Hòa, TP. Hồ Chí Minh</li>
+      <li><span class="ic">📞</span> Hotline: <a href="tel:0786266268">0786266268</a></li>
+      <li><span class="ic">💌</span> Email:phunxamphongthuytainha@gmail.com</li>
+      <li><span class="ic">🕒</span> Giờ hỗ trợ: 9:00 - 21:00 hằng ngày</li>
+    </ul>
+
+    <p class="ef-follow">Theo dõi chúng tôi tại:</p>
+    <div class="ef-social">
+      <a href="https://www.facebook.com/profile.php?id=61555486805617" target="_blank">f</a>
+      <a href="https://zalo.me/0786266268" target="_blank">Zalo</a>
+      <a href="#" target="_blank">Tiktok</a>
+    </div>
+    <div class="ef-copy">© 2018 - 2026 ELLY BEAUTY & SPA - Phun xăm tại nhà</div>
+  </div>
+</footer>
+<script src="script.js"></script>
+</body>
+</html>
