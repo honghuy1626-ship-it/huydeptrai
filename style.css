@@ -8818,3 +8818,21 @@ body.goidau-page .seo-card p {
     font-size:2rem;
   }
 }
+@media (max-width: 900px) {
+  body .site-header.site-header-premium .nav-service-column .nav-service-heading {
+    color: #e8c189 !important;
+    background: transparent !important;
+    font-size: .78rem !important;
+    font-weight: 800 !important;
+    letter-spacing: .06em !important;
+    text-transform: uppercase !important;
+    border: 0 !important;
+    padding: 6px 0 4px !important;
+  }
+  /* Bỏ cái nền be đang đè lên chữ Gội đầu như trong hình */
+  body .site-header.site-header-premium .nav-service-column .nav-service-heading.is-current,
+  body .site-header.site-header-premium .nav-service-column .nav-service-heading:hover {
+    background: transparent !important;
+    color: #e8c189 !important;
+  }
+}
