@@ -1,0 +1,50 @@
+
+/* FIX CHUNG - Chặn booking-summary đè lên header ở mọi trang */
+.site-header-premium{ z-index: 100 !important; }
+
+.booking-summary-sticky{
+  grid-column: 1 / -1;
+  display: grid;
+  gap: 10px;
+}
+
+/* Desktop: không cho fixed */
+@media (min-width: 851px){
+  .booking-summary-sticky{
+    position: static !important;
+    right: auto !important;
+    left: auto !important;
+    bottom: auto !important;
+    transform: none !important;
+    background: transparent !important;
+    border: 0 !important;
+    box-shadow: none !important;
+    padding: 0 !important;
+  }
+}
+
+/* Mobile: chỉ hiện khi có class is-visible */
+@media (max-width: 850px){
+  .booking-summary-sticky{
+    position: fixed !important;
+    z-index: 20;
+    right: 12px !important;
+    left: 12px !important;
+    bottom: max(12px, env(safe-area-inset-bottom)) !important;
+    padding: 12px 16px !important;
+    background: #fffaf1 !important;
+    border: 1px solid var(--line) !important;
+    border-radius: 15px !important;
+    box-shadow: 0 12px 30px rgba(67,39,16,.24) !important;
+    transform: translateY(calc(100% + 24px)) !important;
+    transition: transform .22s ease !important;
+  }
+  .booking-summary-sticky.is-visible{
+    transform: translateY(0) !important;
+  }
+}
+
+/* Ẩn ô checkbox trắng thừa bên cạnh nút Đặt lịch */
+.addon-option input[type="checkbox"]{
+  accent-color: #5a3210;
+}
