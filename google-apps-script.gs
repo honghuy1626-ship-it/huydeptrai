@@ -2,7 +2,7 @@ const SEARCH_LOG_SHEET_NAME = "Search Logs";
 const BOOKING_SHEET_NAME = "ELLY - Đặt lịch";
 const DEFAULT_BOOKING_SHEET_NAME = "ELLY - Dat lich";
 const SHAMPOO_BOOKING_SHEET_NAME = "ELLY - Gội đầu";
-const SPREADSHEET_ID = "";
+const SPREADSHEET_ID = "1ra70AnrgvKvVDVTYqGRsANpe87IQdVXy3vm6x9TDOWA";
 const CRM_NEW_STATUS = "NEW";
 const CRM_READ_STATUS = "READ";
 const CRM_NEW_CUSTOMER = "NEW CUSTOMER";
@@ -131,6 +131,16 @@ const SHAMPOO_BOOKING_COLUMNS = {
 
 function setupShampooBookingSheet() {
   return getSheetWithHeaders(SHAMPOO_BOOKING_SHEET_NAME, SHAMPOO_BOOKING_HEADERS).getName();
+}
+
+function restoreBookingSheets() {
+  const bookingSheet = getSheetWithHeaders(BOOKING_SHEET_NAME, BOOKING_HEADERS);
+  const searchLogSheet = getSheetWithHeaders(SEARCH_LOG_SHEET_NAME, SEARCH_LOG_HEADERS);
+
+  bookingSheet.setFrozenRows(1);
+  searchLogSheet.setFrozenRows(1);
+
+  return 'Ready: ' + bookingSheet.getName() + ' and ' + searchLogSheet.getName();
 }
 
 // Chạy thủ công một lần nếu muốn tạo lại/khôi phục tab Gội đầu riêng.

@@ -1,4 +1,4 @@
-﻿const APPS_SCRIPT_URL = "https://script.google.com/macros/s/AKfycbzQkG1BLZvsvUizthvixSCMHQ6rit1bRDHEi0cpTN111eXiYgrfGXzb-KjBv1h3FaqUhA/exec";
+const APPS_SCRIPT_URL = "https://script.google.com/macros/s/AKfycbwyePSM7rSvhEE0AQw2ZsI2AcZWeGxGTMEwJG51S9zvp9-5uzdXQtRq6kYUtUe2sKlAJg/exec";
 const SEARCH_LOG_APPS_SCRIPT_URL = APPS_SCRIPT_URL;
 const SEARCH_LOG_DEMO_MODE = false;
 const BOOKING_RATE_KEY = "ellyBookingRate";
